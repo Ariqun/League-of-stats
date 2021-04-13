@@ -1,0 +1,48 @@
+import React from 'react';
+import './app-header.css';
+
+const AppHeader = () => {
+	return (
+		<header>
+			<div className="logo">
+				<a href="/" className="home">League of Stats</a>
+			</div>
+
+			<div className="container">
+				<div className="nav">
+					<ul>
+						<li>Чампидроны</li>
+						<li>Предметы</li>
+						<li>Статистика</li>
+					</ul>
+				</div>
+
+				<div className="search">
+					<form action="/summoner" method="POST">
+						<input name="summoner" type="text" placeholder="Имя призывателя"/>
+
+						<select name="region">
+							<option value="ru">RU</option>
+							<option value="euw1">EUW</option>
+							<option value="eun1">EUN</option>
+							<option value="br1">BR</option>
+							<option value="jp1">JP</option>
+							<option value="kr">KR</option>
+							<option value="la1">LA1</option>
+							<option value="la2">LA2</option>
+							<option value="na1">NA</option>
+							<option value="oc1">OC</option>
+							<option value="tr1">TR</option>
+						</select>
+
+						<button type="submit">
+							<img src="/assets/icons/search.png" alt="search"/>
+						</button>
+					</form>
+				</div>
+			</div>
+		</header>
+	)
+}
+
+export default AppHeader

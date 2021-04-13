@@ -1,0 +1,27 @@
+.profile .promo {
+	display: flex;
+	align-items: center;
+	height: 25vh;
+	background: url(https://ero-top.info/uploads/posts/2017-01/1483419114__bhuhvgk1fy.jpg);
+	background-position: center;
+}
+.profile .promo .banner {
+	display: flex;
+	align-items: flex-end;
+	padding: 0 20px;
+}
+.profile .promo .banner .icon img {
+	width: 100px;
+	border-radius: 10px;
+	border: 2px solid black;
+}
+.profile .promo .banner .name_and_lvl {
+	color: white;
+	padding: 0 10px;
+}
+.profile .promo .banner .name_and_lvl .name {
+	font-size: 40px;
+}
+.profile .promo .banner .name_and_lvl .name .region {
+	font-size: 20px;
+}

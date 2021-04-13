@@ -23,21 +23,25 @@ router.post('/summoner', async (request, response) => {
 	};
 
 	await axios.get(profileURL, {headers: headers})
-		.then(res => {
+		.then(resInfo => {
+			const summonerInfo = createSummonerInfo(region, resInfo.data);
 			const leagueURL = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${res.data.id}`;
 
 			axios.get(leagueURL, {headers: headers})
-				.then(resL => {
+				.then(resRanked => {
+					const rankedInfo = createRankedInfo(resRanked.data[0]);
+					const fullInfo = {...summonerInfo, ...rankedInfo};
+
 					Summoner.find({name: summoner, region: region}, (err, item) => {
 						if (item.length) {
-							Summoner.findOneAndUpdate({name: summoner, region: region}, createSumObj(region, res, resL));
+							Summoner.findOneAndUpdate({name: summoner, region: region}, fullInfo);
 							
 							response.redirect(`/summoner/${region}/${request.body.summoner}`);
 						} else {
-							const newSum = new Summoner(createSumObj(region, res, resL));
+							const newSummoner = new Summoner(fullInfo);
 
 							try {
-								newSum.save();
+								newSummoner.save();
 							} catch(e) {
 								console.log(e);
 							}
@@ -49,40 +53,28 @@ router.post('/summoner', async (request, response) => {
 		});
 });
 
-const createSumObj = (region, res, resL) => {
+const createSummonerInfo = (region, res) => {
 	const obj = {
-		name: res.data.name,
+		name: res.name,
 		region: region,
-		iconID: res.data.profileIconId,
-		lvl: res.data.summonerLevel,
+		iconID: res.profileIconId,
+		lvl: res.summonerLevel,
 		tech: {
-			sumID: res.data.id,
-			accID: res.data.accountId,
-			puuID: res.data.puuid
+			sumID: res.id,
+			accID: res.accountId,
+			puuID: res.puuid
 		}
 	};
 
-	if (resL.data.length == 0) {
-		obj.ranked = {
-			rank: 'Не активен'
-		};
-	} else {
-		obj.ranked = {
-			leagueId: resL.data[0].leagueId,
-			queueType: resL.data[0].queueType,
-			tier: resL.data[0].tier,
-			rank: resL.data[0].rank,
-			leaguePoints: resL.data[0].leaguePoints,
-			wins: resL.data[0].wins,
-			losses: resL.data[0].losses,
-			veteran: resL.data[0].veteran,
-			inactive: resL.data[0].inactive,
-			freshBlood: resL.data[0].freshBlood,
-			hotStreak: resL.data[0].hotStreak
-		};
-	}
-	
 	return obj;
 };
+
+const createRankedInfo = (res) => {
+	const obj = {ranked: {rank: 'Не активен'}}
+
+	res.length !== 0 ? obj.ranked = {...res} : null;
+
+	return obj;
+}
 
 module.exports = router;
