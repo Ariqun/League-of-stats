@@ -2,6 +2,11 @@ const {Router} = require('express');
 const Summoner = require('../models/summoner');
 const router = Router();
 
+router.get('/summoner', (req, res) => {
+	// console.log(req)
+	// console.log(res)
+});
+
 router.get('/:region/:name', (req, res) => {
 	Summoner.find({name: req.params.name, region: req.params.region}, (err, item) => {
 		res.render('summoner', {

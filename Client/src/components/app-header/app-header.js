@@ -19,10 +19,10 @@ export default class AppHeader extends Component {
 					</div>
 	
 					<div className="search">
-						<form action="/summoner" method="POST">
-							<input name="summoner" type="text" placeholder="Имя призывателя"/>
+						<form onSubmit={this.props.call}>
+							<input type="text" placeholder="Имя призывателя" value={this.props.name} onChange={this.props.setName}/>
 	
-							<select name="region">
+							<select value={this.props.region} onChange={this.props.setRegion}>
 								<option value="ru">RU</option>
 								<option value="euw1">EUW</option>
 								<option value="eun1">EUN</option>

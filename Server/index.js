@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const homeRoute = require('./routes/home');
-const summonerRoute = require('./routes/summoner');
+// const summonerRoute = require('./routes/summoner');
 
 
 const app = express();
@@ -19,12 +19,12 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use('/', homeRoute);
-app.use('/summoner', summonerRoute);
+// app.use('/summoner', summonerRoute);
 
 async function start() {
 	try {
 		const url = 'mongodb+srv://Ariqun:JdPwllLUl9VVSksa@los.5xgxi.mongodb.net/los';
-		const PORT = process.env.PORT || 3000;
+		const PORT = process.env.PORT || 3001;
 		
 		await mongoose.connect(url, {
 			useNewUrlParser: true,
