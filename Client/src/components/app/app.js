@@ -1,20 +1,20 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import AppHeader from '../app-header/app-header';
 import Profile from '../profile/profile';
 import AppBackground from '../app-background/app-background';
 
-import './app.css'
+import './app.sass'
 
-const App = () => {
-	return (
-		<>
-			<AppHeader/>
-			<Profile/>
-
-			<AppBackground/>
-		</>
-	)
+export default class App extends Component {
+	render() {
+		return (
+			<>
+				<AppHeader/>
+				<Profile/>
+	
+				<AppBackground/>
+			</>
+		)
+	}
 }
-
-export default App
