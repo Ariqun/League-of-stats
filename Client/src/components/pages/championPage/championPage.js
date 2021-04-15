@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
+import ChampGeneral from '../../champComponents/champGeneral/champGeneral';
+import ChampNav from '../../champComponents/champNav/champNav';
 
 import './championPage.sass';
 
 export default class ChampionPage extends Component {
 	state = {
+		general: true,
+		skills: false,
+		skins: false,
+		builds: false,
+		stats: false,
 		champ: {}
 	}
 
@@ -21,21 +28,22 @@ export default class ChampionPage extends Component {
 	
 	render() {
 		console.log(this.state.champ)
-		const {id, lore} = this.state.champ;
+		const {id, lore, stats} = this.state.champ;
 		return (
 			<div className="champion_page">
 				<div className="container">
 					<div className="champion_info">
-						<div className="picture">
+						<div className="picture_block">
 							<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
 						</div>
 
-						<div className='champion_nav'>
-							<button>Общее</button>
-							<button>Умения</button>
-							<button>Билды</button>
-							<button>Скины</button>
+						<div className="info_block">
+							<ChampNav/>
+
+							<ChampGeneral info={{lore, stats}}/>
 						</div>
+
+						
 						{/* <div className="lore">
 							<span>{lore}</span>
 						</div> */}
