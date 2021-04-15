@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import './profile-promo.sass'
 
-export default class Promo extends Component {
+import './summonerPromo.sass'
+
+export default class SummonerPromo extends Component {
 	render() {
 		console.log(this.props)
 		const {name, region, lvl, iconID} = this.props.summoner;

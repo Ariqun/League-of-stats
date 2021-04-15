@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-import './app-header.sass';
+import {Link} from 'react-router-dom';
+
+import './appHeader.sass';
 
 export default class AppHeader extends Component {
 	render() {
 		return (
-			<header>
+			<div className="header">
 				<div className="logo">
-					<a href="/" className="home">League of Stats</a>
+					<Link to='/' className="home">League of Stats</Link>
 				</div>
 	
 				<div className="container">
 					<div className="nav">
 						<ul>
-							<li>Чампидроны</li>
+							<li><Link to="/">Чампидроны</Link></li>
 							<li>Предметы</li>
 							<li>Статистика</li>
 						</ul>
@@ -42,7 +44,7 @@ export default class AppHeader extends Component {
 						</form>
 					</div>
 				</div>
-			</header>
+			</div>
 		)
 	}
 }
