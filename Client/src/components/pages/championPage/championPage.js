@@ -1,18 +1,16 @@
 import React, {Component} from 'react';
+
 import ChampGeneral from '../../champComponents/champGeneral';
 import ChampNav from '../../champComponents/champNav';
+import ChampSkills from '../../champComponents/champSkills';
 
 import './championPage.sass';
 
 export default class ChampionPage extends Component {
 	state = {
 		isLoading: true,
-		general: true,
-		skills: false,
-		skins: false,
-		builds: false,
-		stats: false,
-		champ: {}
+		champ: {},
+		tab: 'general'
 	}
 
 	async componentDidMount() {
@@ -29,10 +27,44 @@ export default class ChampionPage extends Component {
 			.catch(err => console.error(err))
 	}
 
+	changeTab = (id) => {
+		this.setState({tab: id})
+	}
+
+	content = () => {
+		const {champ, tab} = this.state
+		const {id} = champ;
+		let tabContent = '';
+
+		if (tab === 'general') {
+			tabContent = <ChampGeneral champ={champ}/>
+		} else if (tab === 'skills') {
+			tabContent = <ChampSkills champ={champ}/>
+		}
+
+		return(
+			<div className="champion_info">
+				<div className="picture_block">
+					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
+				</div>
+	
+				<div className="info_block">
+					<ChampNav changeTab={this.changeTab}/>
+					{tabContent}
+				</div>
+			</div>
+		)
+	}
+
+	loading = () => {
+		return(
+			<div className="loading"></div>
+		)
+	}
 	
 	render() {
 		const {isLoading} = this.state
-		const content = isLoading ? <Loading/> : <Content champ={this.state.champ}/>
+		const content = isLoading ? <this.loading/> : <this.content/>
 
 		return (
 			<div className="champion_page">
@@ -42,33 +74,4 @@ export default class ChampionPage extends Component {
 			</div>
 		)
 	}
-}
-
-const Content = ({champ}) => {
-	const {id, lore, stats} = champ;
-	console.log(champ)
-	return(
-		<div className="champion_info">
-			<div className="picture_block">
-				<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
-			</div>
-
-			<div className="info_block">
-				<ChampNav/>
-
-				<ChampGeneral info={{lore, stats}}/>
-			</div>
-
-			
-			{/* <div className="lore">
-				<span>{lore}</span>
-			</div> */}
-		</div>
-	)
-}
-
-const Loading = () => {
-	return(
-		<div className="loading"></div>
-	)
 }
