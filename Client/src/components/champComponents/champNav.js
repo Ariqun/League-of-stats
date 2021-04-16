@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import './champNav.sass';
-
 export default class ChampNav extends Component {
 	render() {
 		return(

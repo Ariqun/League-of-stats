@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import SummonerPromo from '../../summonerPromo/summonerPromo';
-import SummonerNav from '../../summonerNav/summonerNav';
+import SummonerPromo from '../../sumComponents/sumPromo';
+import SummonerNav from '../../sumComponents/sumNav';
 
 import './summonerPage.sass';
 

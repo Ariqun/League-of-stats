@@ -6,3 +6,60 @@
 	background-position: 0px 0px, 0px 0px, 5px 5px, 0px 0px
 	opacity: 0.9
 	color: white
+	.summoner_nav
+		height: 4vh
+		ul
+			display: flex
+			justify-content: center
+			height: 100%
+			li
+				display: flex
+				justify-content: center
+				align-items: center
+				width: 5vw
+				height: 100%
+				font-size: 15px
+				color: rgb(205, 216, 228)
+				text-shadow: 0 -1px rgb(46, 53, 58)
+				margin: 1px
+				border: 1px solid rgba(33, 43, 52, 1)
+				border-radius: 3px
+				background: rgb(255, 17, 84) linear-gradient(rgb(255, 17, 84), rgb(0, 0, 0))
+				box-shadow: inset 0 1px rgb(33, 43, 52), inset 0 0 1px rgba(140, 150, 170, 0.8)
+				&:active
+					box-shadow: inset 0 1px 3px rgba(0, 10, 20, 0.5), 0 1px rgb(83, 94, 104), 0 0 1px rgb(86, 96, 106)
+				&:focus:not(:active)
+					border: 1px solid rgb(22, 32, 43)
+					border-bottom: 1px solid rgb(25, 34, 45)
+					background: rgb(53, 61, 71)
+					box-shadow: inset 0 1px 3px rgba(0, 10, 20, 0.5), 0 1px rgb(83, 94, 104), 0 0 1px rgb(86, 96, 106)
+					pointer-events: none
+				a
+					display: flex
+					justify-content: center
+					align-items: center
+					width: 100%
+					height: 100%
+					color: white
+					text-decoration: none
+	.promo
+		display: flex
+		align-items: center
+		height: 25vh
+		background: url(https://u.kanobu.ru/screenshots/88/98caca6f-f650-42cf-8317-d4d5da158bbc.jpg)
+		background-position: center
+		.banner
+			display: flex
+			align-items: flex-end
+			padding: 0 20px
+			.icon img
+				width: 100px
+				border-radius: 10px
+				border: 2px solid black
+			.name_and_lvl
+				color: white
+				padding: 0 10px
+				.name
+					font-size: 40px
+					.region
+						font-size: 20px

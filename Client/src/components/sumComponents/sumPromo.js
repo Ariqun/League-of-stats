@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import './summonerPromo.sass'
-
 export default class SummonerPromo extends Component {
 	render() {
 		console.log(this.props)
