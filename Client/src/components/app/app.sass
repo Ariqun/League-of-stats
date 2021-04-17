@@ -1,43 +1,16 @@
-/* -------------- Сброс стилей -------------- */
-*, *::before, *::after
-	box-sizing: border-box
-
-ul, ol
-	list-style: none
-	padding: 0
-
-body, h1, h2, h3, h4, p, ul, ol,
-li, figure, figcaption, blockquote, dl, dd
-	margin: 0
-
-body
-	min-height: 100vh
-	scroll-behavior: smooth
-	text-rendering: optimizeSpeed
-
-a:not([class])
-	text-decoration-skip-ink: auto
-
-img
-	max-width: 100%
-	display: block
-
-input, button, textarea, select
-	font: inherit
-
-
 /* -------------- Main -------------- */
 
 body
 	position: relative
-	font-family: 'Roboto', sans-serif
+	font-family: 'Beaufort for LoL', sans-serif
 
 .container
 	width: 65vw;
 	margin: 0 auto
+
 .main_page .container,
 .champion_page .container
-	height: 94vh
+	min-height: 94vh
 	background-color: rgb(32, 32, 32)
 	background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,1)), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32))
 	background-size: 100% 100%, 3px 3px, 3px 3px, 3px 3px

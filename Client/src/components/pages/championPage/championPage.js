@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import ChampGeneral from '../../champComponents/champGeneral';
 import ChampNav from '../../champComponents/champNav';
 import ChampSkills from '../../champComponents/champSkills';
+import ChampSkins from '../../champComponents/champSkins';
 
 import './championPage.sass';
 
@@ -40,6 +41,8 @@ export default class ChampionPage extends Component {
 			tabContent = <ChampGeneral champ={champ}/>
 		} else if (tab === 'skills') {
 			tabContent = <ChampSkills champ={champ}/>
+		} else if (tab === 'skins') {
+			tabContent = <ChampSkins champ={champ}/>
 		}
 
 		return(

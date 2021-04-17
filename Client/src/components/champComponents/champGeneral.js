@@ -66,11 +66,15 @@ export default class ChampGeneral extends Component {
 	}
 
 	render() {
-		const {lore, stats, tags} = this.props.champ
+		const {name, title, lore, stats, tags} = this.props.champ
 		
-
 		return(
 			<div className="general">
+				<div className="title">
+					<span className="champ_name">{name}</span>
+					<span className="champ_title">{title}</span>
+				</div>
+
 				<div className="lore">
 					<p>{lore}</p>
 				</div>

@@ -9,7 +9,11 @@ export default class ChampSkills extends Component {
 		const {passive} = this.props.champ
 		return (
 			<div className="skill passive" onClick={() => this.changeCurrentSkill('passive')}>
-				<img src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/${passive.image.full}`} alt={passive.name}></img>
+				<div className="wrapper_for_horizontal_borders">
+					<div className="wrapper_for_vertical_borders">
+						<img src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/${passive.image.full}`} alt={passive.name}></img>
+					</div>
+				</div>
 			</div>
 		)
 	}
@@ -22,7 +26,11 @@ export default class ChampSkills extends Component {
 
 			return (
 				<div className="skill" onClick={() => this.changeCurrentSkill(id)} key={id}>
-					<img src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${image.full}`} alt={name}></img>
+					<div className="wrapper_for_horizontal_borders">
+						<div className="wrapper_for_vertical_borders">
+							<img src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${image.full}`} alt={name}></img>
+						</div>
+					</div>
 				</div>
 			)
 		})
@@ -31,7 +39,6 @@ export default class ChampSkills extends Component {
 	}
 
 	changeCurrentSkill = (id) => {
-		console.log(id)
 		this.setState({currentSkill: id})
 	}
 
@@ -49,7 +56,11 @@ export default class ChampSkills extends Component {
 					</div>
 	
 					<div className="video">
-						<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_P1.webm`} preload="auto" autoPlay loop muted="muted"></video>
+						<div className="wrapper_for_horizontal_borders">
+							<div className="wrapper_for_vertical_borders">
+								<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_P1.webm`} preload="auto" autoPlay loop muted="muted"></video>
+							</div>
+						</div>
 					</div>
 				</React.Fragment>
 			)
@@ -68,7 +79,11 @@ export default class ChampSkills extends Component {
 						</div>
 		
 						<div className="video">
-							<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_${btns[i]}1.webm`} preload="auto" autoPlay loop muted="muted"></video>
+							<div className="wrapper_for_horizontal_borders">
+								<div className="wrapper_for_vertical_borders">
+									<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_${btns[i]}1.webm`} preload="auto" autoPlay loop muted="muted"></video>
+								</div>
+							</div>
 						</div>
 					</React.Fragment>
 				)
@@ -95,8 +110,6 @@ export default class ChampSkills extends Component {
 		const passiveSkill = this.createPassive();
 		const list = this.createSkillList()
 		const descr = this.createSkillDescr(currentSkill)
-
-		console.log(this.props.champ)
 
 		return(
 			<div className="skills">

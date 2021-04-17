@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 
 export default class ChampNav extends Component {
 	render() {
-		const ruArr = ['Общее', 'Умения', 'Билды', 'Статистика', 'Скины']
-		const engArr = ['general', 'skills', 'builds', 'stat', 'skins']
+		const ruArr = ['Общее', 'Умения', 'Скины', 'Билды', 'Статистика']
+		const engArr = ['general', 'skills','skins', 'builds', 'stat']
 		const list = ruArr.map((item, i) => {
 			const id = engArr[i]
 			

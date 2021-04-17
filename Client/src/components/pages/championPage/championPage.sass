@@ -1,10 +1,11 @@
-@mixin transparentBorders
+@mixin transGrayBordersTopAndBot
 	border-top: 1px solid
 	border-bottom: 1px solid
 	border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
 	border-image-slice: 1
 $color-gray: #dadce0
 $dark-gray: gray
+$color-skyblue: skyblue
 
 .champion_page
 	.container
@@ -28,7 +29,7 @@ $dark-gray: gray
 						border-image-slice: 1
 						background: linear-gradient(270deg, rgba(11, 28, 27, 0) 0%, rgba(11, 28, 27, 1) 50%, rgba(11, 28, 27, 0) 100%)
 						&:hover
-							color: skyblue
+							color: $color-skyblue
 							border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
 							border-image-slice: 1
 						span
@@ -40,19 +41,29 @@ $dark-gray: gray
 							border: none
 							font-size: 1em
 					li.active
-						color: skyblue
+						color: $color-skyblue
 						border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
 						border-image-slice: 1
 				.general
-					padding: 20px 40px
+					padding: 10px 40px
+					.title
+						display: flex
+						flex-direction: column
+						align-items: center
+						height: 8vh
+						.champ_name
+							font-size: 35px
+						.champ_title
+							color: gray
+							font-size: 14px
 					.lore
-						@include transparentBorders
+						@include transGrayBordersTopAndBot
 						padding: 10px 0
 						p
 							color: $color-gray
 							text-align: center
 					.stats
-						@include transparentBorders
+						@include transGrayBordersTopAndBot
 						position: relative
 						display: flex
 						flex-wrap: wrap
@@ -79,7 +90,7 @@ $dark-gray: gray
 								color: gray
 							&_value
 								width: 60px
-								color: skyblue
+								color: $color-skyblue
 								&:nth-of-type(2n)
 									display: flex
 									justify-content: flex-end
@@ -87,7 +98,7 @@ $dark-gray: gray
 						display: flex
 						justify-content: center
 						.role
-							width: 125px
+							width: 70px
 							margin: 20px
 				.skills
 					display: flex
@@ -108,7 +119,7 @@ $dark-gray: gray
 						width: 35vw
 						margin-left: 50px
 						.text
-							@include transparentBorders
+							@include transGrayBordersTopAndBot
 							display: flex
 							flex-direction: column
 							align-items: center
@@ -127,3 +138,92 @@ $dark-gray: gray
 							margin-top: 20px
 							video
 								width: 100%
+				.skins
+					display: flex
+					justify-content: space-evenly
+					flex-wrap: wrap
+					.skin_card
+						position: relative
+						width: 10vw
+						margin-top: 15px
+						cursor: pointer
+						img
+							width: 100%
+						.skin_title
+							position: absolute
+							left: 0
+							bottom: 0
+							display: flex
+							justify-content: center
+							align-items: center
+							width: 100%
+							height: 5vh
+							color: $color-skyblue
+							text-align: center
+							padding: 5px 10px
+							transition: 0.5s all ease
+							background: rgba(0, 0, 0, 0.6)
+						&:hover .skin_title
+							color: white
+					.skin_modal
+						position: fixed
+						top: 0
+						left: 0
+						width: 100vw
+						height: 100vh
+						background: rgba(128, 128, 128, 0.6)
+						z-index: 100
+						.modal_wrapper
+							position: fixed
+							top: calc(50% - 360px)
+							right: calc(50% - 607px)
+.wrapper_for_horizontal_borders
+	position: relative
+	pointer-events: none
+	&::before, &::after
+		content: ''
+		position: absolute
+		left: 0
+		width: 100%
+		z-index: 10
+	&::before
+		top: -1px
+		border-top: 1px solid
+		border-image: linear-gradient(270deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+	&::after
+		bottom: -1px
+		border-bottom: 1px solid	
+		border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+.wrapper_for_vertical_borders
+	position: relative
+	pointer-events: none
+	&::before, &::after
+		content: ''
+		position: absolute
+		top: 0
+		height: 100%
+		z-index: 10
+	&::before
+		right: 0
+		border-right: 1px solid
+		border-image: linear-gradient(180deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+	&::after
+		left: -1px
+		border-left: 1px solid
+		border-image: linear-gradient(0deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+.wrapper_for_vertical_borders.active, .wrapper_for_horizontal_borders.active
+	&::before, &::after
+		top: -5px
+		right: -5px
+		bottom: -5px
+		left: -5px
+
+
+
+
+	
+	
