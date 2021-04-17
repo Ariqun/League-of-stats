@@ -3,13 +3,12 @@ const axios = require('axios');
 const router = Router();
 
 router.post('/summoner', async (req, res) => {
-	console.log(req.body)
 	const summoner = encodeURI(req.body.summoner);
 	const region = req.body.region;
 
 	const profileURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}`;
 	const summonerInfo = await getData(profileURL, createSummonerInfo, region);
-
+	
 	const leagueURL = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerInfo.tech.sumID}`;
 	const rankedInfo = await getData(leagueURL, createRankedInfo);
 

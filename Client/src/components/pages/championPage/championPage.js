@@ -15,7 +15,8 @@ export default class ChampionPage extends Component {
 	}
 
 	async componentDidMount() {
-		const champUrl = `http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/champion/${this.props.champName}.json`;
+		const version = this.props.version
+		const champUrl = `http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/champion/${this.props.champName}.json`;
 
 		await fetch(champUrl)
 			.then(res => res.json())
@@ -34,13 +35,14 @@ export default class ChampionPage extends Component {
 
 	content = () => {
 		const {champ, tab} = this.state
+		const version = this.props.version
 		const {id} = champ;
 		let tabContent = '';
 
 		if (tab === 'general') {
 			tabContent = <ChampGeneral champ={champ}/>
 		} else if (tab === 'skills') {
-			tabContent = <ChampSkills champ={champ}/>
+			tabContent = <ChampSkills champ={champ} version={version}/>
 		} else if (tab === 'skins') {
 			tabContent = <ChampSkins champ={champ}/>
 		}

@@ -6,12 +6,14 @@ export default class ChampSkills extends Component {
 	}
 
 	createPassive = () => {
+		const version = this.props.version
 		const {passive} = this.props.champ
+
 		return (
 			<div className="skill passive" onClick={() => this.changeCurrentSkill('passive')}>
 				<div className="wrapper_for_horizontal_borders">
 					<div className="wrapper_for_vertical_borders">
-						<img src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/${passive.image.full}`} alt={passive.name}></img>
+						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${passive.image.full}`} alt={passive.name}></img>
 					</div>
 				</div>
 			</div>
@@ -19,6 +21,7 @@ export default class ChampSkills extends Component {
 	}
 
 	createSkillList = () => {
+		const version = this.props.version
 		const {spells} = this.props.champ
 		
 		const content = spells.map((spell, i) => {
@@ -28,7 +31,7 @@ export default class ChampSkills extends Component {
 				<div className="skill" onClick={() => this.changeCurrentSkill(id)} key={id}>
 					<div className="wrapper_for_horizontal_borders">
 						<div className="wrapper_for_vertical_borders">
-							<img src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${image.full}`} alt={name}></img>
+							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image.full}`} alt={name}></img>
 						</div>
 					</div>
 				</div>

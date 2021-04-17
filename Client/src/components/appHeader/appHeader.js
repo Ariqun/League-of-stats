@@ -4,7 +4,23 @@ import {Link} from 'react-router-dom';
 import './appHeader.sass';
 
 export default class AppHeader extends Component {
+	state = {
+		name: '',
+		region: 'ru'
+	}
+
+	setName = (e) => {
+		this.setState({name: e.target.value});
+	}
+
+	setRegion = (e) => {
+		this.setState({region: e.target.value});
+	}
+
 	render() {
+		const {name, region} = this.state
+		const {call} = this.props
+
 		return (
 			<div className="header">
 				<div className="logo">
@@ -21,10 +37,10 @@ export default class AppHeader extends Component {
 					</div>
 	
 					<div className="search">
-						<form onSubmit={this.props.call}>
-							<input type="text" placeholder="Имя призывателя" value={this.props.name} onChange={this.props.setName}/>
+						<form onSubmit={() => call(name, region)}>
+							<input type="text" placeholder="Имя призывателя" value={name} onChange={this.setName}/>
 	
-							<select value={this.props.region} onChange={this.props.setRegion}>
+							<select value={region} onChange={this.setRegion}>
 								<option value="ru">RU</option>
 								<option value="euw1">EUW</option>
 								<option value="eun1">EUN</option>
@@ -38,9 +54,11 @@ export default class AppHeader extends Component {
 								<option value="tr1">TR</option>
 							</select>
 	
-							<button type="submit">
-								<img src="/assets/icons/search.png" alt="search"/>
-							</button>
+							<Link to={`/summoner/${region}/${name}`}>
+								<button type="submit">
+									<img src="/assets/icons/search.png" alt="search"/>
+								</button>
+							</Link>
 						</form>
 					</div>
 				</div>

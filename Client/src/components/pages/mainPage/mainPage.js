@@ -6,27 +6,21 @@ import './mainPage.sass';
 export default class MainPage extends Component {
 	state = {
 		error: false,
-		version: null,
 		champions: {},
 		championNames: []
 	}
 
 	async componentDidMount() {
-		let latestVersion = '';
-		let language = 'ru_RU';
-		let championList = [];
+		const version = this.props.version || '11.8.1'
+		let language = 'ru_RU'
+		let championList = []
 
-		await fetch('https://ddragon.leagueoflegends.com/api/versions.json')
-			.then(res => res.json())
-			.then(result => latestVersion = result[0])
-			.catch(err => console.error(err))
-		
-		await fetch(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/${language}/champion.json`)
+		await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`)
 			.then(res => res.json())
 			.then(result => championList = {...result.data})
 			.catch(err => console.log(err))
 
-		this.setState({version: latestVersion, champions: {...championList}, championNames: [...Object.keys(championList)]})
+		this.setState({champions: {...championList}, championNames: [...Object.keys(championList)]})
 	}
 
 	componentDidCatch() {
@@ -36,9 +30,9 @@ export default class MainPage extends Component {
 	}
 
 	render() {
-		const version = this.state.version;
+		const version = this.props.version
 		const items = this.state.championNames.map(item => {
-			const {key, name} = this.state.champions[item];
+			const {key, name} = this.state.champions[item]
 
 			return (
 				<div className="champion" key={key}>

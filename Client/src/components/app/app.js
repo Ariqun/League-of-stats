@@ -9,61 +9,50 @@ import AppBackground from '../appBackground/appBackground';
 
 import './app.sass'
 
-
 export default class App extends Component {
 	state = {
-		name: '',
-		region: 'ru',
-		summoner: {}
+		version: ''
 	}
 
-	setName = (e) => {
-		this.setState({name: e.target.value});
+	async componentDidMount() {
+		let latestVersion = '';
+
+		await fetch('https://ddragon.leagueoflegends.com/api/versions.json')
+			.then(res => res.json())
+			.then(result => latestVersion = result[0])
+			.catch(err => console.error(err))
+
+		this.setState({version: latestVersion})
 	}
 
-	setRegion = (e) => {
-		this.setState({region: e.target.value});
-	}
-
-	setSummoner = (obj) => {
-		this.setState({summoner: {...obj}})
-	}
-
-	call = (e) => {
-		e.preventDefault();
-
-		fetch('/summoner', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: `summoner=${this.state.name}&region=${this.state.region}`
-		})
-		.then(res => res.json())
-		.then(result => this.setSummoner(result))
-		.catch((err) => console.log(err))
-	}
 
 	render() {
+		const version = this.state.version
+
 		return (
 			<Router>
 				<div className="app">
-					<AppHeader 
-						name={this.state.name} 
-						setName={this.setName}
-						region={this.state.region}
-						setRegion={this.setRegion}
-						call={this.call}
-					/>
-					<Route path="/" exact component={MainPage}/>
+					<AppHeader call={this.call}/>
+
+					<Route path="/" exact render={
+						() => {
+							return <MainPage version={version}/>
+						}
+					}/>
+
 					<Route path="/champion/:name" render={
 						({match}) => {
 							const {name} = match.params;
-							return <ChampionPage champName={name}/>
+							return <ChampionPage champName={name} version={version}/>
 						}
 					}/>
-					<Route path="/summoner" exact component={SummonerPage}/>
-					<Route path="/summoner/:region/:name" component={SummonerPage}/>
+					
+					<Route path="/summoner/:region/:name" render={
+						({match}) => {
+							const {region, name} = match.params
+							return <SummonerPage region={region} name={name} version={version}/>
+						}
+					}/>
 		
 					<AppBackground/>
 				</div>
