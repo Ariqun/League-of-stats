@@ -18,8 +18,18 @@ $color-skyblue: skyblue
 			display: flex
 			justify-content: center
 			width: 15vw
-			img
-				width: 125px
+			.rank_block
+				display: flex
+				flex-direction: column
+				align-items: center
+				justify-content: center
+				.rank_icon
+					img
+						width: 125px
+				.rank_name
+				.rank_lp
+					color: gray
+					font-size: 13px
 		.banner
 			display: flex
 			flex-direction: column
@@ -50,7 +60,7 @@ $color-skyblue: skyblue
 				display: flex
 				flex-direction: column
 				align-items: center
-				justify-content: space-around
+				justify-content: space-evenly
 				width: 150px
 				height: 150px
 				line-height: 1

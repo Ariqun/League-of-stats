@@ -7,24 +7,22 @@ import ChampionPage from '../pages/championPage/championPage';
 import SummonerPage from '../pages/summonerPage/summonerPage';
 import AppBackground from '../appBackground/appBackground';
 
+import DragonData from '../services/dragonData';
+
 import './app.sass'
 
+
 export default class App extends Component {
+	dragonData = new DragonData();
+
 	state = {
-		version: ''
+		version: '11.8.1'
 	}
 
 	async componentDidMount() {
-		let latestVersion = '';
-
-		await fetch('https://ddragon.leagueoflegends.com/api/versions.json')
-			.then(res => res.json())
-			.then(result => latestVersion = result[0])
-			.catch(err => console.error(err))
-
-		this.setState({version: latestVersion})
+		this.dragonData.getLatestVersion()
+			.then(res => this.setState({version: res}))
 	}
-
 
 	render() {
 		const version = this.state.version
@@ -32,7 +30,7 @@ export default class App extends Component {
 		return (
 			<Router>
 				<div className="app">
-					<AppHeader call={this.call}/>
+					<AppHeader/>
 
 					<Route path="/" exact render={
 						() => {

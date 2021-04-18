@@ -1,32 +1,27 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import DragonData from '../../services/dragonData';
+
 import './mainPage.sass';
 
 export default class MainPage extends Component {
+	dragonData = new DragonData();
+
 	state = {
-		error: false,
 		champions: {},
 		championNames: []
 	}
 
 	async componentDidMount() {
-		const version = this.props.version || '11.8.1'
-		let language = 'ru_RU'
-		let championList = []
+		const version = this.props.version;
+		let language = 'ru_RU';
 
-		await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`)
-			.then(res => res.json())
-			.then(result => championList = {...result.data})
-			.catch(err => console.log(err))
-
-		this.setState({champions: {...championList}, championNames: [...Object.keys(championList)]})
-	}
-
-	componentDidCatch() {
-		this.setState({
-			error: true
-		})
+		this.dragonData.getAllChampions(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`)
+			.then(res => this.setState({
+				champions: {...res}, 
+				championNames: [...Object.keys({...res})]
+			}));
 	}
 
 	render() {

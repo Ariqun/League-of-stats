@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const homeRoute = require('./routes/home');
-// const summonerRoute = require('./routes/summoner');
+const summonerRoute = require('./routes/summoner');
+const sumMatchesRoute = require('./routes/sumMatches');
+const sumMatchRoute = require('./routes/sumMatch');
 
 
 const app = express();
@@ -18,8 +19,9 @@ app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
-app.use('/', homeRoute);
-// app.use('/summoner', summonerRoute);
+app.use('/', summonerRoute);
+app.use('/', sumMatchesRoute);
+app.use('/', sumMatchRoute);
 
 async function start() {
 	try {

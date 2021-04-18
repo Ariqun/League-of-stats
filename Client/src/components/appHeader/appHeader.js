@@ -18,8 +18,7 @@ export default class AppHeader extends Component {
 	}
 
 	render() {
-		const {name, region} = this.state
-		const {call} = this.props
+		const {name, region} = this.state;
 
 		return (
 			<div className="header">
@@ -37,7 +36,7 @@ export default class AppHeader extends Component {
 					</div>
 	
 					<div className="search">
-						<form onSubmit={() => call(name, region)}>
+						<form>
 							<input type="text" placeholder="Имя призывателя" value={name} onChange={this.setName}/>
 	
 							<select value={region} onChange={this.setRegion}>

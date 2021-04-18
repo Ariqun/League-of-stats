@@ -4,10 +4,15 @@ import ChampGeneral from '../../champComponents/champGeneral';
 import ChampNav from '../../champComponents/champNav';
 import ChampSkills from '../../champComponents/champSkills';
 import ChampSkins from '../../champComponents/champSkins';
+import Loading from '../../loading/loading';
+
+import DragonData from '../../services/dragonData';
 
 import './championPage.sass';
 
 export default class ChampionPage extends Component {
+	dragonData = new DragonData();
+
 	state = {
 		isLoading: true,
 		champ: {},
@@ -15,18 +20,14 @@ export default class ChampionPage extends Component {
 	}
 
 	async componentDidMount() {
-		const version = this.props.version
-		const champUrl = `http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/champion/${this.props.champName}.json`;
+		const {version, champName} = this.props;
+		const language = 'ru_RU';
 
-		await fetch(champUrl)
-			.then(res => res.json())
-			.then(result => {
-				this.setState({
-					champ: {...result.data[this.props.champName]},
-					isLoading: false
-				})
-			})
-			.catch(err => console.error(err))
+		this.dragonData.getChampion(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion/${champName}.json`)
+			.then(res => this.setState({
+				champ: {...res[champName]},
+				isLoading: false
+			}))
 	}
 
 	changeTab = (id) => {
@@ -34,8 +35,8 @@ export default class ChampionPage extends Component {
 	}
 
 	content = () => {
-		const {champ, tab} = this.state
-		const version = this.props.version
+		const {champ, tab} = this.state;
+		const version = this.props.version;
 		const {id} = champ;
 		let tabContent = '';
 
@@ -60,16 +61,10 @@ export default class ChampionPage extends Component {
 			</div>
 		)
 	}
-
-	loading = () => {
-		return(
-			<div className="loading"></div>
-		)
-	}
 	
 	render() {
 		const {isLoading} = this.state
-		const content = isLoading ? <this.loading/> : <this.content/>
+		const content = isLoading ? <Loading/> : <this.content/>
 
 		return (
 			<div className="champion_page">

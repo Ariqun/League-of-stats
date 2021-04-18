@@ -70,27 +70,29 @@ export default class ChampSkills extends Component {
 		}
 
 		const content = spells.map((item, i) => {
-			if (item.id === skill) {
-				const btns = {0: 'Q', 1: 'W', 2: 'E', 3: 'R'}
-				const {name, description} = item
+			if (item.id !== skill) {
+				return null;
+			}
 
-				return(
-					<React.Fragment key={key}>
-						<div className="text">
-							<span className="skill_name">{name}<span className="skill_btn">[{btns[i]}]</span></span>
-							<span className="skill_descr">{description}</span>
-						</div>
-		
-						<div className="video">
-							<div className="wrapper_for_horizontal_borders">
-								<div className="wrapper_for_vertical_borders">
-									<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_${btns[i]}1.webm`} preload="auto" autoPlay loop muted="muted"></video>
-								</div>
+			const btns = {0: 'Q', 1: 'W', 2: 'E', 3: 'R'}
+			const {name, description} = item
+
+			return(
+				<React.Fragment key={key}>
+					<div className="text">
+						<span className="skill_name">{name}<span className="skill_btn">[{btns[i]}]</span></span>
+						<span className="skill_descr">{description}</span>
+					</div>
+	
+					<div className="video">
+						<div className="wrapper_for_horizontal_borders">
+							<div className="wrapper_for_vertical_borders">
+								<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_${btns[i]}1.webm`} preload="auto" autoPlay loop muted="muted"></video>
 							</div>
 						</div>
-					</React.Fragment>
-				)
-			}
+					</div>
+				</React.Fragment>
+			)
 		})
 
 		return(content)

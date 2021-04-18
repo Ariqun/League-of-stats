@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 export default class SummonerNav extends Component {
 
 	render() {
-		const ruArr = ['Общее', 'Игры', 'Чемпионы', 'Рекорды', 'Статистика']
-		const engArr = ['general', 'matches','champs', 'records', 'stat']
+		const ruArr = ['Игры', 'Чемпионы', 'Рекорды', 'Статистика']
+		const engArr = ['matches','champs', 'records', 'stat']
 		const list = ruArr.map((item, i) => {
 			const id = engArr[i]
 			

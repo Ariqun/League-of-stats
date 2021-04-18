@@ -1,25 +1,60 @@
 const {Router} = require('express');
-const Summoner = require('../models/summoner');
+const axios = require('axios');
 const router = Router();
 
-router.get('/summoner', (req, res) => {
-	// console.log(req)
-	// console.log(res)
-});
+router.post('/summoner', async (req, res) => {
+	const summoner = encodeURI(req.body.summoner);
+	const region = req.body.region;
 
-router.get('/:region/:name', (req, res) => {
-	Summoner.find({name: req.params.name, region: req.params.region}, (err, item) => {
-		res.render('summoner', {
-			title: `LoS - ${item[0].name}`,
-			region: item[0].region,
-			name: item[0].name,
-			icon: item[0].iconID,
-			lvl: item[0].lvl,
-			ranked: item[0].ranked
-		});
-	});
-
+	const profileURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}`;
+	const summonerInfo = await getData(profileURL, createSummonerInfo, region);
 	
-});
+	const leagueURL = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerInfo.tech.sumID}`;
+	const rankedInfo = await getData(leagueURL, createRankedInfo);
+
+	res.append('Access-Control-Allow-Origin', '*');
+	res.send(JSON.stringify({...summonerInfo, ...rankedInfo}))
+})
+
+const getData = async (url, func, region = 'ru') => {
+	const headers = {
+		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",
+		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+		"Origin": "https://developer.riotgames.com",
+		"X-Riot-Token": "RGAPI-1931cb6f-3921-4e97-91af-38b6757df435"
+	};
+	let result = {};
+
+	await axios.get(url, {headers: headers})
+		.then(res => result = func(res.data, region))
+		.catch(err => console.error(err))
+
+	return result;
+}
+
+const createSummonerInfo = (res, region) => {
+	const obj = {
+		name: res.name,
+		region: region,
+		iconID: res.profileIconId,
+		lvl: res.summonerLevel,
+		tech: {
+			sumID: res.id,
+			accID: res.accountId,
+			puuID: res.puuid
+		}
+	};
+
+	return obj;
+};
+
+const createRankedInfo = (res) => {
+	const obj = {ranked: {rank: 'Не активен'}}
+
+	res[0].length !== 0 ? obj.ranked = {...res[0]} : null;
+
+	return obj;
+}
 
 module.exports = router;
