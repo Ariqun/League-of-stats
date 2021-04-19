@@ -20,13 +20,13 @@ export default class App extends Component {
 	}
 
 	async componentDidMount() {
-		this.dragonData.getLatestVersion()
-			.then(res => this.setState({version: res}))
+		const res = await this.dragonData.getLatestVersion();
+		this.setState({version: res})
 	}
 
 	render() {
 		const version = this.state.version
-
+		
 		return (
 			<Router>
 				<div className="app">

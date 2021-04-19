@@ -1,49 +1,50 @@
+import axios from 'axios';
+
 export default class RiotAPI {
 	getSummoner = async (region, name) => {
-		const res = await fetch('/summoner', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: `summoner=${name}&region=${region}`
-		});
+		const res = await axios({
+			method: 'post',
+			url: '/summoner',
+			data: `summoner=${name}&region=${region}`,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
 
-		if (!res.ok) {
+		if (res.status !== 200) {
 			throw new Error('RiotAPI getSummoner failed');
 		}
-		return await res.json();
+		
+		return res.data;
 	}
 
 	getSumMatches = async (puuID) => {
-		const res = await fetch('/matches', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: `puuID=${puuID}`
-		});
+		const res = await axios({
+			method: 'post',
+			url: '/matches',
+			data: `puuID=${puuID}`,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
 
-		if (!res.ok) {
+		if (res.status !== 200) {
 			throw new Error('RiotAPI getSumMatches failed');
 		}
 
-		return await res.json();
+		return res.data;
 	}
 
 	getMatchInfo = async (matchID) => {
 		console.log('Request')
-		const res = await fetch('/match', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: `matchID=${matchID}`
-		});
 
-		if (!res.ok) {
+		const res = await axios({
+			method: 'post',
+			url: '/match',
+			data: `matchID=${matchID}`,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+
+		if (res.status !== 200) {
 			throw new Error('RiotAPI getMatch failed');
 		}
 
-		return await res.json();
+		return res.data;
 	}
 }

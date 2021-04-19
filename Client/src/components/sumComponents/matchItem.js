@@ -6,142 +6,252 @@ import RiotAPI from '../services/riotAPI';
 import DragonData from '../services/dragonData';
 
 function MatchItem({version, matchID, name}) {
-	const riotAPI = new RiotAPI();
-	const dragonData = new DragonData();
 	const [isLoading, setLoading] = useState(true);
 	const [matchInfo, setMatchInfo] = useState({});
-	const [spellOne, setSpellOne] = useState('');
-	const [spellTwo, setSpellTwo] = useState('');
+	const [playerInfo, setPlayerInfo] = useState({});
+	const [spells, setSpells] = useState([]);
+	const [rune, setRune] = useState('');
 
+	const riotAPI = new RiotAPI();
+	const dragonData = new DragonData();
+	
 	useEffect(() => {
 		const getMatchInfo = async () => {
-			await riotAPI.getMatchInfo(matchID)
-				.then(res => {
-					setMatchInfo(res)
-					setLoading(false)
-				})
+			const res = await riotAPI.getMatchInfo(matchID);
+			setMatchInfo(res);
+
+			let player = {};
+			for (let elem of res.participants) {
+				if (elem.summonerName === name) {
+					player = {...elem};
+				}
+			}
+			setPlayerInfo(player)
+
+			const {spell1Id, spell2Id, perks} = player;
+			const style = perks.styles[0].style;
+			const perk = perks.styles[0].selections[0].perk;
+
+			await getSumSpell(spell1Id);
+			await getSumSpell(spell2Id);
+			await getRune(style, perk);
+
+			setLoading(false);
 		}
 		getMatchInfo();
-		
-		// const {participants} = matchInfo;
-		// let playerInfo = {};
-
-		// for (let elem of participants) {
-		// 	if (elem.summonerName === name) {
-		// 		playerInfo = {...elem};
-		// 	}
-		// }
-
-		// const {spell1Id, spell2Id} = playerInfo;
-
-		// const getSumSpell = async (id, num) => {
-		// 	await dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/summoner.json`, id)
-		// 		.then(res => {
-		// 			if (num === 1) {
-		// 				setSpellOne(res)
-		// 			} else {
-		// 				setSpellTwo(res)
-		// 			}
-		// 		})
-		// }
-
-		// getSumSpell(spell1Id, 1);
-		// getSumSpell(spell2Id, 2);
 	}, [])
 
+	const getSumSpell = async (id) => {
+		if (spells.length >= 2) return;
 
-	// const getMatchInfo = async () => {
-	// 	await riotAPI.getMatchInfo(matchID)
-	// 		.then(res => {
-	// 			setMatchInfo(res)
-	// 			setLoading(false)
-	// 		})
-	// }
+		const res = await dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/summoner.json`, id);
 
-	// const getSumSpells = async (id, num) => {
-	// 	await dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/summoner.json`, id)
-	// 		.then(res => {
-	// 			if (num === 1) {
-	// 				setSpellOne(res)
-	// 			} else {
-	// 				setSpellTwo(res)
-	// 			}
-	// 		})
-	// }
+		setSpells(spells => ([...spells, res]));
+	}
+
+	const getRune = async (style, perk) => {
+		if (rune.length !== 0) return;
+		
+		const res = await dragonData.getRune(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/runesReforged.json`, style, perk)
+		
+		setRune(res);
+	}
+
+	const addZero = (num) => {
+		if ((num + '').length <= 1) {
+			return `0${num}`;
+		} else {
+			return num;
+		}
+	}
+
+	const getGameStartDate = (time) => {
+		const date = new Date(time);
+		const transform = `
+			${addZero(date.getDate())}.${addZero(date.getMonth() + 1)}.${addZero(date.getFullYear())} 
+			${addZero(date.getHours())}:${addZero(date.getMinutes())}
+		`;
+
+		return transform;
+	}
+
+	const getGameDuration = (time) => {
+		const seconds = addZero(Math.floor(time / (1000) % 60));
+		const minutes = addZero(Math.floor(time / (1000 * 60) % 60));
+		const hours = addZero(Math.floor(time / (1000 * 60 * 60) % 24));
+		let duration = '';
+
+		if (time >= 3600000) {
+			duration = `${hours}:${minutes}:${seconds}`
+		} else {
+			duration = `${minutes}:${seconds}`
+		}
+
+		return duration;
+	}
+
+	const getTotalTeamKills = (teams, id) => {
+		let result = 0;
+
+		for (let elem of teams) {
+			if (elem.teamId === id) {
+				result = elem.objectives.champion.kills;
+			}
+		}
+
+		return result;
+	}
+
+	const getItemsTable = () => {
+		let items = [];
+		
+		for(let key in playerInfo) {
+			if (key.match(/item[\d]/)) {
+				items.push(playerInfo[key])
+			}
+		}
+		
+		return(
+			<div className="items_block">
+				{items.map(item => {
+					if (item === 0) return <div className="item" key={item}></div>
+
+					return(
+						<div className="item" key={item}>
+							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item}.png`} alt={`${item}_icon`}/>
+						</div>
+					)
+				})}
+			</div>
+		)
+	}
+
+	const getPlayersTable = () => {
+		const {participants} = matchInfo;
+		const leftTeam = [];
+		const rightTeam = [];
+
+		for (let player of participants) {
+			const obj = {
+				name: player.summonerName,
+				champ: player.championName
+			}
+
+			if (player.teamId === 100) {
+				leftTeam.push(obj)
+			} else if(player.teamId === 200) {
+				rightTeam.push(obj);
+			}
+		}
+
+		const createDOM = (player) => {
+			return(
+				<div className="player" key={player.name}>
+					<div className="champion_icon">
+						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${player.champ}.png`} alt={`${player.champ}_icon`}/>
+					</div>
+					<div className="player_name">
+						<span>{player.name}</span>
+					</div>
+				</div>
+			)
+		}
+
+		return(
+			<div className="players_block">
+				<div className="left_team">
+					{leftTeam.map(player => {return createDOM(player)})}
+				</div>
+				<div className="right_team">
+					{rightTeam.map(player => {return createDOM(player)})}
+				</div>
+			</div>
+		)
+	}
+
+	const getFarmPerMin = (cs, dur) => {
+		return (cs / ((dur / (1000*60)))).toFixed(1);
+	}
 
 	const createMatch = () => {
-		// const {participants} = matchInfo;
-		// let playerInfo = {};
+		if (isLoading) return <Loading/>;
+		
+		const {championName, kills, deaths, assists, totalMinionsKilled, teamId} = playerInfo;
+		const {teams, gameStartTimestamp, gameDuration} = matchInfo;
 
-		// for (let elem of participants) {
-		// 	if (elem.summonerName === name) {
-		// 		playerInfo = {...elem};
-		// 	}
-		// }
-
-		// const {championName, spell1Id, spell2Id} = playerInfo;
-		// getSumSpell(spell1Id, 1);
-		// getSumSpell(spell2Id, 2);
-		console.log(spellOne)
-		console.log(spellTwo)
-		// console.log(playerInfo)
+		const startDate = getGameStartDate(gameStartTimestamp);
+		const duration = getGameDuration(gameDuration);
+		const totalTeamKills = getTotalTeamKills(teams, teamId);
+		const farmPerMin = getFarmPerMin(totalMinionsKilled, gameDuration);
+		const items = getItemsTable();
+		const players = getPlayersTable();
 		console.log(matchInfo)
-
-		// const spell = dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/summoner.json`, spell1Id)
+		console.log(playerInfo)
 
 		return(
 			<div className="match_item">
 				<div className="inner_wrapper">
-					<div className="game_setting">
+					<div className="game_settings">
 						<div className="champion_icon">
-							{/* <img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/> */}
+							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/>
 						</div>
-						<div className="summoner_spells">
-							<div className="spell_one">
-								{/* <img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${sumSpellOne}.png`} alt={`${sumSpellOne}_icon`}/> */}
+						<div className="spells">
+							<div className="sum_spells">
+								{spells.map(spell => {return <img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell}.png`} alt={`${spell}_icon`} key={spell}/>})}
 							</div>
-						</div>
-						<div className="runes">
-
+							<div className="rune">
+								<img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune}`} alt={`${rune}_icon`}/>
+							</div>
 						</div>
 					</div>
 
 					<div className="game_stats">
 						<div className="time">
-							<span className="date"></span>
-							<span className="duration"></span>
+							<span className="date">{startDate}</span>
+							<span className="duration">&ensp;({duration})</span>
 						</div>
 
 						<div className="champion_stats">
-							<span className="kda"></span>
-							<span className="farm"></span>
-							<span className="kill_part"></span>
-						</div>
-
-						<div className="champ_items">
-
+							<div className="kda_score">
+								<span className="kills">{kills}</span>
+								<span> / </span>
+								<span className="deaths">{deaths}</span>
+								<span> / </span>
+								<span className="assists">{assists} </span>
+								<span className="kda_ratio">&ensp;({((kills + assists) / deaths).toFixed(2)})</span>
+							</div>
+							<div className="farm_score">
+								<span className="farm">{totalMinionsKilled} </span>
+								<span className="farm_per_min">({farmPerMin})</span>
+								<span> CS</span>
+							</div>
+							<span className="kill_part">{((kills + assists) * 100 / totalTeamKills).toFixed()}% уч. в уб.</span>
 						</div>
 					</div>
 
-					<div className="game_participants">
+					<div className="champ_items">
+						{items}
+					</div>
 
+					<div className="game_players">
+						{players}
 					</div>
 				</div>
 			</div>
 		)
 	}
 	
-	if (isLoading) {
-		return <Loading/>
+	const render = () => {
+		const result = createMatch();
+
+		return(
+			<>
+				{result}
+			</>
+		)
 	}
 	
-	const result = createMatch();
-
-	return(
-		<div>
-			{result}
-		</div>
-	)
+	return render();
 }
 
 export default MatchItem;

@@ -18,7 +18,7 @@ function SummonerMatches({puuID, name, version}) {
 	}
 
 	const matchList = matches.map((match, i) => {
-		if (i >= 1) {
+		if (i >= 5) {
 			return null;
 		}
 

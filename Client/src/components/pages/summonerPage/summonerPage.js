@@ -20,9 +20,10 @@ export default class SummonerPage extends Component {
 
 	async componentDidMount() {
 		const {region, name} = this.props
+		
+		const res = await this.riotAPI.getSummoner(region, name);
 
-		this.riotAPI.getSummoner(region, name)
-			.then(res => this.setState({isLoading: false, summoner: {...res}}))
+		this.setState({isLoading: false, summoner: {...res}})
 	}
 	
 	changeTab = (id) => {

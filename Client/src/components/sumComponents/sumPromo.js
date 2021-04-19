@@ -38,7 +38,7 @@ export default class SummonerPromo extends Component {
 	createBannerBlock = ({summoner}) => {
 		const {name, lvl, iconID} = summoner
 		const version = this.props.version
-
+		
 		return(
 			<div className="banner">
 				<div className="icon">
