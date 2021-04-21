@@ -1,13 +1,6 @@
 $color-skyblue: skyblue
 	
-.summoner
-	height: 100vh
-	background-color: rgb(32, 32, 32)
-	background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,1)), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32))
-	background-size: 100% 100%, 3px 3px, 3px 3px, 3px 3px
-	background-position: 0px 0px, 0px 0px, 5px 5px, 0px 0px
-	opacity: 0.9
-	color: white
+.summoner_page
 	.promo
 		display: flex
 		justify-content: space-evenly
@@ -120,7 +113,8 @@ $color-skyblue: skyblue
 				display: flex
 				justify-content: space-between
 				padding: 10px 20px
-				.game_settings
+				color: #dadce0
+				.match_settings
 					display: flex
 					.champion_icon
 					.spells
@@ -130,51 +124,90 @@ $color-skyblue: skyblue
 						padding: 5px 0
 						.sum_spells, .rune
 							img
-								width: 25px
-				.game_stats
-					display: flex
-					flex-direction: column
-					justify-content: space-between
-					.time
-						text-align: center
-						.date
-						.duration
-							color: gray
-					.champion_stats
+								width: 20px
+								border-radius: 5px
+								&:first-of-type
+									margin-bottom: 2px
+				.match_stats
+					width: 300px
+					.show_full_match
 						display: flex
 						flex-direction: column
-						justify-content: center
-						align-items: center
-						.kda_score
-							.kills
-								color: #2DEB90
-							.deaths
-								color: #ff5859
-							.assists
-								color: skyblue
-							.kda_ratio
+						justify-content: space-between
+						width: 100%
+						height: 100%
+						text-decoration: none
+						color: inherit
+						.time
+							text-align: center
+							.date
+							.duration
 								color: gray
-						.farm_score
-							.farm_per_min
-								color: gray
+						.stats_wrapper
+							display: flex
+							justify-content: space-evenly
+							height: 90px
+							.match_result
+								display: flex
+								flex-direction: column
+								justify-content: center
+								align-items: center
+								.win
+									color: #2DEB90
+								.defeat
+									color: #ff5859
+								.match_type
+									color: gray
+							.champion_stats
+								display: flex
+								flex-direction: column
+								justify-content: center
+								align-items: center
+								.kda_score
+									margin-bottom: 5px
+									.kills
+										color: #2DEB90
+									.deaths
+										color: #ff5859
+									.assists
+										color: orange
+									.kda_ratio
+										color: gray
+								.farm_score
+									margin-bottom: 5px
+									.farm_per_min
+										color: gray
 				.champ_items
-					width: 100px
+					display: flex
+					justify-content: center
+					align-items: center
+					width: 200px
 					.items_block
 						position: relative
 						display: flex
 						flex-wrap: wrap
-						width: 75px
+						width: 106px
 						.item
-							width: 25px
+							width: 30px
+							margin: 2px
+							border-radius: 2px
+							background: rgba(211, 211, 211, 0.2)
 							&:last-of-type
 								position: absolute
-								top: calc(50% - 12.5px)
-								right: 25px
-				.game_players
+								top: calc(50% - 15px)
+								right: -30px
+							img
+								border-radius: 5px
+				.match_players
+					display: flex
+					justify-content: center
+					width: 400px
 					.players_block
 						display: flex
 						.left_team, .right_team
-							.player
+							width: 200px
+							padding-left: 5px
+							.player, .current_player
 								display: flex
 								align-items: center
 								.champion_icon
@@ -183,11 +216,17 @@ $color-skyblue: skyblue
 								.player_name
 									font-size: 14px
 									padding-left: 5px
+							.current_player
+								color: orange
 						.left_team
 							display: flex
 							flex-direction: column
 							align-items: flex-end
-							.player
+							padding-right: 5px
+							border-right: 1px solid
+							border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+							border-image-slice: 1
+							.player, .current_player
 								display: flex
 								.champion_icon
 									order: 2

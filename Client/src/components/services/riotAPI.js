@@ -31,13 +31,13 @@ export default class RiotAPI {
 		return res.data;
 	}
 
-	getMatchInfo = async (matchID) => {
+	getMatchInfo = async (matchId) => {
 		console.log('Request')
 
 		const res = await axios({
 			method: 'post',
 			url: '/match',
-			data: `matchID=${matchID}`,
+			data: `matchID=${matchId}`,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 

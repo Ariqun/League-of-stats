@@ -33,6 +33,21 @@ export default class DragonData {
 		return champion.data;
 	}
 
+	getGameType = async (url, id) => {
+		const types = await this.getData(url);
+		let res = '';
+
+		for (let obj of types) {
+			if (obj.queueId === id) {
+				res = obj.description;
+			}
+		}
+
+		res = res.replace(/games/, '').trim();
+
+		return res;
+	}
+
 	getSummonerSpells = async (url) => {
 		const sumSpells = await this.getData(url);
 		return sumSpells.data;
@@ -55,6 +70,19 @@ export default class DragonData {
 	getAllRunes = async (url) => {
 		const runes = await this.getData(url);
 		return runes;
+	}
+
+	getStyle = async (url, style) => {
+		const styles = await this.getData(url);
+		let res = '';
+
+		for (let obj of styles) {
+			if (obj.id === style) {
+				res = obj.icon;
+			}
+		}
+		
+		return res;
 	}
 
 	getRune = async (url, style, id) => {

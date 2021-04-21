@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import SummonerPromo from '../../sumComponents/sumPromo';
 import SummonerNav from '../../sumComponents/sumNav';
-import SummonerMatches from '../../sumComponents/sumMatches';
+import SummonerMatches from '../../sumComponents/matches/allMatches';
 import Loading from '../../loading/loading';
 
 import RiotAPI from '../../services/riotAPI';
@@ -45,8 +45,8 @@ export default class SummonerPage extends Component {
 		}
 
 		return (
-			<div className="container">
-				<div className="summoner">
+			<div className="summoner_page">
+				<div className="container">
 					<SummonerPromo summoner={summoner} version={version}/>
 					<SummonerNav changeTab={this.changeTab}/>
 	

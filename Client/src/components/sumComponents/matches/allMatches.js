@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import RiotAPI from '../../services/riotAPI';
 
 import MatchItem from './matchItem';
 
-import RiotAPI from '../services/riotAPI';
 
 function SummonerMatches({puuID, name, version}) {
 	const [matches, setMatches] = useState([]);
+	
 	const riotAPI = new RiotAPI();
 
 	useEffect(() => {
@@ -18,11 +19,11 @@ function SummonerMatches({puuID, name, version}) {
 	}
 
 	const matchList = matches.map((match, i) => {
-		if (i >= 5) {
+		if (i >= 6) {
 			return null;
 		}
 
-		return <MatchItem matchID={match} name={name} version={version} key={match}/>
+		return <MatchItem matchId={match} name={name} version={version} key={match}/>
 	});
 
 	return(
