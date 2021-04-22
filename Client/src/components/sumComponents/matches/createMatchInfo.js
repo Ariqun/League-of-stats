@@ -197,7 +197,6 @@ function CreateMatchInfo(matchId, version, name, mini) {
 		const matchType = await getMatchType(queueId);
 		const duration = getMatchDuration(gameDuration);
 		const startDate = getMatchStartDate(gameStartTimestamp);
-		console.log(matchInfo)
 
 		if (mini) {
 			for (let elem of participants) {
@@ -235,7 +234,7 @@ function CreateMatchInfo(matchId, version, name, mini) {
 			let leftTeamKDA = {kills: 0, deaths: 0, assists: 0}, rightTeamKDA = {kills: 0, deaths: 0, assists: 0};
 
 			for (let elem of participants) {
-				const {summonerId, totalMinionsKilled, visionScore, goldEarned, perks, teamId, kills, deaths, assists} = elem;
+				const {totalMinionsKilled, visionScore, goldEarned, perks, teamId, kills, deaths, assists} = elem;
 
 				const farmPerMin = getScorePerMin(totalMinionsKilled, gameDuration);
 				const visionPerMin = getScorePerMin(visionScore, gameDuration);
@@ -245,9 +244,9 @@ function CreateMatchInfo(matchId, version, name, mini) {
 				const mainRunes = await getMainPlayerRunes(perks);
 				const allRunes = getAllPlayerRunes(perks);
 				const totalTeamKills = getTotalTeamKills(teams, teamId);
-				const rankedInfo = await getSumRankedInfo(platformId, summonerId);
+				// const rankedInfo = await getSumRankedInfo(platformId, summonerId);
 
-				let obj = {...elem, farmPerMin, visionPerMin, items, mainRunes, allRunes, spells, totalTeamKills, goldPerMin, rankedInfo};
+				let obj = {...elem, farmPerMin, visionPerMin, items, mainRunes, allRunes, spells, totalTeamKills, goldPerMin};
 
 				if (teamId === 100) {
 					res.leftTeam.players.push(obj);

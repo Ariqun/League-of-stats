@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import CreateMatchInfo from '../../sumComponents/matches/createMatchInfo';
+import Canvas from '../../sumComponents/matches/canvas';
 import Loading from '../../loading/loading';
 
 import './matchPage.sass';
@@ -8,7 +9,7 @@ import './matchPage.sass';
 function MatchPage({region, matchId, version}) {
 	const [info, setInfo] = useState({});
 	const [isLoading, setLoading] = useState(true);
-
+	
 	useEffect(() => {
 		const getInfo = async () => {
 			const mini = false;
@@ -68,7 +69,7 @@ function MatchPage({region, matchId, version}) {
 
 	const createPlayerBlock = (team) => {
 		const result = team.players.map(player => {
-			const {championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, totalTeamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName, rankedInfo} = player;
+			const {championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, totalTeamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName} = player;
 
 			return(
 				<div className="player" key={championName}>
@@ -88,7 +89,7 @@ function MatchPage({region, matchId, version}) {
 
 					<div className="player_name">
 						<span className="name">{summonerName}</span>
-						{createRank(rankedInfo)}
+						{/* {createRank(rankedInfo)} */}
 					</div>
 
 					<div className="player_stats">
@@ -135,11 +136,29 @@ function MatchPage({region, matchId, version}) {
 		return result;
 	}
 
+	const createObjectOfDamage = (team) => {
+		let res = [];
+
+		for (let elem of team) {
+			let player = {};
+
+			player.champ = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${elem.championName}.png`;
+			player.dmg = elem.totalDamageDealtToChampions;
+
+			res.push(player);
+		}
+		return res;
+	}
+
 	const render = () => {
 		if (isLoading) return <Loading/>;
 
 		const leftTeam = createPlayerBlock(info.leftTeam);
 		const rightTeam = createPlayerBlock(info.rightTeam);
+		
+		const leftTeamDmg = createObjectOfDamage(info.leftTeam.players);
+		const rightTeamDmg = createObjectOfDamage(info.rightTeam.players);
+
 		console.log(info);
 
 		return(
@@ -175,11 +194,16 @@ function MatchPage({region, matchId, version}) {
 								</div>
 							</div>
 						</div>
+
+						<div className="graphs">
+							<Canvas leftTeamDmg={leftTeamDmg} rightTeamDmg={rightTeamDmg}/>
+						</div>
 					</div>
 				</div>
 			</div>
 		)
 	}
+	
 	return render();
 }
 
