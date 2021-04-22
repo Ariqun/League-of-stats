@@ -6,7 +6,7 @@ import DragonData from '../../services/dragonData';
 function CreateMatchInfo(matchId, version, name, mini) {
 	const riotAPI = new RiotAPI();
 	const dragonData = new DragonData();
-	let matchInfo = {}, playerInfo = {}, spells = [], runes = [];
+	let matchInfo = {}, playerInfo = {};
 
 	const getMatchInfo = async () => {
 		const res = await riotAPI.getMatchInfo(matchId);
@@ -18,18 +18,15 @@ function CreateMatchInfo(matchId, version, name, mini) {
 	}
 
 	const getSumSpell = async (id) => {
-		if (spells.length >= 2) return;
-		spells.push(await dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/summoner.json`, id));
+		return await dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/summoner.json`, id);
 	}
 
 	const getRune = async (style, perk) => {
-		if (runes.length >= 1) return;
-		runes.push(await dragonData.getRune(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/runesReforged.json`, style, perk));
+		return await dragonData.getRune(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/runesReforged.json`, style, perk);
 	}
 
 	const getSubStyle = async (style) => {
-		if (runes.length >= 2) return;
-		runes.push(await dragonData.getStyle(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/runesReforged.json`, style));
+		return await dragonData.getStyle(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/runesReforged.json`, style);
 	}
 
 	const addZero = (num) => {
@@ -149,6 +146,49 @@ function CreateMatchInfo(matchId, version, name, mini) {
 		return (score / ((dur / (1000*60)))).toFixed(1);
 	}
 
+	const getAllPlayerSpells = async (player) => {
+		const {summoner1Id, summoner2Id} = player;
+		const res = [await getSumSpell(summoner1Id), await getSumSpell(summoner2Id)];
+		return res;
+	}
+
+	const getMainPlayerRunes = async (perks) => {
+		const primStyle = perks.styles[0].style;
+		const primPerk = perks.styles[0].selections[0].perk;
+		const subStyle = perks.styles[1].style;
+		const res = [];
+		
+		res.push(await getRune(primStyle, primPerk));
+		res.push(await getSubStyle(subStyle));
+
+		return res;
+	}
+
+	const getAllPlayerRunes = (player) => {
+		let runes = {prim: [], sub: [], stat: []};
+
+		for (let style of player.styles) {
+			if (style.description === 'primaryStyle') {
+				for (let elem of style.selections) {
+					runes.prim.push(elem.perk);
+				}
+			} else if (style.description === 'subStyle') {
+				for (let elem of style.selections) {
+					runes.sub.push(elem.perk);
+				}
+			}
+		}
+
+		for (let key in player.statPerks) {
+			runes.stat.push(player.statPerks[key]);
+		}
+
+		return runes;
+	}
+
+	const getSumRankedInfo = async (region, sumId) => {
+		return await riotAPI.getSumRanked(region, sumId);
+	}
 	
 	const result = async () => {
 		await getMatchInfo();
@@ -157,7 +197,6 @@ function CreateMatchInfo(matchId, version, name, mini) {
 		const matchType = await getMatchType(queueId);
 		const duration = getMatchDuration(gameDuration);
 		const startDate = getMatchStartDate(gameStartTimestamp);
-
 		console.log(matchInfo)
 
 		if (mini) {
@@ -166,19 +205,11 @@ function CreateMatchInfo(matchId, version, name, mini) {
 					playerInfo = {...elem};
 				}
 			}
-
-			const {summonerName, championName, kills, deaths, assists, totalMinionsKilled, teamId} = playerInfo;
-	
-			const {spell1Id, spell2Id, perks} = playerInfo;
-			const primStyle = perks.styles[0].style;
-			const primPerk = perks.styles[0].selections[0].perk;
-			const subStyle = perks.styles[1].style;
 			
-			await getSumSpell(spell1Id);
-			await getSumSpell(spell2Id);
-			await getRune(primStyle, primPerk);
-			await getSubStyle(subStyle);
+			const {summonerName, championName, kills, deaths, assists, totalMinionsKilled, teamId, perks} = playerInfo;
 
+			const mainRunes = await getMainPlayerRunes(perks);
+			const spells = await (getAllPlayerSpells(playerInfo));
 			const matchResult = getMatchResult(teamId);
 			const totalTeamKills = getTotalTeamKills(teams, teamId);
 			const farmPerMin = getScorePerMin(totalMinionsKilled, gameDuration);
@@ -186,7 +217,7 @@ function CreateMatchInfo(matchId, version, name, mini) {
 			const players = getPlayersTable(summonerName);
 
 			let res = {
-				spells, runes, matchType, kills, deaths, assists, platformId, startDate, duration, matchResult, totalTeamKills, totalMinionsKilled, farmPerMin, items, players, championName
+				spells, mainRunes, matchType, kills, deaths, assists, platformId, startDate, duration, matchResult, totalTeamKills, totalMinionsKilled, farmPerMin, items, players, championName
 			};
 
 			return res;
@@ -204,22 +235,30 @@ function CreateMatchInfo(matchId, version, name, mini) {
 			let leftTeamKDA = {kills: 0, deaths: 0, assists: 0}, rightTeamKDA = {kills: 0, deaths: 0, assists: 0};
 
 			for (let elem of participants) {
-				const farmPerMin = getScorePerMin(elem.totalMinionsKilled, gameDuration);
-				const visionPerMin = getScorePerMin(elem.visionScore, gameDuration);
-				const items = getItemsTable(elem);
-			
-				let obj = {...elem, farmPerMin, visionPerMin, items};
+				const {summonerId, totalMinionsKilled, visionScore, goldEarned, perks, teamId, kills, deaths, assists} = elem;
 
-				if (elem.teamId === 100) {
+				const farmPerMin = getScorePerMin(totalMinionsKilled, gameDuration);
+				const visionPerMin = getScorePerMin(visionScore, gameDuration);
+				const goldPerMin = getScorePerMin(goldEarned, gameDuration);
+				const items = getItemsTable(elem);
+				const spells = await (getAllPlayerSpells(elem));
+				const mainRunes = await getMainPlayerRunes(perks);
+				const allRunes = getAllPlayerRunes(perks);
+				const totalTeamKills = getTotalTeamKills(teams, teamId);
+				const rankedInfo = await getSumRankedInfo(platformId, summonerId);
+
+				let obj = {...elem, farmPerMin, visionPerMin, items, mainRunes, allRunes, spells, totalTeamKills, goldPerMin, rankedInfo};
+
+				if (teamId === 100) {
 					res.leftTeam.players.push(obj);
-					leftTeamKDA.kills += elem.kills;
-					leftTeamKDA.deaths += elem.deaths;
-					leftTeamKDA.assists += elem.assists;
+					leftTeamKDA.kills += kills;
+					leftTeamKDA.deaths += deaths;
+					leftTeamKDA.assists += assists;
 				} else {
 					res.rightTeam.players.push(obj);
-					rightTeamKDA.kills += elem.kills;
-					rightTeamKDA.deaths += elem.deaths;
-					rightTeamKDA.assists += elem.assists;
+					rightTeamKDA.kills += kills;
+					rightTeamKDA.deaths += deaths;
+					rightTeamKDA.assists += assists;
 				}
 			}
 

@@ -8,9 +8,24 @@ export default class RiotAPI {
 			data: `summoner=${name}&region=${region}`,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
-
+		
 		if (res.status !== 200) {
 			throw new Error('RiotAPI getSummoner failed');
+		}
+		
+		return res.data;
+	}
+
+	getSumRanked = async (region, sumId) => {
+		const res = await axios({
+			method: 'post',
+			url: '/ranked',
+			data: `sumId=${sumId}&region=${region}`,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+
+		if (res.status !== 200) {
+			throw new Error('RiotAPI getSumRanked failed');
 		}
 		
 		return res.data;

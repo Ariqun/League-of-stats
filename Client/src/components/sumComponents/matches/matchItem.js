@@ -22,7 +22,7 @@ function MatchItem({version, matchId, name}) {
 	const render = () => {
 		if (isLoading) return <Loading/>;
 		
-		const {spells, runes, matchType, championName, kills, deaths, assists, platformId, startDate, duration, matchResult, totalTeamKills, totalMinionsKilled, farmPerMin, items, players} = info;
+		const {spells, mainRunes, matchType, championName, kills, deaths, assists, platformId, startDate, duration, matchResult, totalTeamKills, totalMinionsKilled, farmPerMin, items, players} = info;
 
 		return(
 			<div className="match_item">
@@ -35,8 +35,8 @@ function MatchItem({version, matchId, name}) {
 							<div className="sum_spells">
 								{spells.map(spell => {return <img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell}.png`} alt={`${spell}_icon`} key={spell}/>})}
 							</div>
-							<div className="rune">
-								{runes.map(rune => {return <img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune}`} alt={`${rune}_icon`} key={rune}/>})}
+							<div className="runes">
+								{mainRunes.map(rune => {return <img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune}`} alt={`${rune}_icon`} key={rune}/>})}
 							</div>
 						</div>
 					</div>

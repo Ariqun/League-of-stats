@@ -57,7 +57,7 @@ export default class DragonData {
 		const sumSpells = await this.getData(url);
 		const {data} = sumSpells;
 		let result = '';
-
+		
 		for (let obj in data) {
 			if (+data[obj].key === id) {
 				result = data[obj].id;

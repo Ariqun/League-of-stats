@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const summonerRoute = require('./routes/summoner');
 const sumMatchesRoute = require('./routes/sumMatches');
 const sumMatchRoute = require('./routes/sumMatch');
+const sumRankedRoute = require('./routes/sumRanked');
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', summonerRoute);
 app.use('/', sumMatchesRoute);
 app.use('/', sumMatchRoute);
+app.use('/', sumRankedRoute);
 
 async function start() {
 	try {
