@@ -50,11 +50,11 @@ export default class ChampionPage extends Component {
 
 		return(
 			<div className="champion_info">
-				<div className="picture_block">
+				<div className="picture_block col-3">
 					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
 				</div>
 	
-				<div className="info_block">
+				<div className="info_block col">
 					<ChampNav changeTab={this.changeTab}/>
 					{tabContent}
 				</div>
@@ -69,7 +69,9 @@ export default class ChampionPage extends Component {
 		return (
 			<div className="champion_page">
 				<div className="container">
-					{content}
+					<div className="row">
+						{content}
+					</div>
 				</div>
 			</div>
 		)

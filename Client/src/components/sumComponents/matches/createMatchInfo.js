@@ -90,7 +90,7 @@ function CreateMatchInfo(matchId, version, name, mini) {
 					if (item === 0) return <div className="item" key={`${item}_${i}`}></div>
 
 					return(
-						<div className="item" key={item}>
+						<div className="item" key={`${item}_${i}`}>
 							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item}.png`} alt={`${item}_icon`}/>
 						</div>
 					)

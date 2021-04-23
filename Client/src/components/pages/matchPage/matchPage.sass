@@ -8,13 +8,15 @@ $main-color: #dadce0
 
 .full_match
 	color: $main-color
-	padding: 20px
+	padding: 10px
 	.table_result
-		padding-top: 10px
+		padding: 10px 10px 2px
 		border-top: 1px solid
 		border-bottom: 1px solid
 		border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
 		border-image-slice: 1
+		border-radius: 10px
+		background: rgba(128, 128, 128, 0.2)
 		.table_head
 			position: relative
 			display: flex
@@ -122,8 +124,9 @@ $main-color: #dadce0
 										margin-bottom: 1px
 					.player_name
 						@include flexColumn
-						text-align: center
 						width: 135px
+						word-break: break-all
+						text-align: center
 						.rank
 							color: gray
 							font-size: 13px
@@ -162,16 +165,16 @@ $main-color: #dadce0
 							position: relative
 							display: flex
 							flex-wrap: wrap
-							width: 106px
+							width: 102px
 							.item
 								width: 30px
 								margin: 2px
-								border-radius: 2px
+								border-radius: 5px
 								background: rgba(211, 211, 211, 0.2)
 								&:last-of-type
 									position: absolute
 									top: calc(50% - 15px)
-									right: -30px
+									right: -34px
 								img
 									border-radius: 5px
 			.right_team
@@ -199,11 +202,56 @@ $main-color: #dadce0
 								&:last-of-type
 									position: absolute
 									top: calc(50% - 15px)
-									left: -30px
+									left: -34px
 	.graphs
-		padding-top: 20px
-		#damage
-			// border: 1px solid gray
+		display: flex
+		justify-content: space-evenly
+		margin-top: 20px
+		.graph
+			display: flex
+			flex-direction: column
+			align-items: center
+			width: 410px
+			padding: 10px
+			border-radius: 10px
+			border-top: 1px solid
+			border-bottom: 1px solid
+			border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+			border-image-slice: 1
+			background: rgba(128, 128, 128, 0.2)
+			.graph_title
+				padding-bottom: 10px
+			canvas
+				border-top: 1px solid
+				border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+				border-image-slice: 1
+	.champion_statistic
+		margin-top: 20px
+		padding: 10px
+		border-radius: 10px
+		border-top: 1px solid
+		border-bottom: 1px solid
+		border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+		border-image-slice: 1
+		background: rgba(128, 128, 128, 0.2)
+		.tabs
+			display: flex
+			justify-content: space-evenly
+			padding-bottom: 10px
+			border-bottom: 1px solid
+			border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+			border-image-slice: 1
+			.left_team, .right_team
+				display: flex
+				.tab
+					cursor: pointer
+					img
+						width: 50px
+						margin: 0 5px
+			.table
+				width: 100px
+		.content
+			height: 40vh
 
 
 

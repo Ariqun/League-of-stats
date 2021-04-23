@@ -68,11 +68,11 @@ function MatchPage({region, matchId, version}) {
 	}
 
 	const createPlayerBlock = (team) => {
-		const result = team.players.map(player => {
+		const result = team.players.map((player, i) => {
 			const {championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, totalTeamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName} = player;
 
 			return(
-				<div className="player" key={championName}>
+				<div className="player" key={`${championName}_${i}`}>
 					<div className="player_settings">
 						<div className="champion_icon">
 							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/>
@@ -136,14 +136,17 @@ function MatchPage({region, matchId, version}) {
 		return result;
 	}
 
-	const createObjectOfDamage = (team) => {
+	const createInfoForCanvas = (team) => {
 		let res = [];
 
 		for (let elem of team) {
+			const {totalDamageDealtToChampions} = elem;
+			const heal = elem.totalHealsOnTeammates + elem.totalDamageShieldedOnTeammates;
 			let player = {};
 
 			player.champ = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${elem.championName}.png`;
-			player.dmg = elem.totalDamageDealtToChampions;
+			player.dmg = (totalDamageDealtToChampions / 1000).toFixed(3);
+			player.heal = (heal / 1000).toFixed(3);
 
 			res.push(player);
 		}
@@ -156,9 +159,8 @@ function MatchPage({region, matchId, version}) {
 		const leftTeam = createPlayerBlock(info.leftTeam);
 		const rightTeam = createPlayerBlock(info.rightTeam);
 		
-		const leftTeamDmg = createObjectOfDamage(info.leftTeam.players);
-		const rightTeamDmg = createObjectOfDamage(info.rightTeam.players);
-
+		const leftTeamInfoForCanvas = createInfoForCanvas(info.leftTeam.players);
+		const rightTeamInfoForCanvas = createInfoForCanvas(info.rightTeam.players);
 		console.log(info);
 
 		return(
@@ -196,7 +198,53 @@ function MatchPage({region, matchId, version}) {
 						</div>
 
 						<div className="graphs">
-							<Canvas leftTeamDmg={leftTeamDmg} rightTeamDmg={rightTeamDmg}/>
+							<div className="graph graph_damage">
+								<span className="graph_title">Урон по чемпионам</span>
+								<Canvas leftTeam={leftTeamInfoForCanvas} rightTeam={rightTeamInfoForCanvas} option="dmg"/>
+							</div>
+
+							<div className="graph graph_heal">
+								<span className="graph_title">Лечение и щиты на союзников</span>
+								<Canvas leftTeam={leftTeamInfoForCanvas} rightTeam={rightTeamInfoForCanvas} option="heal"/>
+							</div>
+						</div>
+
+						<div className="champion_statistic">
+							<div className="tabs">
+								<div className="left_team">
+									{info.leftTeam.players.map((player, i) => {
+										const {championName} = player;
+										return (
+											<div className="tab" key={`${championName}_${i}`}>
+												<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
+													 alt={`${championName}_icon`}
+												/>
+											</div>
+										)
+									})}
+								</div>
+
+								<div className="table">
+
+								</div>
+
+								<div className="right_team">
+									{info.rightTeam.players.map((player, i) => {
+										const {championName} = player;
+										return (
+											<div className="tab" key={`${championName}_${i}`}>
+												<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
+													 alt={`${championName}_icon`}
+												/>
+											</div>
+										)
+									})}
+								</div>
+							</div>
+
+							<div className="content">
+
+							</div>
 						</div>
 					</div>
 				</div>
