@@ -41,25 +41,14 @@ export default class ChampionPage extends Component {
 		let tabContent = '';
 
 		if (tab === 'general') {
-			tabContent = <ChampGeneral champ={champ}/>
+			tabContent = <ChampGeneral champ={champ} id={id}/>;
 		} else if (tab === 'skills') {
-			tabContent = <ChampSkills champ={champ} version={version}/>
+			tabContent = <ChampSkills champ={champ} version={version}/>;
 		} else if (tab === 'skins') {
-			tabContent = <ChampSkins champ={champ}/>
+			tabContent = <ChampSkins champ={champ}/>;
 		}
 
-		return(
-			<div className="champion_info">
-				<div className="picture_block col-3">
-					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
-				</div>
-	
-				<div className="info_block col">
-					<ChampNav changeTab={this.changeTab}/>
-					{tabContent}
-				</div>
-			</div>
-		)
+		return tabContent;
 	}
 	
 	render() {
@@ -69,9 +58,8 @@ export default class ChampionPage extends Component {
 		return (
 			<div className="champion_page">
 				<div className="container">
-					<div className="row">
-						{content}
-					</div>
+					<ChampNav changeTab={this.changeTab}/>
+					{content}
 				</div>
 			</div>
 		)

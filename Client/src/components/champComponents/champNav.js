@@ -8,7 +8,7 @@ export default class ChampNav extends Component {
 			const id = engArr[i]
 			
 			return(
-				<li onClick={() => this.props.changeTab(id)} className="col" key={id}><span>{item}</span></li>
+				<li onClick={() => this.props.changeTab(id)} className="col-2" key={id}><span>{item}</span></li>
 			)
 		})
 

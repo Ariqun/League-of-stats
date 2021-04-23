@@ -9,174 +9,179 @@ $color-skyblue: skyblue
 
 .champion_page
 	.container
-		.champion_info
+		.champion_nav
 			display: flex
+			justify-content: space-around
+			align-items: self-start
+			padding: 5px 0
+			li 
+				cursor: pointer
+				color: white
+				text-align: center
+				border-top: 1px solid
+				border-bottom: 1px solid
+				border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
+				border-image-slice: 1
+				background: linear-gradient(270deg, rgba(11, 28, 27, 0) 0%, rgba(11, 28, 27, 1) 50%, rgba(11, 28, 27, 0) 100%)
+				&:hover
+					color: $color-skyblue
+					border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
+					border-image-slice: 1
+				span
+					position: relative
+					display: block
+					padding: 10px
+					outline: none
+					border: none
+					font-size: 1em
+			li.active
+				color: $color-skyblue
+				border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
+				border-image-slice: 1	
+		.general
+			display: flex
+			margin: 10px 0 0
 			.picture_block
 				flex-shrink: 0
-			.info_block
-				width: 100%
-				.champion_nav
+			.champion_info
+				padding: 0 20px 20px
+				.title
 					display: flex
-					justify-content: space-around
-					align-items: self-start
-					padding: 5px 0
-					li 
-						cursor: pointer
-						color: white
-						border-top: 1px solid
-						border-bottom: 1px solid
-						border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
-						border-image-slice: 1
-						background: linear-gradient(270deg, rgba(11, 28, 27, 0) 0%, rgba(11, 28, 27, 1) 50%, rgba(11, 28, 27, 0) 100%)
-						&:hover
-							color: $color-skyblue
-							border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
-							border-image-slice: 1
-						span
-							position: relative
-							display: block
-							padding: 10px
-							margin: 0 30px
-							outline: none
-							border: none
-							font-size: 1em
-					li.active
-						color: $color-skyblue
-						border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
-						border-image-slice: 1
-				.general
-					padding: 10px 40px
-					.title
-						display: flex
-						flex-direction: column
-						align-items: center
-						height: 8vh
-						.champ_name
-							font-size: 35px
-						.champ_title
-							color: gray
-							font-size: 14px
-					.lore
-						@include transGrayBordersTopAndBot
-						padding: 10px 0
-						p
-							color: $color-gray
-							text-align: center
-					.stats
-						@include transGrayBordersTopAndBot
-						position: relative
-						display: flex
-						flex-wrap: wrap
-						padding: 10px 0
-						margin: 10px 0
-						&::before
-							content: ''
-							position: absolute
-							top: 0
-							left: calc(50% - 0.5px)
-							height: 100%
-							border-left: 1px solid
-							border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
-							border-image-slice: 1
-						.stat
-							display: flex
-							width: 50%
-							&:nth-of-type(2n + 1)
-								justify-content: flex-end
-								padding-right: 10px
-							&:nth-of-type(2n)
-								padding-left: 10px
-							&_name
-								color: gray
-							&_value
-								width: 60px
-								color: $color-skyblue
-								&:nth-of-type(2n)
-									display: flex
-									justify-content: flex-end
-					.roles
-						display: flex
-						justify-content: center
-						.role
-							width: 70px
-							margin: 20px
-				.skills
+					flex-direction: column
+					align-items: center
+					height: 8vh
+					.champ_name
+						font-size: 35px
+					.champ_title
+						color: gray
+						font-size: 14px
+				.lore
+					@include transGrayBordersTopAndBot
+					padding: 10px 0
+					p
+						color: $color-gray
+						text-align: center
+				.stats
+					@include transGrayBordersTopAndBot
+					position: relative
 					display: flex
-					padding: 20px 0
-					.icons
-						width: 7vw
-						.skill
-							display: flex
-							justify-content: center
-							margin: 30px 0
-							img
-								max-width: 64px
-								cursor: pointer
-						.skill.passive
-							img
-								max-width: 50px
-					.descr
-						width: 35vw
-						margin-left: 50px
-						.text
-							@include transGrayBordersTopAndBot
-							display: flex
-							flex-direction: column
-							align-items: center
-							padding: 10px 0
-							.skill_name
-								font-size: 25px
-							.skill_btn
-								color: $dark-gray
-								font-size: 20px
-								margin: 0 5px
-							.skill_descr
-								color: $color-gray
-								text-align: center
-								margin-top: 10px
-						.video
-							margin-top: 20px
-							video
-								width: 100%
-				.skins
-					display: flex
-					justify-content: space-evenly
 					flex-wrap: wrap
-					.skin_card
-						position: relative
-						width: 10vw
-						margin-top: 15px
-						cursor: pointer
-						img
-							width: 100%
-						.skin_title
-							position: absolute
-							left: 0
-							bottom: 0
-							display: flex
-							justify-content: center
-							align-items: center
-							width: 100%
-							height: 5vh
-							color: $color-skyblue
-							text-align: center
-							padding: 5px 10px
-							transition: 0.5s all ease
-							background: rgba(0, 0, 0, 0.6)
-						&:hover .skin_title
-							color: white
-					.skin_modal
-						position: fixed
+					padding: 10px 0
+					margin: 10px 0
+					&::before
+						content: ''
+						position: absolute
 						top: 0
-						left: 0
-						width: 100vw
-						height: 100vh
-						background: black
-						z-index: 100
-						.modal_wrapper
-							position: fixed
-							top: calc(50% - 360px)
-							right: calc(50% - 607px)
+						left: calc(50% - 0.5px)
+						height: 100%
+						border-left: 1px solid
+						border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+						border-image-slice: 1
+					.stat
+						display: flex
+						width: 50%
+						&:nth-of-type(2n + 1)
+							justify-content: flex-end
+							padding-right: 10px
+						&:nth-of-type(2n)
+							padding-left: 10px
+						&_name
+							color: gray
+						&_value
+							width: 60px
+							color: $color-skyblue
+							&:nth-of-type(2n)
+								display: flex
+								justify-content: flex-end
+				.roles
+					display: flex
+					justify-content: center
+					.role
+						width: 70px
+						margin: 20px
+		.skills
+			display: flex
+			flex-direction: column
+			align-items: center
+			padding: 20px 0
+			.icons
+				display: flex
+				justify-content: space-evenly
+				align-items: center
+				margin-bottom: 20px
+				.skill
+					display: flex
+					justify-content: center
+					img
+						max-width: 64px
+						cursor: pointer
+				.skill.passive
+					img
+						max-width: 50px
+			.descr
+				.text
+					@include transGrayBordersTopAndBot
+					display: flex
+					flex-direction: column
+					align-items: center
+					padding: 10px 0
+					.skill_name
+						font-size: 25px
+					.skill_btn
+						color: $dark-gray
+						font-size: 20px
+						margin: 0 5px
+					.skill_descr
+						color: $color-gray
+						text-align: center
+						margin-top: 10px
+				.video
+					margin-top: 20px
+					.wrapper_for_horizontal_borders
+						&::after
+							bottom: 3px
+					video
+						width: 100%
+		.skins
+			display: flex
+			justify-content: space-evenly
+			flex-wrap: wrap
+			padding-bottom: 20px
+			.skin_card
+				position: relative
+				margin-top: 15px
+				padding: 0 20px
+				cursor: pointer
+				img
+					width: 100%
+				.skin_title
+					position: absolute
+					left: 0
+					bottom: 0
+					display: flex
+					justify-content: center
+					align-items: center
+					width: 100%
+					height: 15%
+					color: $color-skyblue
+					text-align: center
+					padding: 5px 10px
+					transition: 0.5s all ease
+					background: rgba(0, 0, 0, 0.6)
+				&:hover .skin_title
+					color: white
+			.skin_modal
+				position: fixed
+				top: 0
+				left: 0
+				width: 100vw
+				height: 100vh
+				background: black
+				z-index: 100
+				.modal_wrapper
+					position: fixed
+					top: calc(50% - 360px)
+					right: calc(50% - 607px)
 .wrapper_for_horizontal_borders
 	position: relative
 	pointer-events: none

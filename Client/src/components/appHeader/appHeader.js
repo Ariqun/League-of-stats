@@ -22,16 +22,12 @@ export default class AppHeader extends Component {
 
 		return (
 			<div className="header">
-				<div className="logo">
-					<Link to='/' className="home">League of Stats</Link>
-				</div>
-	
 				<div className="container">
-					<div className="nav">
+					<div className="nav col-4">
 						<ul>
-							<li><Link to="/">Чампидроны</Link></li>
-							<li>Предметы</li>
-							<li>Статистика</li>
+							<li className="col"><Link to="/">Чампидроны</Link></li>
+							<li className="col">Предметы</li>
+							<li className="col">Статистика</li>
 						</ul>
 					</div>
 	

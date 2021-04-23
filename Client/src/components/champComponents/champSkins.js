@@ -40,7 +40,7 @@ export default class ChampSkins extends Component {
 			}
 
 			return(
-				<div className="skin_card" onClick={() => this.showModal(id, num)} key={num}>
+				<div className="skin_card col-xl-3 col-lg-4 col-sm-6" onClick={() => this.showModal(id, num)} key={num}>
 					<div className="wrapper_for_horizontal_borders">
 						<div className="wrapper_for_vertical_borders">
 							<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_${num}.jpg`} alt={name}/>

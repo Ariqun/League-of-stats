@@ -31,3 +31,128 @@ input, button, textarea, select
 @font-face
 	font-family: 'Beaufort for LoL'
 	src: url('./fonts/beaufortforlol-medium.otf')
+
+
+/* -------------- Media -------------- */
+
+@media screen and (max-width: 1520px)
+	#video_back
+		width: auto
+
+@media screen and (max-width: 1399px)
+	.champion_page
+		.container
+
+@media screen and (max-width: 1199px)
+	.champion_page
+		.general
+			.lore, .stats
+				font-size: 14px
+		.skills
+			.descr
+				font-size: 14px
+	.summoner_page
+		.matches
+			.match_item
+				.inner_wrapper
+					.match_stats
+						.champion_stats
+							font-size: 14px
+					.champ_items
+						justify-content: flex-start
+						width: 140px
+					.match_players
+						width: 340px
+						.players_block
+							.left_team, .right_team
+								width: 170xp
+	.match_page
+		.table_result
+			.table_body
+				.left_team, .right_team
+					.player
+						.player_items
+							display: none
+
+@media screen and (max-width: 991px)
+	.champion_page
+		.container
+			.general
+				flex-direction: column
+				align-items: center
+	.summoner_page
+		.matches
+			.match_item
+				.inner_wrapper
+					.match_players
+						display: none
+	.match_page
+		.table_result
+			.table_body
+				.left_team, .right_team
+					.player
+						.player_stats
+							width: 120px
+							.kda_score
+								flex-direction: column
+								align-items: center
+								width: auto
+							.other_score
+								display: none
+		.graphs
+			flex-direction: column
+			align-items: center
+			.graph
+				margin-bottom: 10px
+
+@media screen and (max-width: 767px)
+	.champion_page
+		.general
+			.stat_name
+				text-align: center
+	.summoner_page
+		.promo
+			.sum_rating
+				width: 150px
+				.rank_block
+					.rank_icon
+						.img
+							width: 100px
+			.banner
+				.name_and_lvl
+					.name
+						font-size: 20px
+					lvl
+						font-size: 13px
+			.sum_winrate
+				#winrate
+					width: 150px
+				#background
+					width: 150px
+				.stats
+					top: calc(50% - 50px)
+					left: calc(50% - 50px)
+					width: 100px
+					height: 100px
+					.wins, .losses
+						font-size: 20px
+					.percent
+						font-size: 26px
+	.match_page
+		.table_result
+			.table_head
+				.match_type
+					justify-content: space-evenly
+				.left_team, .right_team
+					flex-direction: column
+					align-items: center
+					.result
+						margin-bottom: 10px
+				.right_team
+					.result
+						order: 1
+
+@media screen and (max-width: 575px)
+	.champion_page
+		.container
+			

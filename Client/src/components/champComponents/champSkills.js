@@ -118,12 +118,12 @@ export default class ChampSkills extends Component {
 
 		return(
 			<div className="skills">
-				<div className="icons">
+				<div className="icons col-12">
 					{passiveSkill}
 					{list}
 				</div>
 
-				<div className="descr">
+				<div className="descr col-xl-7 col-lg-9 col-sm-10">
 					{descr}
 				</div>
 			</div>

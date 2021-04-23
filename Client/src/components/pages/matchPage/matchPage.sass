@@ -6,9 +6,8 @@
 	
 $main-color: #dadce0
 
-.full_match
+.match_page
 	color: $main-color
-	padding: 10px
 	.table_result
 		padding: 10px 10px 2px
 		border-top: 1px solid
@@ -32,12 +31,15 @@ $main-color: #dadce0
 				border-image-slice: 1
 			.match_type
 				@include flexColumn
-				.duration
-					color: gray
+				.date
+					display: flex
+					flex-direction: column
+					align-items: center
+					.duration
+						color: gray
 			.left_team, .right_team
 				display: flex
 				justify-content: space-evenly
-				width: 20vw
 				.result
 					@include flexColumn
 					.defeat
@@ -125,7 +127,7 @@ $main-color: #dadce0
 					.player_name
 						@include flexColumn
 						width: 135px
-						word-break: break-all
+						word-break: break-word
 						text-align: center
 						.rank
 							color: gray
@@ -138,12 +140,16 @@ $main-color: #dadce0
 						width: 230px
 						height: 100%
 						.kda_score
-							.kills
-								color: #2DEB90
-							.deaths
-								color: #ff5859
-							.assists
-								color: orange
+							display: flex
+							justify-content: space-evenly
+							width: 60%
+							.score_wrapper
+								.kills
+									color: #2DEB90
+								.deaths
+									color: #ff5859
+								.assists
+									color: orange
 							.kda_ratio
 								color: gray
 						.other_score

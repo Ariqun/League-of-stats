@@ -67,24 +67,31 @@ export default class ChampGeneral extends Component {
 
 	render() {
 		const {name, title, lore, stats, tags} = this.props.champ
+		const id = this.props.id;
 		
 		return(
 			<div className="general">
-				<div className="title">
-					<span className="champ_name">{name}</span>
-					<span className="champ_title">{title}</span>
+				<div className="picture_block col-sm-3">
+					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
 				</div>
 
-				<div className="lore">
-					<p>{lore}</p>
-				</div>
+				<div className="champion_info">
+					<div className="title">
+						<span className="champ_name">{name}</span>
+						<span className="champ_title">{title}</span>
+					</div>
 
-				<div className="roles">
-					<this.createRolesBlock roles={tags}/>
-				</div>
+					<div className="lore">
+						<p>{lore}</p>
+					</div>
 
-				<div className="stats">
-					<this.createStatsTable stats={stats}/>
+					<div className="roles">
+						<this.createRolesBlock roles={tags}/>
+					</div>
+
+					<div className="stats">
+						<this.createStatsTable stats={stats}/>
+					</div>
 				</div>
 			</div>
 		)

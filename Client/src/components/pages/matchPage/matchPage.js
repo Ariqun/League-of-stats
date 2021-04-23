@@ -94,12 +94,14 @@ function MatchPage({region, matchId, version}) {
 
 					<div className="player_stats">
 						<div className="kda_score">
-							<span className="kills">{kills}</span>
-							<span> / </span>
-							<span className="deaths">{deaths}</span>
-							<span> / </span>
-							<span className="assists">{assists} </span>
-							<span className="kda_ratio">&ensp;({((kills + assists) / deaths).toFixed(2)})</span>
+							<div className="score_wrapper">
+								<span className="kills">{kills}</span>
+								<span> / </span>
+								<span className="deaths">{deaths}</span>
+								<span> / </span>
+								<span className="assists">{assists}</span>
+							</div>
+							<span className="kda_ratio">({((kills + assists) / deaths).toFixed(2)})</span>
 						</div>
 
 						<div className="other_score">
@@ -166,85 +168,83 @@ function MatchPage({region, matchId, version}) {
 		return(
 			<div className="match_page">
 				<div className="container">
-					<div className="full_match">
-						<div className="table_result">
-							<div className="table_head">
-								<div className="left_team">
-									{createTeamScoreBlock(100)}
-								</div>
-
-								<div className="match_type">
-									<div className="date">
-										<span className="time_date">{info.date}</span>
-										<span className="duration">({info.duration})</span>
-									</div>
-									<span className="type">{info.type}</span>
-								</div>
-
-								<div className="right_team">
-									{createTeamScoreBlock(200)}
-								</div>
+					<div className="table_result">
+						<div className="table_head">
+							<div className="left_team col-4">
+								{createTeamScoreBlock(100)}
 							</div>
 
-							<div className="table_body">
-								<div className="left_team">
-									{leftTeam}
+							<div className="match_type col-4">
+								<div className="date">
+									<span className="time_date">{info.date}</span>
+									<span className="duration">({info.duration})</span>
 								</div>
+								<span className="type">{info.type}</span>
+							</div>
 
-								<div className="right_team">
-									{rightTeam}
-								</div>
+							<div className="right_team col-4">
+								{createTeamScoreBlock(200)}
 							</div>
 						</div>
 
-						<div className="graphs">
-							<div className="graph graph_damage">
-								<span className="graph_title">Урон по чемпионам</span>
-								<Canvas leftTeam={leftTeamInfoForCanvas} rightTeam={rightTeamInfoForCanvas} option="dmg"/>
+						<div className="table_body">
+							<div className="left_team">
+								{leftTeam}
 							</div>
 
-							<div className="graph graph_heal">
-								<span className="graph_title">Лечение и щиты на союзников</span>
-								<Canvas leftTeam={leftTeamInfoForCanvas} rightTeam={rightTeamInfoForCanvas} option="heal"/>
+							<div className="right_team">
+								{rightTeam}
+							</div>
+						</div>
+					</div>
+
+					<div className="graphs">
+						<div className="graph graph_damage">
+							<span className="graph_title">Урон по чемпионам</span>
+							<Canvas leftTeam={leftTeamInfoForCanvas} rightTeam={rightTeamInfoForCanvas} option="dmg"/>
+						</div>
+
+						<div className="graph graph_heal">
+							<span className="graph_title">Лечение и щиты на союзников</span>
+							<Canvas leftTeam={leftTeamInfoForCanvas} rightTeam={rightTeamInfoForCanvas} option="heal"/>
+						</div>
+					</div>
+
+					<div className="champion_statistic">
+						<div className="tabs">
+							<div className="left_team">
+								{info.leftTeam.players.map((player, i) => {
+									const {championName} = player;
+									return (
+										<div className="tab" key={`${championName}_${i}`}>
+											<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
+													alt={`${championName}_icon`}
+											/>
+										</div>
+									)
+								})}
+							</div>
+
+							<div className="table">
+
+							</div>
+
+							<div className="right_team">
+								{info.rightTeam.players.map((player, i) => {
+									const {championName} = player;
+									return (
+										<div className="tab" key={`${championName}_${i}`}>
+											<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
+													alt={`${championName}_icon`}
+											/>
+										</div>
+									)
+								})}
 							</div>
 						</div>
 
-						<div className="champion_statistic">
-							<div className="tabs">
-								<div className="left_team">
-									{info.leftTeam.players.map((player, i) => {
-										const {championName} = player;
-										return (
-											<div className="tab" key={`${championName}_${i}`}>
-												<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
-													 alt={`${championName}_icon`}
-												/>
-											</div>
-										)
-									})}
-								</div>
+						<div className="content">
 
-								<div className="table">
-
-								</div>
-
-								<div className="right_team">
-									{info.rightTeam.players.map((player, i) => {
-										const {championName} = player;
-										return (
-											<div className="tab" key={`${championName}_${i}`}>
-												<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
-													 alt={`${championName}_icon`}
-												/>
-											</div>
-										)
-									})}
-								</div>
-							</div>
-
-							<div className="content">
-
-							</div>
 						</div>
 					</div>
 				</div>

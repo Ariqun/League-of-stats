@@ -67,10 +67,11 @@ export default class Canvas extends Component {
 		if (maxScore > 10) factor = 20
 		if (maxScore > 15) factor = 14
 		if (maxScore > 25) factor = 10;
-		if (maxScore > 35) factor = 5;
+		if (maxScore > 35) factor = 7;
+		if (maxScore > 50) factor = 5;
 		if (maxScore > 70) factor = 2.5;
 		
-		function createCanvas(team, color, x = 0) {
+		function createCanvas(team, color, j = 0) {
 			ctx.fillStyle = color;
 			
 			for (let i = 0; i < 5; i++) {
@@ -79,9 +80,9 @@ export default class Canvas extends Component {
 				img.width = '20px';
 				
 				ctx.transform(1, 0, 0, -1, 0, 390);
-				ctx.fillRect(0 + i * 40 + x, 32, 30, (team[i][option]) * factor);
+				ctx.fillRect(0 + i * 40 + j, 32, 30, (team[i][option]) * factor);
 				ctx.resetTransform();
-				ctx.drawImage(img, i * 40 + x, 360, 30, 30);
+				ctx.drawImage(img, i * 40 + j, 360, 30, 30);
 			}
 
 			ctx.fillStyle = 'white';
@@ -91,9 +92,9 @@ export default class Canvas extends Component {
 				const num = +team[i][option];
 				let score = `${Math.floor(num)}k`;
 
-				if(num < 1 && num > 0.1) score = `${num.toFixed(1)}k`;
+				if(num < 10 && num > 0.1) score = `${num.toFixed(1)}k`;
 
-				ctx.fillText(score, i * 40 + 2 + x, 350);
+				ctx.fillText(score, i * 40 + 2 + j, 350 - (team[i][option]) * factor);
 			}
 		}
 		createCanvas(leftTeam, '#2a98bf');
