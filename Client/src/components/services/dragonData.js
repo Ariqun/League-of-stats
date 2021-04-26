@@ -4,7 +4,6 @@ export default class DragonData {
 	constructor(version, language) {
 		this.version = version;
 		this.language = language;
-		this._url = `http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`;
 	}
 
 	getData = async (url) => {
@@ -102,6 +101,11 @@ export default class DragonData {
 			}
 		}
 
+		return res;
+	}
+
+	getAllItems = async () => {
+		const res = await this.getData('http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/item.json');
 		return res;
 	}
 }

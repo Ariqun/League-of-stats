@@ -6,14 +6,13 @@ import AppBackground from '../appBackground/appBackground';
 
 import MainPage from '../pages/mainPage/mainPage';
 import ChampionPage from '../pages/championPage/championPage';
+import ItemsPage from '../pages/itemsPage/itemsPage';
 import SummonerPage from '../pages/summonerPage/summonerPage';
 import MatchPage from '../pages/matchPage/matchPage';
 
 import DragonData from '../services/dragonData';
 
 import './app.sass'
-
-
 
 export default class App extends Component {
 	dragonData = new DragonData();
@@ -42,6 +41,10 @@ export default class App extends Component {
 					<Route path="/champion/:name" render={({match}) => {
 						const {name} = match.params;
 						return <ChampionPage champName={name} version={version}/>
+					}}/>
+
+					<Route path="/items" render={() => {
+						return <ItemsPage version={version}/>
 					}}/>
 					
 					<Route path="/summoner/:region/:name" render={({match}) => {
