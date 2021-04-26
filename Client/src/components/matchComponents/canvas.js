@@ -58,10 +58,10 @@ export default class Canvas extends Component {
 		let factor = 40;
 
 		for (let i = 0; i < 5; i++) {
-			allScore.push(leftTeam[i][option], rightTeam[i][option]);
+			allScore.push(leftTeam[i][option].total, rightTeam[i][option].total);
 		}
 
-		const maxScore = Math.max(...allScore);
+		const maxScore = Math.max(...allScore) / 1000;
 
 		if (maxScore > 5) factor = 30
 		if (maxScore > 10) factor = 20
@@ -76,25 +76,27 @@ export default class Canvas extends Component {
 			
 			for (let i = 0; i < 5; i++) {
 				const img = new Image();
+				const num = team[i][option].total / 1000;
+
 				img.src = team[i].champ;
 				img.width = '20px';
 				
-				ctx.transform(1, 0, 0, -1, 0, 390);
-				ctx.fillRect(0 + i * 40 + j, 32, 30, (team[i][option]) * factor);
+				ctx.transform(1, 0, 0, -1, 0, 410);
+				ctx.fillRect(i * 40 + j, 32, 30, num * factor);
 				ctx.resetTransform();
-				ctx.drawImage(img, i * 40 + j, 360, 30, 30);
+				ctx.drawImage(img, i * 40 + j, 380, 30, 30);
 			}
 
 			ctx.fillStyle = 'white';
 			ctx.font = "15px Beaufort for LoL, sans-serif";
 
 			for (let i = 0; i < 5; i++) {
-				const num = +team[i][option];
+				const num = team[i][option].total / 1000;
 				let score = `${Math.floor(num)}k`;
 
 				if(num < 10 && num > 0.1) score = `${num.toFixed(1)}k`;
 
-				ctx.fillText(score, i * 40 + 2 + j, 350 - (team[i][option]) * factor);
+				ctx.fillText(score, i * 40 + 2 + j, 370 - num * factor);
 			}
 		}
 		createCanvas(leftTeam, '#2a98bf');
@@ -103,7 +105,7 @@ export default class Canvas extends Component {
 
 	render() {
 		return(
-			<canvas id="damage" width="390px" height="390px" ref={this.canvas}></canvas>
+			<canvas id="damage" width="390px" height="410px" ref={this.canvas}></canvas>
 		)
 	}
 }

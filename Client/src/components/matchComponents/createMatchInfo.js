@@ -1,7 +1,7 @@
 // import React, {useState, useEffect} from 'react';
 
-import RiotAPI from '../../services/riotAPI';
-import DragonData from '../../services/dragonData';
+import RiotAPI from '../services/riotAPI';
+import DragonData from '../services/dragonData';
 
 function CreateMatchInfo(matchId, version, name, mini) {
 	const riotAPI = new RiotAPI();
@@ -185,10 +185,6 @@ function CreateMatchInfo(matchId, version, name, mini) {
 
 		return runes;
 	}
-
-	const getSumRankedInfo = async (region, sumId) => {
-		return await riotAPI.getSumRanked(region, sumId);
-	}
 	
 	const result = async () => {
 		await getMatchInfo();
@@ -244,7 +240,6 @@ function CreateMatchInfo(matchId, version, name, mini) {
 				const mainRunes = await getMainPlayerRunes(perks);
 				const allRunes = getAllPlayerRunes(perks);
 				const totalTeamKills = getTotalTeamKills(teams, teamId);
-				// const rankedInfo = await getSumRankedInfo(platformId, summonerId);
 
 				let obj = {...elem, farmPerMin, visionPerMin, items, mainRunes, allRunes, spells, totalTeamKills, goldPerMin};
 

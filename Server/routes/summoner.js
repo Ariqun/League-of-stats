@@ -3,17 +3,16 @@ const axios = require('axios');
 const router = Router();
 
 router.post('/summoner', async (req, res) => {
-	const summoner = encodeURI(req.body.summoner);
-	const region = req.body.region;
+	const name = encodeURI(req.body.summoner);
+	const region = (req.body.region).toUpperCase();
 
-	const profileURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}`;
+	const profileURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}`;
 	const summonerInfo = await getData(profileURL, createSummonerInfo, region);
-	
+
 	const leagueURL = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerInfo.tech.sumID}`;
 	const rankedInfo = await getData(leagueURL, createRankedInfo);
-
-	res.append('Access-Control-Allow-Origin', '*');
-	res.send(JSON.stringify({...summonerInfo, ...rankedInfo}))
+	
+	res.send(JSON.stringify({...summonerInfo, ...rankedInfo}));
 })
 
 const getData = async (url, func, region = 'ru') => {
@@ -22,7 +21,7 @@ const getData = async (url, func, region = 'ru') => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-638e5eca-eefe-46de-90ca-0931eb4f1241"
+		"X-Riot-Token": "RGAPI-affb8ef4-84da-43f6-85b5-a4e72ce6ce18"
 	};
 	let result = {};
 
@@ -33,7 +32,7 @@ const getData = async (url, func, region = 'ru') => {
 	return result;
 }
 
-const createSummonerInfo = (res, region) => {
+const createSummonerInfo = async (res, region) => {
 	const obj = {
 		name: res.name,
 		region: region,
@@ -45,12 +44,11 @@ const createSummonerInfo = (res, region) => {
 			puuID: res.puuid
 		}
 	};
-
 	return obj;
 };
 
 const createRankedInfo = (res) => {
-	const obj = {ranked: {rank: 'Не активен'}}
+	const obj = {ranked: {rank: 'Нет рейтинга'}}
 
 	res[0].length !== 0 ? obj.ranked = {...res[0]} : null;
 

@@ -1,8 +1,27 @@
 import React from 'react';
 
+import './loading.css';
+
 function Loading() {
 	return(
-		<div className="loading"></div>
+		<div className="loading">
+			<div className="container">
+				<div className="spinner">
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+				</div>
+			</div>
+		</div>
 	)
 }
 

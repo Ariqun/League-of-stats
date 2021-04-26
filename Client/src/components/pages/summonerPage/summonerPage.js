@@ -1,58 +1,63 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import SummonerPromo from '../../sumComponents/sumPromo';
 import SummonerNav from '../../sumComponents/sumNav';
-import SummonerMatches from '../../sumComponents/matches/allMatches';
+import ListMatches from '../../matchComponents/listMatches';
 import Loading from '../../loading/loading';
 
 import RiotAPI from '../../services/riotAPI';
 
 import './summonerPage.sass';
 
-export default class SummonerPage extends Component {
-	riotAPI = new RiotAPI();
+function SummonerPage({version, region, name}) {
+	const [loading, changeLoading] = useState(true);
+	const [summoner, setSummoner] = useState({});
+	const [tab, changeTab] = useState('matches');
 
-	state = {
-		isLoading: true,
-		summoner: {},
-		tab: 'matches'
-	}
+	const riotAPI = new RiotAPI();
 
-	async componentDidMount() {
-		const {region, name} = this.props
-		
-		const res = await this.riotAPI.getSummoner(region, name);
+	useEffect(() => {
+		const getSummoner = async () => {
+			const res = await riotAPI.getSummoner(region, name);
 
-		this.setState({isLoading: false, summoner: {...res}})
-	}
-	
-	changeTab = (id) => {
-		this.setState({tab: id})
-	}
-
-	render() {
-		if (this.state.isLoading) {
-			return <Loading/>
+			setSummoner({...res});
+			changeLoading(false);
 		}
+		getSummoner();
 
-		const version = this.props.version
-		const {summoner, tab} = this.state
-		const {puuID} = summoner.tech
-		let tabContent = ""
+	}, [])
+
+	const selectTab = (id) => {
+		changeTab(id);
+	}
+
+	const getContent = () => {
+		const {puuID} = summoner.tech;
+		let tabContent = "";
 
 		if (tab === 'matches') {
-			tabContent = <SummonerMatches puuID={puuID} name={summoner.name} version={version}/>
+			tabContent = <ListMatches puuID={puuID} name={summoner.name} version={version}/>;
 		}
+
+		return tabContent;
+	}
+
+	const render = () => {
+		if (loading) return <Loading/>;
 
 		return (
 			<div className="summoner_page">
 				<div className="container">
 					<SummonerPromo summoner={summoner} version={version}/>
-					<SummonerNav changeTab={this.changeTab}/>
+					<SummonerNav changeTab={selectTab}/>
 	
-					{tabContent}
+					{getContent()}
 				</div>
 			</div>
 		)
 	}
+
+	return render();
 }
+
+export default SummonerPage;

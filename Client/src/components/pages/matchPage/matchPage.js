@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 
-import CreateMatchInfo from '../../sumComponents/matches/createMatchInfo';
-import Canvas from '../../sumComponents/matches/canvas';
+import CreateMatchInfo from '../../matchComponents/createMatchInfo';
+import PlayerBlock from '../../matchComponents/playerBlock';
+import Canvas from '../../matchComponents/canvas';
 import Loading from '../../loading/loading';
 
 import './matchPage.sass';
+import TeamScoreBlock from '../../matchComponents/teamScoreBlock';
 
 function MatchPage({region, matchId, version}) {
 	const [info, setInfo] = useState({});
@@ -21,134 +23,26 @@ function MatchPage({region, matchId, version}) {
 		getInfo();
 	}, []);
 
-	const createTeamScoreBlock = (id) => {
-		let team = {};
-
-		for (let elem in info) {
-			if (typeof info[elem] === 'object' && info[elem].teamstats.teamId === id) {
-				team = info[elem].teamstats;
-			}
-		}
-
-		return(
-			<>
-				<div className="result">
-					<div className={team.win ? 'win' : 'defeat'}>{team.win ? 'Победа' : 'Поражение'}</div>
-					<div className="score">
-						<span className="kills">{team.kills}</span>
-						<span> / </span>
-						<span className="deaths">{team.deaths}</span>
-						<span> / </span>
-						<span className="assists">{team.assists}</span>
-					</div>
-				</div>
-
-				<div className="objects">
-					{Object.keys(team.objectives).map(obj => {
-						if (obj === 'champion') return null;
-
-						return(
-							<div className={`object ${obj}`} key={obj}>
-								<div className="obj_icon"></div>
-								<span className="amount">{team.objectives[obj].kills}</span>
-							</div>
-						)
-					})}
-				</div>
-			</>
-		)
-	}
-
-	const createRank = (rankedInfo) => {
-		const ruObj = {iron: 'Железо', bronze: 'Бронза', silver: 'Серебро', gold: 'Золото', platinum: 'Платина', diamond: 'Алмаз', master: 'Мастер', grandmaster: 'Грандмастер', challenger: 'Претендент'};
-
-		const {tier, rank} = rankedInfo;
-
-		return(<span className="rank">{ruObj[tier.toLowerCase()]} {rank}</span>);
-	}
-
-	const createPlayerBlock = (team) => {
-		const result = team.players.map((player, i) => {
-			const {championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, totalTeamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName} = player;
-
-			return(
-				<div className="player" key={`${championName}_${i}`}>
-					<div className="player_settings">
-						<div className="champion_icon">
-							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/>
-						</div>
-						<div className="spells">
-							<div className="sum_spells">
-								{spells.map(spell => {return(<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell}.png`} alt={`${spell}_icon`} key={spell}/>)})}
-							</div>
-							<div className="runes">
-								{mainRunes.map(rune => {return <img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune}`} alt={`${rune}_icon`} key={rune}/>})}
-							</div>
-						</div>
-					</div>
-
-					<div className="player_name">
-						<span className="name">{summonerName}</span>
-						{/* {createRank(rankedInfo)} */}
-					</div>
-
-					<div className="player_stats">
-						<div className="kda_score">
-							<div className="score_wrapper">
-								<span className="kills">{kills}</span>
-								<span> / </span>
-								<span className="deaths">{deaths}</span>
-								<span> / </span>
-								<span className="assists">{assists}</span>
-							</div>
-							<span className="kda_ratio">({((kills + assists) / deaths).toFixed(2)})</span>
-						</div>
-
-						<div className="other_score">
-							<div className="wrapper_block_left">
-								<div className="farm_score">
-									<span className="farm">{totalMinionsKilled} </span>
-									<span className="per_min">({farmPerMin})</span>
-									<span> CS</span>
-								</div>
-								<div className="gold_score">
-									<span className="gold">Золото: {(goldEarned / 1000).toFixed(1)}k </span>
-									<span className="per_min">({Math.floor(goldPerMin)})</span>
-								</div>
-							</div>
-
-							<div className="wrapper_block_right">
-								<div className="vision_score">
-									<span className="vision">Обзор: {visionScore} </span>
-									<span className="per_min">({visionPerMin})</span>
-								</div>
-
-								<span className="kill_part">{((kills + assists) * 100 / totalTeamKills).toFixed()}% уч. в уб.</span>
-							</div>
-						</div>
-					</div>
-
-					<div className="player_items">
-						{items}
-					</div>
-				</div>
-			)
-		})
-
-		return result;
-	}
-
 	const createInfoForCanvas = (team) => {
 		let res = [];
-
+		
 		for (let elem of team) {
-			const {totalDamageDealtToChampions} = elem;
-			const heal = elem.totalHealsOnTeammates + elem.totalDamageShieldedOnTeammates;
+			const {totalDamageDealtToChampions, magicDamageDealtToChampions, physicalDamageDealtToChampions, trueDamageDealtToChampions} = elem;
+			const {totalHealsOnTeammates, totalDamageShieldedOnTeammates} = elem;
 			let player = {};
 
 			player.champ = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${elem.championName}.png`;
-			player.dmg = (totalDamageDealtToChampions / 1000).toFixed(3);
-			player.heal = (heal / 1000).toFixed(3);
+			player.dmg = {
+				total: totalDamageDealtToChampions,
+				physical: physicalDamageDealtToChampions,
+				magic: magicDamageDealtToChampions,
+				trueDmg: trueDamageDealtToChampions
+			};
+			player.heal = {
+				total: totalHealsOnTeammates + totalDamageShieldedOnTeammates,
+				restore: totalHealsOnTeammates,
+				absorb: totalDamageShieldedOnTeammates
+			};
 
 			res.push(player);
 		}
@@ -158,12 +52,8 @@ function MatchPage({region, matchId, version}) {
 	const render = () => {
 		if (isLoading) return <Loading/>;
 
-		const leftTeam = createPlayerBlock(info.leftTeam);
-		const rightTeam = createPlayerBlock(info.rightTeam);
-		
 		const leftTeamInfoForCanvas = createInfoForCanvas(info.leftTeam.players);
 		const rightTeamInfoForCanvas = createInfoForCanvas(info.rightTeam.players);
-		console.log(info);
 
 		return(
 			<div className="match_page">
@@ -171,7 +61,7 @@ function MatchPage({region, matchId, version}) {
 					<div className="table_result">
 						<div className="table_head">
 							<div className="left_team col-4">
-								{createTeamScoreBlock(100)}
+								<TeamScoreBlock info={info} id={100}/>
 							</div>
 
 							<div className="match_type col-4">
@@ -183,17 +73,17 @@ function MatchPage({region, matchId, version}) {
 							</div>
 
 							<div className="right_team col-4">
-								{createTeamScoreBlock(200)}
+								<TeamScoreBlock info={info} id={200}/>
 							</div>
 						</div>
 
 						<div className="table_body">
 							<div className="left_team">
-								{leftTeam}
+								<PlayerBlock team={info.leftTeam} version={version} region={region}/>
 							</div>
 
 							<div className="right_team">
-								{rightTeam}
+								<PlayerBlock team={info.rightTeam} version={version} region={region}/>
 							</div>
 						</div>
 					</div>

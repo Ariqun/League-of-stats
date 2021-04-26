@@ -2,6 +2,8 @@ import axios from 'axios';
 
 export default class RiotAPI {
 	getSummoner = async (region, name) => {
+		console.log('Request')
+
 		const res = await axios({
 			method: 'post',
 			url: '/summoner',
@@ -17,6 +19,8 @@ export default class RiotAPI {
 	}
 
 	getSumRanked = async (region, sumId) => {
+		console.log('Request')
+
 		const res = await axios({
 			method: 'post',
 			url: '/ranked',
@@ -32,6 +36,8 @@ export default class RiotAPI {
 	}
 
 	getSumMatches = async (puuID) => {
+		console.log('Request')
+
 		const res = await axios({
 			method: 'post',
 			url: '/matches',
