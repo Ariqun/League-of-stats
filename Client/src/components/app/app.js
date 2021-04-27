@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import AppHeader from '../appHeader/appHeader';
@@ -11,24 +11,25 @@ import SummonerPage from '../pages/summonerPage/summonerPage';
 import MatchPage from '../pages/matchPage/matchPage';
 
 import DragonData from '../services/dragonData';
+import DataBase from '../services/dataBase';
 
 import './app.sass'
 
-export default class App extends Component {
-	dragonData = new DragonData();
+function App() {
+	const [version, setVersion] = useState('11.8.1');
+	const dragonData = new DragonData();
+	const db = new DataBase();
 
-	state = {
-		version: '11.8.1'
-	}
+	useEffect(() => {
+		const checkVersion = async () => {
+			const res = await dragonData.getLatestVersion();
+			setVersion(res);
+		}
+		checkVersion();
+		db.start();
+	}, [])
 
-	async componentDidMount() {
-		const res = await this.dragonData.getLatestVersion();
-		this.setState({version: res})
-	}
-
-	render() {
-		const version = this.state.version
-		
+	const render = () => {
 		return (
 			<Router>
 				<div className="app">
@@ -62,4 +63,8 @@ export default class App extends Component {
 			</Router>
 		)
 	}
+
+	return render();
 }
+
+export default App;

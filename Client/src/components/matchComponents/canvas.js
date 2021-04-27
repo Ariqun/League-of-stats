@@ -55,14 +55,14 @@ export default class Canvas extends Component {
 		const {leftTeam, rightTeam, option} = this.props;
 		const ctx = this.canvas.current.getContext('2d');
 		const allScore = [];
-		let factor = 40;
+		let factor = 300;
 
 		for (let i = 0; i < 5; i++) {
 			allScore.push(leftTeam[i][option].total, rightTeam[i][option].total);
 		}
 
 		const maxScore = Math.max(...allScore) / 1000;
-
+		if (maxScore > 3) factor = 50
 		if (maxScore > 5) factor = 30
 		if (maxScore > 10) factor = 20
 		if (maxScore > 15) factor = 14
