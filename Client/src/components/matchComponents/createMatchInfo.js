@@ -6,10 +6,12 @@ import DragonData from '../services/dragonData';
 function CreateMatchInfo(matchId, version, name, mini) {
 	const riotAPI = new RiotAPI();
 	const dragonData = new DragonData();
-	let matchInfo = {}, playerInfo = {};
+	let matchInfo = {}, playerInfo = {}, error = false;
 
 	const getMatchInfo = async () => {
 		const res = await riotAPI.getMatchInfo(matchId);
+
+		if (res === 'Error') error = true;
 		matchInfo = {...res};
 	}
 	
@@ -188,6 +190,8 @@ function CreateMatchInfo(matchId, version, name, mini) {
 	
 	const result = async () => {
 		await getMatchInfo();
+		if (error) return null;
+
 
 		const {platformId, queueId, participants, teams, gameStartTimestamp, gameDuration} = matchInfo;
 		const matchType = await getMatchType(queueId);

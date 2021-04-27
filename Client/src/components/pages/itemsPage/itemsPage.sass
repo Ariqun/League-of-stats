@@ -1,12 +1,129 @@
+@mixin bg
+	padding: 10px
+	border-radius: 5px
+	background: rgba(111, 111, 111, 0.3)
+@mixin border
+	border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
+	border-image-slice: 1
+@mixin borderShort
+	border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 25%, rgba(128, 128, 128, 0.8) 50%, rgba(18, 235, 255, 0) 75%)
+	border-image-slice: 1
+
+
 .items_page
 	.container
-		.roles
+		.types
 			display: flex
-			justify-content: space-evenly
+			justify-content: center
 			padding-bottom: 20px
-			.role
+			.type
 				cursor: pointer
-				img
-					width: 50px
 			.inactive
 				opacity: 0.3
+		.items
+			display: flex
+			flex-wrap: wrap
+			.items_wrapper
+				.items_block
+					@include bg
+					@include border
+					display: flex
+					flex-direction: column
+					align-items: center
+					margin: 0 20px 20px 0
+					border-top: 1px solid
+					border-bottom: 1px solid
+					.title
+						@include borderShort
+						display: flex
+						justify-content: center
+						width: 100%
+						padding-bottom: 10px
+						border-bottom: 1px solid
+					.wrapper_block
+						display: flex
+						justify-content: center
+						flex-wrap: wrap
+						padding-top: 10px
+						.item
+							cursor: pointer
+							text-align: center
+							padding: 5px
+							border: 1px solid transparent
+							img
+								width: 48px
+								border-radius: 5px
+								border: 1px solid rgb(128, 128, 128)
+							&:hover
+								border-radius: 5px
+								border: 1px solid rgb(128, 128, 128)
+								background: rgba(128, 128, 128, 0.3)
+			.item_extend
+				position: relative
+				.item_extend_wrapper
+					@include bg
+					@include border
+					position: fixed
+					width: 22%
+					border-top: 1px solid
+					border-bottom: 1px solid
+					.title
+						display: flex
+						padding-bottom: 10px
+						border-bottom: 1px solid
+						border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 15%, rgba(128, 128, 128, 0.8) 50%, rgba(18, 235, 255, 0) 85%)
+						border-image-slice: 1
+						.item_icon
+							img
+								border-radius: 5px
+								border: 1px solid gray
+						.name_and_cost
+							display: flex
+							flex-direction: column
+							padding: 0 10px
+							.cost
+								color: gray
+								.value
+									color: orange
+					.descr
+						padding: 10px 0
+						maintext
+							color: gray
+							li
+								list-style-type: none
+								padding-top: 5px
+							span
+								color: white
+							active
+								color: white
+								padding: 0 2px
+							passive
+								color: white
+								padding: 0 2px
+							rules
+								font-size: 14px
+							keywordstealth
+								color: rgb(255, 105, 180)
+							physicaldamage, scalead
+								color: rgb(255, 99, 71)
+							healing
+								color: rgb(50, 205, 50)
+							magicdamage, scaleap, scalemana
+								color: rgb(0, 191, 255)
+							shield
+								color: 	rgb(220, 220, 220)
+							truedamage
+								color: rgb(255, 240, 245)
+							speed
+								color: rgb(255, 255, 204)
+							scalearmor
+								color: rgb(255, 255, 102)
+							scalemr
+								color: rgb(30, 144, 255)
+							raritymythic
+								color: rgb(255, 165, 0)
+							raritylegendary
+								color: rgb(255, 255, 153)
+							status, onhit
+								color: rgb(147, 112, 219)
+

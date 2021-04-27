@@ -5,21 +5,19 @@ import './loading.css';
 function Loading() {
 	return(
 		<div className="loading">
-			<div className="container">
-				<div className="spinner">
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-					<div/>
-				</div>
+			<div className="spinner">
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
+				<div/>
 			</div>
 		</div>
 	)

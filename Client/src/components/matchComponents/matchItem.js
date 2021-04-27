@@ -7,14 +7,19 @@ import Loading from '../loading/loading';
 function MatchItem({version, matchId, name}) {
 	const [info, setInfo] = useState({});
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
 	useEffect(() => {
 		const getInfo = async () => {
 			const mini = true;
 			const res = await CreateMatchInfo(matchId, version, name, mini);
 			
-			setInfo(info => ({...info, ...res}));
-			setLoading(false);
+			if (res === null) {
+				setError(true);
+			} else {
+				setInfo(info => ({...info, ...res}));
+				setLoading(false);
+			}
 		}
 		getInfo();
 	}, []);
@@ -79,6 +84,7 @@ function MatchItem({version, matchId, name}) {
 	}
 
 	const render = () => {
+		if (error) return null;
 		if (loading) return <Loading/>;
 		
 		const {items, players} = info;
