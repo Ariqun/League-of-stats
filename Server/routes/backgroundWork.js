@@ -12,51 +12,54 @@ router.post('/', async (req, res) => {
 	const bans = [];
 	let matches = 0;
 	
-	await match.find({$or: [{queueId: 420}, {queueId: 400}, {queueId: 440}]}, (err, doc) => {
-		for (let obj of doc) {
-			let matchBans = [];
-			matches++;
-
-			for (let elem of obj.participants) {
-				if (elem.win) {
-					wins.push(elem.championId)
-				} else {
-					losses.push(elem.championId);
-				}
-			}
-
-			for (let team of obj.teams) {
-				for (let elem of team.bans) {
-					if (!matchBans.includes(elem.championId)) {
-						bans.push(elem.championId);
+	await match.find({$or: [{queueId: 420, checked: false}, {queueId: 400, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
+		if (doc.length !== 0) {
+			for (let obj of doc) {
+				let matchBans = [];
+				matches++;
+	
+				for (let elem of obj.participants) {
+					if (elem.win) {
+						wins.push(elem.championId)
+					} else {
+						losses.push(elem.championId);
 					}
 				}
+	
+				for (let team of obj.teams) {
+					for (let elem of team.bans) {
+						if (!matchBans.includes(elem.championId)) {
+							bans.push(elem.championId);
+						}
+					}
+				}
+	
+				bans.push(...matchBans);
+				setChecked(obj.matchId);
 			}
-
-			bans.push(...matchBans);
+	
+			const calculatedWins = calculateStats(wins);
+			const calculatedLosses = calculateStats(losses);
+			const calculatedBans = calculateStats(bans);
+	
+			for (let elem of arrOfChamps) {
+				let w = checkIsNaN(calculatedWins[elem]);
+				let l = checkIsNaN(calculatedLosses[elem]);
+				let b = checkIsNaN(calculatedBans[elem]);
+	
+				const result = {
+					id: elem,
+					wins: w,
+					losses: l,
+					bans: b,
+					matches: w + l,
+					totalMatches: matches,
+				}
+	
+				pushStatsInDB(result);
+			}
 		}
 	})
-
-	const calculatedWins = calculateStats(wins);
-	const calculatedLosses = calculateStats(losses);
-	const calculatedBans = calculateStats(bans);
-
-	for (let elem of arrOfChamps) {
-		let w = checkIsNaN(calculatedWins[elem]);
-		let l = checkIsNaN(calculatedLosses[elem]);
-		let b = checkIsNaN(calculatedBans[elem]);
-
-		const result = {
-			id: elem,
-			wins: w,
-			losses: l,
-			bans: b,
-			matches: w + l,
-			totalMatches: matches,
-		}
-
-		pushStatsInDB(result);
-	}
 })
 
 const getChamps = async () => {
@@ -85,15 +88,36 @@ const checkIsNaN = (num) => {
 	return num;
 }
 
+const setChecked = async (id) => {
+	await match.updateOne({matchId: id}, {$set: {checked: true}});
+}
+
 const pushStatsInDB = async (info) => {
-	console.log(info.id)
-	await champion.updateOne({id: info.id}, {
-		id: info.id,
-		wins: info.wins,
-		losses: info.losses,
-		bans: info.bans,
-		matches: info.matches,
-		totalMatches: info.totalMatches
+	const {id, wins, losses, bans, matches, totalMatches} = info;
+
+	await champion.find({id: id}, (err, doc) => {
+		if (doc.length === 0) {
+			const newChamp = new champion({
+				id: id,
+				wins: wins,
+				losses: losses,
+				bans: bans,
+				matches: matches,
+				totalMatches: totalMatches
+			})
+			
+			newChamp.save();
+		}
+	})
+
+	await champion.updateOne({id: id}, {
+		$inc: {
+			wins: wins,
+			losses: losses,
+			bans: bans,
+			matches: matches,
+			totalMatches: totalMatches
+		}
 	})
 }
 

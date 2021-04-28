@@ -7,6 +7,7 @@ const sumMatchesRoute = require('./routes/sumMatches');
 const sumMatchRoute = require('./routes/sumMatch');
 const sumRankedRoute = require('./routes/sumRanked');
 const sumBackRoute = require('./routes/backgroundWork');
+const champRoute = require('./routes/champion');
 
 const app = express();
 const hbs = exphbs.create({
@@ -26,6 +27,7 @@ app.use('/', sumMatchesRoute);
 app.use('/', sumMatchRoute);
 app.use('/', sumRankedRoute);
 app.use('/', sumBackRoute);
+app.use('/', champRoute);
 
 async function start() {
 	try {

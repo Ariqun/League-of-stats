@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 
-import ChampGeneral from '../../champComponents/champGeneral';
 import ChampNav from '../../champComponents/champNav';
+import ChampGeneral from '../../champComponents/champGeneral';
 import ChampSkills from '../../champComponents/champSkills';
 import ChampSkins from '../../champComponents/champSkins';
+import ChampStats from '../../champComponents/champStats';
 import Loading from '../../loading/loading';
 
 import DragonData from '../../services/dragonData';
@@ -46,6 +47,8 @@ export default class ChampionPage extends Component {
 			tabContent = <ChampSkills champ={champ} version={version}/>;
 		} else if (tab === 'skins') {
 			tabContent = <ChampSkins champ={champ}/>;
+		} else if (tab === 'stats') {
+			tabContent = <ChampStats champ={champ}/>
 		}
 
 		return tabContent;

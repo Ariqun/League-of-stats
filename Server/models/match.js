@@ -8,7 +8,8 @@ const match = new Schema({
 	gameDuration: Number,
 	gameStartTimestamp: Number,
 	participants: Array,
-	teams: Array
+	teams: Array,
+	checked: Boolean
 });
 
 module.exports = model('Match', match);
