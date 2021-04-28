@@ -15,14 +15,21 @@ router.post('/', async (req, res) => {
 	await match.find({$or: [{queueId: 420, checked: false}, {queueId: 400, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
 		if (doc.length !== 0) {
 			for (let obj of doc) {
-				let matchBans = [];
+				let matchBans = [], roles = {};
 				matches++;
 	
 				for (let elem of obj.participants) {
+					const id = elem.championId;
+
 					if (elem.win) {
-						wins.push(elem.championId)
+						wins.push(id)
 					} else {
-						losses.push(elem.championId);
+						losses.push(id);
+					}
+
+					roles[id] = {
+						role: elem.individualPosition,
+						win: elem.win
 					}
 				}
 	
@@ -33,7 +40,7 @@ router.post('/', async (req, res) => {
 						}
 					}
 				}
-	
+				console.log(roles);
 				bans.push(...matchBans);
 				setChecked(obj.matchId);
 			}

@@ -7,11 +7,14 @@ router.post('/matches', async (req, res) => {
 	const matchList = [];
 	let start = 0;
 
-	do {
-		const url = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuID}/ids?start=${start}&count=100`;
-		matchList.push(...await getData(url));
-		start += 100;
-	} while (matchList.length % 100 == 0)
+	const url = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuID}/ids?start=${start}&count=20`;
+	matchList.push(...await getData(url));
+
+	// do {
+	// 	const url = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuID}/ids?start=${start}&count=100`;
+	// 	matchList.push(...await getData(url));
+	// 	start += 100;
+	// } while (matchList.length % 100 == 0)
 
 	res.append('Access-Control-Allow-Origin', '*');
 	res.send(JSON.stringify(matchList))

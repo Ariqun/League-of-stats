@@ -1,22 +1,27 @@
 import React, {useEffect, useState} from 'react';
 
 import CircleCanvas from './circleCanvas';
+import Loading from '../loading/loading';
 
 import DataBase from '../services/dataBase';
 
 function ChampStats({champ}) {
 	const [champStats, setChampStats] = useState({});
+	const [loading, changeLoading] = useState(true);
 	const db = new DataBase();
 
 	useEffect(() => {
 		const getInfo = async () => {
 			const res = await db.getChampionStats(champ.key);
 			setChampStats(res);
+			changeLoading(false);
 		}
 		getInfo();
 	}, [])
 
 	const render = () => {
+		if (loading) return <Loading/>
+
 		const {wins, bans, matches, totalMatches} = champStats;
 		console.log(champStats)
 
