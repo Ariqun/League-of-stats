@@ -210,14 +210,64 @@ $color-skyblue: skyblue
 							position: absolute
 						.numbers
 							position: absolute
-							top: calc(50% - 21px)
+							top: calc(50% - 20px)
 							display: flex
 							justify-content: center
 							width: 100%
-							height: 40px
-							font-size: 28px
-							span
-								height: 100%
+							font-size: 29px
+			.positions
+				@include transGrayBordersTopAndBot
+				padding: 10px
+				border-radius: 10px
+				background: rgba(111, 111, 111, 0.3)
+				tbody
+					tr
+						padding: 5px 0
+						display: flex
+						th, td
+							display: flex
+							font-weight: 400
+							&:first-of-type
+								width: 130px
+							&:not(n1)
+								width: 160px
+								margin: 0 20px
+						th
+							justify-content: center
+					tr.head
+						padding: 0 0 10px
+						border-bottom: 1px solid
+						border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+						border-image-slice: 1
+					tr.top
+						padding-top: 10px
+				.position
+					display: flex
+					align-items: center
+					.position_type
+						display: flex
+						align-items: center
+						.position_name
+							padding-left: 5px
+						img
+							width: 32px
+					.popularity, .winrate
+						position: relative
+						height: 25px
+						progress
+							appearance: none
+							&::-webkit-progress-bar
+								height: 25px
+								border-radius: 15px
+								background: rgba(111, 111, 111, 0.4)
+							&::-webkit-progress-value
+								border-radius: 15px
+								background: skyblue
+						.value
+							position: absolute
+							top: 3px
+							left: 10px
+							color: black
 .wrapper_for_horizontal_borders
 	position: relative
 	pointer-events: none

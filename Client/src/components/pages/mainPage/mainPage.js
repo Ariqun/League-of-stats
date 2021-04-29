@@ -9,6 +9,7 @@ function MainPage({version}) {
 	const [champions, setChampions] = useState({});
 	const [champNames, setChampNames] = useState([]);
 	const [shownRoles, changeShownRoles] = useState(['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank']);
+	const [inputValue, setInputValue] = useState('');
 
 	const dragonData = new DragonData();
 	const language = 'ru_RU';
@@ -16,8 +17,8 @@ function MainPage({version}) {
 	useEffect(() => {
 		const getInfo = async () => {
 			const res = await dragonData.getAllChampions(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`);
-
-			setChampions({...res});
+			
+			setChampions(res);
 			setChampNames([...Object.keys({...res})]);
 		}
 		getInfo();
@@ -26,16 +27,18 @@ function MainPage({version}) {
 	const createChampionsBlock = () => {
 		const champs = champNames.map(item => {
 			const {key, name, tags} = champions[item];
+			const lowerName = name.toLowerCase();
+			const lowerValue = inputValue.toLowerCase();
 			let show = false;
 
 			for (let elem of tags) {
-				if (shownRoles.includes(elem)) show = true;
+				if (shownRoles.includes(elem) && lowerName.includes(lowerValue)) show = true;
 			}
 
 			if (!show) return null;
 
 			return (
-				<div className="champion" key={key} roles={tags}>
+				<div className="champion" name={name} roles={tags} key={key}>
 					<Link to={`/champion/${item}`}>
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${item}.png`} 
 							 alt={name} 
@@ -77,12 +80,20 @@ function MainPage({version}) {
 		}
 	}
 
+	const showChamp = (e) => {
+		setInputValue(e.target.value);
+	}
+
 	const render = () => {
 		return(
 			<div className="main_page">
 				<div className="container">
 					<div className="roles col-6 offset-3">
 						{createRolesBlock()}
+					</div>
+
+					<div className="choice_champ col-12">
+						<input onChange={showChamp} className="col-3" type="text" placeholder="Начните вводить имя чемпиона..."></input>
 					</div>
 
 					<div className="champions col-12">

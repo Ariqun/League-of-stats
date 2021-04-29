@@ -3,13 +3,37 @@
 		.roles
 			display: flex
 			justify-content: space-evenly
-			padding-bottom: 20px
 			.role
 				cursor: pointer
 				img
 					width: 50px
 			.inactive
 				opacity: 0.3
+		.choice_champ
+			display: flex
+			justify-content: center
+			padding: 40px 0
+			input
+				height: 40px
+				text-align: center
+				cursor: pointer
+				outline: none
+				border: none
+				border-radius: 20px
+				// border-bottom: 2px solid rgba(0, 0, 0, 0)
+				transition: 1s all ease
+				background: rgba(255, 255, 255, 1)
+				&:hover
+					color: white
+					background: rgba(111, 111, 111, 0)
+				&:focus
+					color: white
+					cursor: auto
+					border-bottom: 1px solid
+					border-top: 1px solid
+					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(26, 115, 232, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+					border-image-slice: 1
+					background: rgba(111, 111, 111, 0)
 		.champions
 			display: flex
 			justify-content: center

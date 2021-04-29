@@ -51,7 +51,7 @@ export default class AppHeader extends Component {
 	
 							<Link to={`/summoner/${region}/${name}`}>
 								<button type="submit">
-									<img src="/assets/icons/search.png" alt="search"/>
+									<img src={process.env.PUBLIC_URL + "/assets/icons/search.png"} alt="search"/>
 								</button>
 							</Link>
 						</form>
