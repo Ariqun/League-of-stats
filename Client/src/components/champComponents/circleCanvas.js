@@ -16,7 +16,7 @@ export default class CircleCanvas extends Component {
 		const ctxWins = this.canvasFront.current.getContext('2d');
 		
 		const percent = (value * 100 / total) / 100;
-		const degrees = (1 - percent).toFixed(2) * 360.0;
+		const degrees = this.checkDeg((1 - percent).toFixed(2) * 360.0);
 		const radians = degrees * (Math.PI / 180);
 
 		ctxWins.strokeStyle = 'green';
@@ -35,9 +35,19 @@ export default class CircleCanvas extends Component {
 		ctxBack.stroke();
 	}
 
+	checkNum(num) {
+		if (isNaN(num)) return '0.0';
+		return num;
+	}
+
+	checkDeg(deg) {
+		if (deg === 360) return 0;
+		return deg;
+	}
+
 	render() {
 		const {value, total, mode} = this.props;
-		const percent = (value * 100 / total).toFixed(1);
+		const percent = this.checkNum((value * 100 / total).toFixed(1));
 
 		return(
 			<div className="circle_graph">

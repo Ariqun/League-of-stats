@@ -31,11 +31,11 @@ const champion = new Schema({
 		restore: Number,
 		shield: Number
 	},
-	kombo: {
-		doubleKills: Number,
-		tripleKills: Number,
-		quadraKills: Number,
-		pentaKills: Number
+	combo: {
+		double: Number,
+		triple: Number,
+		quadro: Number,
+		penta: Number
 	}
 });
 

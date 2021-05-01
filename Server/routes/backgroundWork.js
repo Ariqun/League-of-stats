@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
 	const arrOfChamps = await getChamps();
 	const wins = [], losses = [], bans = [];
 	let matches = 0;
-	
+
 	await match.find({$or: [{queueId: 420, checked: false}, {queueId: 400, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
 		if (doc.length !== 0) {
 			for (let obj of doc) {
@@ -42,10 +42,10 @@ router.post('/', async (req, res) => {
 						shield: elem.totalDamageShieldedOnTeammates,
 						cs: elem.totalMinionsKilled,
 						gold: elem.goldEarned,
-						doubleKills: elem.doubleKills,
-						tripleKills: elem.tripleKills,
-						quadraKills: elem.quadraKills,
-						pentaKills: elem.pentaKills
+						double: elem.doubleKills,
+						triple: elem.tripleKills,
+						quadra: elem.quadraKills,
+						penta: elem.pentaKills
 					}
 				}
 	
@@ -193,7 +193,7 @@ const pushRolesInDB = async (obj) => {
 
 const pushInfoInDB = async (obj) => {
 	for (let key in obj) {
-		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, doubleKills, tripleKills, quadraKills, pentaKills} = obj[key];
+		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = obj[key];
 
 		await champion.updateOne({id: key}, {
 			$inc: {
@@ -207,10 +207,10 @@ const pushInfoInDB = async (obj) => {
 				"heal.shield": shield,
 				"creeps": cs,
 				"gold": gold,
-				"kombo.doubleKills": doubleKills,
-				"kombo.tripleKills": tripleKills,
-				"kombo.quadraKills": quadraKills,
-				"kombo.pentaKills": pentaKills
+				"combo.double": double,
+				"combo.triple": triple,
+				"combo.quadro": quadra,
+				"combo.penta": penta
 			}
 		}, {upsert: true})
 	}

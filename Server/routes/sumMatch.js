@@ -30,7 +30,7 @@ const getData = async (url) => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-e4a45c11-f830-4d24-85b1-037bf22423be"
+		"X-Riot-Token": "RGAPI-f8680ab0-1843-4b7e-90ed-d3b0a1429a42"
 	};
 	let result = {};
 
