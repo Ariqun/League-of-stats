@@ -1,0 +1,143 @@
+@import '../../../../components/UI/ui'
+	
+.stats
+	.main_stats
+		display: flex
+		justify-content: space-evenly
+		padding: 20px 0
+		.graph
+			@include transGrayBordersTopAndBot
+			display: flex
+			flex-direction: column
+			align-items: center
+			padding: 10px
+			border-radius: 5px
+			background: rgba(111, 111, 111, 0.3)
+			.graph_title
+				width: 100%
+				text-align: center
+				padding-bottom: 10px
+				border-bottom: 1px solid
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+				border-image-slice: 1
+			.circle_graph
+				position: relative
+				display: flex
+				justify-content: center
+				.front_circle
+					position: absolute
+				.numbers
+					position: absolute
+					top: calc(50% - 20px)
+					display: flex
+					justify-content: center
+					width: 100%
+					font-size: 29px
+	.posAndAvg
+		display: flex
+		justify-content: space-evenly
+		.positions
+			@include transGrayBordersTopAndBot
+			padding: 10px
+			border-radius: 10px
+			background: rgba(111, 111, 111, 0.3)
+			tbody
+				tr
+					padding: 5px 0
+					display: flex
+					th, td
+						display: flex
+						font-weight: 400
+						&:first-of-type
+							width: 130px
+						&:not(n1)
+							width: 160px
+							margin: 0 20px
+					th
+						justify-content: center
+				tr.head
+					padding: 0 0 10px
+					border-bottom: 1px solid
+					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+					border-image-slice: 1
+				tr.top
+					padding-top: 10px
+			.position
+				display: flex
+				align-items: center
+				border-bottom: 1px solid
+				border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 10%, rgba(128, 128, 128, 0) 40%)
+				border-image-slice: 1
+				&:last-of-type
+					padding-bottom: 0
+					border: none
+				.position_type
+					display: flex
+					align-items: center
+					.position_name
+						padding-left: 5px
+					img
+						width: 32px
+				.popularity, .winrate
+					position: relative
+					height: 25px
+					progress
+						appearance: none
+						&::-webkit-progress-bar
+							height: 25px
+							border-radius: 15px
+							background: rgba(111, 111, 111, 0.4)
+						&::-webkit-progress-value
+							border-radius: 15px
+							background: deepskyblue
+					.value
+						position: absolute
+						top: 3px
+						left: 10px
+						color: black
+				.winrate
+					progress
+						&::-webkit-progress-value
+							background: green
+		.average
+			@include transGrayBordersTopAndBot
+			width: 594px
+			padding: 10px 0 0
+			border-radius: 10px
+			background: rgba(111, 111, 111, 0.3)
+			.avg_title
+				text-align: center
+				padding-bottom: 10px
+				border-bottom: 1px solid
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+				border-image-slice: 1
+			.avg_wrapper, .avg_combo
+				display: flex
+				flex-wrap: wrap
+				font-size: 20px
+				padding-top: 10px
+				.avg_stat
+					display: flex
+					flex-direction: column
+					align-items: center
+					.title
+						width: 100%
+						color: gray
+						text-align: center
+						padding-bottom: 5px
+						border-bottom: 1px solid
+						border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 30%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 70%)
+						border-image-slice: 1
+					.value
+						padding: 5px 0 10px
+						.kills
+							color: $color-green
+						.deaths
+							color: $color-red
+						.assists
+							color: orange
+			.avg_combo
+				.avg_stat
+					.title
+						border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+						border-image-slice: 1

@@ -1,0 +1,63 @@
+@import '../../../../components/UI/ui'
+	
+.general
+	display: flex
+	margin: 10px 0 0
+	.picture_block
+		flex-shrink: 0
+	.champion_info
+		padding: 0 20px 20px
+		.title
+			display: flex
+			flex-direction: column
+			align-items: center
+			height: 8vh
+			.champ_name
+				font-size: 35px
+			.champ_title
+				color: $dark-gray
+				font-size: 14px
+		.lore
+			@include transGrayBordersTopAndBot
+			padding: 10px 0
+			p
+				color: $light-gray
+				text-align: center
+		.stats
+			@include transGrayBordersTopAndBot
+			position: relative
+			display: flex
+			flex-wrap: wrap
+			padding: 10px 0
+			margin: 10px 0
+			&::before
+				content: ''
+				position: absolute
+				top: 0
+				left: calc(50% - 0.5px)
+				height: 100%
+				border-left: 1px solid
+				border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+				border-image-slice: 1
+			.stat
+				display: flex
+				width: 50%
+				&:nth-of-type(2n + 1)
+					justify-content: flex-end
+					padding-right: 10px
+				&:nth-of-type(2n)
+					padding-left: 10px
+				&_name
+					color: $dark-gray
+				&_value
+					width: 60px
+					color: $color-skyblue
+					&:nth-of-type(2n)
+						display: flex
+						justify-content: flex-end
+		.roles
+			display: flex
+			justify-content: center
+			.role
+				width: 70px
+				margin: 20px

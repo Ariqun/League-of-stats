@@ -1,0 +1,262 @@
+@import '../../components/UI/ui'
+
+.match_page
+	color: $light-gray
+	.table_result
+		padding: 10px 10px 2px
+		border-top: 1px solid
+		border-bottom: 1px solid
+		border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+		border-image-slice: 1
+		border-radius: 10px
+		background: rgba(128, 128, 128, 0.2)
+		.table_head
+			position: relative
+			display: flex
+			justify-content: space-evenly
+			&::after
+				content: ''
+				position: absolute
+				bottom: -10px
+				left: calc(50% - 15vw)
+				width: 30vw
+				border-bottom: 1px solid
+				border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+				border-image-slice: 1
+			.match_type
+				@include flexColumn
+				.date
+					display: flex
+					flex-direction: column
+					align-items: center
+					.duration
+						color: gray
+			.left_team, .right_team
+				display: flex
+				justify-content: space-evenly
+				.result
+					@include flexColumn
+					.defeat
+						color: #ff5859
+					.win
+						color: #2DEB90
+				.objects
+					display: flex
+					.object
+						@include flexColumn
+						width: 20px
+						.obj_icon
+							width: 20px
+							height: 20px
+							background: url('./objects.png') no-repeat
+							background-size: cover
+					.tower
+						order: 5
+						.obj_icon
+							background-position: 0 0
+					.inhibitor
+						order: 3
+						.obj_icon
+							background-position: 0 -20px
+					.baron
+						order: 3
+						.obj_icon
+							background-position: 0 -40px
+					.riftHerald
+						order: 2
+						.obj_icon
+							background-position: 0 -80px
+					.dragon
+						order: 1
+						.obj_icon
+							background-position: 0 -60px
+			.right_team
+				.result
+					order: 2
+				.objects
+					order: 1
+					.tower
+						order: 1
+					.inhibitor
+						order: 2
+					.baron
+						order: 3
+					.riftHerald
+						order: 4
+					.dragon
+						order: 5
+		.table_body
+			display: flex
+			justify-content: space-between
+			margin-top: 20px
+			.left_team, .right_team
+				width: 50%
+				.player
+					display: flex
+					justify-content: space-between
+					align-items: center
+					height: 95px
+					padding: 5px 0
+					border-bottom: 1px solid
+					border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 10%, rgba(128, 128, 128, 0) 80%)
+					border-image-slice: 1
+					&:last-of-type
+						border: none
+					.player_settings
+						display: flex
+						.champion_icon
+							img
+								width: 80px
+						.spells
+							display: flex
+							flex-direction: column
+							justify-content: space-between
+							padding: 5px 0
+							.sum_spells, .runes
+								img
+									width: 15px
+									border-radius: 5px
+									&:first-of-type
+										margin-bottom: 1px
+					.player_name
+						@include flexColumn
+						width: 135px
+						word-break: break-word
+						text-align: center
+						.rank
+							color: gray
+							font-size: 13px
+					.player_stats
+						display: flex
+						flex-direction: column
+						justify-content: space-evenly
+						align-items: center
+						width: 230px
+						height: 100%
+						.kda_score
+							display: flex
+							justify-content: space-evenly
+							width: 60%
+							.score_wrapper
+								.kills
+									color: #2DEB90
+								.deaths
+									color: #ff5859
+								.assists
+									color: orange
+							.kda_ratio
+								color: gray
+						.other_score
+							display: flex
+							justify-content: space-evenly
+							width: 100%
+							font-size: 12px
+							.wrapper_block_left, .wrapper_block_right
+								@include flexColumn
+								.farm_score
+								.per_min
+									color: gray
+					.player_items
+						display: flex
+						justify-content: flex-start
+						align-items: center
+						width: 155px
+						.items_block
+							position: relative
+							display: flex
+							flex-wrap: wrap
+							width: 102px
+							.item
+								width: 30px
+								margin: 2px
+								border-radius: 5px
+								background: rgba(211, 211, 211, 0.2)
+								&:last-of-type
+									position: absolute
+									top: calc(50% - 15px)
+									right: -34px
+								img
+									border-radius: 5px
+			.right_team
+				border-left: 1px solid
+				border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+				border-image-slice: 1
+				.player
+					border-bottom: 1px solid
+					border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 90%, rgba(128, 128, 128, 0) 100%)
+					border-image-slice: 1
+					.player_settings
+						order: 4
+						.champion_icon
+							order: 2
+						.spells
+							order: 1
+					.player_name
+						order: 3
+					.player_stats
+						order: 2
+					.player_items
+						justify-content: flex-end
+						.items_block
+							.item
+								&:last-of-type
+									position: absolute
+									top: calc(50% - 15px)
+									left: -34px
+	.graphs
+		display: flex
+		justify-content: space-evenly
+		margin-top: 20px
+		.graph
+			display: flex
+			flex-direction: column
+			align-items: center
+			width: 410px
+			padding: 10px
+			border-radius: 10px
+			border-top: 1px solid
+			border-bottom: 1px solid
+			border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+			border-image-slice: 1
+			background: rgba(128, 128, 128, 0.2)
+			.graph_title
+				padding-bottom: 10px
+			canvas
+				border-top: 1px solid
+				border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+				border-image-slice: 1
+	.champion_statistic
+		margin-top: 20px
+		padding: 10px
+		border-radius: 10px
+		border-top: 1px solid
+		border-bottom: 1px solid
+		border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+		border-image-slice: 1
+		background: rgba(128, 128, 128, 0.2)
+		.tabs
+			display: flex
+			justify-content: space-evenly
+			padding-bottom: 10px
+			border-bottom: 1px solid
+			border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+			border-image-slice: 1
+			.left_team, .right_team
+				display: flex
+				.tab
+					cursor: pointer
+					img
+						width: 50px
+						margin: 0 5px
+			.table
+				width: 100px
+		.content
+			height: 40vh
+
+
+
+
+
+
+
+

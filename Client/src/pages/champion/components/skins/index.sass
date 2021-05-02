@@ -1,0 +1,42 @@
+@import '../../../../components/UI/ui'
+
+.skins
+	display: flex
+	justify-content: space-evenly
+	flex-wrap: wrap
+	padding-bottom: 20px
+	.skin_card
+		position: relative
+		margin-top: 15px
+		padding: 0 20px
+		cursor: pointer
+		img
+			width: 100%
+		.skin_title
+			position: absolute
+			left: 0
+			bottom: 0
+			display: flex
+			justify-content: center
+			align-items: center
+			width: 100%
+			height: 15%
+			color: $color-skyblue
+			text-align: center
+			padding: 5px 10px
+			transition: 0.5s all ease
+			background: rgba(0, 0, 0, 0.6)
+		&:hover .skin_title
+			color: white
+	.skin_modal
+		position: fixed
+		top: 0
+		left: 0
+		width: 100vw
+		height: 100vh
+		background: black
+		z-index: 100
+		.modal_wrapper
+			position: fixed
+			top: calc(50% - 360px)
+			right: calc(50% - 607px)
