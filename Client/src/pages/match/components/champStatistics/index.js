@@ -1,5 +1,8 @@
 import React from 'react';
+
 import Team from './team';
+
+import './index.sass';
 
 const ChampStatistics = ({info, version}) => {
 	const {leftTeam, rightTeam} = info;

@@ -9,27 +9,29 @@ const TeamScore = ({info, id}) => {
 		}
 	}
 
+	const {win, kills, deaths, assists, objectives} = team;
+
 	return(
 		<>
 			<div className="result">
-				<div className={team.win ? 'win' : 'defeat'}>{team.win ? 'Победа' : 'Поражение'}</div>
+				<div className={win ? 'win' : 'defeat'}>{win ? 'Победа' : 'Поражение'}</div>
 				<div className="score">
-					<span className="kills">{team.kills}</span>
+					<span className="kills">{kills}</span>
 					<span> / </span>
-					<span className="deaths">{team.deaths}</span>
+					<span className="deaths">{deaths}</span>
 					<span> / </span>
-					<span className="assists">{team.assists}</span>
+					<span className="assists">{assists}</span>
 				</div>
 			</div>
 
 			<div className="objects">
-				{Object.keys(team.objectives).map(obj => {
+				{Object.keys(objectives).map(obj => {
 					if (obj === 'champion') return null;
 
 					return(
 						<div className={`object ${obj}`} key={obj}>
 							<div className="obj_icon"></div>
-							<span className="amount">{team.objectives[obj].kills}</span>
+							<span className="amount">{objectives[obj].kills}</span>
 						</div>
 					)
 				})}

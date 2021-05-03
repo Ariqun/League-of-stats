@@ -1,0 +1,22 @@
+@import '../../../../components/UI/ui'
+	
+.champion_statistic
+	@include transGrayBordersTopAndBot
+	@include opacityBg
+	margin-top: 20px
+	.tabs
+		@include transGrayBorderBot_20per
+		display: flex
+		justify-content: space-evenly
+		padding-bottom: 10px
+		.left_team, .right_team
+			display: flex
+			.tab
+				cursor: pointer
+				img
+					width: 50px
+					margin: 0 5px
+		.table
+			width: 100px
+	.content
+		height: 40vh

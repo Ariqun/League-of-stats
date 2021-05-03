@@ -1,0 +1,17 @@
+@import '../../../../components/UI/ui'
+	
+.graphs
+	display: flex
+	justify-content: space-evenly
+	margin-top: 20px
+	.graph
+		@include transGrayBordersTopAndBot
+		@include opacityBg
+		display: flex
+		flex-direction: column
+		align-items: center
+		width: 410px
+		.graph_title
+			padding-bottom: 10px
+		canvas
+			@include transGrayBorderTop_20per

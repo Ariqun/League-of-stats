@@ -3,7 +3,11 @@ import React from 'react';
 import Player from '../player';
 import TeamScore from '../teamScore';
 
+import './index.sass';
+
 const TableResult = ({info, version, region}) => {
+	const {date, duration, type, leftTeam, rightTeam} = info;
+
 	return(
 		<div className="table_result">
 			<div className="table_head">
@@ -13,10 +17,10 @@ const TableResult = ({info, version, region}) => {
 
 				<div className="match_type col-4">
 					<div className="date">
-						<span className="time_date">{info.date}</span>
-						<span className="duration">({info.duration})</span>
+						<span className="time_date">{date}</span>
+						<span className="duration">({duration})</span>
 					</div>
-					<span className="type">{info.type}</span>
+					<span className="type">{type}</span>
 				</div>
 
 				<div className="right_team col-4">
@@ -26,11 +30,11 @@ const TableResult = ({info, version, region}) => {
 
 			<div className="table_body">
 				<div className="left_team">
-					<Player team={info.leftTeam} version={version} region={region}/>
+					<Player team={leftTeam} version={version} region={region}/>
 				</div>
 
 				<div className="right_team">
-					<Player team={info.rightTeam} version={version} region={region}/>
+					<Player team={rightTeam} version={version} region={region}/>
 				</div>
 			</div>
 		</div>

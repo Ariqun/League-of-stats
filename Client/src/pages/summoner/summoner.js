@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import Promo from './components/promo';
 import Nav from './components/nav';
-import ListMatches from '../match/components/listMatches';
+import ListMatches from './components/listMatches';
 import Loading from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';

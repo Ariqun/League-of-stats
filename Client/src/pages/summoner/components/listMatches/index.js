@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
 
-import RiotAPI from '../../../../services/riotAPI';
-
 import MatchItem from '../matchItem';
 
+import RiotAPI from '../../../../services/riotAPI';
 
 const ListMatches = ({puuID, name, version}) => {
 	const [matches, setMatches] = useState([]);
-	
 	const riotAPI = new RiotAPI();
 
 	useEffect(() => {

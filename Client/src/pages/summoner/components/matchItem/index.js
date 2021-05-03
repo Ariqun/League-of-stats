@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import MatchInfo from '../matchInfo';
+import getMatchInfo from '../../../match/components/getMatchInfo';
 import Loading from '../../../../components/loading';
 import Settings from './settings';
 import Statistics from './statistics';
@@ -16,7 +16,7 @@ const MatchItem = ({version, matchId, name}) => {
 	useEffect(() => {
 		const getInfo = async () => {
 			const mini = true;
-			const res = await MatchInfo(matchId, version, name, mini);
+			const res = await getMatchInfo(matchId, version, name, mini);
 			
 			if (res === null) {
 				setError(true);

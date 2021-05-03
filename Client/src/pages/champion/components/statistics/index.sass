@@ -7,19 +7,15 @@
 		padding: 20px 0
 		.graph
 			@include transGrayBordersTopAndBot
+			@include opacityBg
 			display: flex
 			flex-direction: column
 			align-items: center
-			padding: 10px
-			border-radius: 5px
-			background: rgba(111, 111, 111, 0.3)
 			.graph_title
+				@include transGrayBorderBot_10per
 				width: 100%
 				text-align: center
 				padding-bottom: 10px
-				border-bottom: 1px solid
-				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
-				border-image-slice: 1
 			.circle_graph
 				position: relative
 				display: flex
@@ -38,9 +34,7 @@
 		justify-content: space-evenly
 		.positions
 			@include transGrayBordersTopAndBot
-			padding: 10px
-			border-radius: 10px
-			background: rgba(111, 111, 111, 0.3)
+			@include opacityBg
 			tbody
 				tr
 					padding: 5px 0
@@ -56,10 +50,8 @@
 					th
 						justify-content: center
 				tr.head
+					@include transGrayBorderBot_10per
 					padding: 0 0 10px
-					border-bottom: 1px solid
-					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
-					border-image-slice: 1
 				tr.top
 					padding-top: 10px
 			.position
@@ -101,16 +93,13 @@
 							background: green
 		.average
 			@include transGrayBordersTopAndBot
+			@include opacityBg
 			width: 594px
 			padding: 10px 0 0
-			border-radius: 10px
-			background: rgba(111, 111, 111, 0.3)
 			.avg_title
+				@include transGrayBorderBot_20per
 				text-align: center
 				padding-bottom: 10px
-				border-bottom: 1px solid
-				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
-				border-image-slice: 1
 			.avg_wrapper, .avg_combo
 				display: flex
 				flex-wrap: wrap
@@ -121,13 +110,11 @@
 					flex-direction: column
 					align-items: center
 					.title
+						@include transGrayBorderBot_30per
 						width: 100%
-						color: gray
+						color: $color-dark_gray
 						text-align: center
 						padding-bottom: 5px
-						border-bottom: 1px solid
-						border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 30%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 70%)
-						border-image-slice: 1
 					.value
 						padding: 5px 0 10px
 						.kills
@@ -135,9 +122,8 @@
 						.deaths
 							color: $color-red
 						.assists
-							color: orange
+							color: $color-orange
 			.avg_combo
 				.avg_stat
 					.title
-						border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
-						border-image-slice: 1
+						@include transGrayBorderBot_10per

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 
-import MatchInfo from './components/matchInfo';
+import getMatchInfo from './components/getMatchInfo';
 import Loading from '../../components/loading';
 import TableResult from './components/tableResult';
-import Graphs from './components/graphs';
+import CanvasGraphs from './components/canvasGraphs';
 import ChampStatistics from './components/champStatistics';
 
 const Match = ({region, matchId, version}) => {
@@ -13,7 +13,7 @@ const Match = ({region, matchId, version}) => {
 	useEffect(() => {
 		const getInfo = async () => {
 			const mini = false;
-			const res = await MatchInfo(matchId, version, mini);
+			const res = await getMatchInfo(matchId, version, mini);
 
 			setInfo(info => ({...info, ...res}));
 			setLoading(false);
@@ -27,7 +27,7 @@ const Match = ({region, matchId, version}) => {
 		<div className="match_page">
 			<div className="container">
 				<TableResult info={info} version={version} region={region}/>
-				<Graphs info={info} version={version}/>
+				<CanvasGraphs info={info} version={version}/>
 				<ChampStatistics info={info} version={version}/>
 			</div>
 		</div>

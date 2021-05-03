@@ -15,13 +15,13 @@
 			.champ_name
 				font-size: 35px
 			.champ_title
-				color: $dark-gray
+				color: $color-dark_gray
 				font-size: 14px
 		.lore
 			@include transGrayBordersTopAndBot
 			padding: 10px 0
 			p
-				color: $light-gray
+				color: $color-light_gray
 				text-align: center
 		.stats
 			@include transGrayBordersTopAndBot
@@ -31,14 +31,12 @@
 			padding: 10px 0
 			margin: 10px 0
 			&::before
+				@include transGrayBorderLeft
 				content: ''
 				position: absolute
 				top: 0
 				left: calc(50% - 0.5px)
 				height: 100%
-				border-left: 1px solid
-				border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
-				border-image-slice: 1
 			.stat
 				display: flex
 				width: 50%
@@ -48,7 +46,7 @@
 				&:nth-of-type(2n)
 					padding-left: 10px
 				&_name
-					color: $dark-gray
+					color: $color-dark_gray
 				&_value
 					width: 60px
 					color: $color-skyblue

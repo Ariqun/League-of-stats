@@ -4,7 +4,7 @@ import PlayerRank from '../playerRank';
 
 const Player = ({team, region, version}) => {
 	const result = team.players.map((player, i) => {
-		const {summonerId, championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, totalTeamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName} = player;
+		const {summonerId, championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, teamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName} = player;
 
 		return(
 			<div className="player" key={`${championName}_${i}`}>
@@ -58,7 +58,7 @@ const Player = ({team, region, version}) => {
 								<span className="per_min">({visionPerMin})</span>
 							</div>
 
-							<span className="kill_part">{((kills + assists) * 100 / totalTeamKills).toFixed()}% уч. в уб.</span>
+							<span className="kill_part">{((kills + assists) * 100 / teamKills).toFixed()}% уч. в уб.</span>
 						</div>
 					</div>
 				</div>

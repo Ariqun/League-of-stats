@@ -22,7 +22,6 @@ const Champion = ({version, champName}) => {
 	
 			const res = await dragonData.getChampion(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion/${champName}.json`);
 
-			console.log(res[champName])
 			setChamp(res[champName]);
 			changeLoading(false);
 		}

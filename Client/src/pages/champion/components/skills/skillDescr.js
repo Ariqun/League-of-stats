@@ -1,9 +1,9 @@
 import React from 'react';
 
-import addZero from '../../../../components/addZero';
+import {addZeroFour} from '../../../../components/addZeros';
 
 const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
-	let key = addZero(keyID);
+	let key = addZeroFour(keyID);
 
 	if (currentSkill === 'passive') {
 		return(

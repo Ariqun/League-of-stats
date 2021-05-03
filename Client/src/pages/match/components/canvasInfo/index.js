@@ -1,4 +1,4 @@
-const infoForCanvas = (team, version) => {
+const canvasInfo = (team, version) => {
 	let res = [];
 		
 	for (let elem of team) {
@@ -25,4 +25,4 @@ const infoForCanvas = (team, version) => {
 	return res;
 }
 
-export default infoForCanvas;
+export default canvasInfo;

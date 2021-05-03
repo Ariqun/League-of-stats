@@ -1,11 +1,11 @@
 /* -------------- Variables -------------- */
 
-$light-gray: #dadce0
-$dark-gray: gray
+$color-light_gray: #dadce0
+$color-dark_gray: gray
 $color-skyblue: skyblue
 $color-green: limegreen
 $color-red: tomato
-
+$color-orange: orange
 
 /* -------------- Mixins -------------- */	
 
@@ -14,16 +14,50 @@ $color-red: tomato
 	border-bottom: 1px solid
 	border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
 	border-image-slice: 1
-@mixin bg
+	
+@mixin transGrayBorderTop_20per
+	border-top: 1px solid
+	border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+	border-image-slice: 1
+
+@mixin transGrayBorderLeft
+	border-left: 1px solid
+	border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+	border-image-slice: 1
+
+@mixin transGrayBorderRight
+	border-right: 1px solid
+	border-image: linear-gradient(0deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+	border-image-slice: 1
+
+@mixin transGrayBorderBot
+	border-bottom: 1px solid
+	border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 100%)
+	border-image-slice: 1
+@mixin transGrayBorderBot_10per
+	border-bottom: 1px solid
+	border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+	border-image-slice: 1
+@mixin transGrayBorderBot_20per
+	border-bottom: 1px solid
+	border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 80%)
+	border-image-slice: 1
+@mixin transGrayBorderBot_30per
+	border-bottom: 1px solid
+	border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 30%, rgba(128, 128, 128, 0.8) 50%, rgba(128, 128, 128, 0) 70%)
+	border-image-slice: 1
+
+@mixin horizontalSkyblueBordersTopAndBot
+	border-top: 1px solid
+	border-bottom: 1px solid
+	border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
+	border-image-slice: 1
+
+@mixin opacityBg
 	padding: 10px
-	border-radius: 5px
-	background: rgba(111, 111, 111, 0.3)
-@mixin border
-	border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(128, 128, 128, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
-	border-image-slice: 1
-@mixin borderShort
-	border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 25%, rgba(128, 128, 128, 0.8) 50%, rgba(18, 235, 255, 0) 75%)
-	border-image-slice: 1
+	border-radius: 10px
+	background: rgba(128, 128, 128, 0.2)
+
 @mixin flexColumn
 	display: flex
 	flex-direction: column
