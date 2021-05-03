@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const exphbs = require('express-handlebars');
+
 const summonerRoute = require('./routes/summoner');
-const sumMatchesRoute = require('./routes/sumMatches');
-const sumMatchRoute = require('./routes/sumMatch');
-const sumRankedRoute = require('./routes/sumRanked');
-const sumBackRoute = require('./routes/backgroundWork');
+const matchListRoute = require('./routes/matchList');
+const matchRoute = require('./routes/match');
+const rankedRoute = require('./routes/ranked');
+const champStatisticsRoute = require('./routes/champStatistics');
 const champRoute = require('./routes/champion');
 
 const app = express();
@@ -23,10 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/', summonerRoute);
-app.use('/', sumMatchesRoute);
-app.use('/', sumMatchRoute);
-app.use('/', sumRankedRoute);
-app.use('/', sumBackRoute);
+app.use('/', matchListRoute);
+app.use('/', matchRoute);
+app.use('/', rankedRoute);
+app.use('/', champStatisticsRoute);
 app.use('/', champRoute);
 
 async function start() {

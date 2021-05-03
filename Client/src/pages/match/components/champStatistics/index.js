@@ -15,7 +15,7 @@ const ChampStatistics = ({info, version}) => {
 				</div>
 
 				<div className="table">
-
+					
 				</div>
 
 				<div className="right_team">

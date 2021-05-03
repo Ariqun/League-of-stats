@@ -2,22 +2,25 @@ const {Router} = require('express');
 const router = Router();
 const axios = require('axios');
 
-const champion = require('../models/champion');
 const match = require('../models/match');
+const champion = require('../models/champion');
+const summoner = require('../models/summoner');
 
 router.post('/', async (req, res) => {
 	const arrOfChamps = await getChamps();
 	const wins = [], losses = [], bans = [];
 	let matches = 0;
 
-	await match.find({$or: [{queueId: 420, checked: false}, {queueId: 400, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
+	await match.find({$or: [{queueId: 400, checked: false}, {queueId: 420, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
 		if (doc.length !== 0) {
 			for (let obj of doc) {
-				let matchBans = [], matchRoles = {}, info = {};
+				const matchType = obj.queueId;
+				let matchBans = [], matchRoles = {}, info = {}, sumInfo = {};
 				matches++;
 	
 				for (let elem of obj.participants) {
 					const id = elem.championId;
+					const sumId = elem.summonerId;
 
 					if (elem.win) {
 						wins.push(id)
@@ -29,6 +32,35 @@ router.post('/', async (req, res) => {
 						role: elem.individualPosition,
 						wins: elem.win ? 1 : 0,
 						matches: 1
+					}
+
+					sumInfo[sumId] = {
+						sumId: sumId,
+						sumName: elem.summonerName,
+						totalMatches: 1,
+						totalWins: elem.win ? 1 : 0,
+						solo: matchType === 420 ? 1 : 0,
+						soloWins: matchType === 420 && elem.win ? 1 : 0,
+						flex: matchType === 440 ? 1 : 0,
+						flexWins: matchType === 440 && elem.win ? 1 : 0,
+						normal: matchType === 400 ? 1 : 0,
+						normalWins: matchType === 400 && elem.win ? 1 : 0,
+						champion: {
+							champId: id,
+							champName: elem.championName,
+							matches: 1,
+							wins: elem.win ? 1 : 0,
+							kills: elem.kills,
+							deaths: elem.deaths,
+							assists: elem.assists,
+							physical: elem.physicalDamageDealtToChampions,
+							magic: elem.magicDamageDealtToChampions,
+							trueDmg: elem.trueDamageDealtToChampions,
+							restore: elem.totalHealsOnTeammates,
+							shield: elem.totalDamageShieldedOnTeammates,
+							cs: elem.totalMinionsKilled,
+							gold: elem.goldEarned,
+						}
 					}
 
 					info[id] = {
@@ -60,9 +92,10 @@ router.post('/', async (req, res) => {
 				bans.push(...matchBans);
 				pushRolesInDB(matchRoles);
 				pushInfoInDB(info);
+				pushSumInfoInDB(sumInfo);
 				setChecked(obj.matchId);
 			}
-	
+
 			const calculatedWins = calculateStats(wins);
 			const calculatedLosses = calculateStats(losses);
 			const calculatedBans = calculateStats(bans);
@@ -212,6 +245,28 @@ const pushInfoInDB = async (obj) => {
 				"combo.quadro": quadra,
 				"combo.penta": penta
 			}
+		}, {upsert: true})
+	}
+}
+
+const pushSumInfoInDB = async (obj) => {
+	for (let key in obj) {
+		const {sumId, sumName, totalMatches, totalWins, solo, soloWins, flex, flexWins, normal, normalWins} = obj[key];
+
+		await summoner.updateOne({sumId: sumId}, {
+			sumId: sumId,
+			sumName: sumName,
+			$inc: {
+				matches: totalMatches,
+				totalWins: totalWins,
+				solo: solo,
+				soloWins: soloWins,
+				flex: flex,
+				flexWins: flexWins,
+				normal: normal,
+				normalWins: normalWins,
+			},
+			$push: {champions: obj[key].champion}
 		}, {upsert: true})
 	}
 }
