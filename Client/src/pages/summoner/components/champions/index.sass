@@ -1,0 +1,98 @@
+@import '../../../../components/UI/ui'
+
+.champs
+	padding: 50px 0
+	.champs_wrapper
+		@include opacityBg
+		.tabs
+			display: flex
+			.tab
+				@include transGrayBorderBot
+				cursor: pointer
+				padding: 5px 10px 10px
+				margin-right: 20px
+				transition: 0.5s color
+				&:last-of-type
+					margin: 0
+				&:hover
+					@include skyblueBorderBot
+					color: rgba(18, 235, 255, 0.8)
+			.tab.active
+				@include skyblueBorderBot
+				color: rgba(18, 235, 255, 0.8)
+		table
+			tbody
+				.table_head
+					.head_item
+						.title
+							position: relative
+							text-align: center
+							cursor: pointer
+							padding: 10px
+							&:hover
+								color: rgba(18, 235, 255, 0.8)
+							&::before
+								content: '\23f7'
+					.head_item.active
+						color: rgba(18, 235, 255, 0.8)
+				.champ
+					&::after
+						@include transGrayBorderBot
+						content: ''
+						position: absolute
+						left: 0
+						width: 100%
+					td
+						.wrapper
+							display: flex
+							justify-content: center
+							align-items: center
+							padding: 10px
+					td.general
+						.wrapper
+							display: flex
+							justify-content: flex-start
+							align-items: center
+							padding: 10px
+							img
+								width: 48px
+							.name
+								padding: 5px
+					td.matches, td.winrate
+						.wrapper
+							position: relative
+							height: 25px
+							progress
+								appearance: none
+								height: 25px
+								&::-webkit-progress-bar
+									height: 25px
+									border-radius: 15px
+									background: rgba(111, 111, 111, 0.4)
+								&::-webkit-progress-value
+									border-radius: 15px
+									background: deepskyblue
+							.value
+								position: absolute
+								color: black
+					td.winrate
+						.wrapper
+							progress
+								&::-webkit-progress-value
+									background: $color-green
+					td.avg_kda
+						.wrapper
+							.kda_score
+								.kills
+									color: $color-green
+								.deaths
+									color: $color-red
+								.assists
+									color: $color-orange
+					td.avg_creeps, td.avg_dmg, td.avg_gold, td.avg_heal
+						img
+							width: 15px
+							margin-right: 3px
+					td.avg_gold, td.avg_heal
+						img
+							width: 18px

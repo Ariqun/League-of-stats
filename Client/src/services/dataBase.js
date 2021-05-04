@@ -25,4 +25,19 @@ export default class DataBase {
 
 		return res.data;
 	}
+
+	getSumStatistics = async (id) => {
+		const res = await axios({
+			method: 'post',
+			url: '/sumStatistics',
+			data: `sumID=${id}`,
+			headers: {'Content-type': 'application/x-www-form-urlencoded'}
+		});
+
+		if (res.status !== 200) {
+			throw new Error('DataBase getSumStatistics failed');
+		}
+
+		return res.data;
+	}
 }

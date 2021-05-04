@@ -37,19 +37,14 @@ router.post('/', async (req, res) => {
 					sumInfo[sumId] = {
 						sumId: sumId,
 						sumName: elem.summonerName,
-						totalMatches: 1,
-						totalWins: elem.win ? 1 : 0,
+						matches: 1,
+						win: elem.win ? 1 : 0,
 						solo: matchType === 420 ? 1 : 0,
-						soloWins: matchType === 420 && elem.win ? 1 : 0,
 						flex: matchType === 440 ? 1 : 0,
-						flexWins: matchType === 440 && elem.win ? 1 : 0,
 						normal: matchType === 400 ? 1 : 0,
-						normalWins: matchType === 400 && elem.win ? 1 : 0,
 						champion: {
 							champId: id,
 							champName: elem.championName,
-							matches: 1,
-							wins: elem.win ? 1 : 0,
 							kills: elem.kills,
 							deaths: elem.deaths,
 							assists: elem.assists,
@@ -176,51 +171,14 @@ const pushStatsInDB = async (obj) => {
 const pushRolesInDB = async (obj) => {
 	for (let key in obj) {
 		const {wins, matches} = obj[key];
+		const role = (obj[key].role).toLowerCase();
 
-		if (obj[key].role === 'TOP') {
-			await champion.updateOne({id: key}, {
-				$inc: {
-					"roles.top.wins": wins,
-					"roles.top.matches": matches
-				}
-			}, {upsert: true})
-		} 
-		
-		if (obj[key].role === 'JUNGLE') {
-			await champion.updateOne({id: key}, {
-				$inc: {
-					"roles.jungle.wins": wins,
-					"roles.jungle.matches": matches
-				}
-			}, {upsert: true})
-		}
-		
-		if (obj[key].role === 'MIDDLE') {
-			await champion.updateOne({id: key}, {
-				$inc: {
-					"roles.middle.wins": wins,
-					"roles.middle.matches": matches
-				}
-			}, {upsert: true})
-		}
-		
-		if (obj[key].role === 'UTILITY') {
-			await champion.updateOne({id: key}, {
-				$inc: {
-					"roles.support.wins": wins,
-					"roles.support.matches": matches
-				}
-			}, {upsert: true})
-		}
-		
-		if (obj[key].role === 'BOTTOM') {
-			await champion.updateOne({id: key}, {
-				$inc: {
-					"roles.adc.wins": wins,
-					"roles.adc.matches": matches
-				}
-			}, {upsert: true})
-		}
+		await champion.updateOne({id: key}, {
+			$inc: {
+				[`roles.${role}.wins`]: wins,
+				[`roles.${role}.matches`]: matches
+			}
+		}, {upsert: true})
 	}
 }
 
@@ -251,22 +209,53 @@ const pushInfoInDB = async (obj) => {
 
 const pushSumInfoInDB = async (obj) => {
 	for (let key in obj) {
-		const {sumId, sumName, totalMatches, totalWins, solo, soloWins, flex, flexWins, normal, normalWins} = obj[key];
+		const {sumId, sumName, matches, win, solo, flex, normal} = obj[key];
+		const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold} = obj[key].champion;
+		let type = '';
+		if (solo) type = 'solo';
+		if (flex) type = 'flex';
+		if (normal) type = 'normal';
+
 
 		await summoner.updateOne({sumId: sumId}, {
 			sumId: sumId,
 			sumName: sumName,
+			[`champions.${champName}.name`]: champName,
+			[`champions.${champName}.champId`]: champId,
 			$inc: {
-				matches: totalMatches,
-				totalWins: totalWins,
+				totalMatches: matches,
+				totalWins: win,
 				solo: solo,
-				soloWins: soloWins,
+				soloWins: win,
 				flex: flex,
-				flexWins: flexWins,
+				flexWins: win,
 				normal: normal,
-				normalWins: normalWins,
-			},
-			$push: {champions: obj[key].champion}
+				normalWins: win,
+				[`champions.${champName}.total.results.matches`]: matches,
+				[`champions.${champName}.total.results.wins`]: win,
+				[`champions.${champName}.${type}.results.matches`]: matches,
+				[`champions.${champName}.${type}.results.wins`]: win,
+				[`champions.${champName}.total.kda.kills`]: kills,
+				[`champions.${champName}.total.kda.deaths`]: deaths,
+				[`champions.${champName}.total.kda.assists`]: assists,
+				[`champions.${champName}.${type}.kda.kills`]: kills,
+				[`champions.${champName}.${type}.kda.deaths`]: deaths,
+				[`champions.${champName}.${type}.kda.assists`]: assists,
+				[`champions.${champName}.total.dmg.physical`]: physical,
+				[`champions.${champName}.total.dmg.magic`]: magic,
+				[`champions.${champName}.total.dmg.trueDmg`]: trueDmg,
+				[`champions.${champName}.${type}.dmg.physical`]: physical,
+				[`champions.${champName}.${type}.dmg.magic`]: magic,
+				[`champions.${champName}.${type}.dmg.trueDmg`]: trueDmg,
+				[`champions.${champName}.total.heal.restore`]: restore,
+				[`champions.${champName}.total.heal.shield`]: shield,
+				[`champions.${champName}.${type}.heal.restore`]: restore,
+				[`champions.${champName}.${type}.heal.shield`]: shield,
+				[`champions.${champName}.total.cs`]: cs,
+				[`champions.${champName}.total.gold`]: gold,
+				[`champions.${champName}.${type}.cs`]: cs,
+				[`champions.${champName}.${type}.gold`]: gold
+			}
 		}, {upsert: true})
 	}
 }

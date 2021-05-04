@@ -1,20 +1,21 @@
 import React from 'react';
 
-import checkNum from '../../../../components/chekNum';
+import averageScore from '../../../../components/averageScore';
 
 const Average = ({champStats}) => {
 	const {matches, creeps, gold, kda, dmg, combo} = champStats;
-	const avgCreeps = checkNum((creeps / matches).toFixed(1));
-	const avgGold = checkNum((gold / matches / 1000).toFixed(3));
-	const avgKills = checkNum((kda.kills / matches).toFixed(1));
-	const avgDeaths = checkNum((kda.deaths / matches).toFixed(1));
-	const avgAssists = checkNum((kda.assists / matches).toFixed(1));
-	const avgKDARatio = checkNum(((+avgKills + +avgAssists) / +avgDeaths).toFixed(1));
-	const avgDMG = checkNum(((dmg.physical + dmg.magic + dmg.trueDmg) / matches / 1000).toFixed(3) );
-	const avgDouble = checkNum((combo.double / matches).toFixed(4));
-	const avgTriple = checkNum((combo.triple / matches).toFixed(4));
-	const avgQuadro = checkNum((combo.quadro / matches).toFixed(4));
-	const avgPenta = checkNum((combo.penta / matches).toFixed(4));
+
+	const avgCreeps = averageScore(creeps, matches, 1);
+	const avgGold = averageScore(gold, matches) / 1000;
+	const avgKills = averageScore(kda.kills, matches, 1);
+	const avgDeaths = averageScore(kda.deaths, matches, 1);
+	const avgAssists = averageScore(kda.assists, matches, 1);
+	const avgKDARatio = averageScore((+avgKills + +avgAssists), +avgDeaths, 1);
+	const avgDMG = averageScore((dmg.physical + dmg.magic + dmg.trueDmg), matches) / 1000;
+	const avgDouble = averageScore(combo.double, matches, 4);
+	const avgTriple = averageScore(combo.triple, matches, 4);
+	const avgQuadro = averageScore(combo.quadro, matches, 4);
+	const avgPenta = averageScore(combo.penta, matches, 4);
 
 	return(
 		<div className="average">

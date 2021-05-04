@@ -25,7 +25,7 @@ const ListMatches = ({puuID, name, version}) => {
 	});
 
 	return(
-		<div className="matches">
+		<div className="summoner_matches">
 			{matchList}
 		</div>
 	)
