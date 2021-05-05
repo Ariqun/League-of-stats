@@ -10,7 +10,7 @@ const TableBody = ({tab, statistics, sort, version}) => {
 		if (champs[champ][tab] === undefined) return null;
 
 		const {matches, wins} = champs[champ][tab].results;
-		const {cs, gold} = champs[champ][tab];
+		const {cs, gold, vision, wards} = champs[champ][tab];
 		const {kills, deaths, assists} = champs[champ][tab].kda;
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
@@ -23,6 +23,8 @@ const TableBody = ({tab, statistics, sort, version}) => {
 		const avgGold =  averageScore(gold, matches, 1);
 		const avgDmg =  averageScore((magic + physical + trueDmg), matches) / 1000;
 		const avgHeal =  averageScore((restore + shield), matches) / 1000;
+		const avgVision = averageScore(vision, matches, 1);
+		const avgWards = averageScore(wards, matches, 1);
 		
 		return(
 			<tr className={`champ ${champ}`} key={champ}>
@@ -85,6 +87,18 @@ const TableBody = ({tab, statistics, sort, version}) => {
 					<div className="wrapper">
 						<img src={process.env.PUBLIC_URL + '/assets/icons/heal.png'} alt="dmg"/>
 						<span className="value">{avgHeal}</span>
+					</div>
+				</td>
+
+				<td className="avg_vision" vision={avgVision}>
+					<div className="wrapper">
+						<span className="value">{avgVision}</span>
+					</div>
+				</td>
+
+				<td className="avg_wards" wards={avgWards}>
+					<div className="wrapper">
+						<span className="value">{avgWards}</span>
 					</div>
 				</td>
 			</tr>

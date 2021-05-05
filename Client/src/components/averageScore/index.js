@@ -1,7 +1,7 @@
-import checkNum from "../chekNum";
+import {checkNanAndDoubleZero} from "../chekNums";
 
 const averageScore = (score, total, fix = 0) => {
-	const result = checkNum((score / total).toFixed(fix));
+	const result = checkNanAndDoubleZero((score / total).toFixed(fix));
 
 	return result;
 }

@@ -6,8 +6,8 @@ const champion = require('../models/champion');
 router.post('/champion', async (req, res) => {
 	const champ = req.body.champ;
 
-	await champion.find({id: champ}, (err, doc) => {
-		res.send(doc[0]);
+	await champion.findOne({id: champ}, (err, doc) => {
+		res.send(doc);
 	})
 })
 

@@ -9,7 +9,9 @@ const TableHead = ({changeSort, sort}) => {
 		creeps: 'Миньоны', 
 		gold: 'Золото', 
 		dmg: 'Урон', 
-		heal: 'Лечение'
+		heal: 'Лечение',
+		vision: 'Обзор',
+		wards: 'Тотемы'
 	}
 
 	const result = Object.keys(obj).map(title => {

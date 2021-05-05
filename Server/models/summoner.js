@@ -11,7 +11,8 @@ const summoner = new Schema({
 	flexWins: Number,
 	normal: Number,
 	normalWins: Number,
-	champions: Array
+	champions: Array,
+	records: Array
 });
 
 module.exports = model('Summoner', summoner);

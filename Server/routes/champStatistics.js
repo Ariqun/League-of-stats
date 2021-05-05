@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 	await match.find({$or: [{queueId: 400, checked: false}, {queueId: 420, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
 		if (doc.length !== 0) {
 			for (let obj of doc) {
-				const matchType = obj.queueId;
+				const matchType = obj.queueId, date = obj.gameStartTimestamp;
 				let matchBans = [], matchRoles = {}, info = {}, sumInfo = {};
 				matches++;
 	
@@ -55,6 +55,17 @@ router.post('/', async (req, res) => {
 							shield: elem.totalDamageShieldedOnTeammates,
 							cs: elem.totalMinionsKilled,
 							gold: elem.goldEarned,
+							vision: elem.visionScore,
+							wards: elem.wardsPlaced,
+							date: date,
+							matchType: matchType,
+							dmgTaken: elem.totalDamageTaken,
+							CC: elem.totalTimeCCDealt,
+							killingSpree: elem.killingSprees,
+							double: elem.doubleKills,
+							triple: elem.tripleKills,
+							quadra: elem.quadraKills,
+							penta: elem.pentaKills
 						}
 					}
 
@@ -85,8 +96,8 @@ router.post('/', async (req, res) => {
 				}
 
 				bans.push(...matchBans);
-				pushRolesInDB(matchRoles);
-				pushInfoInDB(info);
+				pushChampRolesInDB(matchRoles);
+				pushChampInfoInDB(info);
 				pushSumInfoInDB(sumInfo);
 				setChecked(obj.matchId);
 			}
@@ -113,7 +124,7 @@ router.post('/', async (req, res) => {
 					totalMatches: matches,
 				}
 	
-				pushStatsInDB(result);
+				pushChampStatsInDB(result);
 			}
 		}
 	})
@@ -152,7 +163,7 @@ const setChecked = async (id) => {
 	await match.updateOne({matchId: id}, {$set: {checked: true}});
 }
 
-const pushStatsInDB = async (obj) => {
+const pushChampStatsInDB = async (obj) => {
 	const {id, name, wins, losses, bans, matches, totalMatches} = obj;
 
 	await champion.updateOne({id: id}, {
@@ -168,7 +179,7 @@ const pushStatsInDB = async (obj) => {
 	}, {upsert: true})
 }
 
-const pushRolesInDB = async (obj) => {
+const pushChampRolesInDB = async (obj) => {
 	for (let key in obj) {
 		const {wins, matches} = obj[key];
 		const role = (obj[key].role).toLowerCase();
@@ -182,7 +193,7 @@ const pushRolesInDB = async (obj) => {
 	}
 }
 
-const pushInfoInDB = async (obj) => {
+const pushChampInfoInDB = async (obj) => {
 	for (let key in obj) {
 		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = obj[key];
 
@@ -210,12 +221,18 @@ const pushInfoInDB = async (obj) => {
 const pushSumInfoInDB = async (obj) => {
 	for (let key in obj) {
 		const {sumId, sumName, matches, win, solo, flex, normal} = obj[key];
-		const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold} = obj[key].champion;
+		const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = obj[key].champion;
+		const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = obj[key].champion;
+
+		const dmg = physical + magic + trueDmg;
+		const heal = restore + shield;
+		const kda = +((kills + assists) / deaths).toFixed(1);
+		const records = {kda, kills, deaths, assists, dmg, heal, cs, gold, vision, wards, dmgTaken, CC, killingSpree, double, triple, quadra, penta};
+
 		let type = '';
 		if (solo) type = 'solo';
 		if (flex) type = 'flex';
 		if (normal) type = 'normal';
-
 
 		await summoner.updateOne({sumId: sumId}, {
 			sumId: sumId,
@@ -254,9 +271,43 @@ const pushSumInfoInDB = async (obj) => {
 				[`champions.${champName}.total.cs`]: cs,
 				[`champions.${champName}.total.gold`]: gold,
 				[`champions.${champName}.${type}.cs`]: cs,
-				[`champions.${champName}.${type}.gold`]: gold
+				[`champions.${champName}.${type}.gold`]: gold,
+				[`champions.${champName}.total.vision`]: vision,
+				[`champions.${champName}.total.wards`]: wards,
+				[`champions.${champName}.${type}.vision`]: vision,
+				[`champions.${champName}.${type}.wards`]: wards,
+				[`records.kda.value`]: 0,
+				[`records.kills.value`]: 0,
+				[`records.deaths.value`]: 0,
+				[`records.assists.value`]: 0,
+				[`records.dmg.value`]: 0,
+				[`records.heal.value`]: 0,
+				[`records.cs.value`]: 0,
+				[`records.gold.value`]: 0,
+				[`records.vision.value`]: 0,
+				[`records.wards.value`]: 0,
+				[`records.dmgTaken.value`]: 0,
+				[`records.CC.value`]: 0,
+				[`records.killingSpree.value`]: 0,
+				[`records.double.value`]: 0,
+				[`records.triple.value`]: 0,
+				[`records.quadra.value`]: 0,
+				[`records.penta.value`]: 0
 			}
-		}, {upsert: true})
+		}, {upsert: true});
+
+		for (let key in records) {
+			const value = records[key];
+
+			await summoner.updateOne({sumId: sumId, [`records.${key}.value`]: {$lt: value}}, {
+				$set: {
+					[`records.${key}.value`]: value,
+					[`records.${key}.champName`]: champName,
+					[`records.${key}.date`]: date,
+					[`records.${key}.matchType`]: matchType
+				}
+			});
+		}
 	}
 }
 

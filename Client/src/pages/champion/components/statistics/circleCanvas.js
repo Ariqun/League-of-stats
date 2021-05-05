@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import checkNum from '../../../../components/chekNum';
+import {checkNanAndDoubleZero} from '../../../../components/chekNums';
 
 export default class CircleCanvas extends Component {
 	constructor(props) {
@@ -44,7 +44,7 @@ export default class CircleCanvas extends Component {
 
 	render() {
 		const {value, total, mode} = this.props;
-		const percent = checkNum((value * 100 / total).toFixed(1));
+		const percent = checkNanAndDoubleZero((value * 100 / total).toFixed(1));
 
 		return(
 			<div className="circle_graph">

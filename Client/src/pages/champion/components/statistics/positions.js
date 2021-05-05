@@ -1,6 +1,6 @@
 import React from 'react';
 
-import checkNum from '../../../../components/chekNum';
+import {checkNanAndDoubleZero} from '../../../../components/chekNums';
 
 const Positions = ({roles, matches}) => {
 	const positions = ['top', 'jungle', 'middle', 'adc', 'support'];
@@ -22,8 +22,8 @@ const Positions = ({roles, matches}) => {
 			}
 		}
 
-		const popPercent = checkNum((matchesAtPos * 100 / matches).toFixed(1));
-		const winPercent = checkNum((winsAtPos * 100 / matchesAtPos).toFixed(1));
+		const popPercent = checkNanAndDoubleZero((matchesAtPos * 100 / matches).toFixed(1));
+		const winPercent = checkNanAndDoubleZero((winsAtPos * 100 / matchesAtPos).toFixed(1));
 
 		return (
 			<tr className={`position ${item}`} key={item}>

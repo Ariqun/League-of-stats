@@ -7,7 +7,7 @@ const match = require('../models/match');
 router.post('/match', async (req, res) => {
 	const matchID = req.body.matchID;
 	
-	await match.find({matchId: matchID}, async (err, doc) => {
+	await match.findOne({matchId: matchID}, async (err, doc) => {
 		if (doc.length === 0) {
 			const url = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchID}`;
 			const result = await getData(url);
@@ -19,7 +19,7 @@ router.post('/match', async (req, res) => {
 				res.send('Error');
 			}
 		} else {
-			res.send(doc[0]);
+			res.send(doc);
 		}
 	})
 })
@@ -30,7 +30,7 @@ const getData = async (url) => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-a0cb1f9d-96b4-4079-8164-adfe598e761e"
+		"X-Riot-Token": "RGAPI-ce0b4ba4-fad5-457f-90b3-1d6d8853a85b"
 	};
 	let result = {};
 

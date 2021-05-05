@@ -1,3 +1,11 @@
+const addZero = (num) => {
+	if ((num + '').length <= 1) {
+		return `0${num}`;
+	} else {
+		return num;
+	}
+}
+
 const addZeroFour = (num) => {
 	const arr = num.split('');
 
@@ -10,12 +18,4 @@ const addZeroFour = (num) => {
 	return arr.join('')
 }
 
-const addZero = (num) => {
-	if ((num + '').length <= 1) {
-		return `0${num}`;
-	} else {
-		return num;
-	}
-}
-
-export {addZeroFour, addZero};
+export {addZero, addZeroFour};
