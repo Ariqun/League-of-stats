@@ -4,10 +4,16 @@ const checkNanAndDoubleZero = (num) => {
 	return num;
 }
 
-const checkThousand = (num) => {
-	if (num >= 1000) return (num / 1000).toFixed(3);
+const checkBigNums = (num) => {
+	const milliard = 1000000000;
+	const million = 1000000;
+	const thousand = 1000;
+
+	if (num >= milliard) return `${(num / milliard).toFixed(1)}kkk`;
+	if (num >= million) return `${(num / million).toFixed(3)}kk`;
+	if (num >= thousand) return (num / thousand).toFixed(3);
 
 	return num;
 }
 
-export {checkNanAndDoubleZero, checkThousand};
+export {checkNanAndDoubleZero, checkBigNums};

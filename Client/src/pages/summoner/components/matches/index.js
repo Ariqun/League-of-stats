@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 
-import MatchItem from '../matchItem';
+import MatchItem from './matchItem';
 
 import RiotAPI from '../../../../services/riotAPI';
 
-const ListMatches = ({puuID, name, version}) => {
+import './index.sass';
+
+const Matches = ({puuID, name, version}) => {
 	const [matches, setMatches] = useState([]);
 	const riotAPI = new RiotAPI();
 
@@ -15,7 +17,7 @@ const ListMatches = ({puuID, name, version}) => {
 		}
 		getAllMatches();
 	}, []);
-
+	
 	const matchList = matches.map((match, i) => {
 		if (i >= 5) {
 			return null;
@@ -31,4 +33,4 @@ const ListMatches = ({puuID, name, version}) => {
 	)
 }
 
-export default ListMatches;
+export default Matches;

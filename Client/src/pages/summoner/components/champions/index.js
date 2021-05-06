@@ -27,8 +27,6 @@ const Champions = ({sumID, version}) => {
 
 	if (isLoading) return <Loading/>;
 
-	console.log(statistics);
-
 	return(
 		<div className="champs">
 			<div className="champs_wrapper">

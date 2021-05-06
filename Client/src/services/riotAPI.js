@@ -54,7 +54,6 @@ export default class RiotAPI {
 
 	getMatchInfo = async (matchId) => {
 		console.log('Request')
-
 		const res = await axios({
 			method: 'post',
 			url: '/match',

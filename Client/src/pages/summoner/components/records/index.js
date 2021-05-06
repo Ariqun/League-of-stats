@@ -27,7 +27,6 @@ const Records = ({sumID}) => {
 	const impact = {dmg, heal, dmgTaken, CC, vision, wards};
 	const combo = {killingSpree, double, triple, quadra, penta};
 
-	console.log(records)
 	return(
 		<div className="records">
 			<div className="records_wrapper">

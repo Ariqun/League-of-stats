@@ -1,6 +1,5 @@
 import React from 'react';
-import {addZero} from '../../../../components/addZeros';
-import {checkThousand} from '../../../../components/chekNums';
+import {checkBigNums} from '../../../../components/chekNums';
 import {transformMS, transformDate} from '../../../../components/transformNums';
 
 const Card = ({records}) => {
@@ -37,7 +36,7 @@ const Card = ({records}) => {
 	}
 
 	const result = Object.keys(records).map(record => {
-		let value = checkThousand(records[record].value);
+		let value = checkBigNums(records[record].value);
 		
 		if (value === 0) return noData(record, value);
 		if (record === 'CC') value = transformMS(records[record].value);
@@ -65,7 +64,7 @@ const Card = ({records}) => {
 			</div>
 		)
 	})
-
+	
 	return result;
 }
 

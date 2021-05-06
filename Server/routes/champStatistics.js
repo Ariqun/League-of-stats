@@ -8,82 +8,86 @@ const summoner = require('../models/summoner');
 
 router.post('/', async (req, res) => {
 	const arrOfChamps = await getChamps();
-	const wins = [], losses = [], bans = [];
-	let matches = 0;
 
 	await match.find({$or: [{queueId: 400, checked: false}, {queueId: 420, checked: false}, {queueId: 440, checked: false}]}, (err, doc) => {
-		if (doc.length !== 0) {
-			for (let obj of doc) {
-				const matchType = obj.queueId, date = obj.gameStartTimestamp;
-				let matchBans = [], matchRoles = {}, info = {}, sumInfo = {};
-				matches++;
-	
+		if (doc.length === 0) return;
+		
+		const wins = [], losses = [], bans = [];
+		let matches = 0;
+
+		for (let obj of doc) {
+			const matchType = obj.queueId, date = obj.gameStartTimestamp;
+			let matchBans = [], champInfo = {}, sumInfo = {};
+			matches++;
+
+			const collectionInfo = () => {
 				for (let elem of obj.participants) {
-					const id = elem.championId;
-					const sumId = elem.summonerId;
-
-					if (elem.win) {
-						wins.push(id)
+					const {championId, summonerId, win, summonerName, championName, kills, deaths, assists, 
+						  totalMinionsKilled, goldEarned, visionScore, wardsPlaced, individualPosition,
+						  physicalDamageDealtToChampions, magicDamageDealtToChampions, trueDamageDealtToChampions,
+						  totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, totalTimeCCDealt,
+						  killingSprees, doubleKills, tripleKills, quadraKills, pentaKills} = elem;
+	
+					if (win) {
+						wins.push(championId)
 					} else {
-						losses.push(id);
+						losses.push(championId);
 					}
-
-					matchRoles[id] = {
-						role: elem.individualPosition,
-						wins: elem.win ? 1 : 0,
-						matches: 1
-					}
-
-					sumInfo[sumId] = {
-						sumId: sumId,
-						sumName: elem.summonerName,
+	
+					sumInfo[summonerId] = {
+						sumId: summonerId,
+						sumName: summonerName,
 						matches: 1,
-						win: elem.win ? 1 : 0,
+						win: win ? 1 : 0,
 						solo: matchType === 420 ? 1 : 0,
 						flex: matchType === 440 ? 1 : 0,
 						normal: matchType === 400 ? 1 : 0,
+						role: individualPosition,
 						champion: {
-							champId: id,
-							champName: elem.championName,
-							kills: elem.kills,
-							deaths: elem.deaths,
-							assists: elem.assists,
-							physical: elem.physicalDamageDealtToChampions,
-							magic: elem.magicDamageDealtToChampions,
-							trueDmg: elem.trueDamageDealtToChampions,
-							restore: elem.totalHealsOnTeammates,
-							shield: elem.totalDamageShieldedOnTeammates,
-							cs: elem.totalMinionsKilled,
-							gold: elem.goldEarned,
-							vision: elem.visionScore,
-							wards: elem.wardsPlaced,
+							champId: championId,
+							champName: championName,
+							kills: kills,
+							deaths: deaths,
+							assists: assists,
+							physical: physicalDamageDealtToChampions,
+							magic: magicDamageDealtToChampions,
+							trueDmg: trueDamageDealtToChampions,
+							restore: totalHealsOnTeammates,
+							shield: totalDamageShieldedOnTeammates,
+							cs: totalMinionsKilled,
+							gold: goldEarned,
+							vision: visionScore,
+							wards: wardsPlaced,
 							date: date,
 							matchType: matchType,
-							dmgTaken: elem.totalDamageTaken,
-							CC: elem.totalTimeCCDealt,
-							killingSpree: elem.killingSprees,
-							double: elem.doubleKills,
-							triple: elem.tripleKills,
-							quadra: elem.quadraKills,
-							penta: elem.pentaKills
+							dmgTaken: totalDamageTaken,
+							CC: totalTimeCCDealt,
+							killingSpree: killingSprees,
+							double: doubleKills,
+							triple: tripleKills,
+							quadra: quadraKills,
+							penta: pentaKills
 						}
 					}
-
-					info[id] = {
-						kills: elem.kills,
-						deaths: elem.deaths,
-						assists: elem.assists,
-						physical: elem.physicalDamageDealtToChampions,
-						magic: elem.magicDamageDealtToChampions,
-						trueDmg: elem.trueDamageDealtToChampions,
-						restore: elem.totalHealsOnTeammates,
-						shield: elem.totalDamageShieldedOnTeammates,
-						cs: elem.totalMinionsKilled,
-						gold: elem.goldEarned,
-						double: elem.doubleKills,
-						triple: elem.tripleKills,
-						quadra: elem.quadraKills,
-						penta: elem.pentaKills
+		
+					champInfo[championId] = {
+						kills: kills,
+						deaths: deaths,
+						assists: assists,
+						physical: physicalDamageDealtToChampions,
+						magic: magicDamageDealtToChampions,
+						trueDmg: trueDamageDealtToChampions,
+						restore: totalHealsOnTeammates,
+						shield: totalDamageShieldedOnTeammates,
+						cs: totalMinionsKilled,
+						gold: goldEarned,
+						double: doubleKills,
+						triple: tripleKills,
+						quadra: quadraKills,
+						penta: pentaKills,
+						role: individualPosition,
+						wins: win ? 1 : 0,
+						matches: 1
 					}
 				}
 	
@@ -94,14 +98,16 @@ router.post('/', async (req, res) => {
 						}
 					}
 				}
-
+	
 				bans.push(...matchBans);
-				pushChampRolesInDB(matchRoles);
-				pushChampInfoInDB(info);
+				pushChampInfoInDB(champInfo);
 				pushSumInfoInDB(sumInfo);
 				setChecked(obj.matchId);
 			}
+			collectionInfo();
+		}
 
+		const calculateChampStats = () => {
 			const calculatedWins = calculateStats(wins);
 			const calculatedLosses = calculateStats(losses);
 			const calculatedBans = calculateStats(bans);
@@ -127,6 +133,8 @@ router.post('/', async (req, res) => {
 				pushChampStatsInDB(result);
 			}
 		}
+
+		calculateChampStats();
 	})
 })
 
@@ -163,39 +171,11 @@ const setChecked = async (id) => {
 	await match.updateOne({matchId: id}, {$set: {checked: true}});
 }
 
-const pushChampStatsInDB = async (obj) => {
-	const {id, name, wins, losses, bans, matches, totalMatches} = obj;
-
-	await champion.updateOne({id: id}, {
-		id: id,
-		name: name,
-		$inc: {
-			wins: wins,
-			losses: losses,
-			bans: bans,
-			matches: matches,
-			totalMatches: totalMatches
-		}
-	}, {upsert: true})
-}
-
-const pushChampRolesInDB = async (obj) => {
-	for (let key in obj) {
-		const {wins, matches} = obj[key];
-		const role = (obj[key].role).toLowerCase();
-
-		await champion.updateOne({id: key}, {
-			$inc: {
-				[`roles.${role}.wins`]: wins,
-				[`roles.${role}.matches`]: matches
-			}
-		}, {upsert: true})
-	}
-}
-
 const pushChampInfoInDB = async (obj) => {
 	for (let key in obj) {
 		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = obj[key];
+		const {wins, matches} = obj[key];
+		const role = (obj[key].role).toLowerCase();
 
 		await champion.updateOne({id: key}, {
 			$inc: {
@@ -212,7 +192,9 @@ const pushChampInfoInDB = async (obj) => {
 				"combo.double": double,
 				"combo.triple": triple,
 				"combo.quadro": quadra,
-				"combo.penta": penta
+				"combo.penta": penta,
+				[`roles.${role}.wins`]: wins,
+				[`roles.${role}.matches`]: matches
 			}
 		}, {upsert: true})
 	}
@@ -223,6 +205,7 @@ const pushSumInfoInDB = async (obj) => {
 		const {sumId, sumName, matches, win, solo, flex, normal} = obj[key];
 		const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = obj[key].champion;
 		const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = obj[key].champion;
+		const role = (obj[key].role).toLowerCase();
 
 		const dmg = physical + magic + trueDmg;
 		const heal = restore + shield;
@@ -240,14 +223,14 @@ const pushSumInfoInDB = async (obj) => {
 			[`champions.${champName}.name`]: champName,
 			[`champions.${champName}.champId`]: champId,
 			$inc: {
-				totalMatches: matches,
-				totalWins: win,
-				solo: solo,
-				soloWins: win,
-				flex: flex,
-				flexWins: win,
-				normal: normal,
-				normalWins: win,
+				[`statistics.total.matches`]: matches,
+				[`statistics.total.wins`]: win,
+				[`statistics.total.roles.${role}.matches`]: matches,
+				[`statistics.total.roles.${role}.wins`]: win,
+				[`statistics.${type}.matches`]: matches,
+				[`statistics.${type}.wins`]: win,
+				[`statistics.${type}.roles.${role}.matches`]: matches,
+				[`statistics.${type}.roles.${role}.wins`]: win,
 				[`champions.${champName}.total.results.matches`]: matches,
 				[`champions.${champName}.total.results.wins`]: win,
 				[`champions.${champName}.${type}.results.matches`]: matches,
@@ -309,6 +292,22 @@ const pushSumInfoInDB = async (obj) => {
 			});
 		}
 	}
+}
+
+const pushChampStatsInDB = async (obj) => {
+	const {id, name, wins, losses, bans, matches, totalMatches} = obj;
+
+	await champion.updateOne({id: id}, {
+		id: id,
+		name: name,
+		$inc: {
+			wins: wins,
+			losses: losses,
+			bans: bans,
+			matches: matches,
+			totalMatches: totalMatches
+		}
+	}, {upsert: true})
 }
 
 module.exports = router;

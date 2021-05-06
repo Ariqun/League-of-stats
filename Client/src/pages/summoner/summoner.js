@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 
 import Promo from './components/promo';
 import Nav from './components/nav';
-import ListMatches from './components/listMatches';
+import Matches from './components/matches';
 import Champions from './components/champions';
 import Records from './components/records';
 import Loading from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
+import Statistics from './components/statistics';
 
 const Summoner = ({version, region, name}) => {
 	const [isloading, changeLoading] = useState(true);
@@ -31,9 +32,10 @@ const Summoner = ({version, region, name}) => {
 		const {puuID, sumID} = summoner.tech;
 		let tabContent = "";
 
-		if (tab === 'matches') tabContent = <ListMatches puuID={puuID} name={summoner.name} version={version}/>;
+		if (tab === 'matches') tabContent = <Matches puuID={puuID} name={summoner.name} version={version}/>;
 		if (tab === 'champs') tabContent = <Champions sumID={sumID} version={version}/>;
 		if (tab === 'records') tabContent = <Records sumID={sumID} version={version}/>
+		if (tab === 'stats') tabContent = <Statistics sumID={sumID}/> 
 
 		return tabContent;
 	}

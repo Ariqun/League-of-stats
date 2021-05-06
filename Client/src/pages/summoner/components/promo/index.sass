@@ -35,7 +35,7 @@
 			.lvl
 				text-align: center
 				color: $color-dark_gray
-	.sum_winrate
+	.circle_canvas
 		position: relative
 		display: flex
 		justify-content: center
@@ -50,15 +50,15 @@
 			width: 150px
 			height: 150px
 			line-height: 1
-			.wins
+			.primary
 				font-size: 25px
 				color: $color-green
 			.percent
 				@include transGrayBordersTopAndBot
 				font-size: 35px
 				padding: 5px 0 7px
-			.losses
+			.secondary
 				font-size: 25px
 				color: $color-red
-		#winrate
+		#front
 			position: absolute

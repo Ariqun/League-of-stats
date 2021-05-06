@@ -2,7 +2,7 @@ import React from 'react';
 
 const NavList = ({changeTab}) => {
 	const ruArr = ['Игры', 'Чемпионы', 'Рекорды', 'Статистика'];
-	const engArr = ['matches','champs', 'records', 'stat'];
+	const engArr = ['matches', 'champs', 'records', 'stats'];
 
 	const list = ruArr.map((item, i) => {
 		const id = engArr[i];

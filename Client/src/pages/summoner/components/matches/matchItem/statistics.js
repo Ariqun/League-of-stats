@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import averageScore from '../../../../components/averageScore';
+import averageScore from '../../../../../components/averageScore';
 
 const Statistics = ({info, matchId}) => {
 	const {kills, deaths, assists, platformId, startDate, duration, matchRes, teamKills, totalMinionsKilled, farmPerMin, matchType} = info;

@@ -4,7 +4,7 @@ import averageScore from '../../../../components/averageScore';
 
 const TableBody = ({tab, statistics, sort, version}) => {
 	const champs = statistics.champions[0];
-	const {totalMatches} = statistics;
+	const totalMatches = statistics.statistics[0].total.matches;
 
 	const result = Object.keys(champs).map(champ => {
 		if (champs[champ][tab] === undefined) return null;

@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react';
 
-import getMatchInfo from '../../../match/components/getMatchInfo';
-import Loading from '../../../../components/loading';
+import getMatchInfo from '../../../../match/components/getMatchInfo';
+import Loading from '../../../../../components/loading';
 import Settings from './settings';
 import Statistics from './statistics';
-
-import './index.sass';
 
 const MatchItem = ({version, matchId, name}) => {
 	const [info, setInfo] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const {items, players, championName, spells, mainRunes} = info;
-
+	
 	useEffect(() => {
 		const getInfo = async () => {
 			const mini = true;
