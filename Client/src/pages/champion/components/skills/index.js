@@ -9,7 +9,7 @@ import './index.sass';
 const Skills = ({champ, version}) => {
 	const [currentSkill, changeCurrentSkill] = useState('passive');
 	const {passive, spells, key} = champ;
-
+	console.log(champ)
 	return(
 		<div className="skills">
 			<div className="icons col-12">

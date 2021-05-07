@@ -61,7 +61,8 @@ const getMatchInfo = (matchId, version, name, mini) => {
 				rightTeam: {
 					players: [],
 					teamstats: {}
-				}
+				},
+				timeline: {...matchInfo.timeline[0]}
 			};
 			let leftTeamKDA = {kills: 0, deaths: 0, assists: 0}, rightTeamKDA = {kills: 0, deaths: 0, assists: 0};
 

@@ -1,15 +1,7 @@
 import React from 'react';
 
-const TeamScore = ({info, id}) => {
-	let team = {};
-
-	for (let elem in info) {
-		if (typeof info[elem] === 'object' && info[elem].teamstats.teamId === id) {
-			team = info[elem].teamstats;
-		}
-	}
-
-	const {win, kills, deaths, assists, objectives} = team;
+const TeamScore = ({team}) => {
+	const {win, kills, deaths, assists, objectives} = team.teamstats;
 
 	return(
 		<>

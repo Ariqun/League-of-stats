@@ -1,8 +1,15 @@
 import {addZero} from "../addZeros";
 
 const transformMS = (ms) => {
-	const seconds = Math.floor(ms % 60);
-	const minutes = Math.floor((ms / 60) % 60);
+	const seconds = Math.floor((ms / 1000) % 60);
+	const minutes = Math.floor((ms / (1000 * 60)) % 60);
+
+	return `${minutes}м. ${seconds}с.`;
+}
+
+const transformSeconds = (sec) => {
+	const seconds = Math.floor(sec % 60);
+	const minutes = Math.floor((sec / 60) % 60);
 
 	return `${minutes}м. ${seconds}с.`;
 }
@@ -18,4 +25,4 @@ const transformDate = (ms) => {
 }
 
 
-export {transformMS, transformDate};
+export {transformMS, transformSeconds, transformDate};

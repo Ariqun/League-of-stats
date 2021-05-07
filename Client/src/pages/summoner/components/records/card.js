@@ -1,6 +1,6 @@
 import React from 'react';
 import {checkBigNums} from '../../../../components/chekNums';
-import {transformMS, transformDate} from '../../../../components/transformNums';
+import {transformSeconds, transformDate} from '../../../../components/transformNums';
 
 const Card = ({records}) => {
 	const titles = {
@@ -39,7 +39,7 @@ const Card = ({records}) => {
 		let value = checkBigNums(records[record].value);
 		
 		if (value === 0) return noData(record, value);
-		if (record === 'CC') value = transformMS(records[record].value);
+		if (record === 'CC') value = transformSeconds(records[record].value);
 
 		const date = transformDate(records[record].date);
 		const name = records[record].champName;

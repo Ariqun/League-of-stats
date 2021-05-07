@@ -11,14 +11,14 @@ const Items = ({version}) => {
 	const [currentItem, setCurrentItem] = useState('Зелье здоровья');
 	const [shownTypes, changeShownTypes] = useState(['Damage', 'AttackSpeed', 'SpellDamage', 'CooldownReduction', 'Health', 'Armor', 'SpellBlock', 'NonbootsMovement']);
 
-	const dragonData = new DragonData();
+	const dd = new DragonData(version);
 	
 	useEffect(() => {
 		const getItems = async () => {
-			const res = await dragonData.getAllItems();
+			const res = await dd.getAllItems();
 
-			let result = Object.keys(res.data).map(key => {
-				return res.data[key];
+			let result = Object.keys(res).map(key => {
+				return res[key];
 			})
 
 			result.sort((a, b) => {

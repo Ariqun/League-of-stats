@@ -7,12 +7,12 @@ import './index.sass';
 
 const TableResult = ({info, version, region}) => {
 	const {date, duration, type, leftTeam, rightTeam} = info;
-
+	
 	return(
 		<div className="table_result">
 			<div className="table_head">
 				<div className="left_team col-4">
-					<TeamScore info={info} id={100}/>
+					<TeamScore team={leftTeam}/>
 				</div>
 
 				<div className="match_type col-4">
@@ -24,7 +24,7 @@ const TableResult = ({info, version, region}) => {
 				</div>
 
 				<div className="right_team col-4">
-					<TeamScore info={info} id={200}/>
+					<TeamScore team={rightTeam}/>
 				</div>
 			</div>
 

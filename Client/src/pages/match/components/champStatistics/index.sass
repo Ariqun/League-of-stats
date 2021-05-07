@@ -19,4 +19,32 @@
 		.table
 			width: 100px
 	.content
-		height: 40vh
+		@include flexColumn
+		.skill_table
+			padding: 30px 0
+			table
+				border-collapse: collapse
+				tbody
+					tr
+						td
+							width: 32px
+							text-align: center
+							border: 1px solid $color-dark_gray
+							&:first-of-type
+								border: none
+							img
+								width: 32px
+						td.skill
+							background: deepskyblue
+		.items_block
+			display: flex
+			padding: 20px 0
+			.purchase
+				display: flex
+				align-content: flex-start
+				flex-wrap: wrap-reverse
+				width: 64px
+				margin-right: 20px
+				.item
+					img
+						width: 32px

@@ -9,6 +9,7 @@ const match = new Schema({
 	gameStartTimestamp: Number,
 	participants: Array,
 	teams: Array,
+	timeline: Array,
 	checked: Boolean
 });
 

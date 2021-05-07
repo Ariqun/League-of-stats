@@ -27,9 +27,11 @@ export default class DragonData {
 		return champions.data;
 	}
 
-	getChampion = async (url) => {
+	getChampion = async (name) => {
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/champion/${name}.json`;
 		const champion = await this.getData(url);
-		return champion.data;
+
+		return champion.data[name];
 	}
 
 	getGameType = async (url, id) => {
@@ -66,8 +68,10 @@ export default class DragonData {
 		return result;
 	}
 
-	getAllRunes = async (url) => {
+	getAllRunes = async () => {
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/runesReforged.json`
 		const runes = await this.getData(url);
+		
 		return runes;
 	}
 
@@ -105,7 +109,9 @@ export default class DragonData {
 	}
 
 	getAllItems = async () => {
-		const res = await this.getData('http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/item.json');
-		return res;
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/item.json`
+		const res = await this.getData(url);
+
+		return res.data;
 	}
 }

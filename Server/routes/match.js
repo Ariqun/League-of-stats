@@ -12,8 +12,13 @@ router.post('/match', async (req, res) => {
 			const url = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchID}`;
 			const result = await getData(url);
 
+			const urlTL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchID}/timeline`;
+			const timeline = await getData(urlTL);
+
+			const timelienInfo = collectTimelineInfo(timeline);
+
 			if (Object.keys(result).length !== 0) {
-				pushMatchInDB(result);
+				pushMatchInDB(result, timelienInfo);
 				res.send(JSON.stringify(result.info));
 			} else {
 				res.send('Error');
@@ -30,7 +35,7 @@ const getData = async (url) => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-8b182b30-f0ae-4e36-83a7-50641ed427f8"
+		"X-Riot-Token": "RGAPI-2cb87b3b-4170-4053-b2ac-b8acc3b89623"
 	};
 	let result = {};
 
@@ -41,7 +46,32 @@ const getData = async (url) => {
 	return result;
 }
 
-const pushMatchInDB = async (res) => {
+const collectTimelineInfo = (obj) => {
+	const frames = obj.info.frames;
+	let participant = {};
+
+	for (let i = 1; i <= 10; i++) {
+		const lvlUp = [], itemPurchase = [];
+
+		for (let frame of frames) {
+			for (let event of frame.events) {
+				if (event.participantId === i && event.type === "SKILL_LEVEL_UP") {
+					lvlUp.push({skill: event.skillSlot, time: event.timestamp});
+				}
+
+				if (event.participantId === i && event.type === "ITEM_PURCHASED") {
+					itemPurchase.push({item: event.itemId, time: event.timestamp});
+				}
+
+				participant[i] = {lvlUp, itemPurchase};
+			}
+		}
+	}
+
+	return participant;
+}
+
+const pushMatchInDB = async (res, timeline) => {
 	const matchObj = new match ({
 		matchId: res.metadata.matchId,
 		platformId: res.info.platformId,
@@ -51,6 +81,7 @@ const pushMatchInDB = async (res) => {
 		gameStartTimestamp: res.info.gameStartTimestamp,
 		participants: res.info.participants,
 		teams: res.info.teams,
+		timeline: timeline,
 		checked: false
 	});
 

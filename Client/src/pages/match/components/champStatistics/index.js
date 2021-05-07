@@ -1,30 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import Team from './team';
+import Tabs from './tabs';
+import SkillsBlock from './skillsBlock';
 
 import './index.sass';
+import RunesBlock from './runesBlock';
+import ItemsBlock from './itemsBlock';
 
 const ChampStatistics = ({info, version}) => {
+	const [tab, setTab] = useState(8);
 	const {leftTeam, rightTeam} = info;
+
+	const changeTab = (id) => {
+		setTab(id);
+	}
 
 	return(
 		<div className="champion_statistic">
-			<div className="tabs">
-				<div className="left_team">
-					<Team team={leftTeam} version={version}/>
-				</div>
-
-				<div className="table">
-					
-				</div>
-
-				<div className="right_team">
-					<Team team={rightTeam} version={version}/>
-				</div>
-			</div>
+			<Tabs changeTab={changeTab} leftTeam={leftTeam} rightTeam={rightTeam} version={version}/>
 
 			<div className="content">
-
+				<SkillsBlock info={info} tab={tab} version={version}/>
+				<RunesBlock info={info} tab={tab} version={version}/>
+				<ItemsBlock info={info} tab={tab} version={version}/>
 			</div>
 		</div>
 	)

@@ -30,14 +30,11 @@ const Summoner = ({version, region, name}) => {
 
 	const content = () => {
 		const {puuID, sumID} = summoner.tech;
-		let tabContent = "";
-
-		if (tab === 'matches') tabContent = <Matches puuID={puuID} name={summoner.name} version={version}/>;
-		if (tab === 'champs') tabContent = <Champions sumID={sumID} version={version}/>;
-		if (tab === 'records') tabContent = <Records sumID={sumID} version={version}/>
-		if (tab === 'stats') tabContent = <Statistics sumID={sumID}/> 
-
-		return tabContent;
+		
+		if (tab === 'matches') return <Matches puuID={puuID} name={summoner.name} version={version}/>;
+		if (tab === 'champs') return <Champions sumID={sumID} version={version}/>;
+		if (tab === 'records') return <Records sumID={sumID} version={version}/>
+		if (tab === 'stats') return <Statistics sumID={sumID}/> 
 	}
 
 	if (isloading) return <Loading/>;
