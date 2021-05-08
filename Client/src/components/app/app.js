@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Header from './header';
 import Background from './background';
+import Footer from './footer';
 
 import Main from '../../pages/main';
 import Champion from '../../pages/champion';
@@ -58,6 +59,7 @@ function App() {
 						return <Match region={region} matchId={id} version={version}/>
 					}}/>
 		
+					<Footer/>
 					<Background/>
 				</div>
 			</Router>

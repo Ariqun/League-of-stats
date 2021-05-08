@@ -57,7 +57,7 @@ const Runes = ({ids, version}) => {
 	});
 
 	return(
-		<div className="runes">
+		<div className="runes_comp">
 			{result}
 		</div>
 	)

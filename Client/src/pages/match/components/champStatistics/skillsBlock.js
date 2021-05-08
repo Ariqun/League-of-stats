@@ -49,6 +49,7 @@ const SkillsBlock = ({info, tab, version}) => {
 	
 	return(
 		<div className="skill_table">
+			<div className="title">Порядок прокачки умений</div>
 			<table>
 				<tbody>
 					{createRow(1)}

@@ -1,10 +1,11 @@
 import {addZero} from "../addZeros";
 
-const transformMS = (ms) => {
-	const seconds = Math.floor((ms / 1000) % 60);
-	const minutes = Math.floor((ms / (1000 * 60)) % 60);
+const transformMS = (ms, format = 'literal') => {
+	const seconds = addZero(Math.floor((ms / 1000) % 60));
+	const minutes = addZero(Math.floor((ms / (1000 * 60)) % 60));
 
-	return `${minutes}м. ${seconds}с.`;
+	if (format === 'literal') return `${minutes}м. ${seconds}с.`;
+	if (format === 'digits') return `${minutes}:${seconds}`;
 }
 
 const transformSeconds = (sec) => {

@@ -23,8 +23,8 @@ const Tabs = ({leftTeam, rightTeam, changeTab, version}) => {
 				{createTeamBlock(leftTeam)}
 			</div>
 
-			<div className="table">
-				
+			<div onClick={() => changeTab('table')} className="table">
+				<img src={`${process.env.PUBLIC_URL}/assets/icons/table.png`} alt="table_icon"/>
 			</div>
 
 			<div className="right_team">

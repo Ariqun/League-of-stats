@@ -30,7 +30,7 @@ export default class DragonData {
 	getChampion = async (name) => {
 		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/champion/${name}.json`;
 		const champion = await this.getData(url);
-
+		
 		return champion.data[name];
 	}
 

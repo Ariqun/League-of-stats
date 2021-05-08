@@ -36,7 +36,7 @@ const Card = ({records}) => {
 	}
 
 	const result = Object.keys(records).map(record => {
-		let value = checkBigNums(records[record].value);
+		let value = checkBigNums(records[record].value, 'digits');
 		
 		if (value === 0) return noData(record, value);
 		if (record === 'CC') value = transformSeconds(records[record].value);

@@ -27,6 +27,7 @@ const RunesBlock = ({info, tab, version}) => {
 
 	return(
 		<div className="runes_block">
+			<div className="title">Руны</div>
 			<Runes ids={runes} version={version}/>
 		</div>
 	)

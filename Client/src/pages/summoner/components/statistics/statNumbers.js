@@ -3,8 +3,6 @@ import React from 'react';
 import {checkBigNums} from '../../../../components/chekNums';
 
 const StatNumbers = ({stats}) => {
-	console.log(stats);
-	
 	const statsBlock = (type) => {
 		let statObj = {totalKills: 0, totalDeaths: 0, totalAssists: 0, totalDMG: 0, totalHeal: 0, totalCS: 0, totalGold: 0};
 		let rusTitles = {totalKills: 'Убийства', totalDeaths: 'Смерти', totalAssists: 'Помощь', totalDMG: 'Урон', totalHeal: 'Лечение и щиты', totalCS: 'Миньоны', totalGold: 'Золото'};
@@ -30,12 +28,10 @@ const StatNumbers = ({stats}) => {
 
 		const result = Object.keys(statObj).map(stat => {
 			return(
-				<>
-					<div className="stat" key={stat}>
-						<div className="title">{rusTitles[stat]}</div>
-						<div className="value">{checkBigNums(statObj[stat])}</div>
-					</div>
-				</>
+				<div className="stat" key={stat}>
+					<div className="title">{rusTitles[stat]}</div>
+					<div className="value">{checkBigNums(statObj[stat], 'digits')}</div>
+				</div>
 			)
 		})
 

@@ -23,7 +23,7 @@ const ItemsBlock = ({info, tab, version}) => {
 
 	if (isLoading) return <Loading />
 
-	const fuckIt = () => {
+	const transformArrToObj = () => {
 		let result = timeline.reduce((acc, item) => {
 			let existing = acc.filter(item2 => Math.abs(item2.time - item.time) < 60000)[0];
 
@@ -41,8 +41,7 @@ const ItemsBlock = ({info, tab, version}) => {
 		 
 		return result;
 	}
-	const obj = fuckIt();
-	console.log(obj)
+	const obj = transformArrToObj();
 
 	const result = Object.keys(obj).map((item, i) => {
 		const res = obj[item].map((item2, j) => {
@@ -55,14 +54,20 @@ const ItemsBlock = ({info, tab, version}) => {
 
 		return(
 			<div className="purchase" key={`${item}_${i}`}>
-				{res}
+				<div className="wrapper">
+					{res}
+				</div>
+				<div className="time">{transformMS(item, 'digits')}</div>
 			</div>
 		);
 	})
 
 	return(
 		<div className="items_block">
-			{result}
+			<div className="title">Предметы</div>
+			<div className="items">
+				{result}
+			</div>
 		</div>
 	)
 }

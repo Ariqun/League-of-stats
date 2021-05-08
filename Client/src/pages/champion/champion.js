@@ -14,15 +14,13 @@ const Champion = ({version, champName}) => {
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
 
-	const dragonData = new DragonData();
+	const dd = new DragonData(version);
 
 	useEffect(() => {
 		const getChampion = async () => {
-			const language = 'ru_RU';
-	
-			const res = await dragonData.getChampion(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion/${champName}.json`);
-
-			setChamp(res[champName]);
+			const res = await dd.getChampion(champName);
+			
+			setChamp(res);
 			changeLoading(false);
 		}
 		getChampion();
