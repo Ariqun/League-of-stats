@@ -5,7 +5,6 @@ import {fight, damage, restore, eco, vision, other} from '../../../../components
 
 const Table = ({info, version}) => {
 	const players = [...info.leftTeam.players, ...info.rightTeam.players];
-	console.log(players)
 
 	const createBlock = (obj, title) => {
 		const result = Object.keys(obj).map(item => {

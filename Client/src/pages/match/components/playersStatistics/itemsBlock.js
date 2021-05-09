@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import Loading from '../../../../components/loading';
 import {transformMS} from '../../../../components/transformNums';
@@ -45,8 +46,12 @@ const ItemsBlock = ({info, tab, version}) => {
 
 	const result = Object.keys(obj).map((item, i) => {
 		const res = obj[item].map((item2, j) => {
+			let descr = items[item2].description.replace(/<attention>(\s?\w+%?)<\/attention>/gi, (match, m1) => {
+				return `<span>+${m1}</span>`;
+			})
+
 			return(
-				<div className="item" key={`${item}_${item2}_${j}`}>
+				<div className="item" data-tip={descr} data-for="item_tooltip" key={`${item}_${item2}_${j}`}>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item2}.png`} alt={`${item2}_icon`}/>
 				</div>
 			)
@@ -68,6 +73,7 @@ const ItemsBlock = ({info, tab, version}) => {
 			<div className="items">
 				{result}
 			</div>
+			<ReactTooltip id="item_tooltip" html/>
 		</div>
 	)
 }

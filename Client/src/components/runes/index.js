@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReacTooltip from 'react-tooltip';
 
 import Loading from '../loading';
 
@@ -33,7 +34,7 @@ const Runes = ({ids, version}) => {
 		const res = rune.slots.map((slot, i) => {
 			const subRes = slot.runes.map(item => {
 				return (
-					<div className={perks.includes(item.id) ? "rune active" : "rune"} key={item.id}>
+					<div className={perks.includes(item.id) ? "rune active" : "rune"} data-tip={item.longDesc} data-for="rune_tooltip_1" key={item.id}>
 						<img src={`https://ddragon.leagueoflegends.com/cdn/img/${item.icon}`} alt={`icon_${item.id}`}/>
 					</div>
 				)
@@ -59,6 +60,7 @@ const Runes = ({ids, version}) => {
 	return(
 		<div className="runes_comp">
 			{result}
+			<ReacTooltip id="rune_tooltip_1" html/>
 		</div>
 	)
 }

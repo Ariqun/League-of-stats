@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import Loading from '../../../../components/loading';
 
@@ -24,11 +25,12 @@ const SkillsBlock = ({info, tab, version}) => {
 		}
 		getChamp();
 	}, [tab])
-
+	
 	const createRow = (skillId) => {
 		const skills = info.timeline[tab].lvlUp;
 		const icon = champion.spells[skillId - 1].image.full;
-		
+		const descr = champion.spells[skillId - 1].description;
+
 		const result = skills.map((sk, i) => {
 			if (sk.skill === skillId) {
 				return <td className="cell skill" key={sk.time}>{i + 1}</td>
@@ -39,14 +41,14 @@ const SkillsBlock = ({info, tab, version}) => {
 
 		return(
 			<tr>
-				<td><img src={`http://ddragon.leagueoflegends.com/cdn/11.9.1/img/spell/${icon}`} alt="skill"/></td>
+				<td data-tip={descr} data-for="skill_tooltip"><img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${icon}`} alt="skill"/></td>
 				{result}
 			</tr>
 		);
 	}
 
 	if (isLoading) return <Loading />;
-	
+
 	return(
 		<div className="skill_table">
 			<div className="title">Порядок прокачки умений</div>
@@ -58,6 +60,7 @@ const SkillsBlock = ({info, tab, version}) => {
 					{createRow(4)}
 				</tbody>
 			</table>
+			<ReactTooltip id="skill_tooltip" html/>
 		</div>
 	)
 }

@@ -7,7 +7,7 @@ function Nav() {
 			<ul>
 				<li className="col"><Link to="/">Чампидроны</Link></li>
 				<li className="col"><Link to="/items">Предметы</Link></li>
-				<li className="col">Статистика</li>
+				<li className="col"><Link to="/runes">Руны</Link></li>
 			</ul>
 		</div>
 	)

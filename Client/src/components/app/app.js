@@ -8,6 +8,7 @@ import Footer from './footer';
 import Main from '../../pages/main';
 import Champion from '../../pages/champion';
 import Items from '../../pages/items';
+import Runes from '../../pages/runes/';
 import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
 
@@ -47,6 +48,10 @@ function App() {
 
 					<Route path="/items" render={() => {
 						return <Items version={version}/>
+					}}/>
+
+					<Route path="/runes" render={() => {
+						return <Runes version={version}/>
 					}}/>
 					
 					<Route path="/summoner/:region/:name" render={({match}) => {

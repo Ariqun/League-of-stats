@@ -8,8 +8,8 @@ import ItemsBlock from './itemsBlock';
 
 import './index.sass';
 
-const ChampStatistics = ({info, version}) => {
-	const [tab, setTab] = useState(8);
+const PlayersStatistics = ({info, version}) => {
+	const [tab, setTab] = useState(1);
 	const {leftTeam, rightTeam} = info;
 
 	const changeTab = (id) => {
@@ -31,7 +31,7 @@ const ChampStatistics = ({info, version}) => {
 
 	return(
 		<div className="champion_statistic">
-			<Tabs changeTab={changeTab} leftTeam={leftTeam} rightTeam={rightTeam} version={version}/>
+			<Tabs tab={tab} changeTab={changeTab} leftTeam={leftTeam} rightTeam={rightTeam} version={version}/>
 
 			<div className="content">
 				{content()}
@@ -40,4 +40,4 @@ const ChampStatistics = ({info, version}) => {
 	)
 }
 
-export default ChampStatistics;
+export default PlayersStatistics;

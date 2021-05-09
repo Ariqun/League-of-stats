@@ -2,9 +2,9 @@ const fight = () => {
 	return {
 		largestKillingSpree: 'Лучшая череда убийств',
 		largestMultiKill: 'Максимальное множественной убийство',
-		timeCCingOthers: 'Время контроля',
+		timeCCingOthers: 'Показатель контроля',
 		firstBloodKill: 'Первая кровь',
-		firstTowerKill: 'Первая вышка'
+		firstTowerKill: 'Первая башня'
 	}
 }
 

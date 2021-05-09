@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Tabs = ({leftTeam, rightTeam, changeTab, version}) => {
+const Tabs = ({tab, leftTeam, rightTeam, changeTab, version}) => {
 	const createTeamBlock = (team) => {
 		const content = team.players.map((player, i) => {
 			const {championName, participantId} = player;
 	
 			return (
-				<div onClick={() => changeTab(participantId)} className="tab" key={`${championName}_${i}`}>
+				<div onClick={() => changeTab(participantId)} className={tab === participantId ? "tab active" : "tab"} key={`${championName}_${i}`}>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
 						 alt={`${championName}_icon`}
 					/>

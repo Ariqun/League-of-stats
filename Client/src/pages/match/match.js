@@ -4,7 +4,7 @@ import getMatchInfo from './components/getMatchInfo';
 import Loading from '../../components/loading';
 import TableResult from './components/tableResult';
 import CanvasGraphs from './components/canvasGraphs';
-import ChampStatistics from './components/champStatistics';
+import PlayersStatistics from './components/playersStatistics';
 
 const Match = ({region, matchId, version}) => {
 	const [info, setInfo] = useState({});
@@ -28,7 +28,7 @@ const Match = ({region, matchId, version}) => {
 			<div className="container">
 				<TableResult info={info} version={version} region={region}/>
 				<CanvasGraphs info={info} version={version}/>
-				<ChampStatistics info={info} version={version}/>
+				<PlayersStatistics info={info} version={version}/>
 			</div>
 		</div>
 	);
