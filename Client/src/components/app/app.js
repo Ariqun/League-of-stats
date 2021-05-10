@@ -11,6 +11,7 @@ import Items from '../../pages/items';
 import Runes from '../../pages/runes/';
 import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
+import LiveMatch from '../../pages/liveMatch';
 
 import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
@@ -62,6 +63,14 @@ function App() {
 					<Route path="/match/:region/:id" render={({match}) => {
 						const {region, id} = match.params;
 						return <Match region={region} matchId={id} version={version}/>
+					}}/>
+
+					<Route path="/live/:region/:name/" render={({match, location, history}) => {
+						console.log(match);
+						console.log(history);
+						console.log(location);
+						const {region, name} = match.params;
+						return <LiveMatch region={region} name={name} version={version}/>
 					}}/>
 		
 					<Footer/>

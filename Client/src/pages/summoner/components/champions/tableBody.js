@@ -106,10 +106,12 @@ const TableBody = ({tab, statistics, sort, version}) => {
 	})
 
 	if (result[0] === null) return <tr><td className="no_data">Игры не найдены</td></tr>;
-	
-	result.sort((a, b) => {
-		let x = null, y = null;
 
+	result.sort((a, b) => {
+		if (!a || !b) return null;
+		
+		let x = null, y = null;
+		
 		for (let elem of a.props.children) {
 			if (elem.props[sort] !== undefined) x = elem.props[sort];
 		}

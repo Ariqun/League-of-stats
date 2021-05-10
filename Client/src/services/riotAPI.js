@@ -11,9 +11,7 @@ export default class RiotAPI {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		
-		if (res.status !== 200) {
-			throw new Error('RiotAPI getSummoner failed');
-		}
+		if (res.status !== 200) throw new Error('RiotAPI getSummoner failed');
 		
 		return res.data;
 	}
@@ -28,9 +26,7 @@ export default class RiotAPI {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 
-		if (res.status !== 200) {
-			throw new Error('RiotAPI getSumRanked failed');
-		}
+		if (res.status !== 200) throw new Error('RiotAPI getSumRanked failed');
 		
 		return res.data;
 	}
@@ -45,9 +41,7 @@ export default class RiotAPI {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 
-		if (res.status !== 200) {
-			throw new Error('RiotAPI getSumMatches failed');
-		}
+		if (res.status !== 200) throw new Error('RiotAPI getSumMatches failed');
 
 		return res.data;
 	}
@@ -61,9 +55,22 @@ export default class RiotAPI {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 
-		if (res.status !== 200) {
-			throw new Error('RiotAPI getMatch failed');
-		}
+		if (res.status !== 200) throw new Error('RiotAPI getMatch failed');
+
+		return res.data;
+	}
+
+	getLiveMatch = async (sumId, region) => {
+		console.log('Request');
+
+		const res = await axios({
+			method: 'post',
+			url: '/live',
+			data: `sumId=${sumId}&region=${region}`,
+			headers: {'Content-type': 'application/x-www-form-urlencoded'}
+		})
+
+		if (res.status !== 200) throw new Error('Riot API getLiveMatch failed');
 
 		return res.data;
 	}

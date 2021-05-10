@@ -10,6 +10,7 @@ const rankedRoute = require('./routes/ranked');
 const champStatisticsRoute = require('./routes/champStatistics');
 const champRoute = require('./routes/champion');
 const sumStatisticsRoute = require('./routes/sumStatistics');
+const liveMatch = require('./routes/liveMatch');
 
 const app = express();
 const hbs = exphbs.create({
@@ -31,6 +32,7 @@ app.use('/', rankedRoute);
 app.use('/', champStatisticsRoute);
 app.use('/', champRoute);
 app.use('/', sumStatisticsRoute);
+app.use('/', liveMatch);
 
 async function start() {
 	try {

@@ -6,9 +6,9 @@ const StatNumbers = ({stats}) => {
 	const statsBlock = (type) => {
 		let statObj = {totalKills: 0, totalDeaths: 0, totalAssists: 0, totalDMG: 0, totalHeal: 0, totalCS: 0, totalGold: 0};
 		let rusTitles = {totalKills: 'Убийства', totalDeaths: 'Смерти', totalAssists: 'Помощь', totalDMG: 'Урон', totalHeal: 'Лечение и щиты', totalCS: 'Миньоны', totalGold: 'Золото'};
-
+		
 		for (let key in stats) {
-			if (stats[key][type] === undefined) return <div className="no_data">Нет данных</div>
+			if (stats[key][type] === undefined) continue;
 
 			const {kda, dmg, heal, cs, gold} = stats[key][type];
 			const {kills, deaths, assists} = kda;
@@ -25,6 +25,12 @@ const StatNumbers = ({stats}) => {
 			statObj.totalCS += cs;
 			statObj.totalGold += gold;
 		}
+
+		const sum = Object.keys(statObj).reduce((acc, el) => {
+			return acc += statObj[el];
+		}, 0)
+
+		if (sum === 0) return <div className="no_data">Нет данных</div>;
 
 		const result = Object.keys(statObj).map(stat => {
 			return(
