@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
+import {ranks} from '../../../../components/languages/russian/ranks';
+
 import RiotAPI from '../../../../services/riotAPI';
 
 const PlayerRank = ({id, region}) => {
@@ -7,17 +9,7 @@ const PlayerRank = ({id, region}) => {
 	const [ranked, setRanked] = useState([]);
 
 	const riotAPI = new RiotAPI();
-	const ruObj = {
-		iron: 'Железо', 
-		bronze: 'Бронза', 
-		silver: 'Серебро', 
-		gold: 'Золото', 
-		platinum: 'Платина', 
-		diamond: 'Алмаз', 
-		master: 'Мастер', 
-		grandmaster: 'Грандмастер', 
-		challenger: 'Претендент'
-	};
+	const ruObj = ranks();
 	
 	useEffect(() => {
 		const getRank = async () => {

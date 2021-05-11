@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 
 import RunesBlock from './components/runesBlock';
 import Loading from '../../components/loading';
@@ -33,4 +34,8 @@ const Runes = ({version}) => {
 	)
 }
 
-export default Runes;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Runes);

@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux';
 
 import averageScore from '../../../../components/averageScore';
 
@@ -126,4 +127,8 @@ const TableBody = ({tab, statistics, sort, version}) => {
 	return result;
 }
 
-export default TableBody;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(TableBody);

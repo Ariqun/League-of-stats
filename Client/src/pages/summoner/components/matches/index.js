@@ -6,7 +6,7 @@ import RiotAPI from '../../../../services/riotAPI';
 
 import './index.sass';
 
-const Matches = ({puuID, name, version}) => {
+const Matches = ({puuID, name}) => {
 	const [matches, setMatches] = useState([]);
 	const riotAPI = new RiotAPI();
 
@@ -23,7 +23,7 @@ const Matches = ({puuID, name, version}) => {
 			return null;
 		}
 
-		return <MatchItem matchId={match} name={name} version={version} key={match}/>
+		return <MatchItem matchId={match} name={name} key={match}/>
 	});
 
 	return(

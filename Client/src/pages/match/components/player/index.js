@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import PlayerRank from '../playerRank';
 
@@ -73,4 +74,8 @@ const Player = ({team, region, version}) => {
 	return result;
 }
 
-export default Player;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Player);

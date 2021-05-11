@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const Settings = ({championName, spells, mainRunes, version}) => {
 	return(
@@ -18,4 +19,8 @@ const Settings = ({championName, spells, mainRunes, version}) => {
 	)
 }
 
-export default Settings;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Settings);

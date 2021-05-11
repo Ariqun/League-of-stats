@@ -5,7 +5,7 @@ import TeamScore from '../teamScore';
 
 import './index.sass';
 
-const TableResult = ({info, version, region}) => {
+const TableResult = ({info, region}) => {
 	const {date, duration, type, leftTeam, rightTeam} = info;
 	
 	return(
@@ -30,11 +30,11 @@ const TableResult = ({info, version, region}) => {
 
 			<div className="table_body">
 				<div className="left_team">
-					<Player team={leftTeam} version={version} region={region}/>
+					<Player team={leftTeam} region={region}/>
 				</div>
 
 				<div className="right_team">
-					<Player team={rightTeam} version={version} region={region}/>
+					<Player team={rightTeam} region={region}/>
 				</div>
 			</div>
 		</div>

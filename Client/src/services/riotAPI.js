@@ -16,7 +16,7 @@ export default class RiotAPI {
 		return res.data;
 	}
 
-	getSumRanked = async (region, sumId) => {
+	getSumRanked = async (sumId, region) => {
 		console.log('Request')
 
 		const res = await axios({

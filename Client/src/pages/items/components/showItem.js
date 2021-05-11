@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const ShowItem = ({items, name, version}) => {
 	const result = items.map(item => {
@@ -31,7 +32,11 @@ const ShowItem = ({items, name, version}) => {
 		<div className="item_extend col-4">
 			{result}
 		</div>
-	);
+	)
 }
 
-export default ShowItem;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(ShowItem);

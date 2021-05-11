@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
+import {connect} from 'react-redux';
 
 import Loading from '../../../../components/loading';
 
@@ -65,4 +66,8 @@ const SkillsBlock = ({info, tab, version}) => {
 	)
 }
 
-export default SkillsBlock;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(SkillsBlock);

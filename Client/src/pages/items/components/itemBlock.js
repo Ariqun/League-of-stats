@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-const ItemBlock = ({version, items, setCurrentItem, tag, title}) => {
+const ItemBlock = ({items, setCurrentItem, tag, title, version}) => {
 	const createBlock = () => {
 		const exceptions = ['Чучело', 'Твоя доля', 'Черное копье Калисты', 'Глаз герольда', 'Заведенный секундомер', 'Сломанный секундомер', 'Эликсир стали', 'Эликсир волшебства', 'Эликсир гнева'];
 
@@ -29,4 +30,8 @@ const ItemBlock = ({version, items, setCurrentItem, tag, title}) => {
 	)
 }
 
-export default ItemBlock;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(ItemBlock);

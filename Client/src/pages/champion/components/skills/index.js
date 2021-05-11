@@ -6,15 +6,15 @@ import SkillDescr from './skillDescr';
 
 import './index.sass';
 
-const Skills = ({champ, version}) => {
+const Skills = ({champ}) => {
 	const [currentSkill, changeCurrentSkill] = useState('passive');
 	const {passive, spells, key} = champ;
 	
 	return(
 		<div className="skills">
 			<div className="icons col-12">
-				<PassiveSkill passive={passive} version={version} changeCurrentSkill={changeCurrentSkill} />
-				<SkillList spells={spells} version={version} changeCurrentSkill={changeCurrentSkill}/>
+				<PassiveSkill passive={passive} changeCurrentSkill={changeCurrentSkill} />
+				<SkillList spells={spells} changeCurrentSkill={changeCurrentSkill}/>
 			</div>
 
 			<div className="descr col-xl-7 col-lg-9 col-sm-10">
@@ -22,6 +22,6 @@ const Skills = ({champ, version}) => {
 			</div>
 		</div>
 	)
-}
+};
 
 export default Skills;

@@ -1,1 +1,87 @@
 @import '../../components/UI/ui'
+
+.live_page
+	.container
+		.team
+			display: flex
+			justify-content: center
+			margin-bottom: 50px
+			.player_card
+				@include opacityBg
+				position: relative
+				width: 16.6%
+				height: 392px
+				cursor: pointer
+				padding-top: 0
+				margin: 0 10px
+				border-top: 1px solid
+				border-bottom: 1px solid
+				.player_name
+					text-align: center
+					// padding-bottom: 10px
+					padding: 10px 0
+					border-bottom: 1px solid
+				.champ_stats
+					text-align: center
+					transition: 1s opacity
+					padding: 10px 0
+					.kills
+						color: $color-green
+					.deaths
+						color: $color-red
+					.assists
+						color: $color-orange
+				.player_rank
+					display: flex
+					flex-direction: column
+					align-items: center
+					transition: 1s opacity
+					padding: 10px 0
+					.rank_icon
+						margin-right: 10px
+						img
+							width: 100px
+					.rank_wrapper
+						display: flex
+						flex-direction: column
+						align-items: center
+						.rank_lp
+							font-size: 14px
+						span
+							color: $color-dark_gray
+				.background
+					position: absolute
+					top: 0
+					left: 0
+					opacity: 0.3
+					transition: 1s opacity
+					z-index: -10
+					img
+						border-radius: 10px
+				&:hover
+					border: 1px solid orange !important
+				&:hover .player_name
+					color: orange
+					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 165, 0, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+					border-image-slice: 1
+					background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)
+				&:hover .champ_stats,
+				&:hover .player_rank
+					opacity: 0
+				&:hover .background
+					opacity: 1 !important
+		.team.left
+			.player_card
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
+				border-image-slice: 1
+				.player_name
+					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+					border-image-slice: 1
+		.team.right
+			.player_card
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
+				border-image-slice: 1
+				.player_name
+					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+					border-image-slice: 1
+				

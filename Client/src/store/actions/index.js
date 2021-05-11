@@ -1,10 +1,21 @@
-const versionLoaded = (newVersion) => {
+const versionLoaded = (version) => {
 	return {
-		type: 'VersionLoaded',
-		loaded: newVersion
+		type: 'VERSION_LOADED',
+		versionLoaded: version
 	};
-};
+}
 
-export {
-	versionLoaded
-};
+const championsLoaded = (champions) => {
+	return {
+		type: 'CHAMPIONS_LOADED',
+		championsLoaded: champions
+	}
+}
+
+const liveLoaded = (live) => {
+	return {
+		type: 'LIVE_LOADED',
+		liveLoaded: live
+	}
+}
+export {versionLoaded, championsLoaded, liveLoaded};

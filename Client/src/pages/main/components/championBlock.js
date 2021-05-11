@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const ChampionBlock = ({champNames, champions, inputValue, shownRoles, version}) => {
+const ChampionBlock = ({champions, inputValue, shownRoles, version}) => {
+	const champNames = [...Object.keys({...champions})];
+
 	const champs = champNames.map(item => {
 		const {key, name, tags} = champions[item];
 		const lowerName = name.toLowerCase();
@@ -31,6 +34,13 @@ const ChampionBlock = ({champNames, champions, inputValue, shownRoles, version})
 			{champs}
 		</div>
 	);
-}
+};
 
-export default ChampionBlock;
+const mapStateToProps = (state) => {
+	return {
+		version: state.version,
+		champions: state.champions
+	};
+};
+
+export default connect(mapStateToProps)(ChampionBlock);

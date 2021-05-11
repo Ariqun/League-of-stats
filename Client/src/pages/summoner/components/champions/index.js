@@ -9,7 +9,7 @@ import DataBase from '../../../../services/dataBase';
 
 import './index.sass';
 
-const Champions = ({sumID, version}) => {
+const Champions = ({sumID}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [statistics, setStatistics] = useState([]);
 	const [tab, changeTab] = useState('total');
@@ -36,7 +36,7 @@ const Champions = ({sumID, version}) => {
 					<tbody>
 						<TableHead changeSort={changeSort} sort={sort}/>
 
-						<TableBody tab={tab} statistics={statistics} sort={sort} version={version}/>
+						<TableBody tab={tab} statistics={statistics} sort={sort}/>
 					</tbody>
 				</table>
 			</div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Runes from '../../../../components/runes';
 
-const RunesBlock = ({info, tab, version}) => {
+const RunesBlock = ({info, tab}) => {
 	const players = [...info.leftTeam.players, ...info.rightTeam.players];
 	let runes = {};
 
@@ -28,7 +28,7 @@ const RunesBlock = ({info, tab, version}) => {
 	return(
 		<div className="runes_block">
 			<div className="title">Руны</div>
-			<Runes ids={runes} version={version}/>
+			<Runes ids={runes} />
 		</div>
 	)
 }

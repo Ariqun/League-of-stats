@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-const PassiveSkill = ({passive, version, changeCurrentSkill}) => {
+const PassiveSkill = ({passive, changeCurrentSkill, version}) => {
 	return (
 		<div className="skill passive" onClick={() => changeCurrentSkill('passive')}>
 			<div className="wrapper_for_horizontal_borders">
@@ -9,7 +10,11 @@ const PassiveSkill = ({passive, version, changeCurrentSkill}) => {
 				</div>
 			</div>
 		</div>
-	)
+	);
+};
+
+const mapStateToProps = (state) => {
+	return {version: state.version};
 }
 
-export default PassiveSkill;
+export default connect(mapStateToProps)(PassiveSkill);

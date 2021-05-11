@@ -7,7 +7,7 @@ import CheckLiveMatch from './checkLiveMatch';
 
 import './index.sass';
 
-const Promo = ({summoner, version}) => {
+const Promo = ({summoner}) => {
 	const {name, lvl, iconID, ranked, region} = summoner;
 	const {wins, losses} = ranked;
 	const sumId = summoner.tech.sumID;
@@ -15,7 +15,7 @@ const Promo = ({summoner, version}) => {
 	return (
 		<div className="promo">
 			<Rating ranked={ranked}/>
-			<Banner name={name} lvl={lvl} iconID={iconID} version={version}/>
+			<Banner name={name} lvl={lvl} iconID={iconID}/>
 			<CircleCanvas primary={wins} secondary={losses} width="200" height="200"/>
 			<CheckLiveMatch name={name} sumId={sumId} region={region}/>
 		</div>

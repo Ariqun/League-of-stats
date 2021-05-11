@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Canvas from '../canvas';
 import canvasInfo from '../canvasInfo';
@@ -24,4 +25,8 @@ const CanvasGraphs = ({info, version}) => {
 	)
 }
 
-export default CanvasGraphs;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(CanvasGraphs);

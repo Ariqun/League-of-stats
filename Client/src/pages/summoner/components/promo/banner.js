@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const Banner = ({name, lvl, iconID, version}) => {
 	return(
@@ -15,4 +16,8 @@ const Banner = ({name, lvl, iconID, version}) => {
 	);
 }
 
-export default Banner;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Banner);

@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 
 import getMatchInfo from '../../../../match/components/getMatchInfo';
 import Loading from '../../../../../components/loading';
 import Settings from './settings';
 import Statistics from './statistics';
 
-const MatchItem = ({version, matchId, name}) => {
+const MatchItem = ({matchId, name, version}) => {
 	const [info, setInfo] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
@@ -32,7 +33,7 @@ const MatchItem = ({version, matchId, name}) => {
 	return(
 		<div className="match_item">
 			<div className="inner_wrapper">
-				<Settings championName={championName} spells={spells} mainRunes={mainRunes} version={version}/>
+				<Settings championName={championName} spells={spells} mainRunes={mainRunes}/>
 				<Statistics info={info} matchId={matchId}/>
 
 				<div className="champ_items">
@@ -47,4 +48,8 @@ const MatchItem = ({version, matchId, name}) => {
 	)
 }
 
-export default MatchItem;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(MatchItem);

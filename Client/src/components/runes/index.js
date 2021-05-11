@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReacTooltip from 'react-tooltip';
+import {connect} from 'react-redux';
 
 import Loading from '../loading';
 
@@ -65,4 +66,8 @@ const Runes = ({ids, version}) => {
 	)
 }
 
-export default Runes;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Runes);

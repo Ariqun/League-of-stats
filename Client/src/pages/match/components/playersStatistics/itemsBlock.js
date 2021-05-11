@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
+import {connect} from 'react-redux';
 
 import Loading from '../../../../components/loading';
 import {transformMS} from '../../../../components/transformNums';
@@ -78,4 +79,8 @@ const ItemsBlock = ({info, tab, version}) => {
 	)
 }
 
-export default ItemsBlock;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(ItemsBlock);

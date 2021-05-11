@@ -1,7 +1,9 @@
 import React from 'react';
 
+import {ranks} from '../../../../components/languages/russian/ranks';
+
 const Rating = ({ranked}) => {
-	const ruObj = {iron: 'Железо', bronze: 'Бронза', silver: 'Серебро', gold: 'Золото', platinum: 'Платина', diamond: 'Алмаз', master: 'Мастер', grandmaster: 'Грандмастер', challenger: 'Претендент'}
+	const ruObj = ranks();
 	const {tier, rank, leaguePoints} = ranked;
 
 	return(

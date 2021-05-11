@@ -1,6 +1,7 @@
 import React from 'react'
-import {checkBigNums} from '../../../../components/chekNums';
+import {connect} from 'react-redux';
 
+import {checkBigNums} from '../../../../components/chekNums';
 import {fight, damage, restore, eco, vision, other} from '../../../../components/languages/russian/statisticInMatch';
 
 const Table = ({info, version}) => {
@@ -14,7 +15,7 @@ const Table = ({info, version}) => {
 				let content = checkBigNums(player[item]);
 
 				if (player[item] === true) content = '🗸';
-				console.log(player[item])
+				
 				return (
 					<td className={player[item] === max || player[item] === true ? "max" : null} key={player.participantId}>
 						{content}
@@ -68,4 +69,8 @@ const Table = ({info, version}) => {
 	)
 }
 
-export default Table;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Table);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {connect} from 'react-redux';
 
 import ItemBlock from './components/itemBlock';
 import Types from './components/types';
@@ -37,7 +38,7 @@ const Items = ({version}) => {
 		} else {
 			changeShownTypes([...shownTypes, type]);
 		}
-	}
+	};
 
 	return(
 		<div className="items_page">
@@ -46,17 +47,21 @@ const Items = ({version}) => {
 
 				<div className="items">
 					<div className="items_wrapper col-8">
-						<ItemBlock version={version} items={items} setCurrentItem={setCurrentItem} tag={['Consumable', 'Trinket']} title={'Расходники'}/>
-						<ItemBlock version={version} items={items} setCurrentItem={setCurrentItem} tag={'Boots'} title={'Сапоги'}/>
-						<ItemBlock version={version} items={items} setCurrentItem={setCurrentItem} tag={shownTypes}title={'Предметы'}/>
+						<ItemBlock items={items} setCurrentItem={setCurrentItem} tag={['Consumable', 'Trinket']} title={'Расходники'}/>
+						<ItemBlock items={items} setCurrentItem={setCurrentItem} tag={'Boots'} title={'Сапоги'}/>
+						<ItemBlock items={items} setCurrentItem={setCurrentItem} tag={shownTypes}title={'Предметы'}/>
 					</div>
 
 					
-					<ShowItem items={items} version={version} name={currentItem}/>
+					<ShowItem items={items} name={currentItem}/>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default Items;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Items);

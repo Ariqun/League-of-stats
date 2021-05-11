@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-const SkillList = ({spells, version, changeCurrentSkill}) => {
+const SkillList = ({spells, changeCurrentSkill, version}) => {
 	const content = spells.map((spell, i) => {
 		const {id, name, image} = spell
 
@@ -18,4 +19,8 @@ const SkillList = ({spells, version, changeCurrentSkill}) => {
 	return(content)
 }
 
-export default SkillList;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(SkillList);

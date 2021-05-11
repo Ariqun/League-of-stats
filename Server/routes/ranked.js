@@ -5,7 +5,7 @@ const router = Router();
 router.post('/ranked', async (req, res) => {
 	const sumId = encodeURI(req.body.sumId);
 	const region = req.body.region;
-
+	
 	const leagueURL = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${sumId}`;
 	const rankedInfo = await getData(leagueURL, createRankedInfo);
 
@@ -19,13 +19,13 @@ const getData = async (url, func, region = 'ru') => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-c82976be-ecd8-4fee-946e-4384f3773817"
+		"X-Riot-Token": "RGAPI-5b5565ee-fdf3-4d9a-8aee-d3d4a653be9f"
 	};
 	let result = {};
 
 	await axios.get(url, {headers: headers})
 		.then(res => result = func(res.data, region))
-		.catch(err => console.error(err))
+		// .catch(err => console.error(err))
 
 	return result;
 }

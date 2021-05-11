@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
 
 import Nav from './components/nav';
 import General from './components/general';
@@ -9,7 +10,7 @@ import Loading from '../../components/loading';
 
 import DragonData from '../../services/dragonData';
 
-const Champion = ({version, champName}) => {
+const Champion = ({champName, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
@@ -33,7 +34,7 @@ const Champion = ({version, champName}) => {
 		if (tab === 'general') {
 			tabContent = <General champ={champ} id={id}/>;
 		} else if (tab === 'skills') {
-			tabContent = <Skills champ={champ} version={version}/>;
+			tabContent = <Skills champ={champ}/>;
 		} else if (tab === 'skins') {
 			tabContent = <Skins champ={champ}/>;
 		} else if (tab === 'statistics') {
@@ -53,7 +54,10 @@ const Champion = ({version, champName}) => {
 			</div>
 		</div>
 	)
+};
 
+const mapStateToProps = (state) => {
+	return {version: state.version};
 }
 
-export default Champion;
+export default connect(mapStateToProps)(Champion);

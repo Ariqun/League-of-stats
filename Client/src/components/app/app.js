@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Header from './header';
 import Background from './background';
@@ -12,75 +13,100 @@ import Runes from '../../pages/runes/';
 import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
 import LiveMatch from '../../pages/liveMatch';
+import Loading from '../loading';
 
 import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
 
 import './app.sass'
 
-function App() {
-	const [version, setVersion] = useState('11.8.1');
+const App = ({language = 'ru_RU', version, versionLoaded, championsLoaded}) => {
+	const [isLoading, changeLoading] = useState(true);
 	const dragonData = new DragonData();
 	const db = new DataBase();
 
 	useEffect(() => {
-		const checkVersion = async () => {
-			const res = await dragonData.getLatestVersion();
-			setVersion(res);
+		const getInfo = async () => {
+			const ver = await dragonData.getLatestVersion();
+			const champs = await dragonData.getAllChampions(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`);
+
+			versionLoaded(ver);
+			championsLoaded(champs)
+			changeLoading(false);
 		}
-		checkVersion();
+		getInfo();
 		db.start();
 	}, [])
 
 	const render = () => {
+		if (isLoading) return <Loading />
+
 		return (
-			<Router>
-				<div className="app">
-					<Header/>
+			<div className="app">
+				<Header />
 
-					<Route path="/" exact render={() => {
-						return <Main version={version}/>
-					}}/>
+				<Route path="/" exact render={() => {
+					return <Main />
+				}}/>
 
-					<Route path="/champion/:name" render={({match}) => {
-						const {name} = match.params;
-						return <Champion champName={name} version={version}/>
-					}}/>
+				<Route path="/champion/:name" render={({match}) => {
+					const {name} = match.params;
+					return <Champion champName={name}/>
+				}}/>
 
-					<Route path="/items" render={() => {
-						return <Items version={version}/>
-					}}/>
+				<Route path="/items" render={() => {
+					return <Items />
+				}}/>
 
-					<Route path="/runes" render={() => {
-						return <Runes version={version}/>
-					}}/>
-					
-					<Route path="/summoner/:region/:name" render={({match}) => {
-						const {region, name} = match.params;
-						return <Summoner region={region} name={name} version={version}/>
-					}}/>
+				<Route path="/runes" render={() => {
+					return <Runes />
+				}}/>
+				
+				<Route path="/summoner/:region/:name" render={({match}) => {
+					const {region, name} = match.params;
+					return <Summoner region={region} name={name} />
+				}}/>
 
-					<Route path="/match/:region/:id" render={({match}) => {
-						const {region, id} = match.params;
-						return <Match region={region} matchId={id} version={version}/>
-					}}/>
+				<Route path="/match/:region/:id" render={({match}) => {
+					const {region, id} = match.params;
+					return <Match region={region} matchId={id} />
+				}}/>
 
-					<Route path="/live/:region/:name/" render={({match, location, history}) => {
-						console.log(match);
-						console.log(history);
-						console.log(location);
-						const {region, name} = match.params;
-						return <LiveMatch region={region} name={name} version={version}/>
-					}}/>
-		
-					<Footer/>
-					<Background/>
-				</div>
-			</Router>
+				<Route path="/live/:region/:name/" render={() => {
+					return <LiveMatch />
+				}}/>
+	
+				<Footer/>
+				<Background/>
+			</div>
 		)
 	}
 
 	return render();
+};
+
+const mapStateToProps = (state) => {
+	return {
+		version: state.version,
+		champions: state.champions
+	};
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		versionLoaded: (version) => {
+			dispatch({
+				type: 'VERSION_LOADED',
+				loaded: version
+			})
+		},
+		championsLoaded: (champions) => {
+			dispatch({
+				type: 'CHAMPIONS_LOADED',
+				loaded: champions
+			})
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

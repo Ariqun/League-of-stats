@@ -10,6 +10,7 @@ import {getMatchType, getAllPlayerSpells, getMainPlayerRunes} from './infoFromDD
 
 import RiotAPI from '../../../../services/riotAPI';
 
+
 const getMatchInfo = (matchId, version, name, mini) => {
 	const riotAPI = new RiotAPI();
 	let matchInfo = {}, playerInfo = {}, error = false;

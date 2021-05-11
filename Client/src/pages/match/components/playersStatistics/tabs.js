@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const Tabs = ({tab, leftTeam, rightTeam, changeTab, version}) => {
 	const createTeamBlock = (team) => {
@@ -34,4 +35,8 @@ const Tabs = ({tab, leftTeam, rightTeam, changeTab, version}) => {
 	)
 }
 
-export default Tabs;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(Tabs);

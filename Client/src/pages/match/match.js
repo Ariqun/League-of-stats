@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 
 import getMatchInfo from './components/getMatchInfo';
 import Loading from '../../components/loading';
@@ -26,12 +27,16 @@ const Match = ({region, matchId, version}) => {
 	return(
 		<div className="match_page">
 			<div className="container">
-				<TableResult info={info} version={version} region={region}/>
-				<CanvasGraphs info={info} version={version}/>
-				<PlayersStatistics info={info} version={version}/>
+				<TableResult info={info} region={region} />
+				<CanvasGraphs info={info} />
+				<PlayersStatistics info={info} />
 			</div>
 		</div>
 	);
 }
 
-export default Match;
+const mapStateToProps = (state) => {
+	return {version: state.version}
+}
+
+export default connect(mapStateToProps)(Match);
