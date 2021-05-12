@@ -7,8 +7,10 @@ import canvasInfo from '../canvasInfo';
 import './index.sass';
 
 const CanvasGraphs = ({info, version}) => {
-	const leftTeamCanvasInfo = canvasInfo(info.leftTeam.players, version);
-	const rightTeamCanvasInfo = canvasInfo(info.rightTeam.players, version);
+	const {participants} = info;
+
+	const leftTeamCanvasInfo = canvasInfo(100, participants, version);
+	const rightTeamCanvasInfo = canvasInfo(200, participants, version);
 
 	return(
 		<div className="graphs">

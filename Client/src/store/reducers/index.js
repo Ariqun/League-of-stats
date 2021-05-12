@@ -1,6 +1,10 @@
 const initialState = {
 	version: '11.9.1',
 	champions: {},
+	runes: {},
+	spells: {},
+	items: {},
+	matchTypes: {},
 	live: {}
 }
 
@@ -17,6 +21,34 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			champions: action.loaded
+		}
+	}
+
+	if (action.type === 'RUNES_LOADED') {
+		return {
+			...state,
+			runes: action.loaded
+		}
+	}
+
+	if (action.type === 'SPELLS_LOADED') {
+		return {
+			...state,
+			spells: action.loaded
+		}
+	}
+
+	if (action.type === 'ITEMS_LOADED') {
+		return {
+			...state,
+			items: action.loaded
+		}
+	}
+
+	if (action.type === 'MATCH_TYPES_LOADED') {
+		return {
+			...state,
+			matchTypes: action.loaded
 		}
 	}
 

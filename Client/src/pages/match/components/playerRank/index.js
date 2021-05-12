@@ -13,7 +13,7 @@ const PlayerRank = ({id, region}) => {
 	
 	useEffect(() => {
 		const getRank = async () => {
-			const res = await riotAPI.getSumRanked(region, id);
+			const res = await riotAPI.getSumRanked(id, region);
 			
 			setRanked([res.tier, res.rank]);
 			changeLoading(false);

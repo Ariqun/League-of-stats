@@ -7,7 +7,7 @@ const getMatchType = async (id) => {
 }
 
 const getSumSpell = async (id, version) => {
-	return await dragonData.getSummonerSpell(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/summoner.json`, id);
+	return await dragonData.getSummonerSpell(id);
 }
 
 const getAllPlayerSpells = async (player, version) => {

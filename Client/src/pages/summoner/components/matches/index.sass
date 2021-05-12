@@ -62,13 +62,15 @@
 							justify-content: center
 							align-items: center
 							.kda_score
+								display: flex
 								margin-bottom: 5px
-								.kills
-									color: $color-green
-								.deaths
-									color: $color-red
-								.assists
-									color: $color-orange
+								.score_wrapper
+									.kills
+										color: $color-green
+									.deaths
+										color: $color-red
+									.assists
+										color: $color-orange
 								.kda_ratio
 									color: $color-dark_gray
 							.farm_score
@@ -87,6 +89,7 @@
 					width: 106px
 					.item
 						width: 30px
+						height: 30px
 						margin: 2px
 						border-radius: 5px
 						background: rgba(211, 211, 211, 0.2)

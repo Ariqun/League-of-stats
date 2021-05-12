@@ -1,4 +1,7 @@
-const itemsTable = (player, version) => {
+import React from 'react';
+import {connect} from 'react-redux';
+
+const PlayerItems = ({player, version}) => {
 	let items = [];
 	
 	for(let key in player) {
@@ -22,4 +25,8 @@ const itemsTable = (player, version) => {
 	)
 }
 
-export default itemsTable;
+const mapStateToProps = (state) => {
+	return {version: state.version}
+}
+
+export default connect(mapStateToProps)(PlayerItems);

@@ -1,4 +1,7 @@
-const playersTable = (currentPlayer, participants, version) => {
+import React from 'react';
+import {connect} from 'react-redux';
+
+const PlayersTable = ({currentPlayer, participants, version}) => {
 	const leftTeam = [];
 	const rightTeam = [];
 
@@ -40,4 +43,8 @@ const playersTable = (currentPlayer, participants, version) => {
 	)
 }
 
-export default playersTable;
+const mapStateToProps = (state) => {
+	return {version: state.version};
+}
+
+export default connect(mapStateToProps)(PlayersTable);

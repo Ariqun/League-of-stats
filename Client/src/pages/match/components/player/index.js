@@ -1,11 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import PlayerRunes from '../getMatchInfo/playerRunes';
+import PlayerSpells from '../getMatchInfo/playerSpells';
 import PlayerRank from '../playerRank';
+import PlayerKDA from '../getMatchInfo/playerKDA';
+import PlayerItems from '../getMatchInfo/playerItems';
 
-const Player = ({team, region, version}) => {
-	const result = team.players.map((player, i) => {
-		const {summonerId, championName, spells, mainRunes, kills, deaths, assists, totalMinionsKilled, farmPerMin, teamKills, visionScore, visionPerMin, goldEarned, goldPerMin, items, summonerName} = player;
+import {checkBigNums} from '../../../../components/chekNums';
+import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
+import {scorePerMin} from '../../../../components/manipulationsWithNums/scorePerTime';
+
+const Player = ({teamId, info, region, version}) => {
+	const {participants, gameDuration} = info;
+	const players = [];
+
+	for (let player of participants) {
+		if (player.teamId === teamId) players.push(player);
+	}
+
+	const result = players.map((player, i) => {
+		const {summonerId, championName, kills, deaths, assists, totalMinionsKilled, visionScore, goldEarned, summonerName, summoner1Id, summoner2Id, perks} = player;
+		
+		const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
+		const gold = checkBigNums(goldEarned);
+		const goldPerMin = scorePerMin(goldEarned, gameDuration);
+		const visionPerMin = scorePerMin(visionScore, gameDuration, 1);
+		const teamKills = players.reduce((acc, el) => {return acc += el.kills}, 0);
+		const killPart = findPercent(kills + assists, teamKills);
 
 		return(
 			<div className="player" key={`${championName}_${i}`}>
@@ -14,12 +36,8 @@ const Player = ({team, region, version}) => {
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/>
 					</div>
 					<div className="spells">
-						<div className="sum_spells">
-							{spells.map(spell => {return(<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell}.png`} alt={`${spell}_icon`} key={spell}/>)})}
-						</div>
-						<div className="runes">
-							{mainRunes.map(rune => {return <img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune}`} alt={`${rune}_icon`} key={rune}/>})}
-						</div>
+						<PlayerSpells firstId={summoner1Id} secondId={summoner2Id}/>
+						<PlayerRunes perks={perks}/>
 					</div>
 				</div>
 
@@ -29,16 +47,7 @@ const Player = ({team, region, version}) => {
 				</div>
 
 				<div className="player_stats">
-					<div className="kda_score">
-						<div className="score_wrapper">
-							<span className="kills">{kills}</span>
-							<span> / </span>
-							<span className="deaths">{deaths}</span>
-							<span> / </span>
-							<span className="assists">{assists}</span>
-						</div>
-						<span className="kda_ratio">({((kills + assists) / deaths).toFixed(2)})</span>
-					</div>
+					<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
 
 					<div className="other_score">
 						<div className="wrapper_block_left">
@@ -48,24 +57,24 @@ const Player = ({team, region, version}) => {
 								<span> CS</span>
 							</div>
 							<div className="gold_score">
-								<span className="gold">Золото: {(goldEarned / 1000).toFixed(1)}k </span>
-								<span className="per_min">({Math.floor(goldPerMin)})</span>
+								<span className="gold">Золото: {gold}</span>
+								<span className="per_min"> ({goldPerMin})</span>
 							</div>
 						</div>
 
 						<div className="wrapper_block_right">
 							<div className="vision_score">
 								<span className="vision">Обзор: {visionScore} </span>
-								<span className="per_min">({visionPerMin})</span>
+								<span className="per_min"> ({visionPerMin})</span>
 							</div>
 
-							<span className="kill_part">{((kills + assists) * 100 / teamKills).toFixed()}% уч. в уб.</span>
+							<span className="kill_part">{killPart}% уч. в уб.</span>
 						</div>
 					</div>
 				</div>
 
 				<div className="player_items">
-					{items}
+					<PlayerItems player={player}/>
 				</div>
 			</div>
 		)

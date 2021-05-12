@@ -1,55 +1,55 @@
 import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
 
-import getMatchInfo from '../../../../match/components/getMatchInfo';
-import Loading from '../../../../../components/loading';
 import Settings from './settings';
 import Statistics from './statistics';
+import PlayerItems from '../../../../match/components/getMatchInfo/playerItems';
+import PlayersTable from '../../../../match/components/getMatchInfo/playersTable';
+import Loading from '../../../../../components/loading';
 
-const MatchItem = ({matchId, name, version}) => {
+import RiotAPI from '../../../../../services/riotAPI';
+
+const MatchItem = ({matchId, name}) => {
 	const [info, setInfo] = useState({});
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
-	const {items, players, championName, spells, mainRunes} = info;
+	const [isLoading, changeLoading] = useState(true);
+	const riotAPI = new RiotAPI();
 	
 	useEffect(() => {
 		const getInfo = async () => {
-			const mini = true;
-			const res = await getMatchInfo(matchId, version, name, mini);
-			
-			if (res === null) {
-				setError(true);
-			} else {
-				setInfo(info => ({...info, ...res}));
-				setLoading(false);
-			}
+			const res = await riotAPI.getMatchInfo(matchId);
+
+			setInfo(res);
+			changeLoading(false);
 		}
 		getInfo();
 	}, []);
 
-	if (error) return null;
-	if (loading) return <Loading/>;
-		
+	if (isLoading) return <Loading/>;
+
+	const {participants} = info;
+	let player = {};
+	
+	for (let elem of participants) {
+		if (elem.summonerName === name) {
+			player = {...elem};
+		}
+	}
+
 	return(
 		<div className="match_item">
 			<div className="inner_wrapper">
-				<Settings championName={championName} spells={spells} mainRunes={mainRunes}/>
-				<Statistics info={info} matchId={matchId}/>
+				<Settings player={player} />
+				<Statistics player={player} info={info} matchId={matchId}/>
 
 				<div className="champ_items">
-					{items}
+					<PlayerItems player={player}/>
 				</div>
 
 				<div className="match_players">
-					{players}
+					<PlayersTable currentPlayer={player.summonerName} participants={participants}/>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {version: state.version};
-}
-
-export default connect(mapStateToProps)(MatchItem);
+export default MatchItem;

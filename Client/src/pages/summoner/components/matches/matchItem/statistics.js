@@ -1,11 +1,27 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import averageScore from '../../../../../components/averageScore';
+import {connect} from 'react-redux';
 
-const Statistics = ({info, matchId}) => {
-	const {kills, deaths, assists, platformId, startDate, duration, matchRes, teamKills, totalMinionsKilled, farmPerMin, matchType} = info;
-	const avgRatio = averageScore((kills + assists), deaths, 2);
+import averageScore from '../../../../../components/averageScore';
+import matchDuration from '../../../../match/components/getMatchInfo/matchDuration';
+import matchStartDate from '../../../../match/components/getMatchInfo/matchStartDate';
+import matchResult from '../../../../match/components/getMatchInfo/matchResult';
+import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
+import PlayerKDA from '../../../../match/components/getMatchInfo/playerKDA';
+import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
+
+const Statistics = ({player, info, matchId, matchTypes}) => {
+	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
+	const {kills, deaths, assists, totalMinionsKilled, teamId} = player;
+
+	const matchType = matchTypes.find(type => type.queueId === queueId);
+	const duration = matchDuration(gameDuration);
+	const startDate = matchStartDate(gameStartTimestamp);
+	const matchRes = matchResult(teams, teamId);
+	const teamKills = totalTeamKills(teams, teamId);
+
 	const avgKillPart = averageScore(((kills + assists) * 100), teamKills);
+	const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
 	
 	return(
 		<div className="match_stats">
@@ -18,18 +34,12 @@ const Statistics = ({info, matchId}) => {
 				<div className="stats_wrapper">
 					<div className="match_result">
 						{matchRes}
-						<span className="match_type">{matchType}</span>
+						<span className="match_type">{matchType.description}</span>
 					</div>
 
 					<div className="champion_stats">
-						<div className="kda_score">
-							<span className="kills">{kills}</span>
-							<span> / </span>
-							<span className="deaths">{deaths}</span>
-							<span> / </span>
-							<span className="assists">{assists} </span>
-							<span className="kda_ratio">&ensp;({avgRatio})</span>
-						</div>
+						<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
+
 						<div className="farm_score">
 							<span className="farm">{totalMinionsKilled} </span>
 							<span className="farm_per_min">({farmPerMin})</span>
@@ -43,4 +53,8 @@ const Statistics = ({info, matchId}) => {
 	)
 }
 
-export default Statistics;
+const mapStateToProps = (state) => {
+	return {matchTypes: state.matchTypes}
+}
+
+export default connect(mapStateToProps)(Statistics);

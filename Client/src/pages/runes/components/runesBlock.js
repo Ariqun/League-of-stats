@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
+import {connect} from 'react-redux';
 
 const RunesBlock = ({runes}) => {
 	const result = runes.map(rune => {
@@ -38,4 +39,8 @@ const RunesBlock = ({runes}) => {
 	);
 }
 
-export default RunesBlock;
+const mapStateToProps = (state) => {
+	return {runes: state.runes};
+}
+
+export default connect(mapStateToProps)(RunesBlock);

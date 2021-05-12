@@ -10,7 +10,7 @@ import './index.sass';
 
 const PlayersStatistics = ({info}) => {
 	const [tab, setTab] = useState(1);
-	const {leftTeam, rightTeam} = info;
+	const {participants} = info;
 
 	const changeTab = (id) => {
 		setTab(id);
@@ -31,7 +31,7 @@ const PlayersStatistics = ({info}) => {
 
 	return(
 		<div className="champion_statistic">
-			<Tabs tab={tab} changeTab={changeTab} leftTeam={leftTeam} rightTeam={rightTeam} />
+			<Tabs tab={tab} changeTab={changeTab} participants={participants} />
 
 			<div className="content">
 				{content()}

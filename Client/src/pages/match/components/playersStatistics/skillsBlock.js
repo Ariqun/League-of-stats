@@ -13,22 +13,20 @@ const SkillsBlock = ({info, tab, version}) => {
 
 	useEffect(() => {
 		const getChamp = async () => {
-			const players = [...info.leftTeam.players, ...info.rightTeam.players];
-			let champName = '';
+			const {participants} = info;
+			const player = participants.find(item => item.participantId === tab);
 
-			for (let player of players) {
-				if (player.participantId === tab) champName = player.championName;
-			}
-
-			const res = await dragonData.getChampion(champName);
+			const res = await dragonData.getChampion(player.championName);
 			setChampion(res);
 			changeLoading(false);
 		}
 		getChamp();
 	}, [tab])
+
+	if (isLoading) return <Loading />;
 	
 	const createRow = (skillId) => {
-		const skills = info.timeline[tab].lvlUp;
+		const skills = info.timeline[0][tab].lvlUp;
 		const icon = champion.spells[skillId - 1].image.full;
 		const descr = champion.spells[skillId - 1].description;
 
@@ -47,8 +45,6 @@ const SkillsBlock = ({info, tab, version}) => {
 			</tr>
 		);
 	}
-
-	if (isLoading) return <Loading />;
 
 	return(
 		<div className="skill_table">

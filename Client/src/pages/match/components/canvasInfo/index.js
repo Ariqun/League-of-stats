@@ -1,7 +1,12 @@
-const canvasInfo = (team, version) => {
+const canvasInfo = (teamId, participants, version) => {
+	const players = [];
 	let res = [];
+
+	for (let player of participants) {
+		if (player.teamId === teamId) players.push(player);
+	}
 		
-	for (let elem of team) {
+	for (let elem of players) {
 		const {totalDamageDealtToChampions, magicDamageDealtToChampions, physicalDamageDealtToChampions, trueDamageDealtToChampions} = elem;
 		const {totalHealsOnTeammates, totalDamageShieldedOnTeammates} = elem;
 		let player = {};

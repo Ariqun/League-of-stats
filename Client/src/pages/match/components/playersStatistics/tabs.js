@@ -1,9 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const Tabs = ({tab, leftTeam, rightTeam, changeTab, version}) => {
-	const createTeamBlock = (team) => {
-		const content = team.players.map((player, i) => {
+const Tabs = ({tab, participants, changeTab, version}) => {
+	const leftPlayers = [], rightPlayers = [];
+
+	for (let player of participants) {
+		if (player.teamId === 100) leftPlayers.push(player);
+		if (player.teamId === 200) rightPlayers.push(player);
+	}
+
+	const createTeamBlock = (players) => {
+		const content = players.map((player, i) => {
 			const {championName, participantId} = player;
 	
 			return (
@@ -21,7 +28,7 @@ const Tabs = ({tab, leftTeam, rightTeam, changeTab, version}) => {
 	return(
 		<div className="tabs">
 			<div className="left_team">
-				{createTeamBlock(leftTeam)}
+				{createTeamBlock(leftPlayers)}
 			</div>
 
 			<div onClick={() => changeTab('table')} className="table">
@@ -29,7 +36,7 @@ const Tabs = ({tab, leftTeam, rightTeam, changeTab, version}) => {
 			</div>
 
 			<div className="right_team">
-				{createTeamBlock(rightTeam)}
+				{createTeamBlock(rightPlayers)}
 			</div>
 		</div>
 	)

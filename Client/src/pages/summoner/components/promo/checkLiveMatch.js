@@ -9,7 +9,7 @@ const CheckLiveMatch = ({name, region = 'ru', sumId, live, liveLoaded}) => {
 
 	useEffect(() => {
 		const getLiveInfo = async () => {
-			const res = await riotAPI.getLiveMatch('C_KAURBFJChJY_-1z2LhGI4R4XV3JagrVF3kWXQI-xCE3a6eEE-C1fYo6w', region);
+			const res = await riotAPI.getLiveMatch(sumId, region);
 			liveLoaded(res);
 		}
 		getLiveInfo();

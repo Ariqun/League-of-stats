@@ -1,29 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
-import Loading from '../../../../components/loading';
 import {transformMS} from '../../../../components/transformNums';
 
-import DragonData from '../../../../services/dragonData';
-
-const ItemsBlock = ({info, tab, version}) => {
-	const [isLoading, changeLoading] = useState(true);
-	const [items, setItems] = useState({});
-	const timeline = info.timeline[tab].itemPurchase;
-	const dd = new DragonData(version);
-
-	useEffect(() => {
-		const getItmes = async () => {
-			const res = await dd.getAllItems();
-			setItems(res);
-			changeLoading(false);
-		}
-
-		getItmes();
-	}, [])
-
-	if (isLoading) return <Loading />
+const ItemsBlock = ({info, tab, version, items}) => {
+	const timeline = info.timeline[0][tab].itemPurchase;
 
 	const transformArrToObj = () => {
 		let result = timeline.reduce((acc, item) => {
@@ -80,7 +62,10 @@ const ItemsBlock = ({info, tab, version}) => {
 }
 
 const mapStateToProps = (state) => {
-	return {version: state.version};
+	return {
+		version: state.version,
+		items: state.items
+	};
 }
 
 export default connect(mapStateToProps)(ItemsBlock);

@@ -12,10 +12,38 @@ const championsLoaded = (champions) => {
 	}
 }
 
+const runesLoaded = (runes) => {
+	return {
+		type: 'RUNES_LOADED',
+		runesLoaded: runes
+	}
+}
+
+const spellsLoaded = (spells) => {
+	return {
+		type: 'SPELLS_LOADED',
+		spellsLoaded: spells
+	}
+}
+
+const itemsLoaded = (items) => {
+	return {
+		type: 'ITEMS_LOADED',
+		itemsLoaded: items
+	}
+}
+
+const matchTypesLoaded = (matchTypes) => {
+	return {
+		type: 'MATCH_TYPES_LOADED',
+		matchTypeLoaded: matchTypes
+	}
+}
+
 const liveLoaded = (live) => {
 	return {
 		type: 'LIVE_LOADED',
 		liveLoaded: live
 	}
 }
-export {versionLoaded, championsLoaded, liveLoaded};
+export {versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, liveLoaded, matchTypesLoaded};

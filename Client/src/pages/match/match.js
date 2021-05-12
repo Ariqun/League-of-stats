@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
 
-import getMatchInfo from './components/getMatchInfo';
-import Loading from '../../components/loading';
 import TableResult from './components/tableResult';
 import CanvasGraphs from './components/canvasGraphs';
 import PlayersStatistics from './components/playersStatistics';
+import Loading from '../../components/loading';
 
-const Match = ({region, matchId, version}) => {
+import RiotAPI from '../../services/riotAPI';
+
+const Match = ({region, matchId}) => {
 	const [info, setInfo] = useState({});
-	const [isLoading, setLoading] = useState(true);
+	const [isLoading, changeLoading] = useState(true);
+	const riotAPI = new RiotAPI();
 	
 	useEffect(() => {
 		const getInfo = async () => {
-			const mini = false;
-			const res = await getMatchInfo(matchId, version, mini);
+			const res = await riotAPI.getMatchInfo(matchId);
 
-			setInfo(info => ({...info, ...res}));
-			setLoading(false);
+			setInfo(res);
+			changeLoading(false);
 		}
 		getInfo();
 	}, []);
@@ -35,8 +35,4 @@ const Match = ({region, matchId, version}) => {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {version: state.version}
-}
-
-export default connect(mapStateToProps)(Match);
+export default Match;

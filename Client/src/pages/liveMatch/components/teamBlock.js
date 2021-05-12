@@ -5,7 +5,7 @@ import Card from './card';
 
 const TeamBlock = ({team, type}) => {
 	const result = team.map(player => {
-		return <Card player={player}/>
+		return <Card player={player} key={player.summonerName}/>
 	})
 
 	return (

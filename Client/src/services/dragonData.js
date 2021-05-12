@@ -22,8 +22,10 @@ export default class DragonData {
 		return versions[0];
 	}
 
-	getAllChampions = async (url) => {
+	getAllChampions = async () => {
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/champion.json`;
 		const champions = await this.getData(url);
+
 		return champions.data;
 	}
 
@@ -34,28 +36,32 @@ export default class DragonData {
 		return champion.data[name];
 	}
 
-	getGameType = async (url, id) => {
+	getMatchTypes = async () => {
+		const url = `http://static.developer.riotgames.com/docs/lol/queues.json`;
 		const types = await this.getData(url);
-		let res = '';
+		// let res = '';
 
-		for (let obj of types) {
-			if (obj.queueId === id) {
-				res = obj.description;
-			}
-		}
+		// for (let obj of types) {
+		// 	if (obj.queueId === id) {
+		// 		res = obj.description;
+		// 	}
+		// }
 
-		res = res.replace(/games/, '').trim();
+		// res = res.replace(/games/, '').trim();
 
-		return res;
+		return types;
 	}
 
-	getSummonerSpells = async (url) => {
+	getSummonerSpells = async () => {
+		// const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/summoner.json`;
+		const url = `http://ddragon.leagueoflegends.com/cdn/11.9.1/data/ru_RU/summoner.json`;
 		const sumSpells = await this.getData(url);
+
 		return sumSpells.data;
 	}
 
-	getSummonerSpell = async (url, id) => {
-		const sumSpells = await this.getData(url);
+	getSummonerSpell = async (id) => {
+		const sumSpells = await this.getData();
 		const {data} = sumSpells;
 		let result = '';
 		

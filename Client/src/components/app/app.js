@@ -20,18 +20,26 @@ import DataBase from '../../services/dataBase';
 
 import './app.sass'
 
-const App = ({language = 'ru_RU', version, versionLoaded, championsLoaded}) => {
+const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded}) => {
 	const [isLoading, changeLoading] = useState(true);
-	const dragonData = new DragonData();
+	const dragonData = new DragonData(version);
 	const db = new DataBase();
 
 	useEffect(() => {
 		const getInfo = async () => {
 			const ver = await dragonData.getLatestVersion();
-			const champs = await dragonData.getAllChampions(`http://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`);
+			const champs = await dragonData.getAllChampions();
+			const runes = await dragonData.getAllRunes();
+			const spells = await dragonData.getSummonerSpells();
+			const items = await dragonData.getAllItems();
+			const types = await dragonData.getMatchTypes();
 
 			versionLoaded(ver);
-			championsLoaded(champs)
+			championsLoaded(champs);
+			runesLoaded(runes);
+			spellsLoaded(spells);
+			itemsLoaded(items);
+			matchTypesLoaded(types);
 			changeLoading(false);
 		}
 		getInfo();
@@ -88,6 +96,7 @@ const App = ({language = 'ru_RU', version, versionLoaded, championsLoaded}) => {
 const mapStateToProps = (state) => {
 	return {
 		version: state.version,
+		runes: state.runes,
 		champions: state.champions
 	};
 }
@@ -104,6 +113,30 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch({
 				type: 'CHAMPIONS_LOADED',
 				loaded: champions
+			})
+		},
+		runesLoaded: (runes) => {
+			dispatch({
+				type: 'RUNES_LOADED',
+				loaded: runes
+			})
+		},
+		spellsLoaded: (spells) => {
+			dispatch({
+				type: 'SPELLS_LOADED',
+				loaded: spells
+			})
+		},
+		itemsLoaded: (items) => {
+			dispatch({
+				type: 'ITEMS_LOADED',
+				loaded: items
+			})
+		},
+		matchTypesLoaded: (matchTypes) => {
+			dispatch({
+				type: 'MATCH_TYPES_LOADED',
+				loaded: matchTypes
 			})
 		}
 	}

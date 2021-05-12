@@ -30,7 +30,7 @@ const Champion = ({champName, version}) => {
 	const content = () => {
 		const {id} = champ;
 		let tabContent = '';
-
+		
 		if (tab === 'general') {
 			tabContent = <General champ={champ} id={id}/>;
 		} else if (tab === 'skills') {
