@@ -176,7 +176,7 @@ const pushChampInfoInDB = async (obj) => {
 		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = obj[key];
 		const {wins, matches} = obj[key];
 		const role = (obj[key].role).toLowerCase();
-
+		
 		await champion.updateOne({id: key}, {
 			$inc: {
 				"kda.kills": kills,

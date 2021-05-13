@@ -21,15 +21,20 @@
 					padding: 10px 0
 					border-bottom: 1px solid
 				.champ_stats
-					text-align: center
+					display: flex
+					flex-direction: column
+					align-items: center
 					transition: 0.6s opacity
 					padding: 10px 0
-					.kills
-						color: $color-green
-					.deaths
-						color: $color-red
-					.assists
-						color: $color-orange
+					.kda_score
+						display: flex
+						.score_wrapper
+							.kills
+								color: $color-green
+							.deaths
+								color: $color-red
+							.assists
+								color: $color-orange
 				.player_rank
 					display: flex
 					flex-direction: column
@@ -39,7 +44,7 @@
 					.rank_icon
 						margin-right: 10px
 						img
-							width: 100px
+							width: 80px
 					.rank_wrapper
 						display: flex
 						flex-direction: column
@@ -53,16 +58,32 @@
 					bottom: 0
 					left: 0
 					display: flex
+					justify-content: space-between
+					align-items: center
+					width: 100%
+					transition: 0.6s opacity
 					.runes
 						display: flex
 						align-items: center
-						padding: 2px 5px 2px 2px
+						padding: 5px
 						border-radius: 10px
 						background: rgba(111, 111, 111, 0.3)
 						.rune
 							width: 32px
-						.sub
-							width: 16px
+					.spells
+						display: flex
+						align-items: center
+						padding: 5px
+						border-radius: 10px
+						background: rgba(111, 111, 111, 0.3)
+						img
+							width: 32px
+							height: 32px
+							border-radius: 10px
+							&:first-of-type
+								margin-right: 5px
+					.role
+						width: 42px
 				.background
 					position: absolute
 					top: 0
@@ -80,10 +101,21 @@
 					border-image-slice: 1
 					background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)
 				&:hover .champ_stats,
-				&:hover .player_rank
+				&:hover .player_rank,
+				&:hover .player_settings
 					opacity: 0
 				&:hover .background
 					opacity: 1 !important
+			.player_card.top
+				order: 1
+			.player_card.jungle
+				order: 5
+			.player_card.middle
+				order: 10
+			.player_card.bottom
+				order: 15
+			.player_card.utility
+				order: 20
 		.team.left
 			.player_card
 				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 95%)

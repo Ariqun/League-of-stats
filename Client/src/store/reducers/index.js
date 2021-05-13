@@ -1,5 +1,5 @@
 const initialState = {
-	version: '11.9.1',
+	version: '11.10.1',
 	champions: {},
 	runes: {},
 	spells: {},

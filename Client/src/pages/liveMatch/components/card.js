@@ -1,26 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {ranks} from '../../../components/languages/russian/ranks';
-
+import PlayerKDA from '../../match/components/getMatchInfo/playerKDA';
+import PlayerSpells from '../../match/components/getMatchInfo/playerSpells';
 import Loading from '../../../components/loading';
+import {ranks} from '../../../components/languages/russian/ranks';
+import {findPercent} from '../../../components/manipulationsWithNums/findPercent';
+import {calcRatio} from '../../../components/manipulationsWithNums/calcRatio';
+
 import DataBase from '../../../services/dataBase';
 import RiotAPI from '../../../services/riotAPI';
 
-const Card = ({player, region = 'ru', champions, runes, spells}) => {
+
+const Card = ({player, region = 'ru', champions, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
+	const [champion, setChampion] = useState('');
 	const [summoner, setSummoner] = useState({});
 	const [ranked, setRanked] = useState([]);
 	const db = new DataBase();
 	const riotAPI = new RiotAPI();
 
-	const {summonerId, championId, summonerName} = player
+	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player
 
 	useEffect(() => {
 		const getInfo = async () => {
+			const champRes = await db.getChampionStats(championId);
 			const sumRes = await db.getSumStatistics(summonerId);
 			const rankRes = await riotAPI.getSumRanked(summonerId, region);
 
+			setChampion(champRes);
 			setSummoner(sumRes);
 			setRanked(rankRes)
 			changeLoading(false);
@@ -30,54 +38,59 @@ const Card = ({player, region = 'ru', champions, runes, spells}) => {
 
 	if (isLoading) return <Loading />
 
-	console.log(player);
-	// console.log(runes);
-	// console.log(spells);
+	const name = Object.keys(champions).filter(champ => +champions[champ].key === championId);
+	let champWins = 0, champMatches = 0, champWinrate = 0, champKills = 0, champDeaths = 0, champAssists = 0;
 
 	const {tier, rank, leaguePoints, wins, losses} = ranked;
 	const matches = wins + losses;
 	const winrate = (wins * 100 / matches).toFixed();
 	const ruRanks = ranks();
 
-	const name = Object.keys(champions).filter(champ => +champions[champ].key === championId);
-	let champWins = 0, champMatches = 0, champWinrate = 0, champKills = 0, champDeaths = 0, champAssists = 0;
-
-	const {perkIds, perkStyle, perkSubStyle} = player.perks;
+	const {perkStyle, perkSubStyle} = player.perks;
 	const prim = runes.find(rune => rune.id === perkStyle);
 	const main = prim.slots[0].runes[0];
 	const sub = runes.find(rune => rune.id === perkSubStyle);
-
-	// const {spell1Id, spell2Id} = player;
-	// const spellOne = Object.keys(spells).find(spell => +spells[spell].key === spell1Id);
-	// const spellOne = spells.find(spell => +spell.key === spell1Id);
-	// const spellTwo = spells.find(spell => +spell.key === spell2Id);
-	// console.log(spellOne);
 	
 	if (summoner.length !== 0 && summoner.champions[0][name]) {
 		const champ = summoner.champions[0][name];
 
 		champWins = champ.total.results.wins;
 		champMatches = champ.total.results.matches;
-		champWinrate = (champWins * 100 / champMatches).toFixed();
-
-		champKills = (champ.total.kda.kills / champMatches).toFixed(1);
-		champDeaths = (champ.total.kda.deaths / champMatches).toFixed(1);
-		champAssists = (champ.total.kda.assists / champMatches).toFixed(1);
+		champWinrate = findPercent(champWins, champMatches);
+		
+		champKills = calcRatio(champ.total.kda.kills, champMatches, 1);
+		champDeaths = calcRatio(champ.total.kda.deaths, champMatches, 1);
+		champAssists = calcRatio(champ.total.kda.assists, champMatches, 1);
 	}
 
+	const detectRole = () => {
+		const arr = [];
+
+		for (let key in champion.roles) {
+			if (!champion.roles[key][0]) arr.push({[key]: 0});
+			if (champion.roles[key][0]) arr.push({[key]: champion.roles[key][0].matches});
+		}
+	
+		arr.sort((a, b) => {
+			const keyA = Object.keys(a)[0];
+			const keyB = Object.keys(b)[0];
+	
+			return b[keyB] - a[keyA];
+		})
+
+		return Object.keys(arr[0])[0];
+	}
+	
+	const role = detectRole();
+
 	return(
-		<div className="player_card col-2">
+		<div className={`player_card ${role} col-2`}>
 			<div className="player_name">{summonerName}</div>
 
 			<div className="champ_stats">
 				<div className="winrate">{champWinrate}% <span>({champMatches} всего)</span></div>
-				<div className="kda">
-					<span className="kills">{champKills}</span>
-					<span className="slash"> / </span>
-					<span className="deaths">{champDeaths}</span>
-					<span className="slash"> / </span>
-					<span className="assists">{champAssists}</span>
-				</div>
+
+				<PlayerKDA kills={champKills} deaths={champDeaths} assists={champAssists}/>
 			</div>
 
 			<div className="player_rank">
@@ -98,13 +111,10 @@ const Card = ({player, region = 'ru', champions, runes, spells}) => {
 				</div>
 
 				<div className="role">
-
+					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
 				</div>
 
-				<div className="spells">
-					{/* <div className="spell one"><img src={`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${spellOne.image.full}`} alt={`${spellOne.name}_icon`}/></div> */}
-					{/* <div className="spell two"><img src={`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${spellTwo.image.full}`} alt={`${spellTwo.name}_icon`}/></div> */}
-				</div>
+				<PlayerSpells firstId={spell1Id} secondId={spell2Id}/>
 			</div>
 
 			<div className="background">

@@ -7,7 +7,7 @@ const PlayerSpells = ({firstId, secondId, version, spells}) => {
 	const spellTwo = spellsArr.find(spell => +spell.key === secondId);
 
 	return(
-		<div className="sum_spells">
+		<div className="spells">
 			<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spellOne.image.full}`} alt={`${spellOne.name}_icon`} key={spellOne.key}/>
 			<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spellTwo.image.full}`} alt={`${spellTwo.name}_icon`} key={spellTwo.key}/>
 		</div>

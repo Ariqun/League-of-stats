@@ -39,39 +39,16 @@ export default class DragonData {
 	getMatchTypes = async () => {
 		const url = `http://static.developer.riotgames.com/docs/lol/queues.json`;
 		const types = await this.getData(url);
-		// let res = '';
-
-		// for (let obj of types) {
-		// 	if (obj.queueId === id) {
-		// 		res = obj.description;
-		// 	}
-		// }
-
-		// res = res.replace(/games/, '').trim();
 
 		return types;
 	}
 
 	getSummonerSpells = async () => {
 		// const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/summoner.json`;
-		const url = `http://ddragon.leagueoflegends.com/cdn/11.9.1/data/ru_RU/summoner.json`;
+		const url = `http://ddragon.leagueoflegends.com/cdn/11.10.1/data/ru_RU/summoner.json`;
 		const sumSpells = await this.getData(url);
 
 		return sumSpells.data;
-	}
-
-	getSummonerSpell = async (id) => {
-		const sumSpells = await this.getData();
-		const {data} = sumSpells;
-		let result = '';
-		
-		for (let obj in data) {
-			if (+data[obj].key === id) {
-				result = data[obj].id;
-			}
-		}
-		
-		return result;
 	}
 
 	getAllRunes = async () => {
@@ -79,39 +56,6 @@ export default class DragonData {
 		const runes = await this.getData(url);
 		
 		return runes;
-	}
-
-	getStyle = async (url, style) => {
-		const styles = await this.getData(url);
-		let res = '';
-
-		for (let obj of styles) {
-			if (obj.id === style) {
-				res = obj.icon;
-			}
-		}
-		
-		return res;
-	}
-
-	getRune = async (url, style, id) => {
-		const runes = await this.getData(url);
-		let result = {};
-		let res;
-
-		for (let obj of runes) {
-			if (obj.id === style) {
-				result = {...obj}
-			}
-		}
-
-		for (let obj in result.slots[0].runes) {
-			if (result.slots[0].runes[obj].id === id) {
-				res = result.slots[0].runes[obj].icon;
-			}
-		}
-
-		return res;
 	}
 
 	getAllItems = async () => {

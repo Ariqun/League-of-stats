@@ -35,7 +35,7 @@ const Player = ({teamId, info, region, version}) => {
 					<div className="champion_icon">
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/>
 					</div>
-					<div className="spells">
+					<div className="spells_and_runes">
 						<PlayerSpells firstId={summoner1Id} secondId={summoner2Id}/>
 						<PlayerRunes perks={perks}/>
 					</div>

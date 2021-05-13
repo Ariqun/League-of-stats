@@ -10,8 +10,8 @@ const PlayerRunes = ({perks, runes}) => {
 	
 	return(
 		<div className="runes">
-			<img src={`https://ddragon.leagueoflegends.com/cdn/img/${runePrim.icon}`} alt={`${runePrim.name}_icon`} key={runePrim.id}/>
-			<img src={`https://ddragon.leagueoflegends.com/cdn/img/${styleSub.icon}`} alt={`${styleSub.name}_icon`} key={styleSub.id}/>
+			<img className="rune prim" src={`https://ddragon.leagueoflegends.com/cdn/img/${runePrim.icon}`} alt={`${runePrim.name}_icon`} key={runePrim.id}/>
+			<img className="rune sub" src={`https://ddragon.leagueoflegends.com/cdn/img/${styleSub.icon}`} alt={`${styleSub.name}_icon`} key={styleSub.id}/>
 		</div>
 	)
 }

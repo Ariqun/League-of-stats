@@ -3,8 +3,8 @@ import React from 'react';
 import {checkNanAndDoubleZero} from '../../../../components/chekNums';
 
 const Positions = ({roles, matches}) => {
-	const positions = ['top', 'jungle', 'middle', 'adc', 'support'];
-	const positionsRu = {top: 'Топ', jungle: 'Лес', middle: 'Мид', adc: 'Бот', support: 'Поддержка'};
+	const positions = ['top', 'jungle', 'middle', 'bottom', 'utility'];
+	const positionsRu = {top: 'Топ', jungle: 'Лес', middle: 'Мид', bottom: 'Бот', utility: 'Поддержка'};
 
 	const result = positions.map(item => {
 		let matchesAtPos = 0, winsAtPos = 0;

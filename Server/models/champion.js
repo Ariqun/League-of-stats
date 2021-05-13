@@ -14,8 +14,8 @@ const champion = new Schema({
 		top: Array,
 		jungle: Array,
 		middle: Array,
-		support: Array,
-		adc: Array
+		bottom: Array,
+		utility: Array
 	},
 	kda: {
 		kills: Number,
