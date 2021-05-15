@@ -7,7 +7,7 @@ import PlayerRank from '../playerRank';
 import PlayerKDA from '../getMatchInfo/playerKDA';
 import PlayerItems from '../getMatchInfo/playerItems';
 
-import {checkBigNums} from '../../../../components/chekNums';
+import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 import {scorePerMin} from '../../../../components/manipulationsWithNums/scorePerTime';
 
@@ -23,7 +23,7 @@ const Player = ({teamId, info, region, version}) => {
 		const {summonerId, championName, kills, deaths, assists, totalMinionsKilled, visionScore, goldEarned, summonerName, summoner1Id, summoner2Id, perks} = player;
 		
 		const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
-		const gold = checkBigNums(goldEarned);
+		const gold = checkBigNum(goldEarned);
 		const goldPerMin = scorePerMin(goldEarned, gameDuration);
 		const visionPerMin = scorePerMin(visionScore, gameDuration, 1);
 		const teamKills = players.reduce((acc, el) => {return acc += el.kills}, 0);

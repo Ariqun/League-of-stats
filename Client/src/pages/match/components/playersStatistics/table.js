@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux';
 
-import {checkBigNums} from '../../../../components/chekNums';
+import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {fight, damage, restore, eco, vision, other} from '../../../../components/languages/russian/statisticInMatch';
 
 const Table = ({info, version}) => {
@@ -12,7 +12,7 @@ const Table = ({info, version}) => {
 			const max = Math.max(...players.map(player => {return player[item]}));
 
 			const res = players.map(player => {
-				let content = checkBigNums(player[item]);
+				let content = checkBigNum(player[item]);
 
 				if (player[item] === true) content = '🗸';
 				

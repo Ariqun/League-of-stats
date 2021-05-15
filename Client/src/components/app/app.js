@@ -13,7 +13,7 @@ import Runes from '../../pages/runes/';
 import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
 import LiveMatch from '../../pages/liveMatch';
-import Loading from '../loading';
+import {LoadingPage} from '../loading';
 
 import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
@@ -47,7 +47,7 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 	}, [])
 
 	const render = () => {
-		if (isLoading) return <Loading />
+		if (isLoading) return <LoadingPage />
 
 		return (
 			<div className="app">

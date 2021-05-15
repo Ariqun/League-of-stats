@@ -1,27 +1,11 @@
 import React from 'react';
-import {checkBigNums} from '../../../../components/chekNums';
-import {transformSeconds, transformDate} from '../../../../components/transformNums';
+
+import {recordsRU} from '../../../../components/languages/russian/records';
+import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
+import {transformSeconds, transformDate} from '../../../../components/manipulationsWithNums/transformTime';
 
 const Card = ({records}) => {
-	const titles = {
-		kills: 'Убийства',
-		deaths: 'Смерти',
-		assists: 'Помощь',
-		kda: 'KDA',
-		dmg: 'Урон',
-		heal: 'Лечение и щиты',
-		cs: 'Миньоны',
-		gold: 'Золото',
-		vision: 'Обзор',
-		wards: 'Тотемы',
-		dmgTaken: 'Урона получено',
-		CC: 'Время контроля',
-		killingSpree: 'Цепочка убийств',
-		double: 'Даблкиллы',
-		triple: 'Триплкиллы',
-		quadra: 'Квадракиллы',
-		penta: 'Пентакиллы'
-	}
+	const titles = recordsRU();
 
 	const noData = (record, value) => {
 		return(
@@ -36,7 +20,7 @@ const Card = ({records}) => {
 	}
 
 	const result = Object.keys(records).map(record => {
-		let value = checkBigNums(records[record].value, 'digits');
+		let value = checkBigNum(records[record].value, 'digits');
 		
 		if (value === 0) return noData(record, value);
 		if (record === 'CC') value = transformSeconds(records[record].value);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {checkNanAndDoubleZero} from '../../../../components/chekNums';
+import {checkNanAndDoubleZero} from '../../../../components/manipulationsWithNums/checkNums';
 
 const Positions = ({roles, matches}) => {
 	const positions = ['top', 'jungle', 'middle', 'bottom', 'utility'];

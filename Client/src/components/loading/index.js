@@ -2,7 +2,30 @@ import React from 'react';
 
 import './loading.css';
 
-const Loading = () => {
+const LoadingPage = () => {
+	return(
+		<div className="loading">
+			<div className="container">
+				<div className="spinner">
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+					<div/>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+const LoadingBlock = () => {
 	return(
 		<div className="loading">
 			<div className="spinner">
@@ -23,4 +46,4 @@ const Loading = () => {
 	)
 }
 
-export default Loading;
+export {LoadingPage, LoadingBlock}

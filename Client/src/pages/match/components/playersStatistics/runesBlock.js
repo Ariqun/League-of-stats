@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReacTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
-import Loading from '../../../../components/loading';
+import {LoadingBlock} from '../../../../components/loading';
 
 const RunesBlock = ({info, tab, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -35,7 +35,7 @@ const RunesBlock = ({info, tab, runes}) => {
 		changeLoading(false);
 	}, [tab])
 
-	if (isLoading) return <Loading />
+	if (isLoading) return <LoadingBlock />
 
 	const result = runes.map(rune => {
 		const prim = runeIds.primaryStyle.style;

@@ -1,4 +1,4 @@
-import {addZero} from "../addZeros";
+import {addZero} from "./addZeros";
 
 const transformMS = (ms, format = 'literal') => {
 	const seconds = addZero(Math.floor((ms / 1000) % 60));

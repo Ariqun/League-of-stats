@@ -1,4 +1,4 @@
-import {addZero} from "../../../../components/addZeros";
+import {addZero} from "../../../../components/manipulationsWithNums/addZeros";
 
 const matchStartDate = (time) => {
 	const date = new Date(time);

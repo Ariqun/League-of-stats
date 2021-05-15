@@ -5,7 +5,7 @@ import Nav from './components/nav';
 import Matches from './components/matches';
 import Champions from './components/champions';
 import Records from './components/records';
-import Loading from '../../components/loading';
+import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
 import Statistics from './components/statistics';
@@ -28,16 +28,16 @@ const Summoner = ({region, name}) => {
 
 	}, [])
 
+	if (isloading) return <LoadingPage />
+
 	const content = () => {
 		const {puuID, sumID} = summoner.tech;
-		
+
 		if (tab === 'matches') return <Matches puuID={puuID} name={summoner.name} />;
 		if (tab === 'champs') return <Champions sumID={sumID} />;
 		if (tab === 'records') return <Records sumID={sumID} />
 		if (tab === 'stats') return <Statistics sumID={sumID}/> 
 	}
-
-	if (isloading) return <Loading/>;
 
 	return (
 		<div className="summoner_page">

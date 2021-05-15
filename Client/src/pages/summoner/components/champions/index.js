@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Tabs from './tabs';
 import TableHead from './tableHead';
 import TableBody from './tableBody';
-import Loading from '../../../../components/loading';
+import {LoadingBlock} from '../../../../components/loading';
 
 import DataBase from '../../../../services/dataBase';
 
@@ -25,7 +25,7 @@ const Champions = ({sumID}) => {
 		getChamps();
 	}, [])
 
-	if (isLoading) return <Loading/>;
+	if (isLoading) return <LoadingBlock />
 
 	return(
 		<div className="champs">

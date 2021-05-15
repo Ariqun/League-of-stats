@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import MainStats from './mainStats';
 import Positions from './positions';
 import Average from './average';
-import Loading from '../../../../components/loading';
+import {LoadingBlock} from '../../../../components/loading';
 
 import DataBase from '../../../../services/dataBase';
 
@@ -11,7 +11,7 @@ import './index.sass';
 
 const Statistics = ({champ}) => {
 	const [champStats, setChampStats] = useState({});
-	const [loading, changeLoading] = useState(true);
+	const [isLoading, changeLoading] = useState(true);
 	const db = new DataBase();
 
 	const {roles, matches} = champStats;
@@ -25,7 +25,7 @@ const Statistics = ({champ}) => {
 		getInfo();
 	}, []);
 
-	if (loading) return <Loading/>;
+	if (isLoading) return <LoadingBlock />
 	
 	return (
 		<div className="stats">

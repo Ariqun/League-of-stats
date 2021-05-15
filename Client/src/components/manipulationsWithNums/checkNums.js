@@ -4,7 +4,7 @@ const checkNanAndDoubleZero = (num) => {
 	return num;
 }
 
-const checkBigNums = (num, format = 'literal') => {
+const checkBigNum = (num, format = 'literal') => {
 	const milliard = 1000000000;
 	const million = 1000000;
 	const thousand = 1000;
@@ -18,4 +18,4 @@ const checkBigNums = (num, format = 'literal') => {
 	return num;
 }
 
-export {checkNanAndDoubleZero, checkBigNums};
+export {checkNanAndDoubleZero, checkBigNum};

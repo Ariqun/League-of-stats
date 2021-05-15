@@ -1,21 +1,21 @@
 import React from 'react';
 
-import averageScore from '../../../../components/averageScore';
+import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 
 const Average = ({champStats}) => {
 	const {matches, creeps, gold, kda, dmg, combo} = champStats;
-
-	const avgCreeps = averageScore(creeps, matches, 1);
-	const avgGold = averageScore(gold, matches) / 1000;
-	const avgKills = averageScore(kda.kills, matches, 1);
-	const avgDeaths = averageScore(kda.deaths, matches, 1);
-	const avgAssists = averageScore(kda.assists, matches, 1);
-	const avgKDARatio = averageScore((+avgKills + +avgAssists), +avgDeaths, 1);
-	const avgDMG = averageScore((dmg.physical + dmg.magic + dmg.trueDmg), matches) / 1000;
-	const avgDouble = averageScore(combo.double, matches, 4);
-	const avgTriple = averageScore(combo.triple, matches, 4);
-	const avgQuadro = averageScore(combo.quadro, matches, 4);
-	const avgPenta = averageScore(combo.penta, matches, 4);
+	
+	const avgCreeps = calcRatio(creeps, matches, 1);
+	const avgGold = calcRatio(gold, matches) / 1000;
+	const avgKills = calcRatio(kda.kills, matches, 1);
+	const avgDeaths = calcRatio(kda.deaths, matches, 1);
+	const avgAssists = calcRatio(kda.assists, matches, 1);
+	const avgKDARatio = calcRatio((+avgKills + +avgAssists), +avgDeaths, 1);
+	const avgDMG = calcRatio((dmg.physical + dmg.magic + dmg.trueDmg), matches) / 1000;
+	const avgDouble = calcRatio(combo.double, matches, 4);
+	const avgTriple = calcRatio(combo.triple, matches, 4);
+	const avgQuadro = calcRatio(combo.quadro, matches, 4);
+	const avgPenta = calcRatio(combo.penta, matches, 4);
 
 	return(
 		<div className="average">

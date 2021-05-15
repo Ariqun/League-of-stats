@@ -1,5 +1,7 @@
+import {checkNanAndDoubleZero} from "./checkNums";
+
 const calcRatio = (first, second, fix = 0) => {
-	return (first / second).toFixed(fix);
+	return checkNanAndDoubleZero((first / second).toFixed(fix));
 }
 
 export {calcRatio}

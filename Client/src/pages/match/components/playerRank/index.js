@@ -5,8 +5,8 @@ import {ranks} from '../../../../components/languages/russian/ranks';
 import RiotAPI from '../../../../services/riotAPI';
 
 const PlayerRank = ({id, region}) => {
-	const [loading, changeLoading] = useState(true);
 	const [ranked, setRanked] = useState([]);
+	const [isLoading, changeLoading] = useState(true);
 
 	const riotAPI = new RiotAPI();
 	const ruObj = ranks();
@@ -21,7 +21,7 @@ const PlayerRank = ({id, region}) => {
 		getRank();
 	}, [])
 
-	if (loading) return null;
+	if (isLoading) return null;
 	if (ranked[0] === undefined) return <span className="rank">Нет рейтинга</span>;
 
 	return <span className="rank">{ruObj[ranked[0].toLowerCase()]} {ranked[1]}</span>;

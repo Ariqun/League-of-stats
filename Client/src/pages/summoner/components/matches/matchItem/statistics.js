@@ -2,25 +2,24 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import averageScore from '../../../../../components/averageScore';
 import matchDuration from '../../../../match/components/getMatchInfo/matchDuration';
 import matchStartDate from '../../../../match/components/getMatchInfo/matchStartDate';
 import matchResult from '../../../../match/components/getMatchInfo/matchResult';
 import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
 import PlayerKDA from '../../../../match/components/getMatchInfo/playerKDA';
 import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
+import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRatio';
 
 const Statistics = ({player, info, matchId, matchTypes}) => {
 	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
 	const {kills, deaths, assists, totalMinionsKilled, teamId} = player;
-
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const duration = matchDuration(gameDuration);
 	const startDate = matchStartDate(gameStartTimestamp);
 	const matchRes = matchResult(teams, teamId);
 	const teamKills = totalTeamKills(teams, teamId);
 
-	const avgKillPart = averageScore(((kills + assists) * 100), teamKills);
+	const avgKillPart = calcRatio(((kills + assists) * 100), teamKills);
 	const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
 	
 	return(

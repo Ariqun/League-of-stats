@@ -1,4 +1,4 @@
-import {addZero} from "../../../../components/addZeros";
+import {addZero} from "../../../../components/manipulationsWithNums/addZeros";
 
 const matchDuration = (time) => {
 	const seconds = addZero(Math.floor(time / (1000) % 60));

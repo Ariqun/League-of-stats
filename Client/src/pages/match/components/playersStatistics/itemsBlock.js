@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
-import {transformMS} from '../../../../components/transformNums';
+import {transformMS} from '../../../../components/manipulationsWithNums/transformTime';
 
 const ItemsBlock = ({info, tab, version, items}) => {
 	const timeline = info.timeline[0][tab].itemPurchase;

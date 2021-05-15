@@ -6,7 +6,7 @@ import PlayerRunes from '../../../../match/components/getMatchInfo/playerRunes';
 
 const Settings = ({player, version}) => {
 	const {championName, summoner1Id, summoner2Id, perks} = player;
-
+	
 	return(
 		<div className="match_settings">
 			<div className="champion_icon">

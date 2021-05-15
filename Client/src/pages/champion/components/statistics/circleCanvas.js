@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {checkNanAndDoubleZero} from '../../../../components/chekNums';
+import {checkNanAndDoubleZero} from '../../../../components/manipulationsWithNums/checkNums';
 
 export default class CircleCanvas extends Component {
 	constructor(props) {

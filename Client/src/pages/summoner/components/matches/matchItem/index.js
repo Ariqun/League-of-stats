@@ -4,7 +4,7 @@ import Settings from './settings';
 import Statistics from './statistics';
 import PlayerItems from '../../../../match/components/getMatchInfo/playerItems';
 import PlayersTable from '../../../../match/components/getMatchInfo/playersTable';
-import Loading from '../../../../../components/loading';
+import {LoadingBlock} from '../../../../../components/loading';
 
 import RiotAPI from '../../../../../services/riotAPI';
 
@@ -23,7 +23,7 @@ const MatchItem = ({matchId, name}) => {
 		getInfo();
 	}, []);
 
-	if (isLoading) return <Loading/>;
+	if (isLoading) return <LoadingBlock />
 
 	const {participants} = info;
 	let player = {};
@@ -33,7 +33,7 @@ const MatchItem = ({matchId, name}) => {
 			player = {...elem};
 		}
 	}
-
+	
 	return(
 		<div className="match_item">
 			<div className="inner_wrapper">

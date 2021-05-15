@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux';
 
-import averageScore from '../../../../components/averageScore';
+import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 
 const TableBody = ({tab, statistics, sort, version}) => {
 	const champs = statistics.champions[0];
@@ -16,16 +16,16 @@ const TableBody = ({tab, statistics, sort, version}) => {
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
 		
-		const avgKills = averageScore(kills, matches, 1);
-		const avgDeaths = averageScore(deaths, matches, 1);
-		const avgAssists = averageScore(assists, matches, 1);
-		const avgRatio =  averageScore((kills + assists), deaths, 2);
-		const avgCreeps =  averageScore(cs, matches, 1);
-		const avgGold =  averageScore(gold, matches, 1);
-		const avgDmg =  averageScore((magic + physical + trueDmg), matches) / 1000;
-		const avgHeal =  averageScore((restore + shield), matches) / 1000;
-		const avgVision = averageScore(vision, matches, 1);
-		const avgWards = averageScore(wards, matches, 1);
+		const avgKills = calcRatio(kills, matches, 1);
+		const avgDeaths = calcRatio(deaths, matches, 1);
+		const avgAssists = calcRatio(assists, matches, 1);
+		const avgRatio =  calcRatio((kills + assists), deaths, 2);
+		const avgCreeps =  calcRatio(cs, matches, 1);
+		const avgGold =  calcRatio(gold, matches, 1);
+		const avgDmg =  calcRatio((magic + physical + trueDmg), matches) / 1000;
+		const avgHeal =  calcRatio((restore + shield), matches) / 1000;
+		const avgVision = calcRatio(vision, matches, 1);
+		const avgWards = calcRatio(wards, matches, 1);
 		
 		return(
 			<tr className={`champ ${champ}`} key={champ}>

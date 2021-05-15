@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {addZeroFour} from '../../../../components/addZeros';
+import {addZeroFour} from '../../../../components/manipulationsWithNums/addZeros';
 
 const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 	let key = addZeroFour(keyID);

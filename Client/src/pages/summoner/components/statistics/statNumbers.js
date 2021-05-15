@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {checkBigNums} from '../../../../components/chekNums';
+import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 
 const StatNumbers = ({stats}) => {
 	const statsBlock = (type) => {
@@ -36,7 +36,7 @@ const StatNumbers = ({stats}) => {
 			return(
 				<div className="stat" key={stat}>
 					<div className="title">{rusTitles[stat]}</div>
-					<div className="value">{checkBigNums(statObj[stat], 'digits')}</div>
+					<div className="value">{checkBigNum(statObj[stat], 'digits')}</div>
 				</div>
 			)
 		})

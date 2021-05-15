@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import Card from './card';
-import Loading from '../../../../components/loading';
+import {LoadingBlock} from '../../../../components/loading';
 
 import DataBase from '../../../../services/dataBase';
 
@@ -15,13 +15,15 @@ const Records = ({sumID}) => {
 	useEffect(() => {
 		const getChamps = async () => {
 			const res = await db.getSumStatistics(sumID);
+			
 			setRecords(res.records[0]);
 			changeLoading(false);
 		}
 		getChamps();
 	}, [])
 
-	if (isLoading) return <Loading/>;
+	if (isLoading) return <LoadingBlock />
+
 	const {kda, kills, deaths, assists, cs, gold, dmg, heal, dmgTaken, CC, vision, wards, killingSpree, double, triple, quadra, penta} = records;
 	const basics = {kills, deaths, assists, kda, cs, gold};
 	const impact = {dmg, heal, dmgTaken, CC, vision, wards};

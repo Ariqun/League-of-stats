@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 
-import Loading from '../../../../components/loading';
-import CircleCanvas from '../../../../components/сanvases/circleCanvas';
+import {LoadingBlock} from '../../../../components/loading';
+import MatchTypes from './matchTypes';
+import StatNumbers from './statNumbers';
 
 import DataBase from '../../../../services/dataBase';
 
 import './index.sass';
-import MatchTypes from './matchTypes';
-import StatNumbers from './statNumbers';
 
 const Statistics = ({sumID}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -23,9 +22,7 @@ const Statistics = ({sumID}) => {
 		getChamps();
 	}, [])
 
-	if (isLoading) return <Loading />
-
-	console.log(statistics)
+	if (isLoading) return <LoadingBlock />
 
 	return(
 		<div className="statistics">

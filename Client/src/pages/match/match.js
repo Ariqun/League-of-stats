@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import TableResult from './components/tableResult';
 import CanvasGraphs from './components/canvasGraphs';
 import PlayersStatistics from './components/playersStatistics';
-import Loading from '../../components/loading';
+import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
 
@@ -22,7 +22,7 @@ const Match = ({region, matchId}) => {
 		getInfo();
 	}, []);
 
-	if (isLoading) return <Loading/>;
+	if (isLoading) return <LoadingPage />
 
 	return(
 		<div className="match_page">

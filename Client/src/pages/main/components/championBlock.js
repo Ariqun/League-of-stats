@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-const ChampionBlock = ({champions, inputValue, shownRoles, version}) => {
+const ChampionBlock = ({inputValue, shownRoles, version, champions}) => {
 	const champNames = [...Object.keys({...champions})];
 
 	const champs = champNames.map(item => {

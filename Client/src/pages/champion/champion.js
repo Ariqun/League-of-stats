@@ -6,7 +6,7 @@ import General from './components/general';
 import Skills from './components/skills';
 import Skins from './components/skins';
 import Statistics from './components/statistics';
-import Loading from '../../components/loading';
+import {LoadingPage} from '../../components/loading';
 
 import DragonData from '../../services/dragonData';
 
@@ -44,7 +44,7 @@ const Champion = ({champName, version}) => {
 		return tabContent;
 	}
 
-	if (isLoading) return <Loading/>;
+	if (isLoading) return <LoadingPage />
 
 	return (
 		<div className="champion_page">

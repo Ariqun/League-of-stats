@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 
 import PlayerKDA from '../../match/components/getMatchInfo/playerKDA';
 import PlayerSpells from '../../match/components/getMatchInfo/playerSpells';
-import Loading from '../../../components/loading';
 import {ranks} from '../../../components/languages/russian/ranks';
 import {findPercent} from '../../../components/manipulationsWithNums/findPercent';
 import {calcRatio} from '../../../components/manipulationsWithNums/calcRatio';
+import {LoadingBlock} from '../../../components/loading';
 
 import DataBase from '../../../services/dataBase';
 import RiotAPI from '../../../services/riotAPI';
@@ -36,7 +36,7 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 		getInfo();
 	}, [])
 
-	if (isLoading) return <Loading />
+	if (isLoading) return <LoadingBlock />
 
 	const name = Object.keys(champions).filter(champ => +champions[champ].key === championId);
 	let champWins = 0, champMatches = 0, champWinrate = 0, champKills = 0, champDeaths = 0, champAssists = 0;

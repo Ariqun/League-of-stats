@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
-import Loading from '../../../../components/loading';
+import {LoadingBlock} from '../../../../components/loading';
 
 import DragonData from '../../../../services/dragonData';
 
@@ -23,7 +23,7 @@ const SkillsBlock = ({info, tab, version}) => {
 		getChamp();
 	}, [tab])
 
-	if (isLoading) return <Loading />;
+	if (isLoading) return <LoadingBlock />
 	
 	const createRow = (skillId) => {
 		const skills = info.timeline[0][tab].lvlUp;
