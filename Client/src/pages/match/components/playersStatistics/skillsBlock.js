@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
+import checkLanguage from '../../../../components/languages/checkLanguage';
 import {LoadingBlock} from '../../../../components/loading';
 
 import DragonData from '../../../../services/dragonData';
@@ -9,7 +10,9 @@ import DragonData from '../../../../services/dragonData';
 const SkillsBlock = ({info, tab, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState({});
-	const dragonData = new DragonData(version);
+
+	const lang = checkLanguage();
+	const dragonData = new DragonData(version, lang);
 
 	useEffect(() => {
 		const getChamp = async () => {

@@ -1,16 +1,19 @@
 import React from 'react';
 
 import {addZeroFour} from '../../../../components/manipulationsWithNums/addZeros';
+import removeTags from '../../../../components/manipulationsWithStr/removeTags';
 
 const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 	let key = addZeroFour(keyID);
 
 	if (currentSkill === 'passive') {
+		const descr = removeTags(passive.description);
+
 		return(
 			<React.Fragment key={key}>
 				<div className="text">
 					<span className="skill_name">{passive.name}<span className="skill_btn">[пассивное]</span></span>
-					<span className="skill_descr">{passive.description}</span>
+					<span className="skill_descr">{descr}</span>
 				</div>
 
 				<div className="video">
@@ -31,12 +34,13 @@ const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 
 		const btns = {0: 'Q', 1: 'W', 2: 'E', 3: 'R'};
 		const {name, description} = item;
+		const descr = removeTags(description);
 
 		return(
 			<React.Fragment key={key}>
 				<div className="text">
 					<span className="skill_name">{name}<span className="skill_btn">[{btns[i]}]</span></span>
-					<span className="skill_descr">{description}</span>
+					<span className="skill_descr">{descr}</span>
 				</div>
 
 				<div className="video">

@@ -6,6 +6,7 @@ import General from './components/general';
 import Skills from './components/skills';
 import Skins from './components/skins';
 import Statistics from './components/statistics';
+import checkLanguage from '../../components/languages/checkLanguage';
 import {LoadingPage} from '../../components/loading';
 
 import DragonData from '../../services/dragonData';
@@ -14,8 +15,9 @@ const Champion = ({champName, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
-
-	const dd = new DragonData(version);
+	
+	const lang = checkLanguage();
+	const dd = new DragonData(version, lang);
 
 	useEffect(() => {
 		const getChampion = async () => {
