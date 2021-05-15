@@ -10,7 +10,7 @@ export default class DragonData {
 		const res = await axios(url);
 
 		if (res.status !== 200) {
-			throw new Error('Blablabla');
+			throw new Error('DragonData error');
 		}
 
 		return res.data;
@@ -22,20 +22,6 @@ export default class DragonData {
 		return versions[0];
 	}
 
-	getAllChampions = async () => {
-		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/champion.json`;
-		const champions = await this.getData(url);
-
-		return champions.data;
-	}
-
-	getChampion = async (name) => {
-		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/champion/${name}.json`;
-		const champion = await this.getData(url);
-		
-		return champion.data[name];
-	}
-
 	getMatchTypes = async () => {
 		const url = `http://static.developer.riotgames.com/docs/lol/queues.json`;
 		const types = await this.getData(url);
@@ -43,23 +29,36 @@ export default class DragonData {
 		return types;
 	}
 
+	getAllChampions = async () => {
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion.json`;
+		const champions = await this.getData(url);
+
+		return champions.data;
+	}
+
+	getChampion = async (name) => {
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion/${name}.json`;
+		const champion = await this.getData(url);
+		
+		return champion.data[name];
+	}
+
 	getSummonerSpells = async () => {
-		// const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/summoner.json`;
-		const url = `http://ddragon.leagueoflegends.com/cdn/11.10.1/data/ru_RU/summoner.json`;
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/summoner.json`;
 		const sumSpells = await this.getData(url);
 
 		return sumSpells.data;
 	}
 
 	getAllRunes = async () => {
-		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/runesReforged.json`
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/runesReforged.json`
 		const runes = await this.getData(url);
 		
 		return runes;
 	}
 
 	getAllItems = async () => {
-		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/ru_RU/item.json`
+		const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/item.json`
 		const res = await this.getData(url);
 
 		return res.data;

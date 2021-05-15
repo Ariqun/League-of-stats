@@ -19,10 +19,13 @@ import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
 
 import './app.sass'
+import checkLanguage from '../languages/checkLanguage';
 
 const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded}) => {
 	const [isLoading, changeLoading] = useState(true);
-	const dragonData = new DragonData(version);
+
+	const lang = checkLanguage();
+	const dragonData = new DragonData(version, lang);
 	const db = new DataBase();
 
 	useEffect(() => {
@@ -48,8 +51,6 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 
 	const render = () => {
 		if (isLoading) return <LoadingPage />
-		console.log(navigator.language);
-		console.log(navigator.userLanguage);
 		
 		return (
 			<div className="app">
