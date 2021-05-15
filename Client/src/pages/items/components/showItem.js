@@ -1,8 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const ShowItem = ({items, name, version}) => {
-	const result = items.map(item => {
+import transformAndSort from './transfromAndSort';
+
+const ShowItem = ({name, items, version}) => {
+	const arrOfItems = transformAndSort(items);
+
+	const result = arrOfItems.map(item => {
 		if (item.name !== name) return null;
 
 		let descr = item.description.replace(/<attention>(\s?\w+%?)<\/attention>/gi, (match, m1) => {
@@ -36,7 +40,10 @@ const ShowItem = ({items, name, version}) => {
 }
 
 const mapStateToProps = (state) => {
-	return {version: state.version};
+	return {
+		version: state.version,
+		items: state.items
+	};
 }
 
 export default connect(mapStateToProps)(ShowItem);

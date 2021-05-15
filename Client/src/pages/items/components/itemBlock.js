@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import transformAndSort from './transfromAndSort';
 
-const ItemBlock = ({items, setCurrentItem, tag, title, version}) => {
+const ItemBlock = ({setCurrentItem, tag, title, items, version}) => {
+	const arrOfItems = transformAndSort(items);
+
 	const createBlock = () => {
 		const exceptions = ['Чучело', 'Твоя доля', 'Черное копье Калисты', 'Глаз герольда', 'Заведенный секундомер', 'Сломанный секундомер', 'Эликсир стали', 'Эликсир волшебства', 'Эликсир гнева'];
 
-		const content = items.map(item => {
+		const content = arrOfItems.map(item => {
 			if (exceptions.includes(item.name)) return null;
 			if (tag && !item.tags.some(elem => tag.includes(elem))) return null;
 	
@@ -31,7 +34,10 @@ const ItemBlock = ({items, setCurrentItem, tag, title, version}) => {
 }
 
 const mapStateToProps = (state) => {
-	return {version: state.version};
+	return {
+		version: state.version,
+		items: state.items
+	};
 }
 
 export default connect(mapStateToProps)(ItemBlock);

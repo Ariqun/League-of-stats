@@ -48,7 +48,9 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 
 	const render = () => {
 		if (isLoading) return <LoadingPage />
-
+		console.log(navigator.language);
+		console.log(navigator.userLanguage);
+		
 		return (
 			<div className="app">
 				<Header />
