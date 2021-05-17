@@ -5,6 +5,7 @@ import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNum
 import {fight, damage, restore, eco, vision, other} from '../../../../components/languages/russian/statisticInMatch';
 
 const Table = ({info, version}) => {
+	console.log(info);
 	const players = [...info.leftTeam.players, ...info.rightTeam.players];
 
 	const createBlock = (obj, title) => {

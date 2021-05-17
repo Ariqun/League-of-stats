@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import {findPercent} from '../manipulationsWithNums/findPercent';
 export default class CircleCanvas extends Component {
 	constructor(props) {
 		super(props);
@@ -15,10 +16,10 @@ export default class CircleCanvas extends Component {
 		const {primary, secondary} = this.props;
 		const ctxFront = this.canvasFront.current.getContext('2d');
 		
-		const percent = (secondary * 100 / (primary + secondary)).toFixed(2) / 100;
+		const percent = findPercent(secondary, primary + secondary, 2);
 		const degrees = percent * 360.0;
 		const radians = degrees * (Math.PI / 180);
-
+		
 		ctxFront.strokeStyle = 'green';
 		ctxFront.rotate(-90 * Math.PI / 180);
 		ctxFront.beginPath();
@@ -38,7 +39,7 @@ export default class CircleCanvas extends Component {
 	render() {
 		const {width, height} = this.props;
 		const {primary, secondary} = this.props;
-		const percent = (primary * 100 / (primary + secondary)).toFixed(1);
+		const percent = findPercent(primary, primary + secondary, 1);
 
 		return(
 			<div className="circle_canvas">

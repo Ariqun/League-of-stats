@@ -3,8 +3,21 @@ import React from 'react';
 import {ranks} from '../../../../components/languages/russian/ranks';
 
 const Rating = ({ranked}) => {
+	if (!ranked) {
+		return(
+			<div className="sum_rating">
+				<div className="rank_block">
+					<div className="rank_icon">
+						<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'}></img>
+					</div>
+					<span className="rank_name">Нет рейтинга</span>
+				</div>
+			</div>
+		)
+	}
+
 	const ruObj = ranks();
-	const {tier, rank, leaguePoints} = ranked;
+	let {tier, rank, leaguePoints} = ranked;
 
 	return(
 		<div className="sum_rating">

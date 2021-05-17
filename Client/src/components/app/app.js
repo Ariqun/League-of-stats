@@ -14,12 +14,12 @@ import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
 import LiveMatch from '../../pages/liveMatch';
 import {LoadingPage} from '../loading';
+import checkLanguage from '../languages/checkLanguage';
 
 import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
 
 import './app.sass'
-import checkLanguage from '../languages/checkLanguage';
 
 const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded}) => {
 	const [isLoading, changeLoading] = useState(true);

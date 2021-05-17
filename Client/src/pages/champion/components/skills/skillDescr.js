@@ -27,15 +27,15 @@ const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 		)
 	}
 
-	const content = spells.map((item, i) => {
-		if (item.id !== currentSkill) {
+	const content = spells.map((spell, i) => {
+		if (spell.id !== currentSkill) {
 			return null;
 		}
 
 		const btns = {0: 'Q', 1: 'W', 2: 'E', 3: 'R'};
-		const {name, description} = item;
+		const {name, description} = spell;
 		const descr = removeTags(description);
-
+		console.log(spell);
 		return(
 			<React.Fragment key={key}>
 				<div className="text">

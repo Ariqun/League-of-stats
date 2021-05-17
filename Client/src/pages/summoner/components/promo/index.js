@@ -9,8 +9,13 @@ import './index.sass';
 
 const Promo = ({summoner}) => {
 	const {name, lvl, iconID, ranked, region} = summoner;
-	const {wins, losses} = ranked;
 	const sumId = summoner.tech.sumID;
+	let wins = 0, losses = 0;
+	
+	if (ranked) {
+		wins = ranked.wins;
+		losses = ranked.losses;
+	}
 
 	return (
 		<div className="promo">

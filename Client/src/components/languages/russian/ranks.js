@@ -1,5 +1,6 @@
 const ranks = () => {
 	return {
+		unranked: 'Нет рейтинга',
 		iron: 'Железо', 
 		bronze: 'Бронза', 
 		silver: 'Серебро', 
