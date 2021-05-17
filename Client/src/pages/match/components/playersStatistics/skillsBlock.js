@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
 import checkLanguage from '../../../../components/languages/checkLanguage';
+import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 import {LoadingBlock} from '../../../../components/loading';
 
 import DragonData from '../../../../services/dragonData';
@@ -18,8 +19,9 @@ const SkillsBlock = ({info, tab, version}) => {
 		const getChamp = async () => {
 			const {participants} = info;
 			const player = participants.find(item => item.participantId === tab);
+			const champName = modifyChampName(player.championName);
 
-			const res = await dragonData.getChampion(player.championName);
+			const res = await dragonData.getChampion(champName);
 			setChampion(res);
 			changeLoading(false);
 		}
@@ -51,7 +53,7 @@ const SkillsBlock = ({info, tab, version}) => {
 
 	return(
 		<div className="skill_table">
-			<div className="title">Порядок прокачки умений</div>
+			<div className="title">Прокачка умений</div>
 			<table>
 				<tbody>
 					{createRow(1)}

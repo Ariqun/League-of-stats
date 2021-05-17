@@ -1,3 +1,5 @@
+import {modifyChampName} from "../../../../components/manipulationsWithStr/modifyChampName";
+
 const canvasInfo = (teamId, participants, version) => {
 	const players = [];
 	let res = [];
@@ -9,9 +11,10 @@ const canvasInfo = (teamId, participants, version) => {
 	for (let elem of players) {
 		const {totalDamageDealtToChampions, magicDamageDealtToChampions, physicalDamageDealtToChampions, trueDamageDealtToChampions} = elem;
 		const {totalHealsOnTeammates, totalDamageShieldedOnTeammates} = elem;
+		const champName = modifyChampName(elem.championName);
 		let player = {};
 
-		player.champ = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${elem.championName}.png`;
+		player.champ = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`;
 		player.dmg = {
 			total: totalDamageDealtToChampions,
 			physical: physicalDamageDealtToChampions,

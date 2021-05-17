@@ -19,7 +19,7 @@ const Matches = ({puuID, name}) => {
 	}, []);
 	
 	const matchList = matches.map((match, i) => {
-		if (i >= 5) {
+		if (i >= 12) {
 			return null;
 		}
 

@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {fight, damage, restore, eco, vision, other} from '../../../../components/languages/russian/statisticInMatch';
+import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 
 const Table = ({info, version}) => {
-	console.log(info);
-	const players = [...info.leftTeam.players, ...info.rightTeam.players];
+	const {participants} = info;
 
 	const createBlock = (obj, title) => {
 		const result = Object.keys(obj).map(item => {
-			const max = Math.max(...players.map(player => {return player[item]}));
+			const max = Math.max(...participants.map(player => {return player[item]}));
 
-			const res = players.map(player => {
+			const res = participants.map(player => {
 				let content = checkBigNum(player[item]);
 
 				if (player[item] === true) content = '🗸';
@@ -39,12 +39,13 @@ const Table = ({info, version}) => {
 			</>
 		);
 	}
-	const champsBlock = players.map(player => {
-		const champ = player.championName;
+	
+	const champsBlock = participants.map(player => {
+		const champName = modifyChampName(player.championName);
 
 		return(
-			<td key={champ}>
-				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champ}.png`} alt={`${champ}_icon`}/>
+			<td key={champName}>
+				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
 			</td>
 		)
 	});

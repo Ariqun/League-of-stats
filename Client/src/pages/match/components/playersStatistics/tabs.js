@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+
 const Tabs = ({tab, participants, changeTab, version}) => {
 	const leftPlayers = [], rightPlayers = [];
 
@@ -12,11 +14,12 @@ const Tabs = ({tab, participants, changeTab, version}) => {
 	const createTeamBlock = (players) => {
 		const content = players.map((player, i) => {
 			const {championName, participantId} = player;
+			const champName = modifyChampName(championName);
 	
 			return (
-				<div onClick={() => changeTab(participantId)} className={tab === participantId ? "tab active" : "tab"} key={`${championName}_${i}`}>
-					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} 
-						 alt={`${championName}_icon`}
+				<div onClick={() => changeTab(participantId)} className={tab === participantId ? "tab active" : "tab"} key={`${champName}_${i}`}>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} 
+						 alt={`${champName}_icon`}
 					/>
 				</div>
 			);
