@@ -3,16 +3,18 @@ import {connect} from 'react-redux';
 
 import matchDuration from '../getMatchInfo/matchDuration';
 import matchStartDate from '../getMatchInfo/matchStartDate';
-
 import Player from '../player';
 import TeamScore from '../teamScore';
+import matchTypesRU from '../../../../components/languages/russian/matchTypesRU';
 
 import './index.sass';
 
 const TableResult = ({info, region, matchTypes}) => {
 	const {queueId, gameStartTimestamp, gameDuration} = info;
+	const objRU = matchTypesRU();
 
 	const matchType = matchTypes.find(type => type.queueId === queueId);
+	const matchTypeRU = objRU[matchType.description];
 	const startDate = matchStartDate(gameStartTimestamp);
 	const duration = matchDuration(gameDuration);
 
@@ -26,7 +28,7 @@ const TableResult = ({info, region, matchTypes}) => {
 						<span className="time_date">{startDate}</span>
 						<span className="duration">({duration})</span>
 					</div>
-					<span className="type">{matchType.description}</span>
+					<span className="type">{matchTypeRU}</span>
 				</div>
 
 				<TeamScore teamId={200} info={info} />

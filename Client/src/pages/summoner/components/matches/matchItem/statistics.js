@@ -9,12 +9,15 @@ import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamK
 import PlayerKDA from '../../../../match/components/getMatchInfo/playerKDA';
 import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
 import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRatio';
+import matchTypesRU from '../../../../../components/languages/russian/matchTypesRU';
 
 const Statistics = ({player, info, matchId, matchTypes}) => {
 	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
 	const {kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, teamId} = player;
-	
+	const objRU = matchTypesRU();
+
 	const matchType = matchTypes.find(type => type.queueId === queueId);
+	const matchTypeRU = objRU[matchType.description];
 	const duration = matchDuration(gameDuration);
 	const startDate = matchStartDate(gameStartTimestamp);
 	const matchRes = matchResult(teams, teamId);
@@ -34,7 +37,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 				<div className="stats_wrapper">
 					<div className="match_result">
 						{matchRes}
-						<span className="match_type">{matchType.description}</span>
+						<span className="match_type">{matchTypeRU}</span>
 					</div>
 
 					<div className="champion_stats">
