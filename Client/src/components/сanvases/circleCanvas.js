@@ -16,8 +16,8 @@ export default class CircleCanvas extends Component {
 		const {primary, secondary} = this.props;
 		const ctxFront = this.canvasFront.current.getContext('2d');
 		
-		const percent = findPercent(secondary, primary + secondary, 2);
-		const degrees = percent * 360.0;
+		const percent = findPercent(secondary, primary + secondary, 2) / 100;
+		const degrees = percent * 360;
 		const radians = degrees * (Math.PI / 180);
 		
 		ctxFront.strokeStyle = 'green';

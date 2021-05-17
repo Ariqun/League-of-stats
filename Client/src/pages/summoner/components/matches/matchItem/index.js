@@ -18,7 +18,7 @@ const MatchItem = ({matchId, name}) => {
 		const getInfo = async () => {
 			const res = await riotAPI.getMatchInfo(matchId);
 			
-			if (res === 'Error') {
+			if (res === 'Error' || res.queueId === 2000) {
 				changeError(true);
 			} else {
 				setInfo(res);

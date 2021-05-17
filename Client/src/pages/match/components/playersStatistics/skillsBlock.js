@@ -37,10 +37,10 @@ const SkillsBlock = ({info, tab, version}) => {
 
 		const result = skills.map((sk, i) => {
 			if (sk.skill === skillId) {
-				return <td className="cell skill" key={sk.time}>{i + 1}</td>
+				return <td className="cell skill" key={`${sk.time}_${i}`}>{i + 1}</td>
 			}
 
-			return <td className="cell empty" key={sk.time}></td>
+			return <td className="cell empty" key={`${sk.time}_${i}`}></td>
 		})
 
 		return(
