@@ -2,7 +2,9 @@ import React from 'react';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 
 const PlayerKDA = ({kills, deaths, assists}) => {
-	const ratio = calcRatio(kills + assists, deaths, 2);
+	let ratio = 'Безупречно';
+
+	if (deaths !== 0) ratio = calcRatio(kills + assists, deaths, 2);
 
 	return(
 		<div className="kda_score">
