@@ -11,19 +11,26 @@ import RiotAPI from '../../../../../services/riotAPI';
 const MatchItem = ({matchId, name}) => {
 	const [info, setInfo] = useState({});
 	const [isLoading, changeLoading] = useState(true);
+	const [isError, changeError] = useState(false);
 	const riotAPI = new RiotAPI();
 	
 	useEffect(() => {
 		const getInfo = async () => {
 			const res = await riotAPI.getMatchInfo(matchId);
-
-			setInfo(res);
+			
+			if (res === 'Error') {
+				changeError(true);
+			} else {
+				setInfo(res);
+			}
+			
 			changeLoading(false);
 		}
 		getInfo();
 	}, []);
 
 	if (isLoading) return <LoadingBlock />
+	if (isError) return null;
 
 	const {participants} = info;
 	let player = {};

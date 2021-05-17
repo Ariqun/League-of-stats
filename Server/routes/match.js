@@ -14,11 +14,12 @@ router.post('/match', async (req, res) => {
 
 			const urlTL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchID}/timeline`;
 			const timeline = await getData(urlTL);
-
-			const timelienInfo = collectTimelineInfo(timeline);
-
+			
 			if (Object.keys(result).length !== 0) {
+				const timelienInfo = collectTimelineInfo(timeline);
+
 				pushMatchInDB(result, timelienInfo);
+
 				res.send(JSON.stringify(result.info));
 			} else {
 				res.send('Error');

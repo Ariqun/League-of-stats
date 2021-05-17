@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 					const {championId, summonerId, win, summonerName, championName, kills, deaths, assists, 
 						  totalMinionsKilled, neutralMinionsKilled, goldEarned, visionScore, wardsPlaced, individualPosition,
 						  physicalDamageDealtToChampions, magicDamageDealtToChampions, trueDamageDealtToChampions,
-						  totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, totalTimeCCDealt,
+						  totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, timeCCingOthers,
 						  killingSprees, doubleKills, tripleKills, quadraKills, pentaKills} = elem;
 	
 					if (win) {
@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
 							date: date,
 							matchType: matchType,
 							dmgTaken: totalDamageTaken,
-							CC: totalTimeCCDealt,
+							CC: timeCCingOthers,
 							killingSpree: killingSprees,
 							double: doubleKills,
 							triple: tripleKills,
