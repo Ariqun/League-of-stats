@@ -21,10 +21,11 @@ const Player = ({teamId, info, region, version}) => {
 	}
 
 	const result = players.map((player, i) => {
-		const {summonerId, championName, kills, deaths, assists, totalMinionsKilled, visionScore, goldEarned, summonerName, summoner1Id, summoner2Id, perks} = player;
+		const {summonerId, championName, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, visionScore, goldEarned, summonerName, summoner1Id, summoner2Id, perks} = player;
 		
 		const champName = modifyChampName(championName);
-		const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
+		const farm = totalMinionsKilled + neutralMinionsKilled;
+		const farmPerMin = scorePerMin(farm, gameDuration, 1);
 		const gold = checkBigNum(goldEarned);
 		const goldPerMin = scorePerMin(goldEarned, gameDuration);
 		const visionPerMin = scorePerMin(visionScore, gameDuration, 1);
@@ -54,7 +55,7 @@ const Player = ({teamId, info, region, version}) => {
 					<div className="other_score">
 						<div className="wrapper_block_left">
 							<div className="farm_score">
-								<span className="farm">{totalMinionsKilled} </span>
+								<span className="farm">{farm} </span>
 								<span className="per_min">({farmPerMin})</span>
 								<span> CS</span>
 							</div>

@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 			const collectionInfo = () => {
 				for (let elem of obj.participants) {
 					const {championId, summonerId, win, summonerName, championName, kills, deaths, assists, 
-						  totalMinionsKilled, goldEarned, visionScore, wardsPlaced, individualPosition,
+						  totalMinionsKilled, neutralMinionsKilled, goldEarned, visionScore, wardsPlaced, individualPosition,
 						  physicalDamageDealtToChampions, magicDamageDealtToChampions, trueDamageDealtToChampions,
 						  totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, totalTimeCCDealt,
 						  killingSprees, doubleKills, tripleKills, quadraKills, pentaKills} = elem;
@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
 							trueDmg: trueDamageDealtToChampions,
 							restore: totalHealsOnTeammates,
 							shield: totalDamageShieldedOnTeammates,
-							cs: totalMinionsKilled,
+							cs: totalMinionsKilled + neutralMinionsKilled,
 							gold: goldEarned,
 							vision: visionScore,
 							wards: wardsPlaced,
@@ -79,7 +79,7 @@ router.post('/', async (req, res) => {
 						trueDmg: trueDamageDealtToChampions,
 						restore: totalHealsOnTeammates,
 						shield: totalDamageShieldedOnTeammates,
-						cs: totalMinionsKilled,
+						cs: totalMinionsKilled + neutralMinionsKilled,
 						gold: goldEarned,
 						double: doubleKills,
 						triple: tripleKills,

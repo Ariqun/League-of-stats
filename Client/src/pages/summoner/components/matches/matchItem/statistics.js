@@ -12,15 +12,16 @@ import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRat
 
 const Statistics = ({player, info, matchId, matchTypes}) => {
 	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
-	const {kills, deaths, assists, totalMinionsKilled, teamId} = player;
+	const {kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, teamId} = player;
+	
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const duration = matchDuration(gameDuration);
 	const startDate = matchStartDate(gameStartTimestamp);
 	const matchRes = matchResult(teams, teamId);
 	const teamKills = totalTeamKills(teams, teamId);
-
+	const farm = totalMinionsKilled + neutralMinionsKilled;
 	const avgKillPart = calcRatio(((kills + assists) * 100), teamKills);
-	const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
+	const farmPerMin = scorePerMin(farm, gameDuration, 1);
 	
 	return(
 		<div className="match_stats">
@@ -40,7 +41,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 						<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
 
 						<div className="farm_score">
-							<span className="farm">{totalMinionsKilled} </span>
+							<span className="farm">{farm} </span>
 							<span className="farm_per_min">({farmPerMin})</span>
 							<span> CS</span>
 						</div>
