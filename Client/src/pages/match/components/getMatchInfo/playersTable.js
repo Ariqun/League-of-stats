@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+
 const PlayersTable = ({currentPlayer, participants, version}) => {
 	const leftTeam = [];
 	const rightTeam = [];
@@ -19,10 +21,12 @@ const PlayersTable = ({currentPlayer, participants, version}) => {
 	}
 
 	const createDOM = (player) => {
+		const champName = modifyChampName(player.champ);
+
 		return(
 			<div className={currentPlayer === player.name ? 'current_player' : 'player'} key={player.name}>
 				<div className="champion_icon">
-					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${player.champ}.png`} alt={`${player.champ}_icon`}/>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
 				</div>
 				<div className="player_name">
 					<span>{player.name}</span>

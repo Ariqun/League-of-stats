@@ -10,6 +10,7 @@ import PlayerItems from '../getMatchInfo/playerItems';
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 import {scorePerMin} from '../../../../components/manipulationsWithNums/scorePerTime';
+import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 
 const Player = ({teamId, info, region, version}) => {
 	const {participants, gameDuration} = info;
@@ -22,18 +23,19 @@ const Player = ({teamId, info, region, version}) => {
 	const result = players.map((player, i) => {
 		const {summonerId, championName, kills, deaths, assists, totalMinionsKilled, visionScore, goldEarned, summonerName, summoner1Id, summoner2Id, perks} = player;
 		
+		const champName = modifyChampName(championName);
 		const farmPerMin = scorePerMin(totalMinionsKilled, gameDuration, 1);
 		const gold = checkBigNum(goldEarned);
 		const goldPerMin = scorePerMin(goldEarned, gameDuration);
 		const visionPerMin = scorePerMin(visionScore, gameDuration, 1);
 		const teamKills = players.reduce((acc, el) => {return acc += el.kills}, 0);
 		const killPart = findPercent(kills + assists, teamKills);
-
+		
 		return(
-			<div className="player" key={`${championName}_${i}`}>
+			<div className="player" key={`${champName}_${i}`}>
 				<div className="player_settings">
 					<div className="champion_icon">
-						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`} alt={`${championName}_icon`}/>
+						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
 					</div>
 					<div className="spells_and_runes">
 						<PlayerSpells firstId={summoner1Id} secondId={summoner2Id}/>
