@@ -10,6 +10,7 @@ import checkLanguage from '../../components/languages/checkLanguage';
 import {LoadingPage} from '../../components/loading';
 
 import DragonData from '../../services/dragonData';
+import Builds from './components/builds';
 
 const Champion = ({champName, version}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -41,6 +42,8 @@ const Champion = ({champName, version}) => {
 			tabContent = <Skins champ={champ}/>;
 		} else if (tab === 'statistics') {
 			tabContent = <Statistics champ={champ}/>
+		} else if (tab === 'builds') {
+			tabContent = <Builds champ={champ}/>
 		}
 
 		return tabContent;

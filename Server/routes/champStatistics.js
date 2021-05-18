@@ -23,11 +23,13 @@ router.post('/', async (req, res) => {
 			const collectionInfo = () => {
 				for (let elem of obj.participants) {
 					const {championId, summonerId, win, summonerName, championName, kills, deaths, assists, 
-						  totalMinionsKilled, neutralMinionsKilled, goldEarned, visionScore, wardsPlaced, individualPosition,
+						  totalMinionsKilled, neutralMinionsKilled, goldEarned, visionScore, wardsPlaced,
 						  physicalDamageDealtToChampions, magicDamageDealtToChampions, trueDamageDealtToChampions,
 						  totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, timeCCingOthers,
-						  killingSprees, doubleKills, tripleKills, quadraKills, pentaKills} = elem;
-	
+						  killingSprees, doubleKills, tripleKills, quadraKills, pentaKills, individualPosition,
+						  item0, item1, item2, item3, item4, item5, item6} = elem;
+					const items = [item0, item1, item2, item3, item4, item5, item6];
+
 					if (win) {
 						wins.push(championId)
 					} else {
@@ -87,7 +89,8 @@ router.post('/', async (req, res) => {
 						penta: pentaKills,
 						role: individualPosition,
 						wins: win ? 1 : 0,
-						matches: 1
+						matches: 1,
+						items: items
 					}
 				}
 	
@@ -174,7 +177,8 @@ const setChecked = async (id) => {
 const pushChampInfoInDB = async (obj) => {
 	for (let key in obj) {
 		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = obj[key];
-		const {wins, matches} = obj[key];
+		const {wins, matches, items} = obj[key];
+		const [item0, item1, item2, item3, item4, item5, item6] = items;
 		const role = (obj[key].role).toLowerCase();
 		
 		await champion.updateOne({id: key}, {
@@ -194,7 +198,14 @@ const pushChampInfoInDB = async (obj) => {
 				"combo.quadro": quadra,
 				"combo.penta": penta,
 				[`roles.${role}.wins`]: wins,
-				[`roles.${role}.matches`]: matches
+				[`roles.${role}.matches`]: matches,
+				[`items.${item0}`]: 1,
+				[`items.${item1}`]: 1,
+				[`items.${item2}`]: 1,
+				[`items.${item3}`]: 1,
+				[`items.${item4}`]: 1,
+				[`items.${item5}`]: 1,
+				[`items.${item6}`]: 1,
 			}
 		}, {upsert: true})
 	}

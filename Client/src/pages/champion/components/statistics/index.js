@@ -10,12 +10,12 @@ import DataBase from '../../../../services/dataBase';
 import './index.sass';
 
 const Statistics = ({champ}) => {
-	const [champStats, setChampStats] = useState({});
 	const [isLoading, changeLoading] = useState(true);
-	const db = new DataBase();
-
+	const [champStats, setChampStats] = useState({});
+	
 	const {roles, matches} = champStats;
-
+	const db = new DataBase();
+	
 	useEffect(() => {
 		const getInfo = async () => {
 			const res = await db.getChampionStats(champ.key);

@@ -10,6 +10,7 @@ const champion = new Schema({
 	totalMatches: Number,
 	creeps: Number,
 	gold: Number,
+	items: Array,
 	roles: {
 		top: Array,
 		jungle: Array,
