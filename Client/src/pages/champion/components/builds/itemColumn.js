@@ -1,7 +1,10 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
+
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
+import itemTooltip from '../../../../components/tooltips/itemTooltip';
 
 const ItemColumn = ({champItems, blockItems, matches, title, items, version}) => {
 	const createAndModifyArray = () => {
@@ -31,10 +34,11 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 		const id = item.id;
 		const count = item.count;
 		const percent = findPercent(count, matches, 1);
-
+		const tool = itemTooltip(items[id], version);
+		
 		return(
 			<div className="item" key={id}>
-				<div className="item_icon">
+				<div className="item_icon" data-tip={tool} data-for="item_tooltip">
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${id}.png`} alt={id}/>
 				</div>
 
@@ -50,6 +54,7 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 		<div className="item_column">
 			<div className="column_title">{title}</div>
 			{content}
+			<ReactTooltip id="item_tooltip" html/>
 		</div>
 	)
 }

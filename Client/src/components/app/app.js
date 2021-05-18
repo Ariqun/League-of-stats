@@ -19,7 +19,7 @@ import checkLanguage from '../languages/checkLanguage';
 import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
 
-import './app.sass'
+import './app.sass';
 
 const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded}) => {
 	const [isLoading, changeLoading] = useState(true);
