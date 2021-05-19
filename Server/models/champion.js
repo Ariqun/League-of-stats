@@ -11,6 +11,7 @@ const champion = new Schema({
 	creeps: Number,
 	gold: Number,
 	items: Array,
+	runes: Array,
 	roles: {
 		top: Array,
 		jungle: Array,

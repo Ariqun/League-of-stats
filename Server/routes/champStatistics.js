@@ -27,8 +27,16 @@ router.post('/', async (req, res) => {
 						  physicalDamageDealtToChampions, magicDamageDealtToChampions, trueDamageDealtToChampions,
 						  totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, timeCCingOthers,
 						  killingSprees, doubleKills, tripleKills, quadraKills, pentaKills, individualPosition,
-						  item0, item1, item2, item3, item4, item5, item6} = elem;
+						  item0, item1, item2, item3, item4, item5, item6, perks} = elem;
 					const items = [item0, item1, item2, item3, item4, item5, item6];
+					const doubleStyles = `${perks.styles[0].style}_${perks.styles[1].style}`;
+					const runes = [];
+
+					for (let elem of perks.styles) {
+						for (let perks of elem.selections) {
+							runes.push(perks.perk);
+						}
+					}
 
 					if (win) {
 						wins.push(championId)
@@ -90,7 +98,9 @@ router.post('/', async (req, res) => {
 						role: individualPosition,
 						wins: win ? 1 : 0,
 						matches: 1,
-						items: items
+						items: items,
+						doubleStyles: doubleStyles,
+						runes: runes
 					}
 				}
 	
@@ -177,10 +187,11 @@ const setChecked = async (id) => {
 const pushChampInfoInDB = async (obj) => {
 	for (let key in obj) {
 		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = obj[key];
-		const {wins, matches, items} = obj[key];
+		const {wins, matches, items, doubleStyles, runes} = obj[key];
 		const [item0, item1, item2, item3, item4, item5, item6] = items;
+		const [rune0, rune1, rune2, rune3, rune4, rune5] = runes;
 		const role = (obj[key].role).toLowerCase();
-		
+
 		await champion.updateOne({id: key}, {
 			$inc: {
 				"kda.kills": kills,
@@ -206,6 +217,13 @@ const pushChampInfoInDB = async (obj) => {
 				[`items.${item4}`]: 1,
 				[`items.${item5}`]: 1,
 				[`items.${item6}`]: 1,
+				[`runes.${doubleStyles}.${rune0}`]: 1,
+				[`runes.${doubleStyles}.${rune1}`]: 1,
+				[`runes.${doubleStyles}.${rune2}`]: 1,
+				[`runes.${doubleStyles}.${rune3}`]: 1,
+				[`runes.${doubleStyles}.${rune4}`]: 1,
+				[`runes.${doubleStyles}.${rune5}`]: 1,
+				[`runes.${doubleStyles}.total`]: 1
 			}
 		}, {upsert: true})
 	}

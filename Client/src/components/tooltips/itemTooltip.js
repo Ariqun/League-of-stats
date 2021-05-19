@@ -10,9 +10,9 @@ const itemTooltip = (item, version) => {
 	descr = descr.replace(/<hr>/gi, '<br>');
 
 	const tooltip = `
-		<div class="item_tooltip">
+		<div class="tooltip">
 			<div class="title">
-				<div class="item_icon">
+				<div class="icon">
 					<img src="http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${image.full}" alt="${name}_icon"></img>
 				</div>
 				<div class="name_and_cost">

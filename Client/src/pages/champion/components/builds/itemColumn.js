@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
-
 
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 import itemTooltip from '../../../../components/tooltips/itemTooltip';
@@ -11,10 +9,11 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 		const result = [];
 
 		for (let item of blockItems) {
-			const bool = (!items[item].into || items[items[item].into[0]].requiredAlly);
-			const bool2 = (!items[item].into || !items[items[item].into[0]].requiredAlly);
-			// Подобная ересь нужна, чтобы не показывать улучшенный Орном шмот
-			if (Object.keys(champItems).includes(item) && bool && bool2) {
+			// Подобная ересь нужна, чтобы показывать только полные и не улучшенные Орном предметы
+			const onlyFullItems = !items[item].into || items[items[item].into[0]].requiredAlly;
+			const dontShowOrnn = !items[item].requiredAlly;
+			
+			if (Object.keys(champItems).includes(item) && onlyFullItems && dontShowOrnn) {
 				result.push({
 					id: item,
 					count: champItems[item]
@@ -22,11 +21,7 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 			}
 		}
 	
-		result.sort((a, b) => {
-			return b.count - a.count;
-		});
-
-		return result;
+		return result.sort((a, b) => {return b.count - a.count});
 	}
 	const itemsArray = createAndModifyArray();
 
@@ -34,11 +29,11 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 		const id = item.id;
 		const count = item.count;
 		const percent = findPercent(count, matches, 1);
-		const tool = itemTooltip(items[id], version);
+		const tooltip = itemTooltip(items[id], version);
 		
 		return(
 			<div className="item" key={id}>
-				<div className="item_icon" data-tip={tool} data-for="item_tooltip">
+				<div className="item_icon" data-tip={tooltip} data-for="tooltip">
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${id}.png`} alt={id}/>
 				</div>
 
@@ -54,7 +49,6 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 		<div className="item_column">
 			<div className="column_title">{title}</div>
 			{content}
-			<ReactTooltip id="item_tooltip" html/>
 		</div>
 	)
 }

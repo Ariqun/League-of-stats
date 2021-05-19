@@ -1,62 +1,71 @@
 @import '../UI/ui';
 	
-#item_tooltip
-	.item_tooltip
+#tooltip
+	max-width: 250px
+	font-size: 15px
+	color: $color-dark_gray
+	padding: 10px
+	.tooltip
 		.title
 			@include transGrayBorderBot_20per
 			display: flex
 			padding-bottom: 10px
-			.item_icon
+			.icon
 				img
 					width: 48px
 					border-radius: 5px
 					border: 1px solid gray
-			.name_and_cost
+			.name_and_cost, .name_and_pop
 				display: flex
 				flex-direction: column
 				padding: 0 10px
-				.cost
+				.name
+					color: $color-light_gray
+				.cost, .pop
 					color: $color-dark_gray
 					.value
 						color: #FFA500
-.descr, #item_tooltip
-	padding-top: 10px
-	maintext
-		color: $color-dark_gray
-		li
-			list-style-type: none
-			padding-top: 5px
-		span
-			color: white
-		active
-			color: white
-			padding: 0 2px
-		passive
-			color: white
-			padding: 0 2px
-		rules
-			font-size: 14px
-		keywordstealth
-			color: rgb(255, 105, 180)
-		physicaldamage, scalead
-			color: rgb(255, 99, 71)
-		healing
-			color: rgb(50, 205, 50)
-		magicdamage, scaleap, scalemana
-			color: rgb(0, 191, 255)
-		shield
-			color: 	rgb(220, 220, 220)
-		truedamage
-			color: rgb(255, 240, 245)
-		speed
-			color: rgb(255, 255, 204)
-		scalearmor
-			color: rgb(255, 255, 102)
-		scalemr
-			color: rgb(30, 144, 255)
-		raritymythic
-			color: rgb(255, 165, 0)
-		raritylegendary
-			color: rgb(255, 255, 153)
-		status, onhit
-			color: rgb(147, 112, 219)
+		.descr
+			padding-top: 10px
+			maintext
+				color: $color-dark_gray
+			i
+				color: white
+				font-style: normal
+			li
+				list-style-type: none
+				padding-top: 5px
+			span
+				color: white
+			active
+				color: white
+				padding: 0 2px
+			passive
+				color: white
+				padding: 0 2px
+			rules
+				font-size: 14px
+			keywordstealth
+				color: rgb(255, 105, 180)
+			physicaldamage, scalead
+				color: rgb(255, 99, 71)
+			healing
+				color: rgb(50, 205, 50)
+			magicdamage, scaleap, scalemana
+				color: rgb(0, 191, 255)
+			shield
+				color: 	rgb(220, 220, 220)
+			truedamage
+				color: rgb(255, 240, 245)
+			speed
+				color: rgb(255, 255, 204)
+			scalearmor
+				color: rgb(255, 255, 102)
+			scalemr
+				color: rgb(30, 144, 255)
+			raritymythic
+				color: rgb(255, 165, 0)
+			raritylegendary
+				color: rgb(255, 255, 153)
+			status, onhit
+				color: rgb(147, 112, 219)

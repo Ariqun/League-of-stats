@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import ItemsBlock from './ItemsBlock';
+import RunesBlock from './runesBlock';
 import {LoadingBlock} from '../../../../components/loading';
 
 import DataBase from '../../../../services/dataBase';
@@ -27,7 +29,9 @@ const Builds = ({champ}) => {
 	return(
 		<div className="builds">
 			<ItemsBlock champStats={champStats}/>
+			<RunesBlock champStats={champStats}/>
 			
+			<ReactTooltip id="tooltip" html/>
 		</div>
 	)
 }
