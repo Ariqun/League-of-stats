@@ -42,6 +42,7 @@
 					border: 1px solid rgba(105, 105, 105, 0.3)
 					&:first-of-type
 						width: 40px
+						cursor: pointer
 						border: none
 					img
 						width: 32px
@@ -59,13 +60,16 @@
 				margin-bottom: 10px	
 			.runes_wrapper
 				display: flex
+				align-items: flex-start
 				.style_block
 					@include flexColumn
 					.rune_row
 						display: flex
 						.rune
+							cursor: pointer
 							opacity: 0.3
 							margin: 5px
+							border: 2px solid black
 							border-radius: 50%
 							background: rgba(128, 128, 128, 0.3)
 							img
@@ -77,6 +81,9 @@
 					margin-right: 10px
 				.style_block.sub
 					order: 2
+					.rune_row
+						&:nth-of-type(2)
+							display: none
 		.items_block
 			@include opacityBg
 			margin: 0 10px

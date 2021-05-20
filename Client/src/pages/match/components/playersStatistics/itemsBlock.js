@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
+import itemTooltip from '../../../../components/tooltips/itemTooltip';
 import {transformMS} from '../../../../components/manipulationsWithNums/transformTime';
 
 const ItemsBlock = ({info, tab, version, items}) => {
 	const timeline = info.timeline[0][tab].itemPurchase;
-
+	
 	const transformArrToObj = () => {
 		let result = timeline.reduce((acc, item) => {
 			let existing = acc.filter(item2 => Math.abs(item2.time - item.time) < 60000)[0];
@@ -29,12 +29,10 @@ const ItemsBlock = ({info, tab, version, items}) => {
 
 	const result = Object.keys(obj).map((item, i) => {
 		const res = obj[item].map((item2, j) => {
-			let descr = items[item2].description.replace(/<attention>(\s?\w+%?)<\/attention>/gi, (match, m1) => {
-				return `<span>+${m1}</span>`;
-			})
+			const tooltip = itemTooltip(items[item2], version);
 
 			return(
-				<div className="item" data-tip={descr} data-for="item_tooltip" key={`${item}_${item2}_${j}`}>
+				<div className="item" data-tip={tooltip} data-for="tooltip" key={`${item}_${item2}_${j}`}>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item2}.png`} alt={`${item2}_icon`}/>
 				</div>
 			)
@@ -56,7 +54,6 @@ const ItemsBlock = ({info, tab, version, items}) => {
 			<div className="items">
 				{result}
 			</div>
-			<ReactTooltip id="item_tooltip" html/>
 		</div>
 	)
 }

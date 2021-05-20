@@ -7,6 +7,7 @@ import {modifyChampName} from '../../../../components/manipulationsWithStr/modif
 import {LoadingBlock} from '../../../../components/loading';
 
 import DragonData from '../../../../services/dragonData';
+import skillTooltip from '../../../../components/tooltips/skillTooltip';
 
 const SkillsBlock = ({info, tab, version}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -26,6 +27,7 @@ const SkillsBlock = ({info, tab, version}) => {
 			changeLoading(false);
 		}
 		getChamp();
+		ReactTooltip.rebuild();
 	}, [tab])
 
 	if (isLoading) return <LoadingBlock />
@@ -33,7 +35,7 @@ const SkillsBlock = ({info, tab, version}) => {
 	const createRow = (skillId) => {
 		const skills = info.timeline[0][tab].lvlUp;
 		const icon = champion.spells[skillId - 1].image.full;
-		const descr = champion.spells[skillId - 1].description;
+		const tooltip = skillTooltip(champion.spells[skillId - 1], version);
 
 		const result = skills.map((sk, i) => {
 			if (sk.skill === skillId) {
@@ -45,7 +47,7 @@ const SkillsBlock = ({info, tab, version}) => {
 
 		return(
 			<tr>
-				<td data-tip={descr} data-for="skill_tooltip"><img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${icon}`} alt="skill"/></td>
+				<td data-tip={tooltip} data-for="tooltip"><img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${icon}`} alt="skill"/></td>
 				{result}
 			</tr>
 		);
@@ -62,7 +64,6 @@ const SkillsBlock = ({info, tab, version}) => {
 					{createRow(4)}
 				</tbody>
 			</table>
-			<ReactTooltip id="skill_tooltip" html/>
 		</div>
 	)
 }

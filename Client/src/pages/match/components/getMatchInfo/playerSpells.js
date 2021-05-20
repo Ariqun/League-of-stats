@@ -1,15 +1,30 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import spellTooltip from '../../../../components/tooltips/spellTooltip';
 
 const PlayerSpells = ({firstId, secondId, version, spells}) => {
-	const spellsArr = Object.values(spells);
-	const spellOne = spellsArr.find(spell => +spell.key === firstId);
-	const spellTwo = spellsArr.find(spell => +spell.key === secondId);
+	const spellIds = [firstId, secondId];
+
+	const content = spellIds.map(id => {
+		const spellsArray = Object.values(spells);
+		const spell = spellsArray.find(spell => +spell.key === id);
+		const {name, image} = spell;
+		const tooltip = spellTooltip(spell, version);
+
+		return(
+			<img 
+				src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image.full}`}
+				data-tip={tooltip} 
+				data-for="tooltip"
+				alt={`${name}_icon`}
+				key={id}
+			/>
+		)
+	})
 
 	return(
 		<div className="spells">
-			<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spellOne.image.full}`} alt={`${spellOne.name}_icon`} key={spellOne.key}/>
-			<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spellTwo.image.full}`} alt={`${spellTwo.name}_icon`} key={spellTwo.key}/>
+			{content}
 		</div>
 	)
 }

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import ReacTooltip from 'react-tooltip';
+import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 
 import {LoadingBlock} from '../../../../components/loading';
+import runeTooltip from '../../../../components/tooltips/runeTooltip';
 
 const RunesBlock = ({info, tab, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -33,6 +34,7 @@ const RunesBlock = ({info, tab, runes}) => {
 
 		setRuneIds(obj);
 		changeLoading(false);
+		ReactTooltip.rebuild();
 	}, [tab])
 
 	if (isLoading) return <LoadingBlock />
@@ -46,8 +48,10 @@ const RunesBlock = ({info, tab, runes}) => {
 		
 		const res = rune.slots.map((slot, i) => {
 			const subRes = slot.runes.map(item => {
+				const tooltip = runeTooltip(item);
+
 				return (
-					<div className={perks.includes(item.id) ? "rune active" : "rune"} data-tip={item.longDesc} data-for="rune_tooltip" key={item.id}>
+					<div className={perks.includes(item.id) ? "rune active" : "rune"} data-tip={tooltip} data-for="tooltip" key={item.id}>
 						<img src={`https://ddragon.leagueoflegends.com/cdn/img/${item.icon}`} alt={`icon_${item.id}`}/>
 					</div>
 				)
@@ -76,7 +80,6 @@ const RunesBlock = ({info, tab, runes}) => {
 			<div className="runes_wrapper">
 				{result}
 			</div>
-			<ReacTooltip id="rune_tooltip" html/>
 		</div>
 	)
 }

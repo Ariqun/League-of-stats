@@ -1,23 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const PlayerItems = ({player, version}) => {
-	let items = [];
+import itemTooltip from '../../../../components/tooltips/itemTooltip';
+
+const PlayerItems = ({player, items, version}) => {
+	let itemIds = [];
 	
 	for(let key in player) {
 		if (key.match(/item[\d]/)) {
-			items.push(player[key]);
+			itemIds.push(player[key]);
 		}
 	}
 	
 	return(
 		<div className="items_block">
-			{items.map((item, i) => {
-				if (item === 0) return <div className="item" key={`${item}_${i}`}/>;
+			{itemIds.map((itemId, i) => {
+				if (itemId === 0) return <div className="item" key={`${itemId}_${i}`}/>;
+
+				const tooltip = itemTooltip(items[itemId], version);
 
 				return(
-					<div className="item" key={`${item}_${i}`}>
-						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item}.png`} alt={`${item}_icon`}/>
+					<div className="item" data-tip={tooltip} data-for="tooltip" key={`${itemId}_${i}`}>
+						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`} alt={`${itemId}_icon`}/>
 					</div>
 				);
 			})}
@@ -26,7 +30,10 @@ const PlayerItems = ({player, version}) => {
 }
 
 const mapStateToProps = (state) => {
-	return {version: state.version}
+	return {
+		version: state.version,
+		items: state.items
+	}
 }
 
 export default connect(mapStateToProps)(PlayerItems);

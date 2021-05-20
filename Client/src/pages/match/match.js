@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import TableResult from './components/tableResult';
 import CanvasGraphs from './components/canvasGraphs';
@@ -31,6 +32,8 @@ const Match = ({region, matchId}) => {
 				<CanvasGraphs info={info} />
 				<PlayersStatistics info={info} />
 			</div>
+			
+			<ReactTooltip id="tooltip" html/>
 		</div>
 	);
 }

@@ -3,6 +3,9 @@ import './tooltips.sass';
 const runeTooltip = (rune, percent) => {
 	const {name, icon, longDesc} = rune;
 
+	let popularity = `<span class="pop">Популярность: <span class="value">${percent}%</span></span>`;
+	if (percent === undefined) popularity = '';
+
 	let descr = longDesc.replace(/<b>(\W+)<\/b>/gi, (match, m1) => {
 		return `<span>${m1}</span>`;
 	})
@@ -19,9 +22,9 @@ const runeTooltip = (rune, percent) => {
 				<div class="icon">
 					<img src="https://ddragon.leagueoflegends.com/cdn/img/${icon}" alt="${name}_icon"></img>
 				</div>
-				<div class="name_and_pop">
+				<div class="settings">
 					<span class="name">${name}</span>
-					<span class="pop">Популярность: <span class="value">${percent}%</span></span>
+					${popularity}
 				</div>
 			</div>
 

@@ -15,7 +15,7 @@ const itemTooltip = (item, version) => {
 				<div class="icon">
 					<img src="http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${image.full}" alt="${name}_icon"></img>
 				</div>
-				<div class="name_and_cost">
+				<div class="settings">
 					<span class="name">${name}</span>
 					<span class="cost">Цена: <span class="value">${gold.total}</span></span>
 				</div>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import Settings from './settings';
 import Statistics from './statistics';
@@ -55,6 +56,8 @@ const MatchItem = ({matchId, name}) => {
 					<PlayersTable currentPlayer={player.summonerName} participants={participants}/>
 				</div>
 			</div>
+			
+			<ReactTooltip id="tooltip" html/>
 		</div>
 	)
 }
