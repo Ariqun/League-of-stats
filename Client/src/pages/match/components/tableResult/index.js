@@ -5,9 +5,11 @@ import matchDuration from '../getMatchInfo/matchDuration';
 import matchStartDate from '../getMatchInfo/matchStartDate';
 import Player from '../player';
 import TeamScore from '../teamScore';
+import TeamBans from '../teamBans';
 import matchTypesRU from '../../../../components/languages/russian/matchTypesRU';
 
 import './index.sass';
+
 
 const TableResult = ({info, region, matchTypes}) => {
 	const {queueId, gameStartTimestamp, gameDuration} = info;
@@ -37,10 +39,12 @@ const TableResult = ({info, region, matchTypes}) => {
 			<div className="table_body">
 				<div className="left_team">
 					<Player teamId={100} info={info} region={region}/>
+					<TeamBans teamId={100} info={info}/>
 				</div>
 
 				<div className="right_team">
 					<Player teamId={200} info={info} region={region}/>
+					<TeamBans teamId={200} info={info}/>
 				</div>
 			</div>
 		</div>

@@ -47,7 +47,9 @@ const SkillsBlock = ({info, tab, version}) => {
 
 		return(
 			<tr>
-				<td data-tip={tooltip} data-for="tooltip"><img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${icon}`} alt="skill"/></td>
+				<td data-tip={tooltip} data-for="tooltip">
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${icon}`} alt="skill"/>
+				</td>
 				{result}
 			</tr>
 		);

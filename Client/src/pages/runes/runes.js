@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import RunesBlock from './components/runesBlock';
 
@@ -10,6 +11,8 @@ const Runes = () => {
 					<RunesBlock />
 				</div>
 			</div>
+
+			<ReactTooltip id="tooltip" html/>
 		</div>
 	)
 }

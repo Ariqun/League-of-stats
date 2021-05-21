@@ -171,6 +171,23 @@
 									right: -34px
 								img
 									border-radius: 5px
+				.bans
+					display: flex
+					justify-content: flex-end
+					padding: 10px 15px
+					.banned_champ
+						position: relative
+						width: 50px
+						margin: 0 5px
+						border: 2px solid rgba(246, 36, 89, 0.6)
+						&::after
+							content: ''
+							position: absolute
+							top: calc(50% - 32px)
+							left: calc(50% - 1px)
+							height: 64px
+							transform: rotate(45deg)
+							border: 1px solid rgba(246, 36, 89, 0.6)
 			.right_team
 				@include transGrayBorderLeft
 				.player
@@ -195,3 +212,5 @@
 									position: absolute
 									top: calc(50% - 15px)
 									left: -34px
+				.bans
+					justify-content: flex-start
