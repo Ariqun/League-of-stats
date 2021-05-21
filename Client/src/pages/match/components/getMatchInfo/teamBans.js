@@ -13,7 +13,7 @@ const TeamBans = ({teamId, info, champions, version}) => {
 		const {id, image} = champ;
 
 		return(
-			<div className="banned_champ">
+			<div className="banned_champ" key={item.championId}>
 				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${image.full}`} alt={`${id}_icon`}/>
 			</div>
 		)

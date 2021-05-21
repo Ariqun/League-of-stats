@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import matchDuration from '../getMatchInfo/matchDuration';
 import matchStartDate from '../getMatchInfo/matchStartDate';
 import Player from '../player';
-import TeamScore from '../teamScore';
-import TeamBans from '../teamBans';
+import TeamScore from '../getMatchInfo/teamScore';
+import TeamBans from '../getMatchInfo/teamBans';
 import matchTypesRU from '../../../../components/languages/russian/matchTypesRU';
 
 import './index.sass';

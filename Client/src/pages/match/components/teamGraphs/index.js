@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Canvas from '../canvas';
-import canvasInfo from '../canvasInfo';
+import Canvas from './canvas';
+import graphInfo from './graphInfo';
 
 import './index.sass';
 
-const CanvasGraphs = ({info, version}) => {
+const TeamGraphs = ({info, version}) => {
 	const {participants} = info;
 
-	const leftTeamCanvasInfo = canvasInfo(100, participants, version);
-	const rightTeamCanvasInfo = canvasInfo(200, participants, version);
+	const leftTeamCanvasInfo = graphInfo(100, participants, version);
+	const rightTeamCanvasInfo = graphInfo(200, participants, version);
 
 	return(
 		<div className="graphs">
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
 	return {version: state.version};
 }
 
-export default connect(mapStateToProps)(CanvasGraphs);
+export default connect(mapStateToProps)(TeamGraphs);

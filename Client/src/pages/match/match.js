@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import TableResult from './components/tableResult';
-import CanvasGraphs from './components/canvasGraphs';
+import TeamGraphs from './components/teamGraphs';
 import PlayersStatistics from './components/playersStatistics';
 import {LoadingPage} from '../../components/loading';
 
@@ -29,7 +29,7 @@ const Match = ({region, matchId}) => {
 		<div className="match_page">
 			<div className="container">
 				<TableResult info={info} region={region} />
-				<CanvasGraphs info={info} />
+				<TeamGraphs info={info} />
 				<PlayersStatistics info={info} />
 			</div>
 			

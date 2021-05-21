@@ -14,7 +14,7 @@ export default class Canvas extends Component {
 		const {leftTeam, rightTeam, option} = this.props;
 		const ctx = this.canvas.current.getContext('2d');
 		const allScore = [];
-		let factor = 300;
+		let factor = 150;
 
 		for (let i = 0; i < 5; i++) {
 			allScore.push(leftTeam[i][option].total, rightTeam[i][option].total);
@@ -41,9 +41,9 @@ export default class Canvas extends Component {
 				img.width = '20px';
 				
 				ctx.transform(1, 0, 0, -1, 0, 410);
-				ctx.fillRect(i * 40 + j, 32, 30, num * factor);
+				ctx.fillRect(i * 50 + j, 52, 40, num * factor);
 				ctx.resetTransform();
-				ctx.drawImage(img, i * 40 + j, 380, 30, 30);
+				ctx.drawImage(img, i * 50 + j, 360, 40, 40);
 			}
 
 			ctx.fillStyle = 'white';
@@ -51,20 +51,21 @@ export default class Canvas extends Component {
 
 			for (let i = 0; i < 5; i++) {
 				const num = team[i][option].total / 1000;
-				let score = `${Math.floor(num)}k`;
+				let score = `${num.toFixed(1)}k`;
 
-				if(num < 10 && num > 0.1) score = `${num.toFixed(1)}k`;
+				if (num < 10) score = `${num.toFixed(2)}k`;
+				if (num < 0.1) score = '';
 
-				ctx.fillText(score, i * 40 + 2 + j, 370 - num * factor);
+				ctx.fillText(score, i * 50 + 2 + j, 350 - num * factor);
 			}
 		}
 		createCanvas(leftTeam, '#2a98bf');
-		createCanvas(rightTeam, '#ff5859', 200);
+		createCanvas(rightTeam, '#ff5859', 250);
 	}
 
 	render() {
 		return(
-			<canvas id="damage" width="390px" height="410px" ref={this.canvas}></canvas>
+			<canvas id="damage" width="490px" height="400px" ref={this.canvas}></canvas>
 		)
 	}
 }

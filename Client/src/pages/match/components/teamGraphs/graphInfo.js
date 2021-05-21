@@ -1,6 +1,6 @@
 import {modifyChampName} from "../../../../components/manipulationsWithStr/modifyChampName";
 
-const canvasInfo = (teamId, participants, version) => {
+const graphInfo = (teamId, participants, version) => {
 	const players = [];
 	let res = [];
 
@@ -33,4 +33,4 @@ const canvasInfo = (teamId, participants, version) => {
 	return res;
 }
 
-export default canvasInfo;
+export default graphInfo;
