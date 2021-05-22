@@ -113,16 +113,20 @@
 						width: 200px
 						padding-left: 5px
 						.player, .current_player
-							display: flex
-							align-items: center
-							.champion_icon
-								img
-									width: 24px
-							.player_name
-								font-size: 14px
-								padding-left: 5px
+							a
+								display: flex
+								align-items: center
+								text-decoration: none
+								color: $color-light_gray
+								.champion_icon
+									img
+										width: 24px
+								.player_name
+									font-size: 14px
+									padding-left: 5px
 						.current_player
-							color: $color-orange
+							a
+								color: $color-orange
 					.left_team
 						@include transGrayBorderRight
 						display: flex

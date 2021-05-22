@@ -11,7 +11,6 @@ import {LoadingBlock} from '../../../components/loading';
 import DataBase from '../../../services/dataBase';
 import RiotAPI from '../../../services/riotAPI';
 
-
 const Card = ({player, region = 'ru', champions, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState('');
@@ -20,7 +19,7 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 	const db = new DataBase();
 	const riotAPI = new RiotAPI();
 
-	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player
+	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player;
 
 	useEffect(() => {
 		const getInfo = async () => {

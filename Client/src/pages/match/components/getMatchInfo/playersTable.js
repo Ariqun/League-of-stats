@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 
-const PlayersTable = ({currentPlayer, participants, version}) => {
+const PlayersTable = ({currentPlayer, participants, region, version}) => {
 	const leftTeam = [];
 	const rightTeam = [];
 
@@ -24,13 +25,15 @@ const PlayersTable = ({currentPlayer, participants, version}) => {
 		const champName = modifyChampName(player.champ);
 
 		return(
-			<div className={currentPlayer === player.name ? 'current_player' : 'player'} key={player.name}>
-				<div className="champion_icon">
-					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
-				</div>
-				<div className="player_name">
-					<span>{player.name}</span>
-				</div>
+			<div className={currentPlayer === player.name ? 'current_player' : 'player'} data-tip={player.name} data-for="tooltip" key={player.name}>
+				<Link to={`/summoner/${region}/${player.name}`}>
+					<div className="champion_icon">
+						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
+					</div>
+					<div className="player_name">
+						<span>{player.name}</span>
+					</div>
+				</Link>	
 			</div>
 		)
 	}

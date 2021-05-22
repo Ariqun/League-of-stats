@@ -14,7 +14,7 @@ export default class Canvas extends Component {
 		const {leftTeam, rightTeam, option} = this.props;
 		const ctx = this.canvas.current.getContext('2d');
 		const allScore = [];
-		let factor = 150;
+		let factor = 110;
 
 		for (let i = 0; i < 5; i++) {
 			allScore.push(leftTeam[i][option].total, rightTeam[i][option].total);

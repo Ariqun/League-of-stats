@@ -112,13 +112,16 @@
 									&:first-of-type
 										margin-bottom: 1px
 					.player_name
-						@include flexColumn
-						width: 135px
-						word-break: break-word
-						text-align: center
-						.rank
-							color: $color-dark_gray
-							font-size: 13px
+						a
+							@include flexColumn
+							width: 135px
+							word-break: break-word
+							text-align: center
+							text-decoration: none
+							color: $color-light_gray
+							.rank
+								color: $color-dark_gray
+								font-size: 13px
 					.player_stats
 						display: flex
 						flex-direction: column

@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import PlayerRunes from '../getMatchInfo/playerRunes';
 import PlayerSpells from '../getMatchInfo/playerSpells';
@@ -45,10 +46,12 @@ const Player = ({teamId, info, region, version}) => {
 				</div>
 
 				<div className="player_name">
-					<span className="name">{summonerName}</span>
-					<PlayerRank id={summonerId} region={region}/>
+					<Link to={`/summoner/${region}/${summonerName}`}>
+						<span className="name">{summonerName}</span>
+						<PlayerRank id={summonerId} region={region}/>
+					</Link>
 				</div>
-
+				
 				<div className="player_stats">
 					<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
 

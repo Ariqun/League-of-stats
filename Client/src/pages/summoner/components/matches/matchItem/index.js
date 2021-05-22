@@ -33,7 +33,7 @@ const MatchItem = ({matchId, name}) => {
 	if (isLoading) return <LoadingBlock />
 	if (isError) return null;
 
-	const {participants} = info;
+	const {participants, platformId} = info;
 	let player = {};
 	
 	for (let elem of participants) {
@@ -53,7 +53,7 @@ const MatchItem = ({matchId, name}) => {
 				</div>
 
 				<div className="match_players">
-					<PlayersTable currentPlayer={player.summonerName} participants={participants}/>
+					<PlayersTable currentPlayer={player.summonerName} participants={participants} region={platformId}/>
 				</div>
 			</div>
 			

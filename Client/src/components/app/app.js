@@ -13,8 +13,8 @@ import Runes from '../../pages/runes/';
 import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
 import LiveMatch from '../../pages/liveMatch';
-import {LoadingPage} from '../loading';
 import checkLanguage from '../languages/checkLanguage';
+import {LoadingPage} from '../loading';
 
 import DragonData from '../../services/dragonData';
 import DataBase from '../../services/dataBase';
