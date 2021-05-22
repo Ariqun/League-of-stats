@@ -4,8 +4,7 @@ const initialState = {
 	runes: {},
 	spells: {},
 	items: {},
-	matchTypes: {},
-	live: {}
+	matchTypes: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -49,13 +48,6 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			matchTypes: action.loaded
-		}
-	}
-
-	if (action.type === 'LIVE_LOADED') {
-		return {
-			...state,
-			live: action.loaded
 		}
 	}
 	

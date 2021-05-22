@@ -83,8 +83,9 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 					return <Match region={region} matchId={id} />
 				}}/>
 
-				<Route path="/live/:region/:name/" render={() => {
-					return <LiveMatch />
+				<Route path="/live/:region/:name/" render={({match}) => {
+					const {region, name} = match.params;
+					return <LiveMatch region={region} name ={name}/>
 				}}/>
 	
 				<Footer/>

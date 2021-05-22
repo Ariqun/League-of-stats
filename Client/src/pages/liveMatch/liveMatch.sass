@@ -2,6 +2,31 @@
 
 .live_page
 	.container
+		.not_in_game
+			text-align: center
+			div
+				font-size: 32px
+			.profile
+				@include skyblueBordersTopAndBot
+				cursor: pointer
+				outline: none
+				margin-top: 40px
+				background: linear-gradient(270deg, rgba(11, 28, 27, 0) 0%, rgba(11, 28, 27, 1) 50%, rgba(11, 28, 27, 0) 100%)
+				a
+					display: block
+					text-decoration: none
+					color: $color-light_gray
+					outline: none
+					padding: 10px 30px
+					border: none
+					font-size: 1em
+				&:hover
+					color: $color-skyblue
+					border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(18, 235, 255, 0) 100%)
+					border-image-slice: 1
+		.match_data
+			text-align: center
+			padding-bottom: 20px
 		.team
 			display: flex
 			justify-content: center
@@ -17,7 +42,9 @@
 				border-top: 1px solid
 				border-bottom: 1px solid
 				.player_name
+					display: block
 					text-align: center
+					text-decoration: none
 					padding: 10px 0
 					border-bottom: 1px solid
 				.champ_stats
@@ -96,7 +123,7 @@
 				&:hover
 					border: 1px solid orange !important
 				&:hover .player_name
-					color: orange
+					color: orange !important
 					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 165, 0, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
 					border-image-slice: 1
 					background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)
@@ -121,6 +148,7 @@
 				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
 				border-image-slice: 1
 				.player_name
+					color: rgba(0, 191, 255, 1)
 					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
 					border-image-slice: 1
 		.team.right
@@ -128,6 +156,7 @@
 				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
 				border-image-slice: 1
 				.player_name
+					color: rgba(255, 99, 71, 1)
 					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
 					border-image-slice: 1
 				

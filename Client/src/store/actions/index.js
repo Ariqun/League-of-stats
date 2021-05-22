@@ -39,11 +39,4 @@ const matchTypesLoaded = (matchTypes) => {
 		matchTypeLoaded: matchTypes
 	}
 }
-
-const liveLoaded = (live) => {
-	return {
-		type: 'LIVE_LOADED',
-		liveLoaded: live
-	}
-}
-export {versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, liveLoaded, matchTypesLoaded};
+export {versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded};

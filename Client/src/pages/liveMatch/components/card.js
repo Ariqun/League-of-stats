@@ -1,24 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import PlayerKDA from '../../match/components/getMatchInfo/playerKDA';
 import PlayerSpells from '../../match/components/getMatchInfo/playerSpells';
-import {ranks} from '../../../components/languages/russian/ranks';
 import {findPercent} from '../../../components/manipulationsWithNums/findPercent';
 import {calcRatio} from '../../../components/manipulationsWithNums/calcRatio';
 import {LoadingBlock} from '../../../components/loading';
 
 import DataBase from '../../../services/dataBase';
-import RiotAPI from '../../../services/riotAPI';
 import PlayerRank from '../../match/components/playerRank';
 
 const Card = ({player, region = 'ru', champions, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState('');
 	const [summoner, setSummoner] = useState({});
-	const [ranked, setRanked] = useState([]);
 	const db = new DataBase();
-	const riotAPI = new RiotAPI();
 
 	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player;
 
@@ -26,11 +23,9 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 		const getInfo = async () => {
 			const champRes = await db.getChampionStats(championId);
 			const sumRes = await db.getSumStatistics(summonerId);
-			// const rankRes = await riotAPI.getSumRanked(summonerId, region);
 
 			setChampion(champRes);
 			setSummoner(sumRes);
-			// setRanked(rankRes)
 			changeLoading(false);
 		}
 		getInfo();
@@ -40,11 +35,6 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 
 	const name = Object.keys(champions).filter(champ => +champions[champ].key === championId);
 	let champWins = 0, champMatches = 0, champWinrate = 0, champKills = 0, champDeaths = 0, champAssists = 0;
-
-	// const {tier, rank, leaguePoints, wins, losses} = ranked;
-	// const matches = wins + losses;
-	// const winrate = (wins * 100 / matches).toFixed();
-	// const ruRanks = ranks();
 
 	const {perkStyle, perkSubStyle} = player.perks;
 	const prim = runes.find(rune => rune.id === perkStyle);
@@ -85,12 +75,14 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 
 	return(
 		<div className={`player_card ${role} col-2`}>
-			<div className="player_name">{summonerName}</div>
+			<Link to={`/summoner/${region}/${summonerName}`} className="player_name">
+				{summonerName}
+			</Link>
 
 			<div className="champ_stats">
 				<div className="winrate">{champWinrate}% <span>({champMatches} всего)</span></div>
 
-				<PlayerKDA kills={champKills} deaths={champDeaths} assists={champAssists}/>
+				<PlayerKDA kills={champKills} deaths={champDeaths} assists={champAssists} live/>
 			</div>
 
 			<PlayerRank id={summonerId} region={region} live/>

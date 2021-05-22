@@ -3,7 +3,11 @@ import {addZero} from "./addZeros";
 const transformMS = (ms, format = 'literal') => {
 	const seconds = addZero(Math.floor((ms / 1000) % 60));
 	const minutes = addZero(Math.floor((ms / (1000 * 60)) % 60));
+	const hours = addZero(Math.floor((ms / (1000 * 60 * 60)) % 60));
 
+	if (ms >= 3600000 && format === 'literal') return `${hours}ч. ${minutes}м. ${seconds}с.`
+	if (ms >= 3600000 && format === 'digits') return `${hours}:${minutes}:${seconds}с.`
+	
 	if (format === 'literal') return `${minutes}м. ${seconds}с.`;
 	if (format === 'digits') return `${minutes}:${seconds}`;
 }
