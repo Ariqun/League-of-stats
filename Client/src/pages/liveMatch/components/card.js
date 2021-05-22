@@ -10,6 +10,7 @@ import {LoadingBlock} from '../../../components/loading';
 
 import DataBase from '../../../services/dataBase';
 import RiotAPI from '../../../services/riotAPI';
+import PlayerRank from '../../match/components/playerRank';
 
 const Card = ({player, region = 'ru', champions, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -25,11 +26,11 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 		const getInfo = async () => {
 			const champRes = await db.getChampionStats(championId);
 			const sumRes = await db.getSumStatistics(summonerId);
-			const rankRes = await riotAPI.getSumRanked(summonerId, region);
+			// const rankRes = await riotAPI.getSumRanked(summonerId, region);
 
 			setChampion(champRes);
 			setSummoner(sumRes);
-			setRanked(rankRes)
+			// setRanked(rankRes)
 			changeLoading(false);
 		}
 		getInfo();
@@ -40,10 +41,10 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 	const name = Object.keys(champions).filter(champ => +champions[champ].key === championId);
 	let champWins = 0, champMatches = 0, champWinrate = 0, champKills = 0, champDeaths = 0, champAssists = 0;
 
-	const {tier, rank, leaguePoints, wins, losses} = ranked;
-	const matches = wins + losses;
-	const winrate = (wins * 100 / matches).toFixed();
-	const ruRanks = ranks();
+	// const {tier, rank, leaguePoints, wins, losses} = ranked;
+	// const matches = wins + losses;
+	// const winrate = (wins * 100 / matches).toFixed();
+	// const ruRanks = ranks();
 
 	const {perkStyle, perkSubStyle} = player.perks;
 	const prim = runes.find(rune => rune.id === perkStyle);
@@ -92,16 +93,7 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 				<PlayerKDA kills={champKills} deaths={champDeaths} assists={champAssists}/>
 			</div>
 
-			<div className="player_rank">
-				<div className="rank_icon">
-					<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/${tier}.png`} alt={`${tier}_emblem`}></img>
-				</div>
-				<div className="rank_wrapper">
-					<div className="rank_name">{ruRanks[tier.toLowerCase()]} {rank}</div>
-					<span className="rank_lp">LP: &nbsp;{leaguePoints}</span>
-					<span className="matches">{winrate}% <span>({matches} всего)</span></span>
-				</div>
-			</div>
+			<PlayerRank id={summonerId} region={region} live/>
 
 			<div className="player_settings">
 				<div className="runes">

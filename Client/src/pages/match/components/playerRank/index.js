@@ -4,27 +4,55 @@ import {ranks} from '../../../../components/languages/russian/ranks';
 
 import RiotAPI from '../../../../services/riotAPI';
 
-const PlayerRank = ({id, region}) => {
-	const [ranked, setRanked] = useState([]);
+const PlayerRank = ({id, region, live = false}) => {
 	const [isLoading, changeLoading] = useState(true);
-
+	const [ranked, setRanked] = useState([]);
 	const riotAPI = new RiotAPI();
-	const ruObj = ranks();
 	
 	useEffect(() => {
 		const getRank = async () => {
 			const res = await riotAPI.getSumRanked(id, region);
-			
-			setRanked([res.tier, res.rank]);
+
+			setRanked(res);
 			changeLoading(false);
 		}
 		getRank();
 	}, [])
 
 	if (isLoading) return null;
-	if (ranked[0] === undefined) return <span className="rank">Нет рейтинга</span>;
 
-	return <span className="rank">{ruObj[ranked[0].toLowerCase()]} {ranked[1]}</span>;
+	const {tier, rank, leaguePoints, wins, losses} = ranked;
+	const ruRanks = ranks();
+
+	if (rank === "Не активен") return (
+		<div className="player_rank">
+			<div className="rank_icon">
+				<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'}></img>
+			</div>
+			<span className="rank_name">Нет рейтинга</span>
+		</div>
+	)
+
+	if (live) {
+		const matches = wins + losses;
+		const winrate = (wins * 100 / matches).toFixed();
+
+		return(
+			<div className="player_rank">
+				<div className="rank_icon">
+					<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/${tier}.png`} alt={`${tier}_emblem`}></img>
+				</div>
+
+				<div className="rank_wrapper">
+					<div className="rank_name">{ruRanks[tier.toLowerCase()]} {rank}</div>
+					<span className="rank_lp">LP: &nbsp;{leaguePoints}</span>
+					<span className="matches">{winrate}% <span>({matches} всего)</span></span>
+				</div>
+			</div>
+		)
+	}
+
+	return <span className="rank">{ruRanks[tier.toLowerCase()]} {rank}</span>;
 }
 
 export default PlayerRank;
