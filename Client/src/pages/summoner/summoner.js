@@ -14,19 +14,19 @@ const Summoner = ({region, name}) => {
 	const [isloading, changeLoading] = useState(true);
 	const [summoner, setSummoner] = useState({});
 	const [tab, changeTab] = useState('matches');
-
 	const riotAPI = new RiotAPI();
 
 	useEffect(() => {
 		const getSummoner = async () => {
 			const res = await riotAPI.getSummoner(region, name);
 
-			setSummoner({...res});
+			setSummoner(res);
 			changeLoading(false);
 		}
 		getSummoner();
-
-	}, [])
+		
+		return () => {changeLoading(true)}
+	}, [name])
 
 	if (isloading) return <LoadingPage />
 
@@ -36,7 +36,7 @@ const Summoner = ({region, name}) => {
 		if (tab === 'matches') return <Matches puuID={puuID} name={summoner.name} />;
 		if (tab === 'champs') return <Champions sumID={sumID} />;
 		if (tab === 'records') return <Records sumID={sumID} />
-		if (tab === 'stats') return <Statistics sumID={sumID}/> 
+		if (tab === 'stats') return <Statistics sumID={sumID} /> 
 	}
 
 	return (

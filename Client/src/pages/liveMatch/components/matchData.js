@@ -6,10 +6,12 @@ const MatchData = ({matchType, startTime}) => {
 	const [time, changeTime] = useState(getTime());
 
 	useEffect(() => {
-		setInterval(() => {
+		const timer = setInterval(() => {
 			const duration = getTime();
 			changeTime(duration);
 		}, 1000)
+		
+		return () => {clearInterval(timer)}
 	})
 
 	function getTime() {

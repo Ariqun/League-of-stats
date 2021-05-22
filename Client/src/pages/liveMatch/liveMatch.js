@@ -34,10 +34,10 @@ const LiveMatch = ({region, name, matchTypes}) => {
 			<div className="live_page">
 				<div className="container">
 					<div className="not_in_game">
-						<div>{name} сейчас не в игре</div>
+						<div><span className="name">{name}</span> сейчас не в игре</div>
 						<button className="profile">
 							<Link to={`/summoner/${region}/${name}`}>
-								Профиль {name}
+								Профиль <span className="name">{name}</span>
 							</Link>
 						</button>
 					</div>

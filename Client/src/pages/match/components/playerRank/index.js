@@ -24,14 +24,18 @@ const PlayerRank = ({id, region, live = false}) => {
 	const {tier, rank, leaguePoints, wins, losses} = ranked;
 	const ruRanks = ranks();
 
-	if (rank === "Не активен") return (
-		<div className="player_rank">
-			<div className="rank_icon">
-				<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'}></img>
+	if (!live && rank === "Не активен") return <span className="rank_name">Нет рейтинга</span>
+
+	if (live && rank === "Не активен") {
+		return(
+			<div className="player_rank">
+				<div className="rank_icon">
+					<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'}></img>
+				</div>
+				<span className="rank_name">Нет рейтинга</span>
 			</div>
-			<span className="rank_name">Нет рейтинга</span>
-		</div>
-	)
+		)
+	}
 
 	if (live) {
 		const matches = wins + losses;
@@ -52,7 +56,7 @@ const PlayerRank = ({id, region, live = false}) => {
 		)
 	}
 
-	return <span className="rank">{ruRanks[tier.toLowerCase()]} {rank}</span>;
+	return <span className="rank_name">{ruRanks[tier.toLowerCase()]} {rank}</span>;
 }
 
 export default PlayerRank;

@@ -6,12 +6,11 @@ function Form() {
 	const [region, setRegion] = useState('ru')
 
 	const changeName = (e) => {
-		console.log(e.target.value)
 		setName(e.target.value);
 	}
 
 	const changeRegion = (e) => {
-		setRegion(e.target.value);
+		setRegion((e.target.value).toLowerCase());
 	}
 
 	const render = () => {
