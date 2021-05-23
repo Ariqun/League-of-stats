@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import itemTooltip from '../../../../components/tooltips/itemTooltip';
 
 const PlayerItems = ({player, items, version}) => {
+	const visionScore = player.visionScore;
 	let itemIds = [];
-	
+
 	for(let key in player) {
 		if (key.match(/item[\d]/)) {
 			itemIds.push(player[key]);
@@ -18,10 +19,19 @@ const PlayerItems = ({player, items, version}) => {
 				if (itemId === 0) return <div className="item" key={`${itemId}_${i}`}/>;
 
 				const tooltip = itemTooltip(items[itemId], version);
+				let content = (<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`} alt={`${itemId}_icon`}/>);
+				if (i === 6) {
+					content = (
+						<>
+							<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`} alt={`${itemId}_icon`}/>
+							<div className="vision_score">{visionScore}</div>
+						</>
+					)
+				}
 
 				return(
 					<div className="item" data-tip={tooltip} data-for="tooltip" key={`${itemId}_${i}`}>
-						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`} alt={`${itemId}_icon`}/>
+						{content}
 					</div>
 				);
 			})}

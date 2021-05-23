@@ -69,7 +69,7 @@ const Player = ({teamId, info, region, version}) => {
 						</div>
 
 						<div className="wrapper_block_right">
-							<div className="vision_score">
+							<div className="vision_score hidden">
 								<span className="vision">Обзор: {visionScore} </span>
 								<span className="per_min"> ({visionPerMin})</span>
 							</div>
