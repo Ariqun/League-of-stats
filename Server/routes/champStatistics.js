@@ -238,7 +238,7 @@ const pushSumInfoInDB = async (obj) => {
 
 		const dmg = physical + magic + trueDmg;
 		const heal = restore + shield;
-		const kda = +((kills + assists) / deaths).toFixed(1);
+		const kda = calcRatio((kills + assists), deaths);
 		const records = {kda, kills, deaths, assists, dmg, heal, cs, gold, vision, wards, dmgTaken, CC, killingSpree, double, triple, quadra, penta};
 
 		let type = '';
@@ -320,6 +320,12 @@ const pushSumInfoInDB = async (obj) => {
 				}
 			});
 		}
+	}
+
+	function calcRatio (first, second) {
+		if (second === 0) second = 1;
+
+		return +(first / second).toFixed(1);
 	}
 }
 

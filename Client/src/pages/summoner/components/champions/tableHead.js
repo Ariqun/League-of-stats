@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TableHead = ({changeSort, sort}) => {
+const TableHead = ({changeSort, sortBy}) => {
 	const obj = {
 		champ: 'Чемпион', 
 		matches: 'Игры', 
@@ -16,7 +16,7 @@ const TableHead = ({changeSort, sort}) => {
 
 	const result = Object.keys(obj).map(title => {
 		return(
-			<td onClick={() => changeSort(title)} className={sort === title ? 'head_item active' : 'head_item'} key={title}>
+			<td onClick={() => changeSort(title)} className={sortBy === title ? 'head_item active' : 'head_item'} key={title}>
 				<div className="title">{obj[title]}</div>
 			</td>
 		)

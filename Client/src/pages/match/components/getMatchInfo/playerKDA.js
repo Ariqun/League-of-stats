@@ -16,7 +16,7 @@ const PlayerKDA = ({kills, deaths, assists, live}) => {
 				<span className="slash"> / </span>
 				<span className="assists">{assists}</span>
 			</div>
-			<span className="kda_ratio">&ensp;({ratio})</span>
+			<span className="kda_ratio">({ratio})</span>
 		</div>
 	)
 }

@@ -13,7 +13,7 @@ const Champions = ({sumID}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [statistics, setStatistics] = useState([]);
 	const [tab, changeTab] = useState('total');
-	const [sort, changeSort] = useState('matches');
+	const [sortBy, changeSortBy] = useState('matches');
 	const db = new DataBase();
 
 	useEffect(() => {
@@ -34,9 +34,9 @@ const Champions = ({sumID}) => {
 
 				<table>
 					<tbody>
-						<TableHead changeSort={changeSort} sort={sort}/>
+						<TableHead changeSort={changeSortBy} sortBy={sortBy}/>
 
-						<TableBody tab={tab} statistics={statistics} sort={sort}/>
+						<TableBody tab={tab} statistics={statistics} sortBy={sortBy}/>
 					</tbody>
 				</table>
 			</div>

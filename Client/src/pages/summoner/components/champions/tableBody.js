@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux';
 
+import PlayerKDA from '../../../match/components/getMatchInfo/playerKDA';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 
-const TableBody = ({tab, statistics, sort, version}) => {
+const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 	const champs = statistics.champions[0];
 	const totalMatches = statistics.statistics[0].total.matches;
-
+	
 	const result = Object.keys(champs).map(champ => {
 		if (champs[champ][tab] === undefined) return null;
 
@@ -15,6 +16,7 @@ const TableBody = ({tab, statistics, sort, version}) => {
 		const {kills, deaths, assists} = champs[champ][tab].kda;
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
+		const name = champions[champ].name;
 		
 		const avgKills = calcRatio(kills, matches, 1);
 		const avgDeaths = calcRatio(deaths, matches, 1);
@@ -32,7 +34,7 @@ const TableBody = ({tab, statistics, sort, version}) => {
 				<td className="general" champ={champ}>
 					<div className="wrapper">
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champ}.png`} alt={champ}/>
-						<span className="name">{champ}</span>
+						<span className="name">{name}</span>
 					</div>
 				</td>
 
@@ -52,14 +54,7 @@ const TableBody = ({tab, statistics, sort, version}) => {
 
 				<td className="avg_kda" kda={avgRatio}>
 					<div className="wrapper">
-						<div className="kda_score">
-							<span className="kills">{avgKills}</span>
-							<span> / </span>
-							<span className="deaths">{avgDeaths}</span>
-							<span> / </span>
-							<span className="assists">{avgAssists} </span>
-							<span className="kda_ratio">&ensp;({avgRatio})</span>
-						</div>
+						<PlayerKDA kills={avgKills} deaths={avgDeaths} assists={avgAssists}/>
 					</div>
 				</td>
 
@@ -104,9 +99,9 @@ const TableBody = ({tab, statistics, sort, version}) => {
 				</td>
 			</tr>
 		)
-	})
-
-	if (result[0] === null) return <tr><td className="no_data">Игры не найдены</td></tr>;
+	}).filter(item => item !== null);
+	
+	if (result.length === 0) return <tr><td className="no_data">Игры не найдены</td></tr>;
 
 	result.sort((a, b) => {
 		if (!a || !b) return null;
@@ -114,11 +109,11 @@ const TableBody = ({tab, statistics, sort, version}) => {
 		let x = null, y = null;
 		
 		for (let elem of a.props.children) {
-			if (elem.props[sort] !== undefined) x = elem.props[sort];
+			if (elem.props[sortBy] !== undefined) x = elem.props[sortBy];
 		}
 
 		for (let elem of b.props.children) {
-			if (elem.props[sort] !== undefined) y = elem.props[sort];
+			if (elem.props[sortBy] !== undefined) y = elem.props[sortBy];
 		}
 
 		return y - x;
@@ -128,7 +123,10 @@ const TableBody = ({tab, statistics, sort, version}) => {
 }
 
 const mapStateToProps = (state) => {
-	return {version: state.version};
+	return {
+		version: state.version,
+		champions: state.champions
+	};
 }
 
 export default connect(mapStateToProps)(TableBody);
