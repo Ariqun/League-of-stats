@@ -6,12 +6,11 @@ const runeTooltip = (rune, percent) => {
 	let popularity = `<span class="pop">Популярность: <span class="value">${percent}%</span></span>`;
 	if (percent === undefined) popularity = '';
 
-	let descr = longDesc.replace(/<b>(\W+)<\/b>/gi, (match, m1) => {
-		return `<span>${m1}</span>`;
-	})
-
-	descr = descr.replace(/<attention>(\s?\w+%?)<\/attention>/gi, (match, m1) => {
-		return `<span>${m1}</span>`;
+	let descr = longDesc.replace(/<b>(\W+)<\/b>|<attention>(\s?\w+%?)<\/attention>/gi, (match, m1, m2) => {
+		let str = '';
+		m1 ? str = m1 : str = m2;
+		
+		return `<span>${str}</span>`;
 	})
 
 	descr = descr.replace(/<hr>/gi, '');

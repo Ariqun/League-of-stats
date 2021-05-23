@@ -18,7 +18,7 @@ const Table = ({info, version}) => {
 				if (player[item] === true) content = '🗸';
 
 				let className = '';
-				if (currentColumn === i) className += ' current';
+				if (currentColumn === i) className = 'current';
 				if (player[item] === max || player[item] === true) className += ' max';
 				
 				return (

@@ -2,9 +2,12 @@ import './tooltips.sass';
 
 const itemTooltip = (item, version) => {
 	const {name, gold, image, description} = item;
+	
+	let descr = description.replace(/<attention>(\s?\w+%?)<\/attention>|<ornnBonus>(\s?\w+%?)<\/ornnBonus>/gi, (match, m1, m2) => {
+		let str = '';
+		m1 ? str = m1 : str = m2;
 
-	let descr = description.replace(/<attention>(\s?\w+%?)<\/attention>/gi, (match, m1) => {
-		return `<span>+${m1}</span>`;
+		return `<span>+${str}</span>`;
 	})
 
 	descr = descr.replace(/<hr>/gi, '<br>');
