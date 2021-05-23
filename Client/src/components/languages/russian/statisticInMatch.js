@@ -17,14 +17,14 @@ const damage = () => {
 		largestCriticalStrike: 'Максимальный крит',
 		damageDealtToBuildings: 'Урон по башням',
 		damageDealtToObjectives: 'Урон по объектам',
+		totalDamageTaken: 'Получено урона'
 	}
 }
 
 const restore = () => {
 	return {
 		totalHealsOnTeammates: 'Лечение союзников',
-		totalDamageShieldedOnTeammates: 'Щиты на союзниках',
-		totalDamageTaken: 'Получено урона',
+		totalDamageShieldedOnTeammates: 'Щиты на союзниках'
 	}
 }
 
@@ -32,7 +32,7 @@ const eco = () => {
 	return {
 		goldEarned: 'Золота полученно',
 		totalMinionsKilled: 'Убито миньонов',
-		neutralMinionsKilled: 'Убито нейтральных монстров',
+		neutralMinionsKilled: 'Убито нейтральных монстров'
 	}
 }
 

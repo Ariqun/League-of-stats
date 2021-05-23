@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
@@ -6,19 +6,23 @@ import {fight, damage, restore, eco, vision, other} from '../../../../components
 import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 
 const Table = ({info, version}) => {
+	const [currentColumn, changeCurrentColumn] = useState(0);
 	const {participants} = info;
 
 	const createBlock = (obj, title) => {
-		const result = Object.keys(obj).map(item => {
+		const result = Object.keys(obj).map(item  => {
 			const max = Math.max(...participants.map(player => {return player[item]}));
 
-			const res = participants.map(player => {
+			const res = participants.map((player, i) => {
 				let content = checkBigNum(player[item]);
-
 				if (player[item] === true) content = '🗸';
+
+				let className = '';
+				if (currentColumn === i) className += ' current';
+				if (player[item] === max || player[item] === true) className += ' max';
 				
 				return (
-					<td className={player[item] === max || player[item] === true ? "max" : null} key={player.participantId}>
+					<td className={className} key={player.participantId}>
 						{content}
 					</td>
 				)
@@ -40,11 +44,11 @@ const Table = ({info, version}) => {
 		);
 	}
 	
-	const champsBlock = participants.map(player => {
+	const champsBlock = participants.map((player, i) => {
 		const champName = modifyChampName(player.championName);
 
 		return(
-			<td key={champName}>
+			<td onClick={() => changeCurrentColumn(i)} key={champName}>
 				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
 			</td>
 		)
@@ -66,6 +70,7 @@ const Table = ({info, version}) => {
 				{ecoBlock}
 				{visionBlock}
 				{otherBlock}
+				<tr className="champ_icons"><td></td>{champsBlock}</tr>
 			</tbody>
 		</table>
 	)
