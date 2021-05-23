@@ -5,7 +5,7 @@ import CircleCanvas from '../../../../components/сanvases/circleCanvas';
 const MatchTypes = ({stats}) => {
 	const typeBlock = (type) => {
 		if (stats[type] === undefined) return <div className="no_data">Нет данных</div>
-		console.log(stats);
+		
 		const {matches, wins} = stats[type];
 		const losses = matches - wins;
 
