@@ -9,18 +9,23 @@ import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
 import Statistics from './components/statistics';
+import DataBase from '../../services/dataBase';
 
 const Summoner = ({region, name}) => {
 	const [isloading, changeLoading] = useState(true);
 	const [summoner, setSummoner] = useState({});
+	const [statistics, setStatistics] = useState({});
 	const [tab, changeTab] = useState('matches');
 	const riotAPI = new RiotAPI();
+	const db = new DataBase();
 
 	useEffect(() => {
 		const getSummoner = async () => {
-			const res = await riotAPI.getSummoner(region, name);
-
-			setSummoner(res);
+			const sumInfo = await riotAPI.getSummoner(region, name);
+			const sumStats = await db.getSumStatistics(sumInfo.tech.sumID);
+			
+			setSummoner(sumInfo);
+			setStatistics(sumStats);
 			changeLoading(false);
 		}
 		getSummoner();
@@ -42,7 +47,7 @@ const Summoner = ({region, name}) => {
 	return (
 		<div className="summoner_page">
 			<div className="container">
-				<Promo summoner={summoner}/>
+				<Promo summoner={summoner} statistics={statistics}/>
 				<Nav changeTab={changeTab}/>
 
 				{content()}

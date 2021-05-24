@@ -50,7 +50,7 @@ const createSummonerInfo = async (res, region) => {
 const createRankedInfo = (res) => {
 	const obj = {ranked: {rank: 'Нет рейтинга'}}
 
-	res[0].length !== 0 ? obj.ranked = {...res[0]} : null;
+	res[0].length !== 0 ? obj.ranked = [...res] : null;
 
 	return obj;
 }

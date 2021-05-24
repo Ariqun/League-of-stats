@@ -2,10 +2,12 @@ import React from 'react';
 
 import {ranks} from '../../../../components/languages/russian/ranks';
 
-const Rating = ({ranked}) => {
+const Rating = ({ranked, type}) => {
 	if (!ranked) {
 		return(
-			<div className="sum_rating">
+			<div className={`sum_rating`}>
+				<div className="type">{type}</div>
+
 				<div className="rank_block">
 					<div className="rank_icon">
 						<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'}></img>
@@ -20,7 +22,9 @@ const Rating = ({ranked}) => {
 	let {tier, rank, leaguePoints} = ranked;
 
 	return(
-		<div className="sum_rating">
+		<div className={`sum_rating`}>
+			<div className="type">{type}</div>
+
 			<div className="rank_block">
 				<div className="rank_icon">
 					<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/${tier}.png`} alt={`${tier}_emblem`}></img>

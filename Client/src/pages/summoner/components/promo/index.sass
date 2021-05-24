@@ -1,64 +1,113 @@
 @import '../../../../components/UI/ui'
 	
 .promo
+	position: relative
 	display: flex
-	justify-content: space-evenly
+	justify-content: space-between
 	align-items: center
-	padding: 20px 0
-	.sum_rating
-		display: flex
-		justify-content: center
-		.rank_block
-			@include flexColumn
-			width: 200px
-			.rank_icon
-				img
-					width: 125px
-			.rank_name
-			.rank_lp
-				color: $color-dark_gray
-				font-size: 13px
-	.banner
+	padding: 0 20px 40px
+	.sum_banner, .champ_banner
+		position: relative
 		display: flex
 		flex-direction: column
 		align-items: center
-		padding: 0 20px
-		.icon img
-			width: 100px
-			border-radius: 10px
-			border: 2px solid black
-		.name_and_lvl
+		z-index: 1
+		.icon 
+			border: 5px solid $color-orange
+			border-radius: 50%
+			img
+				width: 150px
+				border-radius: 50%
+				border: 2px solid black
+		.lvl, .role
+			position: absolute
+			bottom: -20px
+			display: flex
+			justify-content: center
+			align-items: center
+			width: 50px
+			height: 50px
 			color: white
-			padding: 0 10px
-			.name
-				font-size: 40px
-			.lvl
-				text-align: center
-				color: $color-dark_gray
-	.circle_canvas
-		position: relative
-		display: flex
-		justify-content: center
-		.stats
+			line-height: 1px
+			border-radius: 50%
+			border: 3px solid $color-orange
+			background: black
+		.role
+			padding: 5px
+		.side_block
+			@include opacityBg
+			@include transGrayBordersTopAndBot
 			position: absolute
 			top: calc(50% - 75px)
-			left: calc(50% - 75px)
+			right: calc(50% - 300px)
 			display: flex
-			flex-direction: column
-			align-items: center
-			justify-content: space-evenly
-			width: 150px
+			justify-content: space-around
+			width: 300px
 			height: 150px
-			line-height: 1
-			.primary
-				font-size: 25px
-				color: $color-green
-			.percent
-				@include transGrayBordersTopAndBot
-				font-size: 35px
-				padding: 5px 0 7px
-			.secondary
-				font-size: 25px
-				color: $color-red
-		#front
+			padding: 10px 10px 10px 80px
+			z-index: -1
+			.sum_rating
+				display: flex
+				flex-direction: column
+				align-items: center
+				.type
+					padding-bottom: 10px
+				.rank_block
+					@include flexColumn
+					.rank_icon
+						width: 50px
+						height: 60px
+					.rank_lp
+						color: $color-dark_gray
+						font-size: 13px
+	.champ_banner
+		.side_block
+			right: 50%
+			padding: 10px 50px 10px 10px
+		.winrate, .matches
 			position: absolute
+			top: calc(50% - 25px)
+			left: 40px
+			height: 30px
+			progress
+				appearance: none
+				height: 30px
+				width: 200px
+				transform: rotate(180deg)
+				&::-webkit-progress-bar
+					height: 30px
+					border-top-right-radius: 15px
+					border-bottom-right-radius: 15px
+					background: rgba(111, 111, 111, 0.4)
+				&::-webkit-progress-value
+					border-top-right-radius: 15px
+					border-bottom-right-radius: 15px
+					background: deepskyblue
+			.value
+				position: absolute
+				top: 4px
+				right: 55px
+				color: black
+		.matches
+			top: calc(50% + 20px)
+			progress
+				&::-webkit-progress-bar
+					background: $color-red
+				&::-webkit-progress-value
+					background: $color-green
+			.counts
+				position: absolute
+				top: 5px
+				display: flex
+				justify-content: space-around
+				width: 100%
+				color: black
+	.sum
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		.name
+			font-size: 40px
+		.region
+			color: $color-dark_gray
