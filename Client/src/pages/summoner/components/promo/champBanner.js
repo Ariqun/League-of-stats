@@ -7,6 +7,8 @@ const ChampBanner = ({statistics, champions, version}) => {
 	let best = 'Teemo';
 	let matches = 0;
 	let wins = 0;
+	let role = '';
+	let matchesAtRole = 0;
 
 	for (let champ of champs) {
 		const champMatches = champ.total.results.matches;
@@ -21,6 +23,14 @@ const ChampBanner = ({statistics, champions, version}) => {
 
 	const percent = findPercent(wins, matches, 1);
 	const name = champions[best].name;
+	const roles = statistics.champions[0][best].total.roles;
+
+	for (let key in roles) {
+		if (roles[key].matches > matchesAtRole) {
+			matchesAtRole = roles[key].matches;
+			role = key;
+		}
+	}
 
 	return(
 		<div className="champ_banner">
@@ -28,7 +38,9 @@ const ChampBanner = ({statistics, champions, version}) => {
 				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${best}.png`} alt={`${best}_icon`}/>
 			</div>
 
-			<div className="role"><img src="/assets/icons/positions/middle.png" alt="middle_icon"/></div>
+			<div className="role">
+				<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
+			</div>
 
 			<div className="side_block">
 				<div className="name">{name}</div>

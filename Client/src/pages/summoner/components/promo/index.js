@@ -6,10 +6,11 @@ import SumBanner from './sumBanner';
 import './index.sass';
 
 const Promo = ({summoner, statistics}) => {
-	const {name, lvl, iconID, ranked, region} = summoner;
+	const {name, lvl, iconId, ranked, region} = summoner;
+	
 	return (
 		<div className="promo">
-			<SumBanner name={name} ranked={ranked} lvl={lvl} iconID={iconID}/>
+			<SumBanner name={name} ranked={ranked} lvl={lvl} iconID={iconId}/>
 			<div className="sum">
 				<div className="name">{name}</div>
 				<div className="region">({region})</div>

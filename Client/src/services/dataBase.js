@@ -30,13 +30,26 @@ export default class DataBase {
 		const res = await axios({
 			method: 'post',
 			url: '/sumStatistics',
-			data: `sumID=${id}`,
+			data: `sumId=${id}`,
 			headers: {'Content-type': 'application/x-www-form-urlencoded'}
 		});
 
 		if (res.status !== 200) {
 			throw new Error('DataBase getSumStatistics failed');
 		}
+
+		return res.data;
+	}
+
+	getMatchInfo = async (matchId) => {
+		const res = await axios({
+			method: 'post',
+			url: '/match',
+			data: `matchID=${matchId}`,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+
+		if (res.status !== 200) throw new Error('DataBase getMatchInfo failed');
 
 		return res.data;
 	}

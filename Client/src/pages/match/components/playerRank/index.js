@@ -13,20 +13,16 @@ const PlayerRank = ({id, region, live = false}) => {
 		const getRank = async () => {
 			const res = await riotAPI.getSumRanked(id, region);
 
-			setRanked(res);
+			setRanked(...Object.values(res));
 			changeLoading(false);
 		}
 		getRank();
 	}, [])
 
 	if (isLoading) return null;
-
-	const {tier, rank, leaguePoints, wins, losses} = ranked;
-	const ruRanks = ranks();
-
-	if (!live && rank === "Не активен") return <span className="rank_name">Нет рейтинга</span>
-
-	if (live && rank === "Не активен") {
+	
+	if (!live && ranked.length === 0) return <span className="rank_name">Нет рейтинга</span>
+	if (live && ranked.length === 0) {
 		return(
 			<div className="player_rank">
 				<div className="rank_icon">
@@ -36,6 +32,9 @@ const PlayerRank = ({id, region, live = false}) => {
 			</div>
 		)
 	}
+
+	const {tier, rank, leaguePoints, wins, losses} = ranked[0];
+	const ruRanks = ranks();
 
 	if (live) {
 		const matches = wins + losses;

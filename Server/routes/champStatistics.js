@@ -47,7 +47,6 @@ router.post('/', async (req, res) => {
 					sumInfo[summonerId] = {
 						sumId: summonerId,
 						sumName: summonerName,
-						matches: 1,
 						win: win ? 1 : 0,
 						solo: matchType === 420 ? 1 : 0,
 						flex: matchType === 440 ? 1 : 0,
@@ -231,7 +230,7 @@ const pushChampInfoInDB = async (obj) => {
 
 const pushSumInfoInDB = async (obj) => {
 	for (let key in obj) {
-		const {sumId, sumName, matches, win, solo, flex, normal} = obj[key];
+		const {sumId, sumName, win, solo, flex, normal} = obj[key];
 		const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = obj[key].champion;
 		const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = obj[key].champion;
 		const role = (obj[key].role).toLowerCase();
@@ -252,18 +251,22 @@ const pushSumInfoInDB = async (obj) => {
 			[`champions.${champName}.name`]: champName,
 			[`champions.${champName}.champId`]: champId,
 			$inc: {
-				[`statistics.total.matches`]: matches,
+				[`statistics.total.matches`]: 1,
 				[`statistics.total.wins`]: win,
-				[`statistics.total.roles.${role}.matches`]: matches,
+				[`statistics.total.roles.${role}.matches`]: 1,
 				[`statistics.total.roles.${role}.wins`]: win,
-				[`statistics.${type}.matches`]: matches,
+				[`statistics.${type}.matches`]: 1,
 				[`statistics.${type}.wins`]: win,
-				[`statistics.${type}.roles.${role}.matches`]: matches,
+				[`statistics.${type}.roles.${role}.matches`]: 1,
 				[`statistics.${type}.roles.${role}.wins`]: win,
-				[`champions.${champName}.total.results.matches`]: matches,
+				[`champions.${champName}.total.results.matches`]: 1,
 				[`champions.${champName}.total.results.wins`]: win,
-				[`champions.${champName}.${type}.results.matches`]: matches,
+				[`champions.${champName}.total.roles.${role}.matches`]: 1,
+				[`champions.${champName}.total.roles.${role}.wins`]: win,
+				[`champions.${champName}.${type}.results.matches`]: 1,
 				[`champions.${champName}.${type}.results.wins`]: win,
+				[`champions.${champName}.${type}.roles.${role}.matches`]: 1,
+				[`champions.${champName}.${type}.roles.${role}.wins`]: win,
 				[`champions.${champName}.total.kda.kills`]: kills,
 				[`champions.${champName}.total.kda.deaths`]: deaths,
 				[`champions.${champName}.total.kda.assists`]: assists,

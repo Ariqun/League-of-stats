@@ -21,9 +21,11 @@ const Summoner = ({region, name}) => {
 
 	useEffect(() => {
 		const getSummoner = async () => {
+			console.time('hey');
 			const sumInfo = await riotAPI.getSummoner(region, name);
-			const sumStats = await db.getSumStatistics(sumInfo.tech.sumID);
-			
+			console.log(sumInfo);
+			const sumStats = await db.getSumStatistics(sumInfo.sumId);
+			console.timeEnd('hey')
 			setSummoner(sumInfo);
 			setStatistics(sumStats);
 			changeLoading(false);
@@ -36,12 +38,12 @@ const Summoner = ({region, name}) => {
 	if (isloading) return <LoadingPage />
 
 	const content = () => {
-		const {puuID, sumID} = summoner.tech;
-
-		if (tab === 'matches') return <Matches puuID={puuID} name={summoner.name} />;
-		if (tab === 'champs') return <Champions sumID={sumID} />;
-		if (tab === 'records') return <Records sumID={sumID} />
-		if (tab === 'stats') return <Statistics sumID={sumID} /> 
+		const {name, matchIds} = summoner;
+		const {records} = statistics;
+		if (tab === 'matches') return <Matches matchIds={matchIds} name={name}/>;
+		if (tab === 'champs') return <Champions statistics={statistics} />
+		if (tab === 'records') return <Records records={records[0]} />
+		if (tab === 'stats') return <Statistics statistics={statistics} />
 	}
 
 	return (
@@ -54,6 +56,7 @@ const Summoner = ({region, name}) => {
 			</div>
 		</div>
 	)
+	
 }
 
 export default Summoner;

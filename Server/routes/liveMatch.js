@@ -1,6 +1,7 @@
 const {Router} = require('express');
-const axios = require('axios');
 const router = Router();
+
+const getData = require('../libs/getData');
 
 router.post('/live', async (req, res) => {
 	const sumId = encodeURI(req.body.sumId);
@@ -11,22 +12,5 @@ router.post('/live', async (req, res) => {
 
 	res.send(JSON.stringify(live));
 })
-
-const getData = async (url) => {
-	const headers = {
-		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",
-		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-239d14bb-9ef5-4a2a-853e-4a26e3d46a36"
-	};
-	let result = {};
-
-	await axios.get(url, {headers: headers})
-		.then(res => result = res.data)
-		.catch(err => console.error(err))
-
-	return result;
-}
 
 module.exports = router;

@@ -31,35 +31,6 @@ export default class RiotAPI {
 		return res.data;
 	}
 
-	getSumMatches = async (puuID) => {
-		console.log('Request')
-
-		const res = await axios({
-			method: 'post',
-			url: '/matches',
-			data: `puuID=${puuID}`,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		})
-
-		if (res.status !== 200) throw new Error('RiotAPI getSumMatches failed');
-
-		return res.data;
-	}
-
-	getMatchInfo = async (matchId) => {
-		console.log('Request')
-		const res = await axios({
-			method: 'post',
-			url: '/match',
-			data: `matchID=${matchId}`,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		})
-
-		if (res.status !== 200) throw new Error('RiotAPI getMatch failed');
-
-		return res.data;
-	}
-
 	getLiveMatch = async (sumId, region) => {
 		console.log('Request');
 

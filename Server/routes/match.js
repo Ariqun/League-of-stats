@@ -1,7 +1,7 @@
 const {Router} = require('express');
-const axios = require('axios');
 const router = Router();
 
+const getData = require('../libs/getData');
 const match = require('../models/match');
 
 router.post('/match', async (req, res) => {
@@ -16,9 +16,9 @@ router.post('/match', async (req, res) => {
 			const timeline = await getData(urlTL);
 			
 			if (Object.keys(result).length !== 0) {
-				const timelienInfo = collectTimelineInfo(timeline);
+				const timelineInfo = collectTimelineInfo(timeline);
 
-				pushMatchInDB(result, timelienInfo);
+				pushMatchInDB(result, timelineInfo);
 
 				res.send(JSON.stringify(result.info));
 			} else {
@@ -29,23 +29,6 @@ router.post('/match', async (req, res) => {
 		}
 	})
 })
-
-const getData = async (url) => {
-	const headers = {
-		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",
-		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-239d14bb-9ef5-4a2a-853e-4a26e3d46a36"
-	};
-	let result = {};
-
-	await axios.get(url, {headers: headers})
-		.then(res => result = res.data)
-		.catch(err => console.error(err))
-
-	return result;
-}
 
 const collectTimelineInfo = (obj) => {
 	const frames = obj.info.frames;

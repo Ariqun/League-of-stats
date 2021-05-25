@@ -6,16 +6,16 @@ import TeamGraphs from './components/teamGraphs';
 import PlayersStatistics from './components/playersStatistics';
 import {LoadingPage} from '../../components/loading';
 
-import RiotAPI from '../../services/riotAPI';
+import DataBase from '../../services/dataBase';
 
 const Match = ({region, matchId}) => {
 	const [info, setInfo] = useState({});
 	const [isLoading, changeLoading] = useState(true);
-	const riotAPI = new RiotAPI();
-	
+	const db = new DataBase();
+
 	useEffect(() => {
 		const getInfo = async () => {
-			const res = await riotAPI.getMatchInfo(matchId);
+			const res = await db.getMatchInfo(matchId);
 
 			setInfo(res);
 			changeLoading(false);

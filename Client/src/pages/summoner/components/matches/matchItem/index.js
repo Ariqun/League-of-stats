@@ -7,17 +7,17 @@ import PlayerItems from '../../../../match/components/getMatchInfo/playerItems';
 import PlayersTable from '../../../../match/components/getMatchInfo/playersTable';
 import {LoadingBlock} from '../../../../../components/loading';
 
-import RiotAPI from '../../../../../services/riotAPI';
+import DataBase from '../../../../../services/dataBase';
 
 const MatchItem = ({matchId, name}) => {
 	const [info, setInfo] = useState({});
 	const [isLoading, changeLoading] = useState(true);
 	const [isError, changeError] = useState(false);
-	const riotAPI = new RiotAPI();
+	const db = new DataBase();
 	
 	useEffect(() => {
 		const getInfo = async () => {
-			const res = await riotAPI.getMatchInfo(matchId);
+			const res = await db.getMatchInfo(matchId);
 			
 			if (res === 'Error' || res.queueId === 2000) {
 				changeError(true);

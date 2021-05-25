@@ -1,27 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import MatchItem from './matchItem';
 
-import RiotAPI from '../../../../services/riotAPI';
-
 import './index.sass';
 
-const Matches = ({puuID, name}) => {
-	const [matches, setMatches] = useState([]);
-	const riotAPI = new RiotAPI();
-
-	useEffect(() => {
-		const getAllMatches = async () => {
-			const res = await riotAPI.getSumMatches(puuID);
-			setMatches(res);
-		}
-		getAllMatches();
-	}, []);
-	
-	const matchList = matches.map((match, i) => {
-		if (i >= 5) {
-			return null;
-		}
+const Matches = ({matchIds, name}) => {
+	const matchList = matchIds.map((match, i) => {
+		if (i >= 5) return null;
 
 		return <MatchItem matchId={match} name={name} key={match}/>
 	});
