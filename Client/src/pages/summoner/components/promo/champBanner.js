@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import { findPercent } from '../../../../components/manipulationsWithNums/findPercent';
 
 const ChampBanner = ({statistics, champions, version}) => {
+	if (!statistics) return content();
+
 	const champs = Object.values(statistics.champions[0]);
 	let best = 'Teemo';
 	let matches = 0;
@@ -22,7 +24,7 @@ const ChampBanner = ({statistics, champions, version}) => {
 	}
 
 	const percent = findPercent(wins, matches, 1);
-	const name = champions[best].name;
+	const champName = champions[best].name;
 	const roles = statistics.champions[0][best].total.roles;
 
 	for (let key in roles) {
@@ -30,6 +32,40 @@ const ChampBanner = ({statistics, champions, version}) => {
 			matchesAtRole = roles[key].matches;
 			role = key;
 		}
+	}
+
+	function content (best = 'Teemo', role = 'undefined', champName = '', wins = 0, matches = 0, percent = 0) {
+		return(
+			<div className="champ_banner">
+				<div className="icon">
+					<div className={matches === 0 ? "cover" : "hidden"}>Любимый чемпион в ранговых и обычных играх не найден</div>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${best}.png`} alt={`${best}_icon`}/>
+				</div>
+
+				<div className="role">
+					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
+				</div>
+
+				<div className="side_block">
+					<div className="name">{champName}</div>
+
+					<div className="champ_stats">
+						<div className="winrate">
+							<progress value={wins} max={matches} />
+							<div className={matches === 0 ? "hidden" : "value"}>{percent}%</div>
+						</div>
+
+						<div className="matches">
+							<progress value={wins} max={matches} />
+							<div className={matches === 0 ? "hidden" : "counts"}>
+								<div className="looses">{matches - wins}</div>
+								<div className="wins">{wins}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
 	}
 
 	return(
@@ -43,7 +79,7 @@ const ChampBanner = ({statistics, champions, version}) => {
 			</div>
 
 			<div className="side_block">
-				<div className="name">{name}</div>
+				<div className="name">{champName}</div>
 
 				<div className="champ_stats">
 					<div className="winrate">

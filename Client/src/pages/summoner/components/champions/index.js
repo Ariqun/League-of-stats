@@ -3,12 +3,15 @@ import React, {useState} from 'react';
 import Tabs from './tabs';
 import TableHead from './tableHead';
 import TableBody from './tableBody';
+import StatisticsNotFound from '../../../../components/errors/statisticsNotFound';
 
 import './index.sass';
 
 const Champions = ({statistics}) => {
 	const [tab, changeTab] = useState('total');
 	const [sortBy, changeSortBy] = useState('matches');
+
+	if (!statistics) return <StatisticsNotFound />
 
 	return(
 		<div className="champs">

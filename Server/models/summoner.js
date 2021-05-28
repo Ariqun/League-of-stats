@@ -5,7 +5,8 @@ const summoner = new Schema({
 	sumName: String,
 	statistics: Array,
 	champions: Array,
-	records: Array
+	records: Array,
+	checkedMatches: Array
 });
 
 module.exports = model('Summoner', summoner);

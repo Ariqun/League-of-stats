@@ -1,11 +1,14 @@
 import React from 'react';
 
 import Card from './card';
+import StatisticsNotFound from '../../../../components/errors/statisticsNotFound';
 
 import './index.sass';
 
 const Records = ({records}) => {
-	const {kda, kills, deaths, assists, cs, gold, dmg, heal, dmgTaken, CC, vision, wards, killingSpree, double, triple, quadra, penta} = records;
+	if (!records) return <StatisticsNotFound />
+
+	const {kda, kills, deaths, assists, cs, gold, dmg, heal, dmgTaken, CC, vision, wards, killingSpree, double, triple, quadra, penta} = records[0];
 	const basics = {kills, deaths, assists, kda, cs, gold};
 	const impact = {dmg, heal, dmgTaken, CC, vision, wards};
 	const combo = {killingSpree, double, triple, quadra, penta};

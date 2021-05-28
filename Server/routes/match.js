@@ -2,74 +2,53 @@ const {Router} = require('express');
 const router = Router();
 
 const getData = require('../libs/getData');
+const collectTimeLineInfo = require('../libs/collectTimeLineInfo');
+const pushMatchInDB = require('../libs/pushMatchInDB');
+const pushInvalidMatchIdInDB = require('../libs/pushInvalidMatchIdInDB');
+const pushInfoInDB = require('../libs/pushInfoInDB');
 const match = require('../models/match');
+const checkedMatchIds = require('../models/checkedMatchIds');
 
 router.post('/match', async (req, res) => {
-	const matchID = req.body.matchID;
+	const matchId = req.body.matchID;
+	
+	const doc = await match.findOne({matchId});
+	if (doc) return res.send(doc);
 
-	await match.findOne({matchId: matchID}, async (err, doc) => {
-		if (!doc) {
-			const url = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchID}`;
-			const result = await getData(url);
+	try {
+		const matchInfoURL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+		const matchInfo = await getData(matchInfoURL);
+		if (Object.keys(matchInfo).length === 0) return res.send('Error');
 
-			const urlTL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchID}/timeline`;
-			const timeline = await getData(urlTL);
-			
-			if (Object.keys(result).length !== 0) {
-				const timelineInfo = collectTimelineInfo(timeline);
+		const timelineURL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline`;
+		const timeline = await getData(timelineURL);
+		const timelineInfo = collectTimeLineInfo(timeline);
 
-				pushMatchInDB(result, timelineInfo);
+		const allowedTypeIds = [400, 420, 440];
+		const typeId = matchInfo.info.queueId;
+		
+		const nowDate = Date.parse(new Date());
+		const matchDate = matchInfo.info.gameCreation;
+		const startDateLastSeason = 1610053200000;
+		const oneMonth = 2592000000;
+		const isMatchChecked = await checkedMatchIds.findOne({matchId});
 
-				res.send(JSON.stringify(result.info));
-			} else {
-				res.send('Error');
-			}
-		} else {
-			res.send(doc);
+		if (nowDate - matchDate <= oneMonth) {
+			pushMatchInDB(matchInfo, timelineInfo);
 		}
-	})
+
+		if (allowedTypeIds.includes(typeId) && matchDate >= startDateLastSeason && !isMatchChecked) {
+			pushInfoInDB(matchInfo.info, matchId);
+		}
+
+		if (!allowedTypeIds.includes(typeId)) {
+			pushInvalidMatchIdInDB(matchId)
+		}
+
+		const result = {...matchInfo.info, timeline: [timelineInfo]};
+		
+		res.send(JSON.stringify(result));
+	} catch {}
 })
-
-const collectTimelineInfo = (obj) => {
-	const frames = obj.info.frames;
-	let participant = {};
-
-	for (let i = 1; i <= 10; i++) {
-		const lvlUp = [], itemPurchase = [];
-
-		for (let frame of frames) {
-			for (let event of frame.events) {
-				if (event.participantId === i && event.type === "SKILL_LEVEL_UP") {
-					lvlUp.push({skill: event.skillSlot, time: event.timestamp});
-				}
-
-				if (event.participantId === i && event.type === "ITEM_PURCHASED") {
-					itemPurchase.push({item: event.itemId, time: event.timestamp});
-				}
-
-				participant[i] = {lvlUp, itemPurchase};
-			}
-		}
-	}
-
-	return participant;
-}
-
-const pushMatchInDB = async (res, timeline) => {
-	const matchObj = new match ({
-		matchId: res.metadata.matchId,
-		platformId: res.info.platformId,
-		queueId: res.info.queueId,
-		gameCreation: res.info.gameCreation,
-		gameDuration: res.info.gameDuration,
-		gameStartTimestamp: res.info.gameStartTimestamp,
-		participants: res.info.participants,
-		teams: res.info.teams,
-		timeline: timeline,
-		checked: false
-	});
-
-	await matchObj.save();
-}
 
 module.exports = router;

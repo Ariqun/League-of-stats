@@ -4,10 +4,13 @@ import spellTooltip from '../../../../components/tooltips/spellTooltip';
 
 const PlayerSpells = ({firstId, secondId, version, spells}) => {
 	const spellIds = [firstId, secondId];
-
+	
 	const content = spellIds.map(id => {
 		const spellsArray = Object.values(spells);
 		const spell = spellsArray.find(spell => +spell.key === id);
+
+		if (!spell) return null;
+
 		const {name, image} = spell;
 		const tooltip = spellTooltip(spell, version);
 

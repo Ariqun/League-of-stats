@@ -1,16 +1,19 @@
 const match = require('../models/match');
 
-module.exports = async (res, timeline) => {
+module.exports = async (matchInfo, timeline) => {
+	const {platformId, queueId, gameCreation, gameDuration, gameStartTimestamp, participants, teams} = matchInfo.info;
+	const {matchId} = matchInfo.metadata;
+
 	const matchObj = new match ({
-		matchId: res.metadata.matchId,
-		platformId: res.info.platformId,
-		queueId: res.info.queueId,
-		gameCreation: res.info.gameCreation,
-		gameDuration: res.info.gameDuration,
-		gameStartTimestamp: res.info.gameStartTimestamp,
-		participants: res.info.participants,
-		teams: res.info.teams,
-		timeline: timeline,
+		matchId,
+		platformId,
+		queueId,
+		gameCreation,
+		gameDuration,
+		gameStartTimestamp,
+		participants,
+		teams,
+		timeline,
 		checked: true
 	});
 

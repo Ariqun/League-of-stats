@@ -6,6 +6,9 @@ const collectSummonerInfo = require('../libs/collectSummonerInfo');
 const collectRankedInfo = require('../libs/collectRankedInfo');
 const bruteForceMatches = require('../libs/bruteForceMatches');
 
+const checkedMatchIds = require('../models/checkedMatchIds');
+const invalidcheckedMatchIds = require('../models/invalidcheckedMatchIds');
+
 router.post('/summoner', async (req, res) => {
 	const name = encodeURI(req.body.summoner);
 	const region = (req.body.region).toUpperCase();
@@ -19,14 +22,45 @@ router.post('/summoner', async (req, res) => {
 	const puuId = summonerInfo.puuId;
 	const matchList = [];
 	let start = 0;
-	const matchListURL = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuId}/ids?start=${start}&count=10`;
-	matchList.push(...await getData(matchListURL));
 
-	const result = await bruteForceMatches(matchList);
-	
-	if (result) {
-		res.send(JSON.stringify({...summonerInfo, ...rankedInfo, matchIds: matchList}));
+	do {
+		const matchListURL = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuId}/ids?start=${start}&count=100`;
+		matchList.push(...await getData(matchListURL));
+		start += 100;
+	} while (matchList.length % 100 == 0)
+
+	const checkedMatches = await checkedMatchIds.find({});
+	const checkedInvalidMatches = await invalidcheckedMatchIds.find({});
+	const arrOfCheckedIds = [];
+
+	const collectCheckedMatches = (valid, invalid) => {
+		const fullArr = [...valid, ...invalid];
+
+		for (let elem of fullArr) {
+			arrOfCheckedIds.push(elem.matchId);
+		}
 	}
+	collectCheckedMatches(checkedMatches, checkedInvalidMatches);
+
+	const uncheckedMatchIds = matchList.filter(id => !arrOfCheckedIds.includes(id));
+	let count = 0;
+	console.log(uncheckedMatchIds);
+	let interval = setTimeout(function tick() {
+		const start = count;
+		const end = count + 2;
+		console.log(count)
+		const twoMatches = uncheckedMatchIds.slice(start, end);
+		bruteForceMatches(twoMatches);
+
+		if (count <= uncheckedMatchIds.length) {
+			interval = setTimeout(tick, 7000);
+		}
+
+		count += 2;
+	}, 7000)
+
+	res.send(JSON.stringify({...summonerInfo, ...rankedInfo, matchIds: matchList}));
+	
 })
 
 module.exports = router;

@@ -6,7 +6,7 @@ module.exports = async (url, func, region = 'ru') => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-f9dff697-f5af-49f4-9618-c64abd9ebedb"
+		"X-Riot-Token": "RGAPI-d7b60e09-3f43-4d4b-85d4-767c7e0f9747"
 	};
 	let result = {};
 
@@ -15,7 +15,7 @@ module.exports = async (url, func, region = 'ru') => {
 			if (func) result = func(res.data, region)
 			if (!func) result = res.data;
 		})
-		.catch(err => console.error(err))
+		.catch(err => console.error(`Ошибка: ${err.response.status} ${err.response.statusText}`))
 
 	return result;
 }

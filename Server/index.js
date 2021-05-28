@@ -4,10 +4,8 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 
 const summonerRoute = require('./routes/summoner');
-const matchListRoute = require('./routes/matchList');
 const matchRoute = require('./routes/match');
 const rankedRoute = require('./routes/ranked');
-const champStatisticsRoute = require('./routes/champStatistics');
 const champRoute = require('./routes/champion');
 const sumStatisticsRoute = require('./routes/sumStatistics');
 const liveMatch = require('./routes/liveMatch');
@@ -26,10 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/', summonerRoute);
-app.use('/', matchListRoute);
 app.use('/', matchRoute);
 app.use('/', rankedRoute);
-app.use('/', champStatisticsRoute);
 app.use('/', champRoute);
 app.use('/', sumStatisticsRoute);
 app.use('/', liveMatch);

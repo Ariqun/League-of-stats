@@ -25,6 +25,7 @@ const Summoner = ({region, name}) => {
 			const sumInfo = await riotAPI.getSummoner(region, name);
 			console.log(sumInfo);
 			const sumStats = await db.getSumStatistics(sumInfo.sumId);
+			console.log(sumStats);
 			console.timeEnd('hey')
 			setSummoner(sumInfo);
 			setStatistics(sumStats);
@@ -40,9 +41,10 @@ const Summoner = ({region, name}) => {
 	const content = () => {
 		const {name, matchIds} = summoner;
 		const {records} = statistics;
+
 		if (tab === 'matches') return <Matches matchIds={matchIds} name={name}/>;
 		if (tab === 'champs') return <Champions statistics={statistics} />
-		if (tab === 'records') return <Records records={records[0]} />
+		if (tab === 'records') return <Records records={records} />
 		if (tab === 'stats') return <Statistics statistics={statistics} />
 	}
 

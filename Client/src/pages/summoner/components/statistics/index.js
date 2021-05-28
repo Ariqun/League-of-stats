@@ -2,10 +2,13 @@ import React from 'react';
 
 import MatchTypes from './matchTypes';
 import StatNumbers from './statNumbers';
+import StatisticsNotFound from '../../../../components/errors/statisticsNotFound';
 
 import './index.sass';
 
 const Statistics = ({statistics}) => {
+	if (!statistics) return <StatisticsNotFound />
+
 	const stats = statistics.statistics[0];
 	const champs = statistics.champions[0];
 

@@ -4,6 +4,7 @@
 	padding: 50px 0
 	.champs_wrapper
 		@include opacityBg
+		@include transGrayBordersTopAndBot
 		.tabs
 			display: flex
 			.tab
@@ -37,7 +38,7 @@
 						color: rgba(18, 235, 255, 0.8)
 				.champ
 					&::after
-						@include transGrayBorderBot
+						@include transGrayBorderBot_10per
 						content: ''
 						position: absolute
 						left: 0

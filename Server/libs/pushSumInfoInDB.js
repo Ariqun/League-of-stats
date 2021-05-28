@@ -1,15 +1,13 @@
 const summoner = require('../models/summoner');
 const calcRatio = require('./calcRatio');
 
-module.exports = async (obj) => {
-	const answers = [];
-	
-	for (const key in obj) {
+module.exports = async (sumInfo, matchId) => {
+	for (const key in sumInfo) {
 		try {
-			const {sumId, sumName, win, solo, flex, normal} = obj[key];
-			const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = obj[key].champion;
-			const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = obj[key].champion;
-			const role = (obj[key].role)?.toLowerCase();
+			const {sumId, sumName, win, solo, flex, normal} = sumInfo[key];
+			const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = sumInfo[key].champion;
+			const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = sumInfo[key].champion;
+			const role = (sumInfo[key].role)?.toLowerCase();
 	
 			const dmg = physical + magic + trueDmg;
 			const heal = restore + shield;
@@ -86,7 +84,6 @@ module.exports = async (obj) => {
 					[`records.penta.value`]: 0
 				}
 			}, {upsert: true});
-			answers.push(sumId);
 	
 			for (let key in records) {
 				const value = records[key];
@@ -95,14 +92,11 @@ module.exports = async (obj) => {
 						[`records.${key}.value`]: value,
 						[`records.${key}.champName`]: champName,
 						[`records.${key}.date`]: date,
-						[`records.${key}.matchType`]: matchType
+						[`records.${key}.matchType`]: matchType,
+						[`records.${key}.matchId`]: matchId
 					}
 				});
 			}
-		} catch (err) {
-			console.error(err);
-		}
+		} catch (err) {}
 	}
-
-	return answers;
   };

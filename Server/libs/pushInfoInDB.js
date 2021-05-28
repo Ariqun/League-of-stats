@@ -1,10 +1,11 @@
-const pushChampStatsInDB = require('./pushChampStatsInDB');
-const pushSumInfoInDB = require('./pushSumInfoInDB');
-const pushChampInfoInDB = require('./pushChampInfoInDB');
-
 const getChamps = require('./getChamps');
 
-module.exports = async (matchInfo) => {
+const pushSumInfoInDB = require('./pushSumInfoInDB');
+const pushChampInfoInDB = require('./pushChampInfoInDB');
+const pushMatchIdInDB = require('./pushMatchIdInDB');
+const increaseChampTotalMatches = require('./increaseChampTotalMatches');
+
+module.exports = async (matchInfo, matchId) => {
 	const {queueId, gameStartTimestamp, participants, teams} = matchInfo;
 	const arrOfChamps = await getChamps();
 	let bans = [], champInfo = {}, sumInfo = {};
@@ -62,6 +63,8 @@ module.exports = async (matchInfo) => {
 		}
 
 		champInfo[championId] = {
+			id: championId,
+			name: championName,
 			kills: kills,
 			deaths: deaths,
 			assists: assists,
@@ -77,8 +80,7 @@ module.exports = async (matchInfo) => {
 			quadra: quadraKills,
 			penta: pentaKills,
 			role: individualPosition,
-			wins: win ? 1 : 0,
-			matches: 1,
+			win: win ? 1 : 0,
 			items: items,
 			doubleStyles: doubleStyles,
 			runes: runes
@@ -91,8 +93,12 @@ module.exports = async (matchInfo) => {
 		}
 	}
 
-	pushChampInfoInDB(champInfo);
-	const res = await pushSumInfoInDB(sumInfo);
-	
-	return res;
+	for (let champ of arrOfChamps) {
+		const champId = champ[0];
+		increaseChampTotalMatches(champId);
+	}
+
+	pushMatchIdInDB(matchId);
+	pushChampInfoInDB(champInfo, bans);
+	pushSumInfoInDB(sumInfo, matchId);
 }

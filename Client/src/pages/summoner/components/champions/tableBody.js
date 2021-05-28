@@ -101,7 +101,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		)
 	}).filter(item => item !== null);
 	
-	if (result.length === 0) return <tr><td className="no_data">Игры не найдены</td></tr>;
+	if (result.length === 0) return <tr><td className="no_data" colSpan="10">Игры не найдены</td></tr>;
 
 	result.sort((a, b) => {
 		if (!a || !b) return null;
