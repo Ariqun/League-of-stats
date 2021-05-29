@@ -16,10 +16,9 @@ export default class CircleCanvas extends Component {
 	}
 
 	updateCanvas = () => {
-		const {primary, secondary} = this.props;
-		const {width, height} = this.props;
+		const {primary, secondary, width, height} = this.props;
+
 		const ctxFront = this.canvasFront.current.getContext('2d');
-		
 		const percent = findPercent(primary, primary + secondary, 2) / 100;
 		const degrees = percent * 360;
 		const result = degrees * (Math.PI / 180);
@@ -43,7 +42,7 @@ export default class CircleCanvas extends Component {
 		ctxBack.strokeStyle = 'rgba(111, 111, 111, 0.3)';
 		ctxBack.beginPath();
 		ctxBack.arc(100, 100, 80, 0, Math.PI * 2, false);
-		ctxBack.lineWidth = 7.5;
+		ctxBack.lineWidth = 8;
 		ctxBack.closePath();
 		ctxBack.stroke();
 
@@ -57,17 +56,16 @@ export default class CircleCanvas extends Component {
 	}
 
 	render() {
-		const {width, height} = this.props;
-		const {primary, secondary} = this.props;
+		const {primary, secondary, width, height, mode} = this.props;
 		const percent = findPercent(primary, primary + secondary, 1);
 
 		return(
 			<div className="circle_canvas">
 				<canvas id="front" width={width} height={height} ref={this.canvasFront}></canvas>
 				<div className="stats">
-					<span className="primary">{primary}</span>
+					<span className={mode === 'hidden' ? "hidden" : "primary"}>{primary}</span>
 					<span className="percent">{percent}%</span>
-					<span className="secondary">{secondary}</span>
+					<span className={mode === 'hidden' ? "hidden" : "secondary"}>{secondary}</span>
 				</div>
 				<canvas id="back" width={width} height={height} ref={this.canvasBack}></canvas>
 				<canvas id="border" width={width} height={height} ref={this.canvasBorder}></canvas>
