@@ -10,27 +10,27 @@ const StatsTable = ({stats}) => {
 		// Такая наркомания нужна для правильного формирования окончательной таблицы
 		for (let key in stats) {
 			if (ruObj.hasOwnProperty(key) && (key !== 'attackrange' && key !== 'movespeed' && key !== 'attackspeedperlevel')) {
-				arr.push(`${ruObj[key]}: ${stats[key]}`)
+				arr.push(`${ruObj[key]}: ${stats[key]}`);
 			}
 		}
 
 		for (let key in stats) {
 			if (ruObj.hasOwnProperty(key) && (key === 'attackspeedperlevel')) {
-				arr.push(`${ruObj[key]}: ${stats[key]}`)
+				arr.push(`${ruObj[key]}: ${stats[key]}`);
 			}
 		}
 
 		for (let key in stats) {
 			if (ruObj.hasOwnProperty(key) && (key === 'attackrange' || key === 'movespeed')) {
-				arr.push(`${ruObj[key]}: ${stats[key]}`)
+				arr.push(`${ruObj[key]}: ${stats[key]}`);
 			}
 		}
 	}
-	sortArr()
+	sortArr();
 
 	const table = arr.map((item, i) => {
-		const name = item.split(':')[0]
-		const value = item.split(':')[1]
+		const name = item.split(':')[0];
+		const value = item.split(':')[1];
 
 		if (i % 2 === 0) {
 			return(

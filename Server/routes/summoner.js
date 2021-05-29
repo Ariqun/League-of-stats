@@ -5,6 +5,7 @@ const getData = require('../libs/getData');
 const collectSummonerInfo = require('../libs/collectSummonerInfo');
 const collectRankedInfo = require('../libs/collectRankedInfo');
 const bruteForceMatches = require('../libs/bruteForceMatches');
+const deleteOldMatchesFromDB = require('../libs/deleteOldMatchesFromDB');
 
 const checkedMatchIds = require('../models/checkedMatchIds');
 const invalidcheckedMatchIds = require('../models/invalidcheckedMatchIds');
@@ -58,6 +59,8 @@ router.post('/summoner', async (req, res) => {
 
 		count += 2;
 	}, 7000)
+
+	// deleteOldMatchesFromDB();
 
 	res.send(JSON.stringify({...summonerInfo, ...rankedInfo, matchIds: matchList}));
 	

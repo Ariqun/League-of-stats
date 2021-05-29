@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { findPercent } from '../../../../components/manipulationsWithNums/findPercent';
+
+import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 
 const ChampBanner = ({statistics, champions, version}) => {
 	if (!statistics) return content();

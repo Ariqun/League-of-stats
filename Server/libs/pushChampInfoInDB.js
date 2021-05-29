@@ -1,6 +1,6 @@
 const champion = require('../models/champion');
 
-module.exports = async (champInfo, bans) => {
+module.exports = async (champInfo) => {
 	for (let key in champInfo) {
 		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = champInfo[key];
 		const {win, items, doubleStyles, runes, id, name} = champInfo[key];
@@ -8,7 +8,6 @@ module.exports = async (champInfo, bans) => {
 		const [rune0, rune1, rune2, rune3, rune4, rune5] = runes;
 		const role = (champInfo[key].role).toLowerCase();
 		const loose = win ? 0 : 1;
-		const ban = bans.includes(id) ? 1 : 0;
 
 		await champion.updateOne({id: key}, {
 			id: id,
@@ -16,7 +15,6 @@ module.exports = async (champInfo, bans) => {
 			$inc: {
 				wins: win,
 				losses: loose,
-				bans: ban,
 				matches: 1,
 				"kda.kills": kills,
 				"kda.deaths": deaths,

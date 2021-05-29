@@ -44,7 +44,7 @@
 						left: 0
 						width: 100%
 					td
-						.wrapper
+						.wrapper, .progress_bar
 							display: flex
 							justify-content: center
 							align-items: center
@@ -60,28 +60,6 @@
 								width: 48px
 							.name
 								padding: 5px
-					td.matches, td.winrate
-						.wrapper
-							position: relative
-							height: 25px
-							progress
-								appearance: none
-								height: 25px
-								&::-webkit-progress-bar
-									height: 25px
-									border-radius: 15px
-									background: rgba(111, 111, 111, 0.4)
-								&::-webkit-progress-value
-									border-radius: 15px
-									background: deepskyblue
-							.value
-								position: absolute
-								color: black
-					td.winrate
-						.wrapper
-							progress
-								&::-webkit-progress-value
-									background: $color-green
 					td.avg_kda
 						.wrapper
 							.kda_score

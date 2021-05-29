@@ -1,11 +1,14 @@
 import React from 'react';
 
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
+import sumStatistics from '../../../../components/languages/russian/sumStatistics';
 
 const StatNumbers = ({stats}) => {
+	const arrayOfTypes = ['total', 'solo', 'flex', 'normal'];
+
 	const statsBlock = (type) => {
 		let statObj = {totalKills: 0, totalDeaths: 0, totalAssists: 0, totalDMG: 0, totalHeal: 0, totalCS: 0, totalGold: 0};
-		let rusTitles = {totalKills: 'Убийства', totalDeaths: 'Смерти', totalAssists: 'Помощь', totalDMG: 'Урон', totalHeal: 'Лечение и щиты', totalCS: 'Миньоны', totalGold: 'Золото'};
+		let rusTitles = sumStatistics();
 		
 		for (let key in stats) {
 			if (stats[key][type] === undefined) continue;
@@ -26,9 +29,7 @@ const StatNumbers = ({stats}) => {
 			statObj.totalGold += gold;
 		}
 
-		const sum = Object.keys(statObj).reduce((acc, el) => {
-			return acc += statObj[el];
-		}, 0)
+		const sum = Object.keys(statObj).reduce((acc, el) => acc += statObj[el], 0);
 
 		if (sum === 0) return <div className="no_data">Нет данных</div>;
 
@@ -43,28 +44,18 @@ const StatNumbers = ({stats}) => {
 
 		return result;
 	}
+
+	const content = arrayOfTypes.map(type => {
+		return(
+			<div className="type" key={type}>
+				{statsBlock(type)}
+			</div>
+		)
+	});
 	
 	return(
 		<div className="stats_type">
-			<div className="type total">
-				<div className="type_title">Ранговые и обычные</div>
-				{statsBlock('total')}
-			</div>
-
-			<div className="type solo">
-				<div className="type_title">Одиночные</div>
-				{statsBlock('solo')}
-			</div>
-
-			<div className="type flex">
-				<div className="type_title">Флекс</div>
-				{statsBlock('flex')}
-			</div>
-
-			<div className="type normal">
-				<div className="type_title">Обычные</div>
-				{statsBlock('normal')}
-			</div>
+			{content}
 		</div>
 	)
 }

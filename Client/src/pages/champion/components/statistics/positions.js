@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {checkNanAndDoubleZero} from '../../../../components/manipulationsWithNums/checkNums';
+import RateBar from '../../../../components/progressBars/rateBar';
 
 const Positions = ({roles, matches}) => {
 	const positions = ['top', 'jungle', 'middle', 'bottom', 'utility'];
@@ -18,12 +18,8 @@ const Positions = ({roles, matches}) => {
 					matchesAtPos = 0;
 					winsAtPos = 0;
 				}
-				
 			}
 		}
-
-		const popPercent = checkNanAndDoubleZero((matchesAtPos * 100 / matches).toFixed(1));
-		const winPercent = checkNanAndDoubleZero((winsAtPos * 100 / matchesAtPos).toFixed(1));
 
 		return (
 			<tr className={`position ${item}`} key={item}>
@@ -33,13 +29,11 @@ const Positions = ({roles, matches}) => {
 				</td>
 
 				<td className="popularity">
-					<progress max="100" value={popPercent}/>
-					<span className="value">{popPercent}%</span>
+					<RateBar current={matchesAtPos} max={matches} pop/>
 				</td>
 
 				<td className="winrate">
-					<progress max="100" value={winPercent}/>
-					<span className="value">{winPercent}%</span>
+					<RateBar current ={winsAtPos} max={matchesAtPos}/>
 				</td>
 			</tr>
 		);

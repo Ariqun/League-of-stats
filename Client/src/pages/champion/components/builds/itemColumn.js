@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
+import RateBar from '../../../../components/progressBars/rateBar';
 import itemTooltip from '../../../../components/tooltips/itemTooltip';
 
 const ItemColumn = ({champItems, blockItems, matches, title, items, version}) => {
@@ -26,9 +26,7 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 	const itemsArray = createAndModifyArray();
 
 	const content = itemsArray.map(item => {
-		const id = item.id;
-		const count = item.count;
-		const percent = findPercent(count, matches, 1);
+		const {id, count} = item;
 		const tooltip = itemTooltip(items[id], version);
 		
 		return(
@@ -37,10 +35,7 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${id}.png`} alt={id}/>
 				</div>
 
-				<div className="popularity">
-					<progress value={count} max={matches}/>
-					<span className="value">{percent}%</span>
-				</div>
+				<RateBar current={count} max={matches} pop/>
 			</div>
 		)
 	})

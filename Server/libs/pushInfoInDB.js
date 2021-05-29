@@ -3,7 +3,7 @@ const getChamps = require('./getChamps');
 const pushSumInfoInDB = require('./pushSumInfoInDB');
 const pushChampInfoInDB = require('./pushChampInfoInDB');
 const pushMatchIdInDB = require('./pushMatchIdInDB');
-const increaseChampTotalMatches = require('./increaseChampTotalMatches');
+const increaseMatchesAndBans = require('./increaseMatchesAndBans');
 
 module.exports = async (matchInfo, matchId) => {
 	const {queueId, gameStartTimestamp, participants, teams} = matchInfo;
@@ -95,7 +95,11 @@ module.exports = async (matchInfo, matchId) => {
 
 	for (let champ of arrOfChamps) {
 		const champId = champ[0];
-		increaseChampTotalMatches(champId);
+		let ban = 0;
+		
+		if (bans.includes(champId)) ban = 1;
+
+		increaseMatchesAndBans(champId, ban);
 	}
 
 	pushMatchIdInDB(matchId);

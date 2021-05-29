@@ -2,12 +2,23 @@ import React from 'react'
 import {connect} from 'react-redux';
 
 import PlayerKDA from '../../../match/components/getMatchInfo/playerKDA';
+import ProgressBar from '../../../../components/progressBars/progressBar';
+import RateBar from '../../../../components/progressBars/rateBar';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
+import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 	const champs = statistics.champions[0];
-	const totalMatches = statistics.statistics[0].total.matches;
-	
+
+	const maxMatches = Object.values(champs).reduce((acc, curr) => {
+		let matches = 0;
+
+		if (curr[tab]) matches = curr[tab].results.matches
+		if (acc < matches) return matches;
+		
+		return acc;
+	}, 0);
+
 	const result = Object.keys(champs).map(champ => {
 		if (champs[champ][tab] === undefined) return null;
 
@@ -18,6 +29,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		const {restore, shield} = champs[champ][tab].heal;
 		const name = champions[champ].name;
 		
+		const winrate = findPercent(wins, matches, 1);
 		const avgKills = calcRatio(kills, matches, 1);
 		const avgDeaths = calcRatio(deaths, matches, 1);
 		const avgAssists = calcRatio(assists, matches, 1);
@@ -39,17 +51,11 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 				</td>
 
 				<td className="matches" matches={matches}>
-					<div className="wrapper">
-						<progress max={totalMatches} value={matches}/>
-						<span className="value">{matches}</span>
-					</div>
+					<ProgressBar current={matches} max={maxMatches}/>
 				</td>
 
-				<td className="winrate" winrate={(wins * 100 / matches)}>
-					<div className="wrapper">
-						<progress max={matches} value={wins}/>
-						<span className="value">{(wins * 100 / matches).toFixed(1)}%</span>
-					</div>
+				<td className="winrate" winrate={winrate}>
+					<RateBar current={wins} max={matches}/>
 				</td>
 
 				<td className="avg_kda" kda={avgRatio}>

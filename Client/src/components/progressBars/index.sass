@@ -1,0 +1,29 @@
+@import '../UI/ui'
+	
+.progress_bar
+	position: relative
+	display: flex
+	justify-content: center
+	align-items: center
+	height: 25px
+	progress
+		appearance: none
+		height: 25px
+		&::-webkit-progress-bar
+			height: 25px
+			border-radius: 15px
+			background: rgba(111, 111, 111, 0.4)
+		&::-webkit-progress-value
+			border-radius: 15px
+			background: deepskyblue
+	.value
+		position: absolute
+		color: black
+.progress_bar.rate
+	progress
+		&::-webkit-progress-value
+			background: $color-green
+.progress_bar.pop
+	progress
+		&::-webkit-progress-value
+			background: deepskyblue

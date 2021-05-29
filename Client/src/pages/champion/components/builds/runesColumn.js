@@ -4,14 +4,13 @@ import {connect} from 'react-redux';
 import runeTooltip from '../../../../components/tooltips/runeTooltip';
 import {checkNanAndDoubleZero} from '../../../../components/manipulationsWithNums/checkNums';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
+import RateBar from '../../../../components/progressBars/rateBar';
 
 const RunesColumn = ({styles, perks, matches, runes}) => {
 	const arrOfStyles = styles.split('_');
 	const prim = +arrOfStyles[0];
 	const sub = +arrOfStyles[1];
-
 	const {total} = perks;
-	const percent = findPercent(total, matches, 1);
 
 	const createAndModifyArray = (slot) => {
 		const result = [];
@@ -73,10 +72,8 @@ const RunesColumn = ({styles, perks, matches, runes}) => {
 
 	return(
 		<div className="runes_build">
-			<div className="popularity">
-				<progress value={total} max={matches}/>
-				<span className="value">{percent}%</span>
-			</div>
+			<RateBar current={total} max={matches} pop/>
+
 			{content}
 		</div>
 	)
