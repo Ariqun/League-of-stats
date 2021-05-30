@@ -1,7 +1,10 @@
 const axios = require('axios');
 
 module.exports = async () => {
-	const res = await axios.get('http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ru_RU/champion.json');
+	const versions = await this.getData('https://ddragon.leagueoflegends.com/api/versions.json');
+	const version = versions[0];
+
+	const res = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/champion.json`);
 	const arr = [];
 
 	for (let elem in res.data.data) {

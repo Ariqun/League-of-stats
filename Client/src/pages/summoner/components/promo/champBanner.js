@@ -37,7 +37,7 @@ const ChampBanner = ({statistics, champions, version}) => {
 
 	function content (best = 'Teemo', role = 'undefined', champName = '', wins = 0, matches = 0, percent = 0) {
 		return(
-			<div className="champ_banner">
+			<div className="champ_banner" title="Любимый чемпион">
 				<div className="icon">
 					<div className={matches === 0 ? "cover" : "hidden"}>Любимый чемпион в ранговых и обычных играх не найден</div>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${best}.png`} alt={`${best}_icon`}/>
@@ -69,36 +69,7 @@ const ChampBanner = ({statistics, champions, version}) => {
 		)
 	}
 
-	return(
-		<div className="champ_banner">
-			<div className="icon">
-				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${best}.png`} alt={`${best}_icon`}/>
-			</div>
-
-			<div className="role">
-				<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
-			</div>
-
-			<div className="side_block">
-				<div className="name">{champName}</div>
-
-				<div className="champ_stats">
-					<div className="winrate">
-						<progress value={wins} max={matches} />
-						<div className="value">{percent}%</div>
-					</div>
-
-					<div className="matches">
-						<progress value={wins} max={matches} />
-						<div className="counts">
-							<div className="looses">{matches - wins}</div>
-							<div className="wins">{wins}</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
+	return content(best, role, champName, wins, matches, percent);
 }
 
 const mapStateToProps = (state) => {

@@ -18,7 +18,7 @@ const CheckLiveMatch = ({name, region = 'ru', sumId}) => {
 	if (!live || Object.keys(live).length === 0) return null;
 
 	return(
-		<Link to={`/live/${region}/${name}`}>
+		<Link to={`/live/${region}/${name}`} target="_blank">
 			<div className="live">Сейчас в игре</div>
 		</Link>
 	);

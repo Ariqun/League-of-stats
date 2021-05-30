@@ -8,6 +8,7 @@ import matchTypesRU from '../../components/languages/russian/matchTypesRU';
 import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
+import SkyblueBtn from '../../components/buttons/skyblueBtn';
 
 const LiveMatch = ({region, name, matchTypes}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -18,7 +19,7 @@ const LiveMatch = ({region, name, matchTypes}) => {
 		const getLiveInfo = async () => {
 			const summoner = await riotAPI.getSummoner(region, name);
 
-			const sumId = summoner.tech.sumID;
+			const {sumId} = summoner;
 			const liveMatch = await riotAPI.getLiveMatch(sumId, region);
 
 			setLive(liveMatch);
@@ -29,41 +30,45 @@ const LiveMatch = ({region, name, matchTypes}) => {
 
 	if (isLoading) return <LoadingPage />
 
-	if (Object.keys(live).length === 0) {
-		return(
-			<div className="live_page">
-				<div className="container">
-					<div className="not_in_game">
-						<div><span className="name">{name}</span> сейчас не в игре</div>
-						<button className="profile">
-							<Link to={`/summoner/${region}/${name}`}>
-								Профиль <span className="name">{name}</span>
-							</Link>
-						</button>
-					</div>
+	const content = () => {
+		if (Object.keys(live).length === 0) {
+			return(
+				<div className="not_in_game">
+					<div><span className="name">{name}</span> сейчас не в игре</div>
+					
+					<Link to={`/summoner/${region}/${name}`} className="profile">
+						<SkyblueBtn text="Профиль" spanText={name}/>
+					</Link>
 				</div>
-			</div>
-		)
-	}
-
-	const {gameQueueConfigId, gameStartTime, participants} = live;
-	const leftTeam = participants.filter(player => player.teamId === 100);
-	const rightTeam = participants.filter(player => player.teamId === 200);
-
-	const ruMatchTypes = matchTypesRU();
-	const matchTypesArr = Object.values(matchTypes);
-	const matchTypeInfo = matchTypesArr.find(type => type.queueId === gameQueueConfigId);
-	const matchTypeName = ruMatchTypes[matchTypeInfo.description];
+			)
+		}
 	
-	return(
-		<div className="live_page">
-			<div className="container">
+		const {gameQueueConfigId, gameStartTime, participants} = live;
+		const leftTeam = participants.filter(player => player.teamId === 100);
+		const rightTeam = participants.filter(player => player.teamId === 200);
+	
+		const ruMatchTypes = matchTypesRU();
+		const matchTypesArr = Object.values(matchTypes);
+		const matchTypeInfo = matchTypesArr.find(type => type.queueId === gameQueueConfigId);
+		const matchTypeName = ruMatchTypes[matchTypeInfo.description];
+		
+		return(
+			<>
 				<MatchData matchType={matchTypeName} startTime={gameStartTime}/>
 				<TeamBlock team={leftTeam} type="left"/>
 				<TeamBlock team={rightTeam} type="right"/>
+			</>
+		)
+	}
+
+	return(
+		<div className="live_page">
+			<div className="container">
+				{content()}
 			</div>
 		</div>
 	)
+	
 }
 
 const mapStateToProps = (state) => {

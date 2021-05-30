@@ -17,7 +17,6 @@ import checkLanguage from '../languages/checkLanguage';
 import {LoadingPage} from '../loading';
 
 import DragonData from '../../services/dragonData';
-import DataBase from '../../services/dataBase';
 
 import './app.sass';
 
@@ -26,7 +25,6 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 
 	const lang = checkLanguage();
 	const dragonData = new DragonData(version, lang);
-	const db = new DataBase();
 
 	useEffect(() => {
 		const getInfo = async () => {
@@ -46,7 +44,6 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 			changeLoading(false);
 		}
 		getInfo();
-		db.start();
 	}, [])
 
 	const render = () => {
@@ -56,23 +53,15 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 			<div className="app">
 				<Header />
 
-				<Route path="/" exact render={() => {
-					return <Main />
-				}}/>
+				<Route path="/" exact render={() => <Main />}/>
+				<Route path="/items" render={() => <Items />}/>
+				<Route path="/runes" render={() => <Runes />}/>
 
 				<Route path="/champion/:name" render={({match}) => {
 					const {name} = match.params;
 					return <Champion champName={name}/>
 				}}/>
 
-				<Route path="/items" render={() => {
-					return <Items />
-				}}/>
-
-				<Route path="/runes" render={() => {
-					return <Runes />
-				}}/>
-				
 				<Route path="/summoner/:region/:name" render={({match}) => {
 					const {region, name} = match.params;
 					return <Summoner region={region} name={name} />

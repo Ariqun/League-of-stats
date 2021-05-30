@@ -22,8 +22,9 @@ const Player = ({teamId, info, region, version}) => {
 	}
 
 	const result = players.map((player, i) => {
-		const {summonerId, championName, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, visionScore, goldEarned, summonerName, summoner1Id, summoner2Id, perks} = player;
-		
+		const {summonerId, summonerName, championName, summoner1Id, summoner2Id, perks, individualPosition} = player;
+		const {kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, visionScore, goldEarned} = player;
+
 		const champName = modifyChampName(championName);
 		const farm = totalMinionsKilled + neutralMinionsKilled;
 		const farmPerMin = scorePerMin(farm, gameDuration, 1);
@@ -34,7 +35,7 @@ const Player = ({teamId, info, region, version}) => {
 		const killPart = findPercent(kills + assists, teamKills);
 		
 		return(
-			<div className="player" key={`${champName}_${i}`}>
+			<div className={`player ${individualPosition.toLowerCase()}`} key={`${champName}_${i}`}>
 				<div className="player_settings">
 					<div className="champion_icon">
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>

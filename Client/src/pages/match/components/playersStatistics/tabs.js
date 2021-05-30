@@ -13,11 +13,13 @@ const Tabs = ({tab, participants, changeTab, version}) => {
 
 	const createTeamBlock = (players) => {
 		const content = players.map((player, i) => {
-			const {championName, participantId} = player;
+			const {championName, participantId, individualPosition} = player;
 			const champName = modifyChampName(championName);
+			const className = `tab ${individualPosition.toLowerCase()}`;
+			const classNameActive = className + ' active';
 	
 			return (
-				<div onClick={() => changeTab(participantId)} className={tab === participantId ? "tab active" : "tab"} key={`${champName}_${i}`}>
+				<div onClick={() => changeTab(participantId)} className={tab === participantId ? classNameActive : className} key={`${champName}_${i}`}>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} 
 						 alt={`${champName}_icon`}
 					/>

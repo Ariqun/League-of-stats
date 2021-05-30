@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import MatchItem from './matchItem';
+import SkyblueBtn from '../../../../components/buttons/skyblueBtn';
 
 import './index.sass';
 
@@ -17,7 +18,9 @@ const Matches = ({matchIds, name}) => {
 		<div className="summoner_matches">
 			{matchList}
 
-			<button onClick={() => changeMatchListLength(matchListLenght + 10)} className="show_more_matches">Показать еще 10 матчей</button>
+			<div onClick={() => changeMatchListLength(matchListLenght + 10)} className="show_more_matches">
+				<SkyblueBtn text="Показать еще 10 матчей" />
+			</div>
 		</div>
 	)
 }

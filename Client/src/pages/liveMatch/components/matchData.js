@@ -25,7 +25,7 @@ const MatchData = ({matchType, startTime}) => {
 	return(
 		<div className="match_data">
 			<div className="match_type">{matchType}</div>
-			<div className="match_time">({time})</div>
+			<div className="match_time">{time}</div>
 		</div>
 	)
 }

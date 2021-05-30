@@ -82,6 +82,8 @@
 			justify-content: space-between
 			margin-top: 20px
 			.left_team, .right_team
+				display: flex
+				flex-direction: column
 				width: 50%
 				.player
 					display: flex
@@ -185,9 +187,20 @@
 										background: rgba(0, 0, 0, 0.8)
 								img
 									border-radius: 5px
+				.player.top
+					order: 1
+				.player.jungle
+					order: 2
+				.player.middle
+					order: 3
+				.player.bottom
+					order: 4
+				.player.utility
+					order: 5
 				.bans
 					display: flex
 					justify-content: flex-end
+					order: 6
 					padding: 10px 15px
 					.banned_champ
 						position: relative

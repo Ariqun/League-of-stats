@@ -1,4 +1,4 @@
-const matchTypesRU = () => {
+const matchTypesRu = () => {
 	return {
 		'5v5 Draft Pick games': 'Обычная (выбор)',
 		'5v5 Blind Pick games': 'Обычная (слепая)',
@@ -14,4 +14,4 @@ const matchTypesRU = () => {
 	}
 }
 
-export default matchTypesRU;
+export default matchTypesRu;

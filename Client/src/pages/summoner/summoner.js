@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
 import Promo from './components/promo';
-import Nav from './components/nav';
+import Nav from '../../components/nav';
 import Matches from './components/matches';
 import Champions from './components/champions';
 import Records from './components/records';
+import Statistics from './components/statistics';
 import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
-import Statistics from './components/statistics';
 import DataBase from '../../services/dataBase';
 
 const Summoner = ({region, name}) => {
@@ -48,11 +48,13 @@ const Summoner = ({region, name}) => {
 		if (tab === 'stats') return <Statistics statistics={statistics} />
 	}
 
+	const titles = ['matches', 'champs', 'records', 'statistics'];
+
 	return (
 		<div className="summoner_page">
 			<div className="container">
 				<Promo summoner={summoner} statistics={statistics}/>
-				<Nav changeTab={changeTab}/>
+				<Nav changeTab={changeTab} type="sumNav" titles={titles}/>
 
 				{content()}
 			</div>
