@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import PlayerSpells from '../../../../match/components/getMatchInfo/playerSpells';
-import PlayerRunes from '../../../../match/components/getMatchInfo/playerRunes';
+import PlayerSpells from '../../../../match/components/playerSpells';
+import PlayerRunes from '../../../../match/components/playerRunes';
 import {modifyChampName} from '../../../../../components/manipulationsWithStr/modifyChampName';
 
 const Settings = ({player, version}) => {

@@ -11,7 +11,6 @@ const PlayerRunes = ({perks, runes}) => {
 
 	const runePrim = stylePrim.slots[0].runes[0];
 	const tooltip = runeTooltip(runePrim);
-
 	return(
 		<div className="runes">
 			<img 

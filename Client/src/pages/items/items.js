@@ -25,11 +25,11 @@ const Items = () => {
 				<div className="items">
 					<div className="items_wrapper col-8">
 						<ItemBlock setCurrentItem={setCurrentItem} tag={['Consumable', 'Trinket']} title={'Расходники'}/>
-						<ItemBlock setCurrentItem={setCurrentItem} tag={'Boots'} title={'Сапоги'}/>
+						<ItemBlock setCurrentItem={setCurrentItem} tag={'Boots'} title={'Обувь'}/>
 						<ItemBlock setCurrentItem={setCurrentItem} tag={shownTypes} title={'Предметы'}/>
 					</div>
 					
-					<ShowItem name={currentItem}/>
+					<ShowItem currentItem={currentItem}/>
 				</div>
 			</div>
 		</div>

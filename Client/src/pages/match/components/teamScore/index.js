@@ -1,10 +1,14 @@
 import React from 'react';
 
+import MatchResult from '../matchResult';
+
+import './index.sass';
+
 const TeamScore = ({teamId, info}) => {
-	const {teams, participants} = info;
+	const {teams, participants, gameDuration} = info;
 
 	const teamStats = teams.find(team => team.teamId === teamId);
-	const {win, objectives} = teamStats;
+	const {objectives} = teamStats;
 	const players = [];
 
 	for (let player of participants) {
@@ -18,7 +22,7 @@ const TeamScore = ({teamId, info}) => {
 	return(
 		<div className={teamId === 100 ? "left_team col-4" : "right_team col-4"}>
 			<div className="result">
-				<div className={win ? 'win' : 'defeat'}>{win ? 'Победа' : 'Поражение'}</div>
+				<MatchResult teams={teams} teamId={teamId} duration={gameDuration}/>
 				<div className="score">
 					<span>{kills}</span>
 					<span> / </span>

@@ -4,6 +4,8 @@ import {ranks} from '../../../../components/languages/russian/ranks';
 
 import RiotAPI from '../../../../services/riotAPI';
 
+import './index.sass';
+
 const PlayerRank = ({id, region, live = false}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [ranked, setRanked] = useState([]);

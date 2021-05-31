@@ -1,12 +1,15 @@
 import React from 'react';
+
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
+
+import './index.sass';
 
 const PlayerKDA = ({kills, deaths, assists, live}) => {
 	let ratio = 'Безупречно';
 
 	if (deaths === 0 && live) ratio = ' - ';
 	if (deaths !== 0) ratio = calcRatio(+kills + +assists, +deaths, 2);
-
+	
 	return(
 		<div className="kda_score">
 			<div className="score_wrapper">

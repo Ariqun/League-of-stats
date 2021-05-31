@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 import transformAndSort from './transfromAndSort';
 
 const ItemBlock = ({setCurrentItem, tag, title, items, version}) => {

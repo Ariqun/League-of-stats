@@ -1,15 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import matchDuration from '../getMatchInfo/matchDuration';
-import matchStartDate from '../getMatchInfo/matchStartDate';
 import Player from '../player';
-import TeamScore from '../getMatchInfo/teamScore';
-import TeamBans from '../getMatchInfo/teamBans';
+import TeamScore from '../teamScore';
+import TeamBans from '../teamBans';
 import matchTypesRU from '../../../../components/languages/russian/matchTypesRU';
+import {transformDate, transformMS} from '../../../../components/manipulationsWithNums/transformTime';
 
 import './index.sass';
-
 
 const TableResult = ({info, region, matchTypes}) => {
 	const {queueId, gameStartTimestamp, gameDuration} = info;
@@ -17,8 +15,8 @@ const TableResult = ({info, region, matchTypes}) => {
 
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const matchTypeRU = objRU[matchType.description];
-	const startDate = matchStartDate(gameStartTimestamp);
-	const duration = matchDuration(gameDuration);
+	const startDate = transformDate(gameStartTimestamp, true);
+	const duration = transformMS(gameDuration, 'digits');
 
 	return(
 		<div className="table_result">

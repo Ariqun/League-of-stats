@@ -3,8 +3,8 @@ import ReactTooltip from 'react-tooltip';
 
 import Settings from './settings';
 import Statistics from './statistics';
-import PlayerItems from '../../../../match/components/getMatchInfo/playerItems';
-import PlayersTable from '../../../../match/components/getMatchInfo/playersTable';
+import PlayerItems from '../../../../match/components/playerItems';
+import PlayersTable from '../../../../match/components/playersTable';
 import {LoadingBlock} from '../../../../../components/loading';
 
 import DataBase from '../../../../../services/dataBase';
@@ -48,9 +48,7 @@ const MatchItem = ({matchId, name}) => {
 				<Settings player={player} />
 				<Statistics player={player} info={info} matchId={matchId}/>
 
-				<div className="champ_items">
-					<PlayerItems player={player}/>
-				</div>
+				<PlayerItems player={player}/>
 
 				<div className="match_players">
 					<PlayersTable currentPlayer={player.summonerName} participants={participants} region={platformId}/>

@@ -59,6 +59,8 @@
 								color: $color-green
 							.defeat
 								color: $color-red
+							.remake
+								color: $color-skyblue
 							.match_type
 								color: $color-dark_gray
 						.champion_stats
@@ -67,92 +69,15 @@
 							justify-content: center
 							align-items: center
 							.kda_score
-								display: flex
 								margin-bottom: 5px
-								.score_wrapper
-									.kills
-										color: $color-green
-									.deaths
-										color: $color-red
-									.assists
-										color: $color-orange
-								.kda_ratio
-									color: $color-dark_gray
-									white-space: pre
 							.farm_score
 								margin-bottom: 5px
 								.farm_per_min
 									color: $color-dark_gray
-			.champ_items
-				display: flex
-				justify-content: center
-				align-items: center
-				width: 200px
-				.items_block
-					position: relative
-					display: flex
-					flex-wrap: wrap
-					width: 106px
-					.item
-						width: 30px
-						height: 30px
-						cursor: pointer
-						margin: 2px
-						border-radius: 5px
-						background: rgba(211, 211, 211, 0.2)
-						&:last-of-type
-							position: absolute
-							top: calc(50% - 15px)
-							right: -30px
-							display: flex
-							justify-content: center
-							align-items: center
-							.vision_score
-								position: absolute
-								height: 22px
-								text-align: center
-								padding: 0 3px 0 2px
-								border-radius: 5px
-								background: rgba(0, 0, 0, 0.8)
-						img
-							border-radius: 5px
 			.match_players
 				display: flex
 				justify-content: center
 				width: 400px
-				.players_block
-					display: flex
-					.left_team, .right_team
-						width: 200px
-						padding-left: 5px
-						.player, .current_player
-							a
-								display: flex
-								align-items: center
-								text-decoration: none
-								color: $color-light_gray
-								.champion_icon
-									img
-										width: 24px
-								.player_name
-									font-size: 14px
-									overflow: hidden
-									padding-left: 5px
-						.current_player
-							a
-								color: $color-orange
-					.left_team
-						@include transGrayBorderRight
-						display: flex
-						flex-direction: column
-						align-items: flex-end
-						padding-right: 5px
-						.player, .current_player
-							display: flex
-							.champion_icon
-								order: 2
-							.player_name
-								padding-right: 5px
 	.show_more_matches
 		width: 20%
 		padding: 10px 20px

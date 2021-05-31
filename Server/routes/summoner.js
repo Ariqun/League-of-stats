@@ -48,17 +48,17 @@ router.post('/summoner', async (req, res) => {
 	console.log(uncheckedMatchIds);
 	let interval = setTimeout(function tick() {
 		const start = count;
-		const end = count + 2;
+		const end = count + 1;
 		console.log(count)
-		const twoMatches = uncheckedMatchIds.slice(start, end);
-		bruteForceMatches(twoMatches);
+		const oneMatch = uncheckedMatchIds.slice(start, end);
+		bruteForceMatches(oneMatch[0]);
 
 		if (count <= uncheckedMatchIds.length) {
-			interval = setTimeout(tick, 7000);
+			interval = setTimeout(tick, 3500);
 		}
 
-		count += 2;
-	}, 7000)
+		count++;
+	}, 3500)
 
 	// deleteOldMatchesFromDB();
 

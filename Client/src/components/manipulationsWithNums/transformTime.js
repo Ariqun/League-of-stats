@@ -19,14 +19,19 @@ const transformSeconds = (sec) => {
 	return `${minutes}м. ${seconds}с.`;
 }
 
-const transformDate = (ms) => {
+const transformDate = (ms, full = false) => {
 	const date = new Date(ms);
 
 	const day = addZero(date.getDate());
 	const months = addZero(date.getMonth() - 1);
 	const year = addZero(date.getFullYear());
+	const hours = addZero(date.getHours());
+	const minutes = addZero(date.getMinutes());
 
-	return `${day}.${months}.${year}`;
+	let result = `${day}.${months}.${year}`;
+	if (full) result = `${result} ${hours}:${minutes}`;
+
+	return result;
 }
 
 

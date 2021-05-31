@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux';
 
-import PlayerKDA from '../../../match/components/getMatchInfo/playerKDA';
+import PlayerKDA from '../../../match/components/playerKDA';
 import ProgressBar from '../../../../components/progressBars/progressBar';
 import RateBar from '../../../../components/progressBars/rateBar';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';

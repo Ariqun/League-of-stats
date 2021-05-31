@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 import spellTooltip from '../../../../components/tooltips/spellTooltip';
 
 const PlayerSpells = ({firstId, secondId, version, spells}) => {

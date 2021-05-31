@@ -1,0 +1,59 @@
+@import '../../../../components/UI/ui'
+
+.table_head
+	.left_team, .right_team
+		display: flex
+		justify-content: space-evenly
+		.result
+			@include flexColumn
+			.win
+				color: $color-green
+			.defeat
+				color: $color-red
+			.remake
+				color: $color-skyblue
+		.objects
+			display: flex
+			.object
+				@include flexColumn
+				width: 20px
+				.obj_icon
+					width: 20px
+					height: 20px
+					background: url('./objects.png') no-repeat
+					background-size: cover
+			.tower
+				order: 5
+				.obj_icon
+					background-position: 0 0
+			.inhibitor
+				order: 3
+				.obj_icon
+					background-position: 0 -20px
+			.baron
+				order: 3
+				.obj_icon
+					background-position: 0 -40px
+			.riftHerald
+				order: 2
+				.obj_icon
+					background-position: 0 -80px
+			.dragon
+				order: 1
+				.obj_icon
+					background-position: 0 -60px
+	.right_team
+		.result
+			order: 2
+		.objects
+			order: 1
+			.tower
+				order: 1
+			.inhibitor
+				order: 2
+			.baron
+				order: 3
+			.riftHerald
+				order: 4
+			.dragon
+				order: 5

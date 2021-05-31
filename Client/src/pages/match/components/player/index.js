@@ -2,16 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import PlayerRunes from '../getMatchInfo/playerRunes';
-import PlayerSpells from '../getMatchInfo/playerSpells';
+import PlayerRunes from '../playerRunes';
+import PlayerSpells from '../playerSpells';
 import PlayerRank from '../playerRank';
-import PlayerKDA from '../getMatchInfo/playerKDA';
-import PlayerItems from '../getMatchInfo/playerItems';
+import PlayerKDA from '../playerKDA';
+import PlayerItems from '../playerItems';
 
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 import {scorePerMin} from '../../../../components/manipulationsWithNums/scorePerTime';
 import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+
+import './index.sass';
 
 const Player = ({teamId, info, region, version}) => {
 	const {participants, gameDuration} = info;
@@ -80,9 +82,7 @@ const Player = ({teamId, info, region, version}) => {
 					</div>
 				</div>
 
-				<div className="player_items">
-					<PlayerItems player={player}/>
-				</div>
+				<PlayerItems player={player}/>
 			</div>
 		)
 	})

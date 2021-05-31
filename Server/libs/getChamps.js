@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 module.exports = async () => {
-	const versions = await this.getData('https://ddragon.leagueoflegends.com/api/versions.json');
-	const version = versions[0];
+	const versions = await axios('https://ddragon.leagueoflegends.com/api/versions.json');
+	const version = versions.data[0];
 
 	const res = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${version}/data/ru_RU/champion.json`);
 	const arr = [];

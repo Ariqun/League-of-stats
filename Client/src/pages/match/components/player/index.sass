@@ -1,0 +1,68 @@
+@import '../../../../components/UI/ui'
+
+.player
+	display: flex
+	justify-content: space-between
+	align-items: center
+	height: 95px
+	padding: 5px 0
+	border-bottom: 1px solid
+	border-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.8) 10%, rgba(128, 128, 128, 0) 80%)
+	border-image-slice: 1
+	&:last-of-type
+		border: none
+	.player_settings
+		display: flex
+		.champion_icon
+			img
+				width: 80px
+		.spells_and_runes
+			display: flex
+			flex-direction: column
+			justify-content: space-between
+			padding: 1px 0
+			.spells, .runes
+				cursor: pointer
+				img
+					width: 15px
+					border-radius: 5px
+					&:first-of-type
+						margin-bottom: 1px
+	.player_name
+		a
+			@include flexColumn
+			width: 135px
+			word-break: break-word
+			text-align: center
+			text-decoration: none
+			color: $color-light_gray
+			.rank_name
+				color: $color-dark_gray
+				font-size: 13px
+	.player_stats
+		display: flex
+		flex-direction: column
+		justify-content: space-evenly
+		align-items: center
+		width: 230px
+		height: 100%
+		.other_score
+			display: flex
+			justify-content: space-evenly
+			width: 100%
+			font-size: 12px
+			.wrapper_block_left, .wrapper_block_right
+				@include flexColumn
+				.farm_score
+				.per_min
+					color: $color-dark_gray
+.player.top
+	order: 1
+.player.jungle
+	order: 2
+.player.middle
+	order: 3
+.player.bottom
+	order: 4
+.player.utility
+	order: 5

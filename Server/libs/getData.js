@@ -8,7 +8,7 @@ module.exports = async (url, func, region = 'ru') => {
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-b875529c-52c7-4f94-83fb-c168ef0f7e68"
+		"X-Riot-Token": "RGAPI-f74477fb-b672-4d90-8add-226c586e17f0"
 	};
 	let result = {};
 

@@ -2,14 +2,13 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import matchDuration from '../../../../match/components/getMatchInfo/matchDuration';
-import matchStartDate from '../../../../match/components/getMatchInfo/matchStartDate';
-import matchResult from '../../../../match/components/getMatchInfo/matchResult';
+import MatchResult from '../../../../match/components/matchResult';
 import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
-import PlayerKDA from '../../../../match/components/getMatchInfo/playerKDA';
+import PlayerKDA from '../../../../match/components/playerKDA';
 import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
 import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRatio';
 import matchTypesRU from '../../../../../components/languages/russian/matchTypesRU';
+import {transformDate, transformMS} from '../../../../../components/manipulationsWithNums/transformTime';
 
 const Statistics = ({player, info, matchId, matchTypes}) => {
 	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
@@ -18,9 +17,8 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const matchTypeRU = objRU[matchType.description];
-	const duration = matchDuration(gameDuration);
-	const startDate = matchStartDate(gameStartTimestamp);
-	const matchRes = matchResult(teams, teamId);
+	const duration = transformMS(gameDuration, 'digits');
+	const startDate = transformDate(gameStartTimestamp, true);
 	const teamKills = totalTeamKills(teams, teamId);
 	const farm = totalMinionsKilled + neutralMinionsKilled;
 	const avgKillPart = calcRatio(((kills + assists) * 100), teamKills);
@@ -36,7 +34,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 
 				<div className="stats_wrapper">
 					<div className="match_result">
-						{matchRes}
+						<MatchResult teams={teams} teamId={teamId} duration={gameDuration}/>
 						<span className="match_type">{matchTypeRU}</span>
 					</div>
 

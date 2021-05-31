@@ -24,11 +24,20 @@ router.post('/match', async (req, res) => {
 		const timeline = await getData(timelineURL);
 		const timelineInfo = collectTimeLineInfo(timeline);
 
-		const allowedTypeIds = [400, 420, 440];
-		const typeId = matchInfo.info.queueId;
+		const result = {...info, timeline: [timelineInfo]};
+
+		if (matchInfo.info.gameDuration >= 300000) {
+			pushMatchIdInDB(matchId);
+			res.send(JSON.stringify(result));
+			return;
+		}
+
+		const allowedQueueIds = [400, 420, 440];
+		const {info} = matchInfo;
+		const {queueId, gameCreation} = info;
 		
 		const nowDate = Date.parse(new Date());
-		const matchDate = matchInfo.info.gameCreation;
+		const matchDate = gameCreation;
 		const startDateLastSeason = 1610053200000;
 		const oneMonth = 2592000000;
 		const isMatchChecked = await checkedMatchIds.findOne({matchId});
@@ -37,16 +46,14 @@ router.post('/match', async (req, res) => {
 			pushMatchInDB(matchInfo, timelineInfo);
 		}
 
-		if (allowedTypeIds.includes(typeId) && matchDate >= startDateLastSeason && !isMatchChecked) {
-			pushInfoInDB(matchInfo.info, matchId);
+		if (allowedQueueIds.includes(queueId) && matchDate >= startDateLastSeason && !isMatchChecked) {
+			pushInfoInDB(info, matchId);
 		}
 
-		if (!allowedTypeIds.includes(typeId)) {
+		if (!allowedQueueIds.includes(queueId)) {
 			pushInvalidMatchIdInDB(matchId)
 		}
 
-		const result = {...matchInfo.info, timeline: [timelineInfo]};
-		
 		res.send(JSON.stringify(result));
 	} catch {}
 })

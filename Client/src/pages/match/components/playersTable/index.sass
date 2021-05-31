@@ -1,0 +1,35 @@
+@import '../../../../components/UI/ui'
+	
+.players_block
+	display: flex
+	.left_team, .right_team
+		width: 200px
+		padding-left: 5px
+		.player_small, .current_player
+			a
+				display: flex
+				align-items: center
+				text-decoration: none
+				color: $color-light_gray
+				.champion_icon
+					img
+						width: 24px
+				.player_name
+					font-size: 14px
+					overflow: hidden
+					padding-left: 5px
+		.current_player
+			a
+				color: $color-orange
+	.left_team
+		@include transGrayBorderRight
+		display: flex
+		flex-direction: column
+		align-items: flex-end
+		padding-right: 5px
+		.player_small, .current_player
+			display: flex
+			.champion_icon
+				order: 2
+			.player_name
+				padding-right: 5px

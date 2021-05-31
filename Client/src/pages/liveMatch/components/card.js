@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import PlayerKDA from '../../match/components/getMatchInfo/playerKDA';
-import PlayerSpells from '../../match/components/getMatchInfo/playerSpells';
+import PlayerKDA from '../../match/components/playerKDA';
+import PlayerSpells from '../../match/components/playerSpells';
 import {findPercent} from '../../../components/manipulationsWithNums/findPercent';
 import {calcRatio} from '../../../components/manipulationsWithNums/calcRatio';
 import {LoadingBlock} from '../../../components/loading';

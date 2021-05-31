@@ -1,0 +1,35 @@
+@import '../../../../components/UI/ui'
+
+.player_items
+	display: flex
+	justify-content: flex-start
+	align-items: center
+	width: 155px
+	.items_block
+		position: relative
+		display: flex
+		flex-wrap: wrap
+		width: 102px
+		.item
+			width: 30px
+			height: 30px
+			cursor: pointer
+			margin: 2px
+			border-radius: 5px
+			background: rgba(211, 211, 211, 0.2)
+			&:last-of-type
+				position: absolute
+				top: calc(50% - 15px)
+				right: -34px
+				display: flex
+				justify-content: center
+				align-items: center
+				.vision_score
+					position: absolute
+					height: 22px
+					text-align: center
+					padding: 0 3px 0 2px
+					border-radius: 5px
+					background: rgba(0, 0, 0, 0.8)
+			img
+				border-radius: 5px

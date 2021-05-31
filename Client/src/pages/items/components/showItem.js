@@ -3,14 +3,19 @@ import {connect} from 'react-redux';
 
 import transformAndSort from './transfromAndSort';
 
-const ShowItem = ({name, items, version}) => {
+const ShowItem = ({currentItem, items, version}) => {
 	const arrOfItems = transformAndSort(items);
 
 	const result = arrOfItems.map(item => {
-		if (item.name !== name) return null;
+		if (item.name !== currentItem) return null;
 
-		let descr = item.description.replace(/<attention>(\s?\w+%?)<\/attention>/gi, (match, m1) => {
-			return `<span>+${m1}</span>`;
+		const {name, description, image, gold} = item;
+
+		let descr = description.replace(/<attention>(\s?\w+%?)<\/attention>|<ornnBonus>(\s?\w+%?)<\/ornnBonus>/gi, (match, m1, m2) => {
+			let str = '';
+			m1 ? str = m1 : str = m2;
+	
+			return `<span>+${str}</span>`;
 		})
 
 		descr = descr.replace(/<hr>/gi, '<br>');
@@ -19,11 +24,11 @@ const ShowItem = ({name, items, version}) => {
 			<div className="item_extend_wrapper" key={name}>
 				<div className="title">
 					<div className="item_icon">
-						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`} alt={item.name}></img>
+						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${image.full}`} alt={name}></img>
 					</div>
 					<div className="name_and_cost">
-						<span className="name">{item.name}</span>
-						<span className="cost">Цена: <span className="value">{item.gold.total}</span></span>
+						<span className="name">{name}</span>
+						<span className="cost">Цена: <span className="value">{gold.total}</span></span>
 					</div>
 				</div>
 
