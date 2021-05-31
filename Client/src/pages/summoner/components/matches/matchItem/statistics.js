@@ -13,8 +13,10 @@ import {transformDate, transformMS} from '../../../../../components/manipulation
 const Statistics = ({player, info, matchId, matchTypes}) => {
 	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
 	const {kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, teamId} = player;
+	const {win, gameEndedInEarlySurrender, gameEndedInSurrender} = player;
 	const objRU = matchTypesRU();
 
+	const isSurrender = !win && (gameEndedInEarlySurrender || gameEndedInSurrender);
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const matchTypeRU = objRU[matchType.description];
 	const duration = transformMS(gameDuration, 'digits');
@@ -34,7 +36,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 
 				<div className="stats_wrapper">
 					<div className="match_result">
-						<MatchResult teams={teams} teamId={teamId} duration={gameDuration}/>
+						<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender}/>
 						<span className="match_type">{matchTypeRU}</span>
 					</div>
 

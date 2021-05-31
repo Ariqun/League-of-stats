@@ -8,7 +8,8 @@ const PlayerKDA = ({kills, deaths, assists, live}) => {
 	let ratio = 'Безупречно';
 
 	if (deaths === 0 && live) ratio = ' - ';
-	if (deaths !== 0) ratio = calcRatio(+kills + +assists, +deaths, 2);
+	if (kills === 0 && deaths === 0 && assists === 0) ratio = ' - ';
+	if (deaths !== 0) ratio = calcRatio(kills + assists, deaths, 2);
 	
 	return(
 		<div className="kda_score">

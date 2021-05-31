@@ -10,9 +10,16 @@ const TeamScore = ({teamId, info}) => {
 	const teamStats = teams.find(team => team.teamId === teamId);
 	const {objectives} = teamStats;
 	const players = [];
+	let isSurrender = '';
 
 	for (let player of participants) {
-		if (player.teamId === teamId) players.push(player);
+		if (player.teamId === teamId) {
+			const {win, gameEndedInEarlySurrender, gameEndedInSurrender} = player;
+			
+			isSurrender = !win && (gameEndedInEarlySurrender || gameEndedInSurrender);
+
+			players.push(player);
+		};
 	}
 
 	const kills = players.reduce((acc, el) => {return acc += el.kills}, 0);
@@ -22,7 +29,7 @@ const TeamScore = ({teamId, info}) => {
 	return(
 		<div className={teamId === 100 ? "left_team col-4" : "right_team col-4"}>
 			<div className="result">
-				<MatchResult teams={teams} teamId={teamId} duration={gameDuration}/>
+				<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender}/>
 				<div className="score">
 					<span>{kills}</span>
 					<span> / </span>
