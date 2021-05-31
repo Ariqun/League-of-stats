@@ -6,6 +6,12 @@
 		justify-content: space-evenly
 		.result
 			@include flexColumn
+			.kda_score
+				.score_wrapper
+					.kills, .deaths, .assists
+						color: $color-light_gray
+				.kda_ratio
+					display: none
 		.objects
 			display: flex
 			.object

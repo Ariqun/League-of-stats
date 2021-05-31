@@ -23,7 +23,7 @@ const transformDate = (ms, full = false) => {
 	const date = new Date(ms);
 
 	const day = addZero(date.getDate());
-	const months = addZero(date.getMonth() - 1);
+	const months = addZero(date.getMonth() + 1);
 	const year = addZero(date.getFullYear());
 	const hours = addZero(date.getHours());
 	const minutes = addZero(date.getMinutes());

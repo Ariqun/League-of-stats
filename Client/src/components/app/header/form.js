@@ -33,7 +33,7 @@ function Form() {
 						<option value="tr1">TR</option>
 					</select>
 
-					<Link to={`/summoner/${region}/${name}`}>
+					<Link to={`/summoner/${region.toLowerCase()}/${name}`}>
 						<button type="submit">
 							<img src={process.env.PUBLIC_URL + "/assets/icons/search.png"} alt="search"/>
 						</button>

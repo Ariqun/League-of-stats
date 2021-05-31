@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MatchResult from '../matchResult';
+import PlayerKDA from '../playerKDA';
 
 import './index.sass';
 
@@ -30,13 +31,8 @@ const TeamScore = ({teamId, info}) => {
 		<div className={teamId === 100 ? "left_team col-4" : "right_team col-4"}>
 			<div className="result">
 				<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender}/>
-				<div className="score">
-					<span>{kills}</span>
-					<span> / </span>
-					<span>{deaths}</span>
-					<span> / </span>
-					<span>{assists}</span>
-				</div>
+				
+				<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
 			</div>
 
 			<div className="objects">

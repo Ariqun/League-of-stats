@@ -28,7 +28,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 	
 	return(
 		<div className="match_stats">
-			<Link to={`/match/${platformId}/${matchId}`} className="show_full_match" title="Показать матч">
+			<Link to={`/match/${platformId.toLowerCase()}/${matchId}`} className="show_full_match" title="Показать матч">
 				<div className="time">
 					<span className="date">{startDate}</span>
 					<span className="duration">&ensp;({duration})</span>
