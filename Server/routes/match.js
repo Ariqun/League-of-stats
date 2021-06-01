@@ -8,19 +8,22 @@ const pushInvalidMatchIdInDB = require('../libs/pushInvalidMatchIdInDB');
 const pushInfoInDB = require('../libs/pushInfoInDB');
 const match = require('../models/match');
 const checkedMatchIds = require('../models/checkedMatchIds');
+const checkArea = require('../libs/checkArea');
 
 router.post('/match', async (req, res) => {
-	const matchId = req.body.matchId;
+	const {matchId, region} = req.body;
+	const area = checkArea(region);
 
 	const doc = await match.findOne({matchId});
 	if (doc) return res.send(doc);
-
+	
 	try {
-		const matchInfoURL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+		const matchInfoURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/${matchId}`;
 		const matchInfo = await getData(matchInfoURL);
+
 		if (Object.keys(matchInfo).length === 0) return res.send('Error');
 		
-		const timelineURL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline`;
+		const timelineURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline`;
 		const timeline = await getData(timelineURL);
 		const timelineInfo = collectTimeLineInfo(timeline);
 		

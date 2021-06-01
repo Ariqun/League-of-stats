@@ -30,11 +30,11 @@ export default class DataBase {
 		return res.data;
 	}
 
-	getMatchInfo = async (matchId) => {
+	getMatchInfo = async (matchId, region) => {
 		const res = await axios({
 			method: 'post',
 			url: '/match',
-			data: `matchId=${matchId}`,
+			data: `matchId=${matchId}&region=${region}`,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 

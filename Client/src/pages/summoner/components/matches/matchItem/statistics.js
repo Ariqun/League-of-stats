@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import MatchResult from '../../../../match/components/matchResult';
-import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
 import PlayerKDA from '../../../../match/components/playerKDA';
+import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
+import matchTypesRU from '../../../../../components/languages/russian/matchTypesRU';
 import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
 import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRatio';
-import matchTypesRU from '../../../../../components/languages/russian/matchTypesRU';
 import {transformDate, transformMS} from '../../../../../components/manipulationsWithNums/transformTime';
 
 const Statistics = ({player, info, matchId, matchTypes}) => {

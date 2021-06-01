@@ -35,6 +35,11 @@
 					text-decoration: none
 					padding: 10px 0
 					border-bottom: 1px solid
+				.champ_icon
+					transition: 0.6s opacity
+					img
+						width: 60px
+						margin: 10px auto
 				.champ_stats
 					display: flex
 					flex-direction: column
@@ -76,8 +81,8 @@
 					position: absolute
 					top: 0
 					left: 0
-					opacity: 0.3
-					transition: 1s opacity
+					opacity: 0
+					transition: 0.6s opacity
 					z-index: -10
 					img
 						border-radius: 10px
@@ -89,6 +94,7 @@
 					border-image-slice: 1
 					background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)
 				&:hover .champ_stats,
+				&:hover .champ_icon,
 				&:hover .player_rank,
 				&:hover .player_settings
 					opacity: 0

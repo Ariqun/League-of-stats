@@ -8,12 +8,12 @@ const pushInfoInDB = require('./pushInfoInDB');
 const pushInvalidMatchIdInDB = require('./pushInvalidMatchIdInDB');
 const pushMatchIdInDB = require('./pushMatchIdInDB');
 
-module.exports = async (matchId) => {
+module.exports = async (matchId, area) => {
 	const doc = await match.findOne({matchId});
 	if (doc) return;
-
+	
 	try {
-		const matchURL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+		const matchURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/${matchId}`;
 		const matchInfo = await getData(matchURL);
 
 		if (Object.keys(matchInfo).length === 0) return;
@@ -22,7 +22,7 @@ module.exports = async (matchId) => {
 			return;
 		}
 
-		const timelineURL = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline`;
+		const timelineURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline`;
 		const timeline = await getData(timelineURL);
 		const timelineInfo = collectTimelineInfo(timeline);
 

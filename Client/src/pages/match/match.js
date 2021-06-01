@@ -15,7 +15,7 @@ const Match = ({region, matchId}) => {
 
 	useEffect(() => {
 		const getInfo = async () => {
-			const res = await db.getMatchInfo(matchId);
+			const res = await db.getMatchInfo(matchId, region);
 			
 			setInfo(res);
 			changeLoading(false);

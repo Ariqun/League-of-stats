@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 
 const getData = require('../libs/getData');
+const checkArea = require('../libs/checkArea');
 const collectSummonerInfo = require('../libs/collectSummonerInfo');
 const collectRankedInfo = require('../libs/collectRankedInfo');
 const bruteForceMatches = require('../libs/bruteForceMatches');
@@ -13,7 +14,8 @@ const invalidcheckedMatchIds = require('../models/invalidcheckedMatchIds');
 router.post('/summoner', async (req, res) => {
 	const name = encodeURI(req.body.summoner);
 	const region = (req.body.region).toUpperCase();
-
+	const area = checkArea(region);
+	
 	const profileURL = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}`;
 	const summonerInfo = await getData(profileURL, collectSummonerInfo, region);
 
@@ -25,7 +27,7 @@ router.post('/summoner', async (req, res) => {
 	let start = 0;
 
 	do {
-		const matchListURL = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuId}/ids?start=${start}&count=100`;
+		const matchListURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuId}/ids?start=${start}&count=100`;
 		matchList.push(...await getData(matchListURL));
 		start += 100;
 	} while (matchList.length % 100 == 0)
@@ -52,7 +54,7 @@ router.post('/summoner', async (req, res) => {
 		console.log(count)
 		
 		const oneMatch = uncheckedMatchIds.slice(start, end);
-		bruteForceMatches(oneMatch[0]);
+		bruteForceMatches(oneMatch[0], area);
 
 		if (count <= uncheckedMatchIds.length) {
 			interval = setTimeout(tick, 3500);

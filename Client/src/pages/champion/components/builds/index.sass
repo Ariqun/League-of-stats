@@ -1,13 +1,14 @@
 @import '../../../../components/UI/ui'
 
 .builds
+	padding: 20px 0
 	.items_block, .runes_block
 		display: flex
 		flex-direction: column
 		.block_title
 			@include transGrayBorderBot_20per
 			text-align: center
-			padding: 20px 0 10px
+			padding-bottom: 10px
 		.columns_wrapper
 			display: flex
 			justify-content: space-evenly
@@ -16,6 +17,8 @@
 			padding: 20px 0
 			.item_column
 				@include opacityBg
+				@include transGrayBordersTopAndBot
+				margin-bottom: 20px
 				.column_title
 					@include transGrayBorderBot_20per
 					text-align: center
@@ -41,9 +44,10 @@
 		flex-wrap: wrap
 		.runes_build
 			@include opacityBg
+			@include transGrayBordersTopAndBot
 			display: flex
 			flex-direction: column
-			margin: 20px
+			margin-bottom: 20px
 			.style_block
 				@include flexColumn
 				.style_title

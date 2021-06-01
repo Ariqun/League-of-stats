@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
+import PlayerRank from '../../match/components/playerRank';
 import PlayerKDA from '../../match/components/playerKDA';
 import PlayerSpells from '../../match/components/playerSpells';
 import {findPercent} from '../../../components/manipulationsWithNums/findPercent';
@@ -9,9 +10,8 @@ import {calcRatio} from '../../../components/manipulationsWithNums/calcRatio';
 import {LoadingBlock} from '../../../components/loading';
 
 import DataBase from '../../../services/dataBase';
-import PlayerRank from '../../match/components/playerRank';
 
-const Card = ({player, region = 'ru', champions, runes}) => {
+const Card = ({player, region = 'ru', champions, runes, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState('');
 	const [summoner, setSummoner] = useState({});
@@ -78,6 +78,10 @@ const Card = ({player, region = 'ru', champions, runes}) => {
 			<Link to={`/summoner/${region}/${summonerName}`} className="player_name">
 				{summonerName}
 			</Link>
+
+			<div className="champ_icon">
+				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${name[0]}.png`} alt={`${name[0]}_img`}/>
+			</div>
 
 			<div className="champ_stats">
 				<div className="winrate">{champWinrate}% <span>({champMatches} всего)</span></div>

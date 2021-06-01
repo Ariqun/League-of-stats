@@ -37,13 +37,13 @@ const Summoner = ({region, name}) => {
 	}, [name])
 
 	if (isloading) return <LoadingPage />
-
+	
 	const content = () => {
 		const {name, matchIds} = summoner;
 		const {records} = statistics;
 		const matchAmount = matchIds.length;
 		
-		if (tab === 'matches') return <Matches matchIds={matchIds} name={name}/>;
+		if (tab === 'matches') return <Matches matchIds={matchIds} name={name} region={region}/>;
 		if (tab === 'champs') return <Champions statistics={statistics} matchAmount={matchAmount}/>
 		if (tab === 'records') return <Records records={records} matchAmount={matchAmount}/>
 		if (tab === 'statistics') return <Statistics statistics={statistics} matchAmount={matchAmount}/>

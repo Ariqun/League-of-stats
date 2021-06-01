@@ -5,13 +5,13 @@ import SkyblueBtn from '../../../../components/buttons/skyblueBtn';
 
 import './index.sass';
 
-const Matches = ({matchIds, name}) => {
+const Matches = ({matchIds, name, region}) => {
 	const [matchListLenght, changeMatchListLength] = useState(10);
 
 	const matchList = matchIds.map((match, i) => {
 		if (i >= matchListLenght) return null;
 		
-		return <MatchItem matchId={match} name={name} key={match}/>
+		return <MatchItem matchId={match} name={name} key={match} region={region}/>
 	});
 
 	return(

@@ -8,7 +8,9 @@ const Tabs = ({changeTab, currentTab}) => {
 		const descr = tab[Object.keys(tab)];
 		
 		return(
-			<div onClick={() => changeTab(`${name}`)} className={currentTab === name ? "tab active" : "tab"} key={name}>{descr}</div>
+			<div onClick={() => changeTab(`${name}`)} className={currentTab === name ? "tab active" : "tab"} key={name}>
+				{descr}
+			</div>
 		)
 	});
 

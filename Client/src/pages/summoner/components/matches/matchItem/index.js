@@ -9,7 +9,7 @@ import {LoadingBlock} from '../../../../../components/loading';
 
 import DataBase from '../../../../../services/dataBase';
 
-const MatchItem = ({matchId, name}) => {
+const MatchItem = ({matchId, name, region}) => {
 	const [info, setInfo] = useState({});
 	const [isLoading, changeLoading] = useState(true);
 	const [isError, changeError] = useState(false);
@@ -17,9 +17,10 @@ const MatchItem = ({matchId, name}) => {
 	
 	useEffect(() => {
 		const getInfo = async () => {
-			const res = await db.getMatchInfo(matchId);
+			const res = await db.getMatchInfo(matchId, region);
+			const {queueId} = res;
 
-			if (res === 'Error' || res.queueId === 2000) {
+			if (res === 'Error' || queueId === 2000 || queueId === 2020 || queueId === 2010) {
 				changeError(true);
 			} else {
 				setInfo(res);
