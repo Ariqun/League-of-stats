@@ -51,17 +51,17 @@ const ChampBanner = ({statistics, champions, version}) => {
 					<div className="name">{champName}</div>
 
 					<div className="champ_stats">
+						<div className="matches">
+							<progress value="0" max="0" />
+							<div className={matches === 0 ? "hidden" : "counts"}>
+								<div className="total">Игры: <span className="num">{matches}</span></div>
+								<div className="wins">Победы: <span className="num">{wins}</span></div>
+							</div>
+						</div>
+
 						<div className="winrate">
 							<progress value={wins} max={matches} />
 							<div className={matches === 0 ? "hidden" : "value"}>{percent}%</div>
-						</div>
-
-						<div className="matches">
-							<progress value={wins} max={matches} />
-							<div className={matches === 0 ? "hidden" : "counts"}>
-								<div className="looses">{matches - wins}</div>
-								<div className="wins">{wins}</div>
-							</div>
 						</div>
 					</div>
 				</div>

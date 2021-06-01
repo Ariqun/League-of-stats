@@ -79,13 +79,13 @@
 			padding: 10px 50px 10px 10px
 		.winrate, .matches
 			position: absolute
-			top: calc(50% - 25px)
-			left: 40px
+			top: calc(50% + 20px)
+			left: 25px
 			height: 30px
 			progress
 				appearance: none
 				height: 30px
-				width: 200px
+				width: 215px
 				transform: rotate(180deg)
 				&::-webkit-progress-bar
 					height: 30px
@@ -99,22 +99,29 @@
 			.value
 				position: absolute
 				top: 4px
-				right: 55px
+				right: 25px
 				color: black
 		.matches
-			top: calc(50% + 20px)
+			top: calc(50% - 25px)
 			progress
+				width: 200px
 				&::-webkit-progress-bar
-					background: $color-red
+					background: rgba(111, 111, 111, 0.3)
 				&::-webkit-progress-value
-					background: $color-green
+					// background: $color-green
 			.counts
 				position: absolute
 				top: 5px
 				display: flex
-				justify-content: space-around
+				justify-content: space-evenly
 				width: 100%
-				color: black
+				.total
+					color: $color-orange
+				.wins
+					color: $color-green
+				.total, .wins
+					.num
+						color: $color-light_gray
 	.sum
 		display: flex
 		flex-direction: column
