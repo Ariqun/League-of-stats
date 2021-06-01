@@ -17,7 +17,7 @@ module.exports = async (matchId) => {
 		const matchInfo = await getData(matchURL);
 
 		if (Object.keys(matchInfo).length === 0) return;
-		if (matchInfo.info.gameDuration >= 300000) {
+		if (matchInfo.info.gameDuration <= 300000) {
 			pushMatchIdInDB(matchId);
 			return;
 		}

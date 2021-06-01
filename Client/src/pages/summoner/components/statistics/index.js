@@ -6,8 +6,8 @@ import StatisticsNotFound from '../../../../components/errors/statisticsNotFound
 
 import './index.sass';
 
-const Statistics = ({statistics}) => {
-	if (!statistics) return <StatisticsNotFound />
+const Statistics = ({statistics, matchAmount}) => {
+	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount}/>
 
 	const stats = statistics.statistics[0];
 	const champs = statistics.champions[0];

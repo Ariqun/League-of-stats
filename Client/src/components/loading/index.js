@@ -4,7 +4,7 @@ import './loading.css';
 
 const LoadingPage = () => {
 	return(
-		<div className="loading">
+		<div className="loading_page">
 			<div className="container">
 				<div className="spinner">
 					<div/>
@@ -27,7 +27,7 @@ const LoadingPage = () => {
 
 const LoadingBlock = () => {
 	return(
-		<div className="loading">
+		<div className="loading_block">
 			<div className="spinner">
 				<div/>
 				<div/>

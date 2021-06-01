@@ -18,7 +18,7 @@ const MatchItem = ({matchId, name}) => {
 	useEffect(() => {
 		const getInfo = async () => {
 			const res = await db.getMatchInfo(matchId);
-			
+
 			if (res === 'Error' || res.queueId === 2000) {
 				changeError(true);
 			} else {

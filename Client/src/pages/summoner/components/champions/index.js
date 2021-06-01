@@ -7,11 +7,11 @@ import StatisticsNotFound from '../../../../components/errors/statisticsNotFound
 
 import './index.sass';
 
-const Champions = ({statistics}) => {
+const Champions = ({statistics, matchAmount}) => {
 	const [tab, changeTab] = useState('total');
 	const [sortBy, changeSortBy] = useState('matches');
-
-	if (!statistics) return <StatisticsNotFound />
+	console.log(statistics);
+	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount}/>
 
 	return(
 		<div className="champs">

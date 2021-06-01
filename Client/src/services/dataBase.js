@@ -34,7 +34,7 @@ export default class DataBase {
 		const res = await axios({
 			method: 'post',
 			url: '/match',
-			data: `matchID=${matchId}`,
+			data: `matchId=${matchId}`,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 

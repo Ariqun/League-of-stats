@@ -50,6 +50,7 @@ router.post('/summoner', async (req, res) => {
 		const start = count;
 		const end = count + 1;
 		console.log(count)
+		
 		const oneMatch = uncheckedMatchIds.slice(start, end);
 		bruteForceMatches(oneMatch[0]);
 
@@ -60,7 +61,7 @@ router.post('/summoner', async (req, res) => {
 		count++;
 	}, 3500)
 
-	// deleteOldMatchesFromDB();
+	deleteOldMatchesFromDB();
 
 	res.send(JSON.stringify({...summonerInfo, ...rankedInfo, matchIds: matchList}));
 	

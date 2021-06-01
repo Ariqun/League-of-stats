@@ -5,8 +5,8 @@ import StatisticsNotFound from '../../../../components/errors/statisticsNotFound
 
 import './index.sass';
 
-const Records = ({records}) => {
-	if (!records) return <StatisticsNotFound />
+const Records = ({records, matchAmount}) => {
+	if (!records) return <StatisticsNotFound matchAmount={matchAmount}/>
 
 	const {kda, kills, deaths, assists, cs, gold, dmg, heal, dmgTaken, CC, vision, wards, killingSpree, double, triple, quadra, penta} = records[0];
 	const basics = {kills, deaths, assists, kda, cs, gold};
