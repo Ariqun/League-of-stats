@@ -1,9 +1,7 @@
 const addZero = (num) => {
-	if ((num + '').length <= 1) {
-		return `0${num}`;
-	} else {
-		return num;
-	}
+	if ((num + '').length <= 1) return `0${num}`;
+	
+	return num;
 }
 
 const addZeroFour = (num) => {

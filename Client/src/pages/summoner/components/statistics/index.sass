@@ -5,24 +5,38 @@
 	.match_type, .stats_type
 		display: flex
 		justify-content: space-evenly
+		flex-wrap: wrap
 		.type
-			@include opacityBg
-			@include transGrayBordersTopAndBot
-			flex: 0 0 auto
-			width: 20%
-			.type_title
-				@include transGrayBorderBot_10per
-				text-align: center
-				padding-bottom: 10px
-			.total
-				text-align: center
-				color: $color-dark_gray
-			.no_data
-				text-align: center
-				color: $color-dark_gray
-				margin-top: 75px
+			.type_head
+				@include opacityBg
+				@include transGrayBordersTopAndBot
+				flex: 0 0 auto
+				.type_title
+					@include transGrayBorderBot_10per
+					text-align: center
+					color: $color-light_gray
+					padding-bottom: 10px
+				.total_matches
+					text-align: center
+					color: $color-dark_gray
+				.no_data
+					text-align: center
+					color: $color-dark_gray
+					margin-top: 75px
+		.type.total
+			order: 1
+		.type.solo
+			order: 2
+		.type.flex
+			order: 3
+		.type.normal
+			order: 4
+		.type.clash
+			order: 5
 	.stats_type
-		margin-top: 30px
+		@include opacityBg
+		@include transGrayBordersTopAndBot
+		margin: 30px 0
 		.type
 			.type_title
 				margin-bottom: 10px
@@ -33,3 +47,5 @@
 				padding-bottom: 5px
 				.title
 					color: $color-dark_gray
+				.value
+					color: $color-light_gray

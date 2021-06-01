@@ -4,7 +4,7 @@ const calcRatio = require('./calcRatio');
 module.exports = async (sumInfo, matchId) => {
 	for (const key in sumInfo) {
 		try {
-			const {sumId, sumName, win, solo, flex, normal} = sumInfo[key];
+			const {sumId, sumName, win, type} = sumInfo[key];
 			const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = sumInfo[key].champion;
 			const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = sumInfo[key].champion;
 			const role = (sumInfo[key].role)?.toLowerCase();
@@ -13,11 +13,6 @@ module.exports = async (sumInfo, matchId) => {
 			const heal = restore + shield;
 			const kda = calcRatio((kills + assists), deaths);
 			const records = {kda, kills, deaths, assists, dmg, heal, cs, gold, vision, wards, dmgTaken, CC, killingSpree, double, triple, quadra, penta};
-	
-			let type = '';
-			if (solo) type = 'solo';
-			if (flex) type = 'flex';
-			if (normal) type = 'normal';
 	
 			await summoner.updateOne({sumId: sumId}, {
 				sumId: sumId,

@@ -1,4 +1,5 @@
 import React from 'react';
+import matchTypesRu from '../../../../components/languages/russian/matchTypesRU';
 
 import {recordsRU} from '../../../../components/languages/russian/records';
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
@@ -27,12 +28,8 @@ const Card = ({records}) => {
 
 		const date = transformDate(records[record].date);
 		const name = records[record].champName;
-		const matchType = records[record].matchType;
-		let type = '';
-
-		if (matchType === 400) type = 'Обычная';
-		if (matchType === 420) type = 'Одиночная';
-		if (matchType === 440) type = 'Флекс';
+		const ruMatchTypes = matchTypesRu();
+		const matchType = ruMatchTypes[records[record].matchType]
 		
 		return(
 			<div className="card col-2" key={record}>
@@ -40,7 +37,7 @@ const Card = ({records}) => {
 				<div className="value">{value}</div>
 				<div className="other">
 					<div className="date">{date}</div>
-					<div className="type">{type}</div>
+					<div className="type">{matchType}</div>
 				</div>
 				<div className="background">
 					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg`} alt={`${name}_img`}/>

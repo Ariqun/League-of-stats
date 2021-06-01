@@ -26,11 +26,11 @@ module.exports = async (matchId) => {
 		const timeline = await getData(timelineURL);
 		const timelineInfo = collectTimelineInfo(timeline);
 
-		const allowedTypeIds = [400, 420, 440];
-		const typeId = matchInfo.info.queueId;
+		const allowedQueueIds = [400, 420, 440, 700];
+		const {queueId, gameCreation} = matchInfo.info;
 
 		const nowDate = Date.parse(new Date());
-		const matchDate = matchInfo.info.gameCreation;
+		const matchDate = gameCreation;
 		const startDateLastSeason = 1610118000000;
 		const oneMonth = 2592000000;
 		
@@ -38,11 +38,11 @@ module.exports = async (matchId) => {
 			pushMatchInDB(matchInfo, timelineInfo);
 		}
 
-		if (allowedTypeIds.includes(typeId) && matchDate >= startDateLastSeason) {
+		if (allowedQueueIds.includes(queueId) && matchDate >= startDateLastSeason) {
 			pushInfoInDB(matchInfo.info, matchId);
 		}
 		
-		if (!allowedTypeIds.includes(typeId) || matchDate <= startDateLastSeason) {
+		if (!allowedQueueIds.includes(queueId) || matchDate <= startDateLastSeason) {
 			pushInvalidMatchIdInDB(matchId)
 		}
 	} catch (err) {}

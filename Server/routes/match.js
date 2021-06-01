@@ -31,7 +31,7 @@ router.post('/match', async (req, res) => {
 			return;
 		}
 		
-		const allowedQueueIds = [400, 420, 440];
+		const allowedQueueIds = [400, 420, 440, 700];
 		const {queueId, gameCreation} = matchInfo.info;
 		
 		const nowDate = Date.parse(new Date());

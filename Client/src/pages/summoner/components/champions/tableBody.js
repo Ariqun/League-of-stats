@@ -6,6 +6,8 @@ import ProgressBar from '../../../../components/progressBars/progressBar';
 import RateBar from '../../../../components/progressBars/rateBar';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
+import { separateNumWithDot } from '../../../../components/manipulationsWithNums/checkNums';
+import AvgBlock from './avgBlock';
 
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 	const champs = statistics.champions[0];
@@ -35,12 +37,12 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		const avgAssists = calcRatio(assists, matches, 1);
 		const avgRatio =  calcRatio((kills + assists), deaths, 2);
 		const avgCreeps =  calcRatio(cs, matches, 1);
-		const avgGold =  calcRatio(gold, matches, 1);
-		const avgDmg =  calcRatio((magic + physical + trueDmg), matches) / 1000;
-		const avgHeal =  calcRatio((restore + shield), matches) / 1000;
+		const avgGold =  separateNumWithDot(calcRatio(gold, matches, 1));
+		const avgDmg =  separateNumWithDot(calcRatio((magic + physical + trueDmg), matches));
+		const avgHeal =  separateNumWithDot(calcRatio((restore + shield), matches));
 		const avgVision = calcRatio(vision, matches, 1);
 		const avgWards = calcRatio(wards, matches, 1);
-		
+
 		return(
 			<tr className={`champ ${champ}`} key={champ}>
 				<td className="general" champ={champ}>
@@ -65,31 +67,19 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 				</td>
 
 				<td className="avg_creeps" creeps={avgCreeps}>
-					<div className="wrapper">
-						<img src={process.env.PUBLIC_URL + '/assets/icons/cs.png'} alt="cs"/>
-						<span className="value">{avgCreeps}</span>
-					</div>
+					<AvgBlock type="cs" value={avgCreeps}/>
 				</td>
 
 				<td className="avg_gold" gold={avgGold}>
-					<div className="wrapper">
-						<img src={process.env.PUBLIC_URL + '/assets/icons/gold.png'} alt="gold"/>
-						<span className="value">{avgGold}</span>
-					</div>
+					<AvgBlock type="gold" value={avgGold}/>
 				</td>
 
 				<td className="avg_dmg" dmg={avgDmg}>
-					<div className="wrapper">
-						<img src={process.env.PUBLIC_URL + '/assets/icons/dmg.png'} alt="dmg"/>
-						<span className="value">{avgDmg}</span>
-					</div>
+					<AvgBlock type="dmg" value={avgDmg}/>
 				</td>
 
 				<td className="avg_heal" heal={avgHeal}>
-					<div className="wrapper">
-						<img src={process.env.PUBLIC_URL + '/assets/icons/heal.png'} alt="dmg"/>
-						<span className="value">{avgHeal}</span>
-					</div>
+					<AvgBlock type="heal" value={avgHeal}/>
 				</td>
 
 				<td className="avg_vision" vision={avgVision}>

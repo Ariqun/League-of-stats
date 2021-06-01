@@ -3,17 +3,15 @@ import React from 'react';
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import sumStatistics from '../../../../components/languages/russian/sumStatistics';
 
-const StatNumbers = ({stats}) => {
-	const arrayOfTypes = ['total', 'solo', 'flex', 'normal'];
-
-	const statsBlock = (type) => {
+const StatNumbers = ({champs, type}) => {
+	const statsBlock = () => {
 		let statObj = {totalKills: 0, totalDeaths: 0, totalAssists: 0, totalDMG: 0, totalHeal: 0, totalCS: 0, totalGold: 0};
 		let rusTitles = sumStatistics();
 		
-		for (let key in stats) {
-			if (stats[key][type] === undefined) continue;
+		for (let key in champs) {
+			if (champs[key][type] === undefined) continue;
 
-			const {kda, dmg, heal, cs, gold} = stats[key][type];
+			const {kda, dmg, heal, cs, gold} = champs[key][type];
 			const {kills, deaths, assists} = kda;
 			const {physical, magic, trueDmg} = dmg;
 			const {restore, shield} = heal;
@@ -33,7 +31,7 @@ const StatNumbers = ({stats}) => {
 
 		if (sum === 0) return <div className="no_data">Нет данных</div>;
 
-		const result = Object.keys(statObj).map(stat => {
+		const content = Object.keys(statObj).map(stat => {
 			return(
 				<div className="stat" key={stat}>
 					<div className="title">{rusTitles[stat]}</div>
@@ -42,20 +40,14 @@ const StatNumbers = ({stats}) => {
 			)
 		})
 
-		return result;
+		return content;
 	}
-
-	const content = arrayOfTypes.map(type => {
-		return(
-			<div className="type" key={type}>
-				{statsBlock(type)}
-			</div>
-		)
-	});
 	
 	return(
 		<div className="stats_type">
-			{content}
+			<div className="type" key={type}>
+				{statsBlock()}
+			</div>
 		</div>
 	)
 }

@@ -5,5 +5,5 @@ const oneMonth = 2592000000;
 const value = now - oneMonth;
 
 module.exports = async () => {
-	await match.remove({gameCreation: {$lt: value}});
+	await match.deleteMany({gameCreation: {$lt: value}});
 }

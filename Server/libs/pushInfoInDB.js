@@ -8,6 +8,7 @@ const increaseMatchesAndBans = require('./increaseMatchesAndBans');
 module.exports = async (matchInfo, matchId) => {
 	const {queueId, gameStartTimestamp, participants, teams} = matchInfo;
 	const arrOfChamps = await getChamps();
+	const types = {400: 'normal', 420: 'solo', 440: 'flex', 700: 'clash'};
 	let bans = [], champInfo = {}, sumInfo = {};
 
 	for (let elem of participants) {
@@ -31,9 +32,7 @@ module.exports = async (matchInfo, matchId) => {
 			sumId: summonerId,
 			sumName: summonerName,
 			win: win ? 1 : 0,
-			solo: queueId === 420 ? 1 : 0,
-			flex: queueId === 440 ? 1 : 0,
-			normal: queueId === 400 ? 1 : 0,
+			type: types[queueId],
 			role: individualPosition,
 			champion: {
 				champId: championId,

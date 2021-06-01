@@ -18,4 +18,12 @@ const checkBigNum = (num, format = 'literal') => {
 	return num;
 }
 
-export {checkNanAndDoubleZero, checkBigNum};
+const separateNumWithDot = (number) => {
+	const num = Math.floor(number);
+
+	if (num >= 1000 && num % 10 === 0) return num / 1000 + '0';
+
+	return num / 1000;
+}
+
+export {checkNanAndDoubleZero, checkBigNum, separateNumWithDot};

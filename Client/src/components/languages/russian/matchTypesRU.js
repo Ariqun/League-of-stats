@@ -10,7 +10,11 @@ const matchTypesRu = () => {
 		'Clash games': 'Clash',
 		'6v6 Hexakill games': 'Hexakill',
 		'URF games': 'УРФ',
-		'One for All games': 'Все за одного'
+		'One for All games': 'Все за одного',
+		400: 'Обычная',
+		420: 'Одиночная',
+		440: 'Флекс',
+		700: 'Clash',
 	}
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Tabs = ({changeTab, currentTab}) => {
-	const tabs = [{total: 'Ранговые и обычные'}, {solo: 'Одиночные'}, {flex: 'Флекс'}, {normal: 'Обычные'}];
+	const tabs = [{total: 'Ранговые, обычные и clash'}, {solo: 'Одиночные'}, {flex: 'Флекс'}, {normal: 'Обычные'}, {clash: 'Clash'}];
 	
 	const result = tabs.map(tab => {
 		const name = Object.keys(tab)[0];
