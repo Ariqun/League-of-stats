@@ -94,7 +94,7 @@ module.exports = async (matchInfo, matchId) => {
 	}
 
 	for (let champ of arrOfChamps) {
-		const champId = champ[0];
+		const champId = +champ[0];
 		let ban = 0;
 		
 		if (bans.includes(champId)) ban = 1;
