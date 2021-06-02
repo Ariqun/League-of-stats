@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Header from './header';
 import Background from './background';
 import Footer from './footer';
+import Up from '../buttons/up';
 
 import Main from '../../pages/main';
 import Champion from '../../pages/champion';
@@ -77,8 +78,9 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 					return <LiveMatch region={region} name ={name}/>
 				}}/>
 	
-				<Footer/>
-				<Background/>
+				<Up />
+				<Footer />
+				<Background />
 			</div>
 		)
 	}

@@ -11,4 +11,10 @@ router.post('/champion', async (req, res) => {
 	})
 })
 
+router.post('/champions', async (req, res) => {
+	await champion.find({}, (err, doc) => {
+		res.send(doc);
+	})
+})
+
 module.exports = router;

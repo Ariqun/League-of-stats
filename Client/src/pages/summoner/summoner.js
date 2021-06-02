@@ -18,13 +18,14 @@ const Summoner = ({region, name}) => {
 	const [tab, changeTab] = useState('matches');
 	const riotAPI = new RiotAPI();
 	const db = new DataBase();
-
+	window.scrollTo(0, 0);
+	
 	useEffect(() => {
 		const getSummoner = async () => {
 			console.time('hey');
 			const sumInfo = await riotAPI.getSummoner(region, name);
 
-			const sumStats = await db.getSumStatistics(sumInfo.sumId);
+			const sumStats = await db.getSumStatistics(sumInfo.puuid);
 			console.timeEnd('hey');
 
 			setSummoner(sumInfo);
@@ -32,7 +33,6 @@ const Summoner = ({region, name}) => {
 			changeLoading(false);
 		}
 		getSummoner();
-		
 		return () => {changeLoading(true)}
 	}, [name])
 

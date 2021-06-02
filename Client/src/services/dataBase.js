@@ -15,11 +15,24 @@ export default class DataBase {
 		return res.data;
 	}
 
-	getSumStatistics = async (id) => {
+	getAllChampionsStats = async () => {
+		const res = await axios({
+			method: 'post',
+			url: '/champions'
+		});
+
+		if (res.status !== 200) {
+			throw new Error('DataBase getAllChampionsStats failed');
+		}
+
+		return res.data;
+	}
+
+	getSumStatistics = async (puuid) => {
 		const res = await axios({
 			method: 'post',
 			url: '/sumStatistics',
-			data: `sumId=${id}`,
+			data: `puuid=${puuid}`,
 			headers: {'Content-type': 'application/x-www-form-urlencoded'}
 		});
 

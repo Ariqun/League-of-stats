@@ -6,7 +6,7 @@ module.exports = (res, region) => {
 		iconId: res.profileIconId,
 		sumId: res.id,
 		accId: res.accountId,
-		puuId: res.puuid
+		puuid: res.puuid
 	};
 	
 	return obj;

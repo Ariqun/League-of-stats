@@ -1,6 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const summoner = new Schema({
+	puuid: String,
 	sumId: String,
 	sumName: String,
 	statistics: Array,

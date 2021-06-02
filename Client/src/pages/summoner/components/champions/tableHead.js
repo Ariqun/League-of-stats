@@ -1,9 +1,9 @@
 import React from 'react';
 
-import champStatistics from '../../../../components/languages/russian/champStatistics';
+import {champStatistics} from '../../../../components/languages/russian/champStatistics';
 
 const TableHead = ({changeSort, sortBy}) => {
-	const ruTitles = champStatistics();
+	let ruTitles = champStatistics();
 
 	const result = Object.keys(ruTitles).map(title => {
 		return(

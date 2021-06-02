@@ -6,7 +6,7 @@ import ProgressBar from '../../../../components/progressBars/progressBar';
 import RateBar from '../../../../components/progressBars/rateBar';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
-import { separateNumWithDot } from '../../../../components/manipulationsWithNums/checkNums';
+import {separateNumWithDot} from '../../../../components/manipulationsWithNums/checkNums';
 import AvgBlock from './avgBlock';
 
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
@@ -24,12 +24,12 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 	const result = Object.keys(champs).map(champ => {
 		if (champs[champ][tab] === undefined) return null;
 
+		const name = champions[champ].name;
 		const {matches, wins} = champs[champ][tab].results;
 		const {cs, gold, vision, wards} = champs[champ][tab];
 		const {kills, deaths, assists} = champs[champ][tab].kda;
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
-		const name = champions[champ].name;
 		
 		const winrate = findPercent(wins, matches, 1);
 		const avgKills = calcRatio(kills, matches, 1);
@@ -42,7 +42,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		const avgHeal =  separateNumWithDot(calcRatio((restore + shield), matches));
 		const avgVision = calcRatio(vision, matches, 1);
 		const avgWards = calcRatio(wards, matches, 1);
-
+		
 		return(
 			<tr className={`champ ${champ}`} key={champ}>
 				<td className="general" champ={champ}>

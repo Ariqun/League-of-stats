@@ -4,7 +4,7 @@ const calcRatio = require('./calcRatio');
 module.exports = async (sumInfo, matchId) => {
 	for (const key in sumInfo) {
 		try {
-			const {sumId, sumName, win, type} = sumInfo[key];
+			const {sumId, puuid, sumName, win, type} = sumInfo[key];
 			const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = sumInfo[key].champion;
 			const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = sumInfo[key].champion;
 			const role = (sumInfo[key].role)?.toLowerCase();
@@ -14,7 +14,8 @@ module.exports = async (sumInfo, matchId) => {
 			const kda = calcRatio((kills + assists), deaths);
 			const records = {kda, kills, deaths, assists, dmg, heal, cs, gold, vision, wards, dmgTaken, CC, killingSpree, double, triple, quadra, penta};
 	
-			await summoner.updateOne({sumId: sumId}, {
+			await summoner.updateOne({puuid: puuid}, {
+				puuid: puuid,
 				sumId: sumId,
 				sumName: sumName,
 				[`champions.${champName}.name`]: champName,
@@ -82,7 +83,7 @@ module.exports = async (sumInfo, matchId) => {
 	
 			for (let key in records) {
 				const value = records[key];
-				await summoner.updateOne({sumId: sumId, [`records.${key}.value`]: {$lt: value}}, {
+				await summoner.updateOne({puuid: puuid, [`records.${key}.value`]: {$lt: value}}, {
 					$set: {
 						[`records.${key}.value`]: value,
 						[`records.${key}.champName`]: champName,

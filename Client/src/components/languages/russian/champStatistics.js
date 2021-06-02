@@ -13,4 +13,4 @@ const champStatistics = () => {
 	}
 }
 
-export default champStatistics;
+export {champStatistics}

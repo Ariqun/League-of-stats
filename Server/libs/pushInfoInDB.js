@@ -12,7 +12,7 @@ module.exports = async (matchInfo, matchId) => {
 	let bans = [], champInfo = {}, sumInfo = {};
 
 	for (let elem of participants) {
-		const {championId, summonerId, win, summonerName, championName, kills, deaths, assists, 
+		const {championId, summonerId, puuid, win, summonerName, championName, kills, deaths, assists, 
 				totalMinionsKilled, neutralMinionsKilled, goldEarned, visionScore, wardsPlaced,
 				physicalDamageDealtToChampions, magicDamageDealtToChampions, trueDamageDealtToChampions,
 				totalHealsOnTeammates, totalDamageShieldedOnTeammates, totalDamageTaken, timeCCingOthers,
@@ -28,7 +28,8 @@ module.exports = async (matchInfo, matchId) => {
 			}
 		}
 
-		sumInfo[summonerId] = {
+		sumInfo[puuid] = {
+			puuid: puuid,
 			sumId: summonerId,
 			sumName: summonerName,
 			win: win ? 1 : 0,

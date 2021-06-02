@@ -22,12 +22,12 @@ router.post('/summoner', async (req, res) => {
 	const leagueURL = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerInfo.sumId}`;
 	const rankedInfo = await getData(leagueURL, collectRankedInfo);
 
-	const puuId = summonerInfo.puuId;
+	const puuid = summonerInfo.puuid;
 	const matchList = [];
 	let start = 0;
 
 	do {
-		const matchListURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuId}/ids?start=${start}&count=100`;
+		const matchListURL = `https://${area}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=${start}&count=100`;
 		matchList.push(...await getData(matchListURL));
 		start += 100;
 	} while (matchList.length % 100 == 0)
@@ -45,9 +45,9 @@ router.post('/summoner', async (req, res) => {
 	}
 	collectCheckedMatches(checkedMatches, checkedInvalidMatches);
 
-	const uncheckedMatchIds = matchList.filter(id => !arrOfCheckedIds.includes(id));
+	const uncheckedMatchIds = matchList.filter(id => !arrOfCheckedIds.includes(id)).reverse();
 	let count = 0;
-	console.log(uncheckedMatchIds);
+	console.log(uncheckedMatchIds.length);
 	let interval = setTimeout(function tick() {
 		const start = count;
 		const end = count + 1;

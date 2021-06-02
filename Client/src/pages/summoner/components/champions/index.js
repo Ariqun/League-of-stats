@@ -12,7 +12,7 @@ const Champions = ({statistics, matchAmount}) => {
 	const [sortBy, changeSortBy] = useState('matches');
 
 	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount}/>
-
+	
 	return(
 		<div className="champs">
 			<div className="champs_wrapper">
