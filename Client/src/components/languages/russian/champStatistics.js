@@ -8,8 +8,7 @@ const champStatistics = () => {
 		gold: 'Золото', 
 		dmg: 'Урон', 
 		heal: 'Лечение',
-		vision: 'Обзор',
-		wards: 'Тотемы'
+		vision: 'Обзор'
 	}
 }
 

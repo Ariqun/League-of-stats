@@ -26,7 +26,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 
 		const name = champions[champ].name;
 		const {matches, wins} = champs[champ][tab].results;
-		const {cs, gold, vision, wards} = champs[champ][tab];
+		const {cs, gold, vision} = champs[champ][tab];
 		const {kills, deaths, assists} = champs[champ][tab].kda;
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
@@ -41,7 +41,6 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		const avgDmg =  separateNumWithDot(calcRatio((magic + physical + trueDmg), matches));
 		const avgHeal =  separateNumWithDot(calcRatio((restore + shield), matches));
 		const avgVision = calcRatio(vision, matches, 1);
-		const avgWards = calcRatio(wards, matches, 1);
 		
 		return(
 			<tr className={`champ ${champ}`} key={champ}>
@@ -83,15 +82,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 				</td>
 
 				<td className="avg_vision" vision={avgVision}>
-					<div className="wrapper">
-						<span className="value">{avgVision}</span>
-					</div>
-				</td>
-
-				<td className="avg_wards" wards={avgWards}>
-					<div className="wrapper">
-						<span className="value">{avgWards}</span>
-					</div>
+					<AvgBlock type="vision" value={avgVision}/>
 				</td>
 			</tr>
 		)

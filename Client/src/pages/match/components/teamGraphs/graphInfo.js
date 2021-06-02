@@ -14,6 +14,7 @@ const graphInfo = (teamId, participants, version) => {
 		if (position === 'MIDDLE') return 3;
 		if (position === 'BOTTOM') return 4;
 		if (position === 'UTILITY') return 5;
+		return 0;
 	}
 		
 	for (let elem of players) {

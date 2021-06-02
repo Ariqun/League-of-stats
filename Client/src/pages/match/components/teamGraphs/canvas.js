@@ -11,13 +11,13 @@ export default class Canvas extends Component {
 	}
 
 	verticalGraph() {
-		const {leftTeam, rightTeam, option} = this.props;
+		const {leftTeam, rightTeam, type} = this.props;
 		const ctx = this.canvas.current.getContext('2d');
 		const allScore = [];
 		let factor = 110;
 
 		for (let i = 0; i < 5; i++) {
-			allScore.push(leftTeam[i][option].total, rightTeam[i][option].total);
+			allScore.push(leftTeam[i][type].total, rightTeam[i][type].total);
 		}
 
 		const maxScore = Math.max(...allScore) / 1000;
@@ -35,7 +35,7 @@ export default class Canvas extends Component {
 			
 			for (let i = 0; i < 5; i++) {
 				const img = new Image();
-				const num = team[i][option].total / 1000;
+				const num = team[i][type].total / 1000;
 
 				img.src = team[i].champ;
 				img.width = '20px';
@@ -50,7 +50,7 @@ export default class Canvas extends Component {
 			ctx.font = "15px Beaufort for LoL, sans-serif";
 
 			for (let i = 0; i < 5; i++) {
-				const num = team[i][option].total / 1000;
+				const num = team[i][type].total / 1000;
 				let score = `${num.toFixed(1)}k`;
 
 				if (num < 10) score = `${num.toFixed(2)}k`;

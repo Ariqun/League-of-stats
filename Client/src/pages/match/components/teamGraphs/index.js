@@ -18,13 +18,13 @@ const TeamGraphs = ({info, version}) => {
 			<div className="graph graph_damage">
 				<span className="graph_title">Урон по чемпионам</span>
 				<TotalTeamScore leftTeam={leftTeamInfo} rightTeam={rightTeamInfo} type="dmg"/>
-				<Canvas leftTeam={leftTeamInfo} rightTeam={rightTeamInfo} option="dmg"/>
+				<Canvas leftTeam={leftTeamInfo} rightTeam={rightTeamInfo} type="dmg"/>
 			</div>
 
 			<div className="graph graph_heal">
 				<span className="graph_title">Лечение и щиты на союзников</span>
 				<TotalTeamScore leftTeam={leftTeamInfo} rightTeam={rightTeamInfo} type="heal"/>
-				<Canvas leftTeam={leftTeamInfo} rightTeam={rightTeamInfo} option="heal"/>
+				<Canvas leftTeam={leftTeamInfo} rightTeam={rightTeamInfo} type="heal"/>
 			</div>
 		</div>
 	)
