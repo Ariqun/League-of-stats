@@ -3,6 +3,7 @@ const matchTypesRu = () => {
 		'5v5 Draft Pick games': 'Обычная (выбор)',
 		'5v5 Blind Pick games': 'Обычная (слепая)',
 		'5v5 Ranked Solo games': 'Ранговая (одиночная)',
+		"Nexus Blitz games": 'Штурм Нексуса',
 		'RANKED_SOLO_5x5': 'Одиночная',
 		'5v5 Ranked Flex games': 'Ранговая (флекс)',
 		'RANKED_FLEX_SR': 'Флекс',
@@ -15,6 +16,8 @@ const matchTypesRu = () => {
 		420: 'Одиночная',
 		440: 'Флекс',
 		700: 'Clash',
+		1300: 'Штурм Нексуса',
+		1020: 'Все за одного'
 	}
 }
 

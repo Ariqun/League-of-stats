@@ -7,10 +7,18 @@ const graphInfo = (teamId, participants, version) => {
 	for (let player of participants) {
 		if (player.teamId === teamId) players.push(player);
 	}
+
+	const setOrder = (position) => {
+		if (position === 'TOP') return 1;
+		if (position === 'JUNGLE') return 2;
+		if (position === 'MIDDLE') return 3;
+		if (position === 'BOTTOM') return 4;
+		if (position === 'UTILITY') return 5;
+	}
 		
 	for (let elem of players) {
 		const {totalDamageDealtToChampions, magicDamageDealtToChampions, physicalDamageDealtToChampions, trueDamageDealtToChampions} = elem;
-		const {totalHealsOnTeammates, totalDamageShieldedOnTeammates} = elem;
+		const {totalHealsOnTeammates, totalDamageShieldedOnTeammates, individualPosition} = elem;
 		const champName = modifyChampName(elem.championName);
 		let player = {};
 
@@ -26,11 +34,14 @@ const graphInfo = (teamId, participants, version) => {
 			restore: totalHealsOnTeammates,
 			absorb: totalDamageShieldedOnTeammates
 		};
+		player.order = setOrder(individualPosition);
 
 		res.push(player);
 	}
 
-	return res;
+	const sorted = res.sort((a, b) => a.order - b.order);
+
+	return sorted;
 }
 
 export default graphInfo;

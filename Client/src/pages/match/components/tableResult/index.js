@@ -12,7 +12,7 @@ import './index.sass';
 const TableResult = ({info, region, matchTypes}) => {
 	const {queueId, gameStartTimestamp, gameDuration} = info;
 	const objRU = matchTypesRU();
-
+	
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const matchTypeRU = objRU[matchType.description];
 	const startDate = transformDate(gameStartTimestamp, true);
