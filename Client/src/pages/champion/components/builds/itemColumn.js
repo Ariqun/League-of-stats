@@ -21,7 +21,7 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version}) =>
 			}
 		}
 	
-		return result.sort((a, b) => {return b.count - a.count});
+		return result.sort((a, b) => b.count - a.count);
 	}
 	const itemsArray = createAndModifyArray();
 

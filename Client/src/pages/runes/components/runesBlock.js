@@ -5,6 +5,8 @@ import runeTooltip from '../../../components/tooltips/runeTooltip';
 
 const RunesBlock = ({runes}) => {
 	const result = runes.map(rune => {
+		const {id, name, icon} = rune;
+
 		const res = rune.slots.map((slot, i) => {
 			const subRes = slot.runes.map(item => {
 				const tooltip = runeTooltip(item);
@@ -24,11 +26,11 @@ const RunesBlock = ({runes}) => {
 		})
 
 		return(
-			<div className={"style_block"} key={rune.id}>
+			<div className={"style_block"} key={id}>
 				<div className="style">
-					<img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune.icon}`} alt={rune}/>
+					<img src={`https://ddragon.leagueoflegends.com/cdn/img/${icon}`} alt={name}/>
 				</div>
-				<div className="style_title">{rune.name}</div>
+				<div className="style_title">{name}</div>
 				{res}
 			</div>
 		)

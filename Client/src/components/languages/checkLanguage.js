@@ -9,7 +9,8 @@ const checkLanguage = () => {
 		lang = navigator.language;
 	}
 
-	const result = lang.replace(/-/g, '_');
+	let result = lang.split(/[-_]/g);
+	result = `${result[0]}_${result[0].toUpperCase()}`;
 
 	return result;
 }

@@ -1,21 +1,24 @@
 import React from 'react';
 
-import {champStatistics} from '../../../../components/languages/russian/champStatistics';
+import {champStatistics} from '../../../../components/languages/russian/champ';
 
 const TableHead = ({changeSort, sortBy}) => {
+	const titles = ['champ', 'matches', 'winrate', 'kda', 'creeps', 'gold', 'dmg', 'heal', 'vision'];
 	let ruTitles = champStatistics();
 
-	const result = Object.keys(ruTitles).map(title => {
+	const content = titles.map(title => {
+		const ruTitle = ruTitles[title];
+
 		return(
 			<td onClick={() => changeSort(title)} className={sortBy === title ? 'head_item active' : 'head_item'} key={title}>
-				<div className="title">{ruTitles[title]}</div>
+				<div className="title">{ruTitle}</div>
 			</td>
 		)
 	})
 
 	return(
 		<tr className="table_head">
-			{result}
+			{content}
 		</tr>
 	)
 }

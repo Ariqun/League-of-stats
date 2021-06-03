@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CircleCanvas from '../../../../components/сanvases/circleCanvas';
-import champRates from '../../../../components/languages/russian/champRates';
+import {champRates} from '../../../../components/languages/russian/champ';
 
 const MainStats = ({champStats}) => {
 	const {wins, matches, totalMatches, bans} = champStats;

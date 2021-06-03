@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 const ChampionBlock = ({inputValue, shownRoles, version, champions}) => {
 	const champNames = [...Object.keys({...champions})];
 
-	const champs = champNames.map(item => {
-		const {key, name, tags} = champions[item];
+	const champs = champNames.map(champ => {
+		const {key, name, tags} = champions[champ];
 		const lowerName = name.toLowerCase();
 		const lowerValue = inputValue.toLowerCase();
 		let show = false;
@@ -19,11 +19,11 @@ const ChampionBlock = ({inputValue, shownRoles, version, champions}) => {
 
 		return (
 			<div className="champion" name={name} roles={tags} key={key}>
-				<Link to={`/champion/${item}`}>
-					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${item}.png`} 
+				<Link to={`/champion/${champ}`}>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champ}.png`} 
 						 alt={name} 
-						 title={name}>
-					</img>
+						 title={name}
+					/>
 				</Link>
 			</div>
 		)

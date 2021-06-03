@@ -3,20 +3,34 @@ import {connect} from 'react-redux';
 
 import transformAndSort from './transfromAndSort';
 
-const ItemBlock = ({setCurrentItem, tag, title, items, version}) => {
+const ItemBlock = ({setCurrentItem, inputValue, type, title, items, version}) => {
 	const arrOfItems = transformAndSort(items);
+	const exceptions = ['Чучело', 'Твоя доля', 'Черное копье Калисты', 'Глаз герольда', 'Заведенный секундомер', 'Сломанный секундомер', 'Эликсир стали', 'Эликсир волшебства', 'Эликсир гнева'];
+	let types = ['Damage', 'AttackSpeed', 'SpellDamage', 'CooldownReduction', 'Health', 'Armor', 'SpellBlock', 'NonbootsMovement', 'OnHit', "ManaRegen", "Active"];
+
+	if (type === 'Boots') types = ['Boots'];
+	if (type === 'Consumable') {
+		types = ['Consumable', 'Trinket'];
+		exceptions.splice(-3);
+	}
 
 	const createBlock = () => {
-		const exceptions = ['Чучело', 'Твоя доля', 'Черное копье Калисты', 'Глаз герольда', 'Заведенный секундомер', 'Сломанный секундомер', 'Эликсир стали', 'Эликсир волшебства', 'Эликсир гнева'];
-
 		const content = arrOfItems.map(item => {
-			if (exceptions.includes(item.name)) return null;
-			if (tag && !item.tags.some(elem => tag.includes(elem))) return null;
+			const {name, tags, image, gold} = item;
+			const lowerName = name.toLowerCase();
+			const lowerValue = inputValue.toLowerCase();
+			let show = false;
+
+			if (exceptions.includes(name)) return null;
+			if (!tags.some(elem => types.includes(elem))) return null;
+			
+			if (lowerName.includes(lowerValue)) show = true;
+			if (!show) return null;
 	
 			return (
-				<div onClick={() => setCurrentItem(item.name)} className="item" key={item.image.full}>
-					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`} alt={item.name}></img>
-					<div className="cost">{item.gold.total}</div>
+				<div onClick={() => setCurrentItem(name)} className="item" key={name}>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${image.full}`} alt={name}></img>
+					<div className="cost">{gold.total}</div>
 				</div>
 			)
 		});

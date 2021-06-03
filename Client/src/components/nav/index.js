@@ -2,7 +2,7 @@ import React from 'react';
 
 import SkyblueBtn from '../buttons/skyblueBtn';
 import sumNav from '../languages/russian/sumNav';
-import champNav from '../languages/russian/champNav';
+import {champNav} from '../languages/russian/champ';
 
 import './index.sass';
 

@@ -4,9 +4,7 @@ const SkinList = ({id, skins, showModal}) => {
 	const cards = skins.map(skin => {
 		const {num, name} = skin;
 
-		if (num === 0) {
-			return null;
-		}
+		if (num === 0) return null;
 
 		return(
 			<div className="skin_card col-xl-3 col-lg-4 col-sm-6" onClick={() => showModal(num)} key={num}>

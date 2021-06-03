@@ -9,9 +9,9 @@ const Roles = ({shownRoles, toggleVision}) => {
 		return(
 			<div onClick={() => toggleVision(role)} className={opacity ? 'role' : 'role inactive'} key={role}>
 				<img src={`${process.env.PUBLIC_URL}/assets/icons/roles/${role}.png`} 
-					   alt={`Role_${role}`} 
-					  title={role}>
-				</img>
+					 alt={`Role_${role}`} 
+					 title={role} 
+				/>
 			</div>
 		)
 	})

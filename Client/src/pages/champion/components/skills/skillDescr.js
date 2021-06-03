@@ -1,25 +1,27 @@
 import React from 'react';
 
-import {addZeroFour} from '../../../../components/manipulationsWithNums/addZeros';
 import removeTags from '../../../../components/manipulationsWithStr/removeTags';
+import {addZeroFour} from '../../../../components/manipulationsWithNums/addZeros';
 
 const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 	let key = addZeroFour(keyID);
 
-	if (currentSkill === 'passive') {
-		const descr = removeTags(passive.description);
+	const content = (name, description, url, passive = false) => {
+		const descr = removeTags(description);
 
-		return(
+		return (
 			<React.Fragment key={key}>
 				<div className="text">
-					<span className="skill_name">{passive.name}<span className="skill_btn">[пассивное]</span></span>
+					<span className="skill_name">{name}
+						<span className={passive ? "skill_btn" : "hidden"}>[пассивное]</span>
+					</span>
 					<span className="skill_descr">{descr}</span>
 				</div>
 
 				<div className="video">
 					<div className="wrapper_for_horizontal_borders">
 						<div className="wrapper_for_vertical_borders">
-							<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_P1.webm`} preload="auto" autoPlay loop muted="muted"></video>
+							<video src={url} preload="auto" autoPlay loop muted="muted"></video>
 						</div>
 					</div>
 				</div>
@@ -27,34 +29,24 @@ const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 		)
 	}
 
-	const content = spells.map((spell, i) => {
-		if (spell.id !== currentSkill) {
-			return null;
-		}
+	if (currentSkill === 'passive') {
+		const {name, description} = passive;
+		const url = `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_P1.webm`;
+
+		return content(name, description, url, true);
+	}
+
+	const result = spells.map((spell, i) => {
+		if (spell.id !== currentSkill) return null;
 
 		const btns = {0: 'Q', 1: 'W', 2: 'E', 3: 'R'};
 		const {name, description} = spell;
-		const descr = removeTags(description);
-		console.log(spell);
-		return(
-			<React.Fragment key={key}>
-				<div className="text">
-					<span className="skill_name">{name}<span className="skill_btn">[{btns[i]}]</span></span>
-					<span className="skill_descr">{descr}</span>
-				</div>
+		const url = `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_${btns[i]}1.webm`;
 
-				<div className="video">
-					<div className="wrapper_for_horizontal_borders">
-						<div className="wrapper_for_vertical_borders">
-							<video src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${key}/ability_${key}_${btns[i]}1.webm`} preload="auto" autoPlay loop muted="muted"></video>
-						</div>
-					</div>
-				</div>
-			</React.Fragment>
-		)
+		return content(name, description, url);
 	})
 
-	return(content);
+	return result;
 }
 
 export default SkillDescr;

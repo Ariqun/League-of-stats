@@ -2,21 +2,30 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const SkillList = ({spells, changeCurrentSkill, version}) => {
-	const content = spells.map((spell, i) => {
-		const {id, name, image} = spell
-
-		return (
-			<div className="skill" onClick={() => changeCurrentSkill(id)} key={id}>
+	const content = (id, name, url) => {
+		const className = id === 'passive' ? "passive" : "skill";
+		
+		return(
+			<div onClick={() => changeCurrentSkill(id)} className={className} key={id}>
 				<div className="wrapper_for_horizontal_borders">
 					<div className="wrapper_for_vertical_borders">
-						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image.full}`} alt={name}></img>
+						<img src={url} alt={name} />
 					</div>
 				</div>
 			</div>
 		)
+	}
+
+	const result = spells.map(spell => {
+		const {id, name, image} = spell;
+		let url = `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image.full}`;
+
+		if (id === 'passive') url = `http://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${image.full}`;
+
+		return content(id, name, url);
 	})
 
-	return(content)
+	return result;
 }
 
 const mapStateToProps = (state) => {

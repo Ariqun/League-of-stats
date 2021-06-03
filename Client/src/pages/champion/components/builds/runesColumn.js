@@ -27,7 +27,7 @@ const RunesColumn = ({styles, perks, matches, runes}) => {
 			}
 		}
 
-		result.sort((a, b) => {return b.count - a.count});
+		result.sort((a, b) => b.count - a.count);
 		result.push(matchesWithThisStyles);
 
 		return result;

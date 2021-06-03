@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import ChampionBlock from './components/championBlock';
 import Roles from './components/roles';
+import Search from '../../components/app/inputs/search';
 
 const Main = () => {
 	const [shownRoles, changeShownRoles] = useState(['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank']);
@@ -26,7 +27,7 @@ const Main = () => {
 				<Roles shownRoles={shownRoles} toggleVision={toggleVision}/>
 
 				<div className="choice_champ col-12">
-					<input onChange={showChamp} className="col-3" type="text" placeholder="Начните вводить имя чемпиона..."></input>
+					<Search func={showChamp} placeholder="Начните вводить имя чемпиона..." />
 				</div>
 
 				<ChampionBlock inputValue={inputValue} shownRoles={shownRoles}/>

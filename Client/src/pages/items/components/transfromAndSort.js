@@ -1,11 +1,7 @@
 const transformAndSort = (obj) => {
-	let result = Object.keys(obj).map(key => {
-		return obj[key];
-	})
+	let result = Object.keys(obj).map(key => obj[key]);
 
-	result.sort((a, b) => {
-		return a.gold.total - b.gold.total;
-	})
+	result.sort((a, b) => a.gold.total - b.gold.total);
 
 	return result;
 }

@@ -1,32 +1,30 @@
 import React, {useState} from 'react';
 
 import ItemBlock from './components/itemBlock';
-import Types from './components/types';
 import ShowItem from './components/showItem';
+import Search from '../../components/app/inputs/search';
 
 const Items = () => {
 	const [currentItem, setCurrentItem] = useState('Зелье здоровья');
-	const [shownTypes, changeShownTypes] = useState(['Damage', 'AttackSpeed', 'SpellDamage', 'CooldownReduction', 'Health', 'Armor', 'SpellBlock', 'NonbootsMovement']);
+	const [inputValue, setInputValue] = useState('');
 
-	const toggleVision = (type) => {
-		if (shownTypes.includes(type)) {
-			const arr = shownTypes.filter(item => item !== type);
-			changeShownTypes([...arr]);
-		} else {
-			changeShownTypes([...shownTypes, type]);
-		}
-	};
+	const showItem = (e) => {
+		setInputValue(e.target.value);
+	}
 
 	return(
 		<div className="items_page">
 			<div className="container">
-				<Types shownTypes={shownTypes} toggleVision={toggleVision}/>
+
+				<div className="choice_item col-12">
+					<Search func={showItem} placeholder="Начните вводить название предмета..." />
+				</div>
 
 				<div className="items">
 					<div className="items_wrapper col-8">
-						<ItemBlock setCurrentItem={setCurrentItem} tag={['Consumable', 'Trinket']} title={'Расходники'}/>
-						<ItemBlock setCurrentItem={setCurrentItem} tag={'Boots'} title={'Обувь'}/>
-						<ItemBlock setCurrentItem={setCurrentItem} tag={shownTypes} title={'Предметы'}/>
+						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="Consumable" title={'Расходники'}/>
+						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="Boots" title={'Обувь'}/>
+						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="All" title={'Предметы'}/>
 					</div>
 					
 					<ShowItem currentItem={currentItem}/>
