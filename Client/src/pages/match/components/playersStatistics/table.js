@@ -1,16 +1,25 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
-import {fight, damage, restore, eco, vision, other} from '../../../../components/languages/russian/statisticInMatch';
 import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 
 const Table = ({info, version}) => {
 	const [currentColumn, changeCurrentColumn] = useState(0);
+	const [t] = useTranslation();
+	
+	const fight = ['largestKillingSpree', 'largestMultiKill', 'timeCCingOthers', 'firstBloodKill', 'firstTowerKill'];
+	const damage = ["totalDamageDealtToChampions", "physicalDamageDealtToChampions", "magicDamageDealtToChampions", "trueDamageDealtToChampions", "largestCriticalStrike", "damageDealtToBuildings", "damageDealtToObjectives", "totalDamageTaken"];
+	const restore = ['totalHealsOnTeammates', 'totalDamageShieldedOnTeammates'];
+	const eco = ['goldEarned', 'totalMinionsKilled', 'neutralMinionsKilled'];
+	const vision = ['visionScore', 'visionWardsBoughtInGame', 'wardsKilled', 'wardsPlaced'];
+	const other = ['spell1Casts', 'spell2Casts', 'spell3Casts', 'spell4Casts', 'summoner1Casts', 'summoner2Casts'];
+
 	const {participants} = info;
 
-	const createBlock = (obj, title) => {
-		const result = Object.keys(obj).map(item  => {
+	const createBlock = (arr, title) => {
+		const result = arr.map(item  => {
 			const max = Math.max(...participants.map(player => {return player[item]}));
 
 			const res = participants.map((player, i) => {
@@ -30,7 +39,7 @@ const Table = ({info, version}) => {
 	
 			return(
 				<tr key={item}>
-					<td className="title">{obj[item]}</td>
+					<td className="title">{t(item)}</td>
 					{res}
 				</tr>
 			)
@@ -53,12 +62,12 @@ const Table = ({info, version}) => {
 			</td>
 		)
 	});
-	const fightBlock = createBlock(fight(), 'Бой');
-	const damageBlock = createBlock(damage(), 'Урон');
-	const restoreBlock = createBlock(restore(), 'Лечение и щиты');
-	const ecoBlock = createBlock(eco(), 'Экономика');
-	const visionBlock = createBlock(vision(), 'Обзор');
-	const otherBlock = createBlock(other(), 'Остальное');
+	const fightBlock = createBlock(fight, 'Бой');
+	const damageBlock = createBlock(damage, 'Урон');
+	const restoreBlock = createBlock(restore, 'Лечение и щиты');
+	const ecoBlock = createBlock(eco, 'Экономика');
+	const visionBlock = createBlock(vision, 'Обзор');
+	const otherBlock = createBlock(other, 'Остальное');
 
 	return(
 		<table className="statistics_table">

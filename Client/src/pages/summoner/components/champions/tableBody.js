@@ -27,7 +27,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 
 		const name = champions[champ].name;
 		const {matches, wins} = champs[champ][tab].results;
-		const {cs, gold, vision} = champs[champ][tab];
+		const {creeps, gold, vision} = champs[champ][tab];
 		const {kills, deaths, assists} = champs[champ][tab].kda;
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
@@ -37,7 +37,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		const avgDeaths = calcRatio(deaths, matches, 1);
 		const avgAssists = calcRatio(assists, matches, 1);
 		const avgRatio =  calcRatio((kills + assists), deaths, 2);
-		const avgCreeps =  calcRatio(cs, matches, 1);
+		const avgCreeps =  calcRatio(creeps, matches, 1);
 		const avgGold =  separateNumWithDot(calcRatio(gold, matches, 1));
 		const avgDmg =  separateNumWithDot(calcRatio((magic + physical + trueDmg), matches));
 		const avgHeal =  separateNumWithDot(calcRatio((restore + shield), matches));
@@ -67,7 +67,7 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 				</td>
 
 				<td className="avg_creeps" creeps={avgCreeps}>
-					<AvgBlock type="cs" value={avgCreeps}/>
+					<AvgBlock type="creeps" value={avgCreeps}/>
 				</td>
 
 				<td className="avg_gold" gold={avgGold}>

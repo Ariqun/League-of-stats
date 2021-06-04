@@ -13,7 +13,7 @@ const StatNumbers = ({champs, type}) => {
 		for (let key in champs) {
 			if (champs[key][type] === undefined) continue;
 
-			const {kda, dmg, heal, cs, gold} = champs[key][type];
+			const {kda, dmg, heal, creeps, gold} = champs[key][type];
 			const {kills, deaths, assists} = kda;
 			const {physical, magic, trueDmg} = dmg;
 			const {restore, shield} = heal;
@@ -25,7 +25,7 @@ const StatNumbers = ({champs, type}) => {
 			statObj.assists += assists;
 			statObj.dmg += damage;
 			statObj.healAndShields += healing;
-			statObj.creeps += cs;
+			statObj.creeps += creeps;
 			statObj.gold += gold;
 		}
 

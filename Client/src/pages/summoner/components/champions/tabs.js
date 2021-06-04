@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 
 const Tabs = ({changeTab, currentTab}) => {
 	const [t] = useTranslation();
-	const tabs = ['total', 'solos', 'flex', 'normals', 'clash'];
+	const tabs = ['total', 'solo', 'flex', 'normal', 'clash'];
 	
 	const result = tabs.map(tab => {
 		return(

@@ -5,11 +5,10 @@ import {useTranslation} from 'react-i18next';
 
 import MatchData from './components/matchData';
 import TeamBlock from './components/teamBlock';
-import matchTypesRU from '../../components/languages/russian/matchTypesRU';
+import SkyblueBtn from '../../components/buttons/skyblueBtn';
 import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
-import SkyblueBtn from '../../components/buttons/skyblueBtn';
 
 const LiveMatch = ({region, name, matchTypes}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -49,14 +48,13 @@ const LiveMatch = ({region, name, matchTypes}) => {
 		const leftTeam = participants.filter(player => player.teamId === 100);
 		const rightTeam = participants.filter(player => player.teamId === 200);
 	
-		const ruMatchTypes = matchTypesRU();
 		const matchTypesArr = Object.values(matchTypes);
 		const matchTypeInfo = matchTypesArr.find(type => type.queueId === gameQueueConfigId);
-		const matchTypeName = ruMatchTypes[matchTypeInfo.description];
+		const matchType = t(matchTypeInfo.description);
 		
 		return(
 			<>
-				<MatchData matchType={matchTypeName} startTime={gameStartTime}/>
+				<MatchData matchType={matchType} startTime={gameStartTime}/>
 				<TeamBlock team={leftTeam} type="left"/>
 				<TeamBlock team={rightTeam} type="right"/>
 			</>

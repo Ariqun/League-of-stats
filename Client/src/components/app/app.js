@@ -51,6 +51,7 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 	}, [language])
 
 	const changeLang = (e) => {
+		localStorage.setItem('lang', e.target.value);
 		setLanguage(e.target.value)
 		i18n.changeLanguage(e.target.value);
 	}

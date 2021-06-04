@@ -37,7 +37,7 @@ const Average = ({champStats}) => {
 
 			<div className="avg_combo">
 				<AvgBlock type="penta" value={avgPenta} combo />
-				<AvgBlock type="quadro" value={avgQuadro} combo />
+				<AvgBlock type="quadra" value={avgQuadro} combo />
 				<AvgBlock type="triple" value={avgTriple} combo />
 				<AvgBlock type="double" value={avgDouble} combo />
 			</div>

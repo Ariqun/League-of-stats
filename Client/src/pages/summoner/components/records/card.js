@@ -6,7 +6,7 @@ import {transformSeconds, transformDate} from '../../../../components/manipulati
 
 const Card = ({records}) => {
 	const [t] = useTranslation();
-	const titles = ['kills', 'deaths', 'assists', 'kda', 'dmg', 'healAndShields', 'creeps', 'gold', 'vision', 'wards', 'dmgTaken', 'CC', 'killingSpree', 'double', 'triple', 'Quadra', 'penta'];
+	const titles = ['kills', 'deaths', 'assists', 'kda', 'dmg', 'healAndShields', 'creeps', 'gold', 'vision', 'wards', 'dmgTaken', 'CC', 'killingSpree', 'double', 'triple', 'quadra', 'penta'];
 
 	const noData = (record, value) => {
 		const title = titles.find(item => item === record);
@@ -21,7 +21,7 @@ const Card = ({records}) => {
 			</div>
 		)
 	}
-
+	
 	const result = Object.keys(records).map(record => {
 		const {value, date, champName, matchType} = records[record];
 

@@ -17,6 +17,7 @@ const Champion = ({champName, lang, version}) => {
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
 	
+	// const lang = checkLanguage();
 	const dd = new DragonData(version, langForDB(lang));
 
 	useEffect(() => {
@@ -27,7 +28,7 @@ const Champion = ({champName, lang, version}) => {
 			changeLoading(false);
 		}
 		getChampion();
-	}, []);
+	}, [lang]);
 
 	if (isLoading) return <LoadingPage />
 

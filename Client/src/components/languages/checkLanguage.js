@@ -1,5 +1,7 @@
 const checkLanguage = () => {
-	let lang = '';
+	let lang = localStorage.getItem('lang');
+
+	if (lang) return lang;
 
 	if (navigator.languages && navigator.languages.length) {
 		lang = navigator.languages[0];

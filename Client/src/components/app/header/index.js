@@ -11,8 +11,11 @@ function Header({changeLang}) {
 		<div className="header">
 			<div className="container">
 				<Nav />
-				<Form />
-				<ChangeLanguage changeLang={changeLang}/>
+				
+				<div className="forms">
+					<Form />
+					<ChangeLanguage changeLang={changeLang}/>
+				</div>
 			</div>
 		</div>
 	)
