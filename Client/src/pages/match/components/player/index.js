@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 import PlayerRunes from '../playerRunes';
 import PlayerSpells from '../playerSpells';
@@ -16,6 +17,7 @@ import {modifyChampName} from '../../../../components/manipulationsWithStr/modif
 import './index.sass';
 
 const Player = ({teamId, info, region, version}) => {
+	const [t] = useTranslation();
 	const {participants, gameDuration} = info;
 	const players = [];
 
@@ -66,18 +68,18 @@ const Player = ({teamId, info, region, version}) => {
 								<span> CS</span>
 							</div>
 							<div className="gold_score">
-								<span className="gold">Золото: {gold}</span>
+								<span className="gold">{t('gold')}: {gold}</span>
 								<span className="per_min"> ({goldPerMin})</span>
 							</div>
 						</div>
 
 						<div className="wrapper_block_right">
 							<div className="vision_score hidden">
-								<span className="vision">Обзор: {visionScore} </span>
+								<span className="vision">{t('vision')}: {visionScore} </span>
 								<span className="per_min"> ({visionPerMin})</span>
 							</div>
 
-							<span className="kill_part">{killPart}% уч. в уб.</span>
+							<span className="kill_part">{killPart}% {t('killsPart')}.</span>
 						</div>
 					</div>
 				</div>

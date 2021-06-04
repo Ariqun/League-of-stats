@@ -1,9 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 
 const ChampBanner = ({statistics, champions, version}) => {
+	const [t] = useTranslation();
+
 	if (!statistics) return content();
 
 	const champs = Object.values(statistics.champions[0]);
@@ -37,9 +40,9 @@ const ChampBanner = ({statistics, champions, version}) => {
 
 	function content (best = 'Teemo', role = 'undefined', champName = '', wins = 0, matches = 0, percent = 0) {
 		return(
-			<div className="champ_banner" title="Любимый чемпион">
+			<div className="champ_banner" title={t('favoriteChamp')}>
 				<div className="icon">
-					<div className={matches === 0 ? "cover" : "hidden"}>Любимый чемпион в ранговых и обычных играх не найден</div>
+					<div className={matches === 0 ? "cover" : "hidden"}>{t('favoriteChampNotFound')}</div>
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${best}.png`} alt={`${best}_icon`}/>
 				</div>
 
@@ -54,8 +57,8 @@ const ChampBanner = ({statistics, champions, version}) => {
 						<div className="matches">
 							<progress value="0" max="0" />
 							<div className={matches === 0 ? "hidden" : "counts"}>
-								<div className="total">Игры: <span className="num">{matches}</span></div>
-								<div className="wins">Победы: <span className="num">{wins}</span></div>
+								<div className="total">{t('games')}: <span className="num">{matches}</span></div>
+								<div className="wins">{t('wins')}: <span className="num">{wins}</span></div>
 							</div>
 						</div>
 

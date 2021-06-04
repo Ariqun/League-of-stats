@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 import RiotAPI from '../../../../services/riotAPI';
 
 const CheckLiveMatch = ({name, region = 'ru', sumId}) => {
 	const [live, setLive] = useState({});
+	const [t] = useTranslation();
 	const riotAPI = new RiotAPI();
 
 	useEffect(() => {
@@ -19,7 +21,7 @@ const CheckLiveMatch = ({name, region = 'ru', sumId}) => {
 
 	return(
 		<Link to={`/live/${region.toLowerCase()}/${name}`} className="live" target="_blank">
-			<span>Сейчас в игре</span>
+			<span>{t('nowInGame')}</span>
 		</Link>
 	);
 }

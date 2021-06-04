@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
+
+import checkLanguage from '../../languages/checkLanguage';
 
 function Form() {
 	const [name, setName] = useState('');
-	const [region, setRegion] = useState('ru')
+	const [region, setRegion] = useState(checkLanguage());
+	const [t] = useTranslation();
 
 	const changeName = (e) => {
 		setName(e.target.value);
@@ -17,7 +21,7 @@ function Form() {
 		return(
 			<div className="search">
 				<form>
-					<input type="text" placeholder="Имя призывателя" value={name} onChange={changeName}/>
+					<input type="text" placeholder={t('sumName')} value={name} onChange={changeName}/>
 
 					<select value={region} onChange={changeRegion}>
 						<option value="ru">RU</option>

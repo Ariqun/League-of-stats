@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import Header from './header';
 import Background from './background';
@@ -15,6 +16,7 @@ import Summoner from '../../pages/summoner';
 import Match from '../../pages/match';
 import LiveMatch from '../../pages/liveMatch';
 import checkLanguage from '../languages/checkLanguage';
+import langForDB from '../languages/langForDB';
 import {LoadingPage} from '../loading';
 
 import DragonData from '../../services/dragonData';
@@ -23,10 +25,11 @@ import './app.sass';
 
 const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded}) => {
 	const [isLoading, changeLoading] = useState(true);
+	const [language, setLanguage] = useState(checkLanguage())
+	const [t, i18n] = useTranslation();
 
-	const lang = checkLanguage();
-	const dragonData = new DragonData(version, lang);
-
+	const dragonData = new DragonData(version, langForDB(language));
+	
 	useEffect(() => {
 		const getInfo = async () => {
 			const ver = await dragonData.getLatestVersion();
@@ -45,47 +48,48 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 			changeLoading(false);
 		}
 		getInfo();
-	}, [])
+	}, [language])
 
-	const render = () => {
-		if (isLoading) return <LoadingPage />
-		
-		return (
-			<div className="app">
-				<Header />
-
-				<Route path="/" exact render={() => <Main />}/>
-				<Route path="/items" render={() => <Items />}/>
-				<Route path="/runes" render={() => <Runes />}/>
-
-				<Route path="/champion/:name" render={({match}) => {
-					const {name} = match.params;
-					return <Champion champName={name}/>
-				}}/>
-
-				<Route path="/summoner/:region/:name" render={({match}) => {
-					const {region, name} = match.params;
-					return <Summoner region={region} name={name} />
-				}}/>
-
-				<Route path="/match/:region/:id" render={({match}) => {
-					const {region, id} = match.params;
-					return <Match region={region} matchId={id} />
-				}}/>
-
-				<Route path="/live/:region/:name/" render={({match}) => {
-					const {region, name} = match.params;
-					return <LiveMatch region={region} name ={name}/>
-				}}/>
-	
-				<Up />
-				<Footer />
-				<Background />
-			</div>
-		)
+	const changeLang = (e) => {
+		setLanguage(e.target.value)
+		i18n.changeLanguage(e.target.value);
 	}
 
-	return render();
+	if (isLoading) return <LoadingPage />
+	
+	return (
+		<div className="app">
+			<Header changeLang={changeLang}/>
+
+			<Route path="/" exact render={() => <Main />} />
+			<Route path="/items" render={() => <Items />} />
+			<Route path="/runes" render={() => <Runes />} />
+
+			<Route path="/champion/:name" render={({match}) => {
+				const {name} = match.params;
+				return <Champion champName={name} lang={language}/>
+			}}/>
+
+			<Route path="/summoner/:region/:name" render={({match}) => {
+				const {region, name} = match.params;
+				return <Summoner region={region} name={name} />
+			}}/>
+
+			<Route path="/match/:region/:id" render={({match}) => {
+				const {region, id} = match.params;
+				return <Match region={region} matchId={id} />
+			}}/>
+
+			<Route path="/live/:region/:name/" render={({match}) => {
+				const {region, name} = match.params;
+				return <LiveMatch region={region} name ={name} />
+			}}/>
+
+			<Up />
+			<Footer />
+			<Background />
+		</div>
+	)
 };
 
 const mapStateToProps = (state) => {

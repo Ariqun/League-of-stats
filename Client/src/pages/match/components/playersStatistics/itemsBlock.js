@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import itemTooltip from '../../../../components/tooltips/itemTooltip';
 import {transformMS} from '../../../../components/manipulationsWithNums/transformTime';
 
 const ItemsBlock = ({info, tab, version, items}) => {
+	const [t] = useTranslation();
 	const timeline = info.timeline[0][tab].itemPurchase;
 	
 	const transformArrToObj = () => {
@@ -50,7 +52,7 @@ const ItemsBlock = ({info, tab, version, items}) => {
 
 	return(
 		<div className="items_block">
-			<div className="title">Предметы</div>
+			<div className="title">{t('items')}</div>
 			<div className="items">
 				{result}
 			</div>

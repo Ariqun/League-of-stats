@@ -7,19 +7,17 @@ import Skills from './components/skills';
 import Skins from './components/skins';
 import Statistics from './components/statistics';
 import Builds from './components/builds';
-import checkLanguage from '../../components/languages/checkLanguage';
+import langForDB from '../../components/languages/langForDB';
 import {LoadingPage} from '../../components/loading';
 
 import DragonData from '../../services/dragonData';
 
-
-const Champion = ({champName, version}) => {
+const Champion = ({champName, lang, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
 	
-	const lang = checkLanguage();
-	const dd = new DragonData(version, lang);
+	const dd = new DragonData(version, langForDB(lang));
 
 	useEffect(() => {
 		const getChampion = async () => {
@@ -30,6 +28,10 @@ const Champion = ({champName, version}) => {
 		}
 		getChampion();
 	}, []);
+
+	if (isLoading) return <LoadingPage />
+
+	const titles = ['general', 'skills','skins', 'builds', 'statistics'];
 
 	const content = () => {
 		const {id} = champ;
@@ -44,14 +46,10 @@ const Champion = ({champName, version}) => {
 		return tabContent;
 	}
 
-	if (isLoading) return <LoadingPage />
-
-	const titles = ['general', 'skills','skins', 'builds', 'statistics'];
-
 	return (
 		<div className="champion_page">
 			<div className="container">
-				<Nav changeTab={changeTab} type="champNav" titles={titles}/>
+				<Nav changeTab={changeTab} titles={titles}/>
 				{content()}
 			</div>
 		</div>

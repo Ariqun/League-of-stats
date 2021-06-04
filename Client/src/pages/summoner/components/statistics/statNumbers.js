@@ -1,12 +1,14 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
-import sumStatistics from '../../../../components/languages/russian/sumStatistics';
 
 const StatNumbers = ({champs, type}) => {
+	const [t] = useTranslation();
+
 	const statsBlock = () => {
-		let statObj = {totalKills: 0, totalDeaths: 0, totalAssists: 0, totalDMG: 0, totalHeal: 0, totalCS: 0, totalGold: 0};
-		let rusTitles = sumStatistics();
+		const stats = ['kills', 'deaths', 'assists', 'dmg', 'healAndShields', 'creeps', 'gold'];
+		const statObj = {kills: 0, deaths: 0, assists: 0, dmg: 0, healAndShields: 0, creeps: 0, gold: 0};
 		
 		for (let key in champs) {
 			if (champs[key][type] === undefined) continue;
@@ -18,23 +20,23 @@ const StatNumbers = ({champs, type}) => {
 			const damage = physical + magic + trueDmg;
 			const healing = restore + shield;
 
-			statObj.totalKills += kills;
-			statObj.totalDeaths += deaths;
-			statObj.totalAssists += assists;
-			statObj.totalDMG += damage;
-			statObj.totalHeal += healing;
-			statObj.totalCS += cs;
-			statObj.totalGold += gold;
+			statObj.kills += kills;
+			statObj.deaths += deaths;
+			statObj.assists += assists;
+			statObj.dmg += damage;
+			statObj.healAndShields += healing;
+			statObj.creeps += cs;
+			statObj.gold += gold;
 		}
 
 		const sum = Object.keys(statObj).reduce((acc, el) => acc += statObj[el], 0);
 
-		if (sum === 0) return <div className="no_data">Нет данных</div>;
+		if (sum === 0) return <div className="no_data">{t('noData')}</div>;
 
-		const content = Object.keys(statObj).map(stat => {
+		const content = stats.map(stat => {
 			return(
 				<div className="stat" key={stat}>
-					<div className="title">{rusTitles[stat]}</div>
+					<div className="title">{t(stat)}</div>
 					<div className="value">{checkBigNum(statObj[stat], 'digits')}</div>
 				</div>
 			)

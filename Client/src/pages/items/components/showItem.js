@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import transformAndSort from './transfromAndSort';
 import modifyTags from '../../../components/manipulationsWithStr/modifyTags';
 
 const ShowItem = ({currentItem, items, version}) => {
+	const [t] = useTranslation();
 	const arrOfItems = transformAndSort(items);
 
 	const result = arrOfItems.map(item => {
@@ -21,7 +23,7 @@ const ShowItem = ({currentItem, items, version}) => {
 					</div>
 					<div className="name_and_cost">
 						<span className="name">{name}</span>
-						<span className="cost">Цена: <span className="value">{gold.total}</span></span>
+						<span className="cost">{t('cost')}: <span className="value">{gold.total}</span></span>
 					</div>
 				</div>
 

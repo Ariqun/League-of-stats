@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import Rating from './rating';
 
 const SumBanner = ({lvl, iconID, ranked, version}) => {
+	const [t] = useTranslation();
 	let solo = null, flex = null;
 	
 	if (ranked) {
@@ -20,8 +22,8 @@ const SumBanner = ({lvl, iconID, ranked, version}) => {
 			<div className="lvl">{lvl}</div>
 
 			<div className="side_block">
-				<Rating ranked={solo} type="Одиночная" />
-				<Rating ranked={flex} type="Флекс" />
+				<Rating ranked={solo} type={t('solo')} />
+				<Rating ranked={flex} type={t('flex')} />
 			</div>
 		</div>
 	)

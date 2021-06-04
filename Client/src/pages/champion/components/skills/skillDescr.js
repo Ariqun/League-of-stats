@@ -1,9 +1,11 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import removeTags from '../../../../components/manipulationsWithStr/removeTags';
 import {addZeroFour} from '../../../../components/manipulationsWithNums/addZeros';
 
 const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
+	const [t] = useTranslation();
 	let key = addZeroFour(keyID);
 
 	const content = (name, description, url, passive = false) => {
@@ -13,7 +15,7 @@ const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 			<React.Fragment key={key}>
 				<div className="text">
 					<span className="skill_name">{name}
-						<span className={passive ? "skill_btn" : "hidden"}>[пассивное]</span>
+						<span className={passive ? "skill_btn" : "hidden"}>[{t("passive")}]</span>
 					</span>
 					<span className="skill_descr">{descr}</span>
 				</div>

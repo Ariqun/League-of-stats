@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import ChampionBlock from './components/championBlock';
 import Roles from './components/roles';
@@ -7,7 +8,8 @@ import Search from '../../components/app/inputs/search';
 const Main = () => {
 	const [shownRoles, changeShownRoles] = useState(['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank']);
 	const [inputValue, setInputValue] = useState('');
-	
+	const [t] = useTranslation();
+
 	const toggleVision = (role) => {
 		if (shownRoles.includes(role)) {
 			const arr = shownRoles.filter(item => item !== role);
@@ -27,7 +29,7 @@ const Main = () => {
 				<Roles shownRoles={shownRoles} toggleVision={toggleVision}/>
 
 				<div className="choice_champ col-12">
-					<Search func={showChamp} placeholder="Начните вводить имя чемпиона..." />
+					<Search func={showChamp} placeholder={t("startWriteChampName")} />
 				</div>
 
 				<ChampionBlock inputValue={inputValue} shownRoles={shownRoles}/>

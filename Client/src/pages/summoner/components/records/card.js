@@ -1,17 +1,19 @@
 import React from 'react';
-import matchTypesRu from '../../../../components/languages/russian/matchTypesRU';
+import {useTranslation} from 'react-i18next';
 
-import {recordsRU} from '../../../../components/languages/russian/records';
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {transformSeconds, transformDate} from '../../../../components/manipulationsWithNums/transformTime';
 
 const Card = ({records}) => {
-	const titles = recordsRU();
+	const [t] = useTranslation();
+	const titles = ['kills', 'deaths', 'assists', 'kda', 'dmg', 'healAndShields', 'creeps', 'gold', 'vision', 'wards', 'dmgTaken', 'CC', 'killingSpree', 'double', 'triple', 'Quadra', 'penta'];
 
 	const noData = (record, value) => {
+		const title = titles.find(item => item === record);
+
 		return(
 			<div className="card col-2" key={record}>
-				<div className="title">{titles[record]}</div>
+				<div className="title">{t(title)}</div>
 				<div className="value">{value}</div>
 				<div className="background">
 					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Teemo_0.jpg`} alt={`Teemo_img`}/>
@@ -21,26 +23,26 @@ const Card = ({records}) => {
 	}
 
 	const result = Object.keys(records).map(record => {
-		let value = checkBigNum(records[record].value, 'digits');
-		
-		if (value === 0) return noData(record, value);
-		if (record === 'CC') value = transformSeconds(records[record].value);
+		const {value, date, champName, matchType} = records[record];
 
-		const date = transformDate(records[record].date);
-		const name = records[record].champName;
-		const ruMatchTypes = matchTypesRu();
-		const matchType = ruMatchTypes[records[record].matchType]
+		if (value === 0) return noData(record, value);
+
+		const title = titles.find(item => item === record);
+		const matchDate = transformDate(date);
+		let num = checkBigNum(value, 'digits');
 		
+		if (record === 'CC') num = transformSeconds(value);
+
 		return(
 			<div className="card col-2" key={record}>
-				<div className="title">{titles[record]}</div>
-				<div className="value">{value}</div>
+				<div className="title">{t(title)}</div>
+				<div className="value">{num}</div>
 				<div className="other">
-					<div className="date">{date}</div>
-					<div className="type">{matchType}</div>
+					<div className="date">{matchDate}</div>
+					<div className="type">{t(matchType)}</div>
 				</div>
 				<div className="background">
-					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg`} alt={`${name}_img`}/>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champName}_0.jpg`} alt={`${champName}_img`}/>
 				</div>
 			</div>
 		)

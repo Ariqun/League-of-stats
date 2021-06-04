@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 import PlayerRank from '../../match/components/playerRank';
 import PlayerKDA from '../../match/components/playerKDA';
@@ -15,6 +16,7 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState('');
 	const [summoner, setSummoner] = useState({});
+	const [t] = useTranslation();
 	const db = new DataBase();
 
 	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player;
@@ -84,7 +86,7 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 			</div>
 
 			<div className="champ_stats">
-				<div className="winrate">{champWinrate}% <span>({champMatches} всего)</span></div>
+				<div className="winrate">{champWinrate}% <span>({champMatches} {t('played')})</span></div>
 
 				<PlayerKDA kills={champKills} deaths={champDeaths} assists={champAssists} live/>
 			</div>

@@ -5,14 +5,14 @@ module.exports = async (sumInfo, matchId) => {
 	for (const key in sumInfo) {
 		try {
 			const {sumId, puuid, sumName, win, type} = sumInfo[key];
-			const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, vision, wards} = sumInfo[key].champion;
+			const {champName, champId, kills, deaths, assists, physical, magic, trueDmg, restore, shield, creeps, gold, vision, wards} = sumInfo[key].champion;
 			const {date, matchType, dmgTaken, CC, killingSpree, double, triple, quadra, penta} = sumInfo[key].champion;
 			const role = (sumInfo[key].role)?.toLowerCase();
 	
 			const dmg = physical + magic + trueDmg;
-			const heal = restore + shield;
+			const healAndShields = restore + shield;
 			const kda = calcRatio((kills + assists), deaths);
-			const records = {kda, kills, deaths, assists, dmg, heal, cs, gold, vision, wards, dmgTaken, CC, killingSpree, double, triple, quadra, penta};
+			const records = {kda, kills, deaths, assists, dmg, healAndShields, creeps, gold, vision, wards, dmgTaken, CC, killingSpree, double, triple, quadra, penta};
 	
 			await summoner.updateOne({puuid: puuid}, {
 				puuid: puuid,
@@ -53,9 +53,9 @@ module.exports = async (sumInfo, matchId) => {
 					[`champions.${champName}.total.heal.shield`]: shield,
 					[`champions.${champName}.${type}.heal.restore`]: restore,
 					[`champions.${champName}.${type}.heal.shield`]: shield,
-					[`champions.${champName}.total.cs`]: cs,
+					[`champions.${champName}.total.creeps`]: creeps,
 					[`champions.${champName}.total.gold`]: gold,
-					[`champions.${champName}.${type}.cs`]: cs,
+					[`champions.${champName}.${type}.creeps`]: creeps,
 					[`champions.${champName}.${type}.gold`]: gold,
 					[`champions.${champName}.total.vision`]: vision,
 					[`champions.${champName}.total.wards`]: wards,
@@ -66,8 +66,8 @@ module.exports = async (sumInfo, matchId) => {
 					[`records.deaths.value`]: 0,
 					[`records.assists.value`]: 0,
 					[`records.dmg.value`]: 0,
-					[`records.heal.value`]: 0,
-					[`records.cs.value`]: 0,
+					[`records.healAndShields.value`]: 0,
+					[`records.creeps.value`]: 0,
 					[`records.gold.value`]: 0,
 					[`records.vision.value`]: 0,
 					[`records.wards.value`]: 0,

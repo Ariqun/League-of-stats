@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import checkLanguage from '../../../../components/languages/checkLanguage';
 import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
@@ -8,13 +9,15 @@ import {LoadingBlock} from '../../../../components/loading';
 
 import DragonData from '../../../../services/dragonData';
 import skillTooltip from '../../../../components/tooltips/skillTooltip';
+import langForDB from '../../../../components/languages/langForDB';
 
 const SkillsBlock = ({info, tab, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState({});
+	const [t] = useTranslation();
 
 	const lang = checkLanguage();
-	const dragonData = new DragonData(version, lang);
+	const dragonData = new DragonData(version, langForDB(lang));
 
 	useEffect(() => {
 		const getChamp = async () => {
@@ -57,7 +60,7 @@ const SkillsBlock = ({info, tab, version}) => {
 
 	return(
 		<div className="skill_table">
-			<div className="title">Прокачка умений</div>
+			<div className="title">{t('skillOrders')}</div>
 			<table>
 				<tbody>
 					{createRow(1)}

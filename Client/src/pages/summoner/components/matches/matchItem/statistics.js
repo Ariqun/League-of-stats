@@ -1,24 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import MatchResult from '../../../../match/components/matchResult';
 import PlayerKDA from '../../../../match/components/playerKDA';
 import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
-import matchTypesRU from '../../../../../components/languages/russian/matchTypesRU';
 import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
 import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRatio';
 import {transformDate, transformMS} from '../../../../../components/manipulationsWithNums/transformTime';
 
 const Statistics = ({player, info, matchId, matchTypes}) => {
+	const [t] = useTranslation();
+
 	const {platformId, queueId, teams, gameStartTimestamp, gameDuration} = info;
 	const {kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, teamId} = player;
 	const {win, gameEndedInEarlySurrender, gameEndedInSurrender} = player;
-	const objRU = matchTypesRU();
 
 	const isSurrender = !win && (gameEndedInEarlySurrender || gameEndedInSurrender);
 	const matchType = matchTypes.find(type => type.queueId === queueId);
-	const matchTypeRU = objRU[matchType.description];
 	const duration = transformMS(gameDuration, 'digits');
 	const startDate = transformDate(gameStartTimestamp, true);
 	const teamKills = totalTeamKills(teams, teamId);
@@ -37,7 +37,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 				<div className="stats_wrapper">
 					<div className="match_result">
 						<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender}/>
-						<span className="match_type">{matchTypeRU}</span>
+						<span className="match_type">{t(matchType.description)}</span>
 					</div>
 
 					<div className="champion_stats">
@@ -48,7 +48,7 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 							<span className="farm_per_min">({farmPerMin})</span>
 							<span> CS</span>
 						</div>
-						<span className="kill_part">{avgKillPart}% уч. в уб.</span>
+						<span className="kill_part">{avgKillPart}% {t('killsPart')}.</span>
 					</div>
 				</div>
 			</Link>

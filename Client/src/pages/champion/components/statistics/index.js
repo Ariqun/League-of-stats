@@ -12,7 +12,7 @@ import './index.sass';
 const Statistics = ({champ}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champStats, setChampStats] = useState({});
-	
+
 	const {roles, matches} = champStats;
 	const db = new DataBase();
 	

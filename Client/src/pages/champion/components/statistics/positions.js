@@ -1,18 +1,17 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import RateBar from '../../../../components/progressBars/rateBar';
-import positions from '../../../../components/languages/russian/positions';
 
 const Positions = ({roles, matches}) => {
+	const [t] = useTranslation();
 	const pos = ['top', 'jungle', 'middle', 'bottom', 'utility'];
-	const ruPositions = positions();
 
-	const result = pos.map(item => {
-		const position = ruPositions[item];
+	const result = pos.map(position => {
 		let matchesAtPos = 0, winsAtPos = 0;
 
 		for (let key in roles) {
-			if (key === item) {
+			if (key === position) {
 				if (!roles[key][0]) continue;
 
 				matchesAtPos = roles[key][0].matches;
@@ -21,10 +20,10 @@ const Positions = ({roles, matches}) => {
 		}
 
 		return (
-			<tr className={`position ${item}`} key={item}>
+			<tr className={`position ${position}`} key={position}>
 				<td className="position_type">
-					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${item}.png`} alt={`${item}_icon`}/>
-					<span className="position_name">{position}</span>
+					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${position}.png`} alt={`${position}_icon`}/>
+					<span className="position_name">{t(position)}</span>
 				</td>
 
 				<td className="popularity">
@@ -42,9 +41,9 @@ const Positions = ({roles, matches}) => {
 		<table className="positions">
 			<tbody>
 				<tr className="head">
-					<th>Позиция</th>
-					<th>Популярность</th>
-					<th>Винрейт</th>
+					<th>{t('position')}</th>
+					<th>{t('popularity')}</th>
+					<th>{t('winrate')}</th>
 				</tr>
 				{result}
 			</tbody>

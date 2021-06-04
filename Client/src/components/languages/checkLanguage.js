@@ -10,9 +10,8 @@ const checkLanguage = () => {
 	}
 
 	let result = lang.split(/[-_]/g);
-	result = `${result[0]}_${result[0].toUpperCase()}`;
 
-	return result;
+	return result[0];
 }
 
 export default checkLanguage;

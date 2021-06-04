@@ -1,10 +1,12 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 import PlayerKDA from '../../../match/components/playerKDA';
 import AvgBlock from './avgBlock';
 
 const Average = ({champStats}) => {
+	const [t] = useTranslation();
 	const {matches, creeps, gold, kda, dmg, combo} = champStats;
 	
 	const avgKills = calcRatio(kda.kills, matches, 1);
@@ -20,7 +22,7 @@ const Average = ({champStats}) => {
 
 	return(
 		<div className="average">
-			<div className="avg_title">В среднем за игру</div>
+			<div className="avg_title">{t('average')}</div>
 
 			<div className="avg_wrapper">
 				<div className="avg_stat kda col-6">

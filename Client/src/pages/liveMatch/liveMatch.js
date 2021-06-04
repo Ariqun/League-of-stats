@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 import MatchData from './components/matchData';
 import TeamBlock from './components/teamBlock';
@@ -14,6 +15,7 @@ const LiveMatch = ({region, name, matchTypes}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [live, setLive] = useState({});
 	const riotAPI = new RiotAPI();
+	const [t] = useTranslation();
 
 	useEffect(() => {
 		const getLiveInfo = async () => {
@@ -34,10 +36,10 @@ const LiveMatch = ({region, name, matchTypes}) => {
 		if (Object.keys(live).length === 0) {
 			return(
 				<div className="not_in_game">
-					<div><span className="name">{name}</span> сейчас не в игре</div>
+					<div><span className="name">{name}</span> {t('notInGame')}</div>
 					
 					<Link to={`/summoner/${region}/${name}`} className="profile">
-						<SkyblueBtn text="Профиль" spanText={name}/>
+						<SkyblueBtn text={t('profile')} spanText={name}/>
 					</Link>
 				</div>
 			)

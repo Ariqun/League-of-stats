@@ -2,7 +2,7 @@ const champion = require('../models/champion');
 
 module.exports = async (champInfo) => {
 	for (let key in champInfo) {
-		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, cs, gold, double, triple, quadra, penta} = champInfo[key];
+		const {kills, deaths, assists, physical, magic, trueDmg, restore, shield, creeps, gold, double, triple, quadra, penta} = champInfo[key];
 		const {win, items, doubleStyles, runes, id, name} = champInfo[key];
 		const [item0, item1, item2, item3, item4, item5, item6] = items;
 		const [rune0, rune1, rune2, rune3, rune4, rune5] = runes;
@@ -24,11 +24,11 @@ module.exports = async (champInfo) => {
 				"dmg.trueDmg": trueDmg,
 				"heal.restore": restore,
 				"heal.shield": shield,
-				"creeps": cs,
+				"creeps": creeps,
 				"gold": gold,
 				"combo.double": double,
 				"combo.triple": triple,
-				"combo.quadro": quadra,
+				"combo.quadra": quadra,
 				"combo.penta": penta,
 				[`roles.${role}.wins`]: win,
 				[`roles.${role}.matches`]: 1,

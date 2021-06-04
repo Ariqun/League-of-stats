@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import {LoadingBlock} from '../../../../components/loading';
 import runeTooltip from '../../../../components/tooltips/runeTooltip';
@@ -8,6 +9,7 @@ import runeTooltip from '../../../../components/tooltips/runeTooltip';
 const RunesBlock = ({info, tab, runes}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [runeIds, setRuneIds] = useState({});
+	const [t] = useTranslation();
 	const {participants} = info;
 
 	useEffect(() => {
@@ -76,7 +78,7 @@ const RunesBlock = ({info, tab, runes}) => {
 
 	return(
 		<div className="runes_block">
-			<div className="title">Руны</div>
+			<div className="title">{t('runes')}</div>
 			<div className="runes_wrapper">
 				{result}
 			</div>

@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import PlayerKDA from '../../../match/components/playerKDA';
 import ProgressBar from '../../../../components/progressBars/progressBar';
 import RateBar from '../../../../components/progressBars/rateBar';
+import AvgBlock from './avgBlock';
 import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 import {separateNumWithDot} from '../../../../components/manipulationsWithNums/checkNums';
-import AvgBlock from './avgBlock';
+
 
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 	const champs = statistics.champions[0];

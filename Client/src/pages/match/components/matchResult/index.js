@@ -1,16 +1,19 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import './index.sass';
 
 const MatchResult = ({teams, teamId, duration, surrender}) => {
-	if (duration < 300000) return <div className="remake">Пересоздано</div>
+	const [t] = useTranslation();
+
+	if (duration < 300000) return <div className="remake">{t('remake')}</div>
 
 	for (let team of teams) {
 		if (team.teamId === teamId) {
 			return(
 				<div className={team.win ? 'win' : 'defeat'}>
-					{team.win ? 'Победа' : 'Поражение'}
-					<span className="surrender"> {surrender ? '(сдались)' : ''}</span>
+					{team.win ? t('win') : t('defeat')}
+					<span className="surrender"> {surrender ? `(${t('surrender')})` : ''}</span>
 				</div>
 			);
 		}

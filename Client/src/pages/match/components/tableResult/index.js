@@ -1,20 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import Player from '../player';
 import TeamScore from '../teamScore';
 import TeamBans from '../teamBans';
-import matchTypesRU from '../../../../components/languages/russian/matchTypesRU';
 import {transformDate, transformMS} from '../../../../components/manipulationsWithNums/transformTime';
 
 import './index.sass';
 
 const TableResult = ({info, region, matchTypes}) => {
+	const [t] = useTranslation();
+
 	const {queueId, gameStartTimestamp, gameDuration} = info;
-	const objRU = matchTypesRU();
 	
 	const matchType = matchTypes.find(type => type.queueId === queueId);
-	const matchTypeRU = objRU[matchType.description];
 	const startDate = transformDate(gameStartTimestamp, true);
 	const duration = transformMS(gameDuration, 'digits');
 
@@ -28,7 +28,7 @@ const TableResult = ({info, region, matchTypes}) => {
 						<span className="time_date">{startDate}</span>
 						<span className="duration">({duration})</span>
 					</div>
-					<span className="type">{matchTypeRU}</span>
+					<span className="type">{t(matchType.description)}</span>
 				</div>
 
 				<TeamScore teamId={200} info={info} />

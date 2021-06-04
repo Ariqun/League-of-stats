@@ -1,28 +1,27 @@
 import React from 'react';
-
-import {characteristics} from '../../../../components/languages/russian/champ';
+import {useTranslation} from 'react-i18next';
 
 const StatsTable = ({stats}) => {
-	const ruTitles = characteristics();
+	const [t] = useTranslation();
 	const sortedStats = [];
 
 	const sortArr = () => {
 		// Такая наркомания нужна для правильного формирования окончательной таблицы
 		for (let key in stats) {
-			if (ruTitles.hasOwnProperty(key) && (key !== 'attackrange' && key !== 'movespeed' && key !== 'attackspeedperlevel')) {
-				sortedStats.push(`${ruTitles[key]}: ${stats[key]}`);
+			if (key !== 'attackrange' && key !== 'movespeed' && key !== 'attackspeedperlevel') {
+				sortedStats.push(`${t(key)}: ${stats[key]}`);
 			}
 		}
 
 		for (let key in stats) {
-			if (ruTitles.hasOwnProperty(key) && (key === 'attackspeedperlevel')) {
-				sortedStats.push(`${ruTitles[key]}: ${stats[key]}`);
+			if (key === 'attackspeedperlevel') {
+				sortedStats.push(`${t(key)}: ${stats[key]}`);
 			}
 		}
 
 		for (let key in stats) {
-			if (ruTitles.hasOwnProperty(key) && (key === 'attackrange' || key === 'movespeed')) {
-				sortedStats.push(`${ruTitles[key]}: ${stats[key]}`);
+			if (key === 'attackrange' || key === 'movespeed') {
+				sortedStats.push(`${t(key)}: ${stats[key]}`);
 			}
 		}
 	}

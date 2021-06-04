@@ -1,15 +1,14 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 const Tabs = ({changeTab, currentTab}) => {
-	const tabs = [{total: 'Ранговые, обычные и clash'}, {solo: 'Одиночные'}, {flex: 'Флекс'}, {normal: 'Обычные'}, {clash: 'Clash'}];
+	const [t] = useTranslation();
+	const tabs = ['total', 'solos', 'flex', 'normals', 'clash'];
 	
 	const result = tabs.map(tab => {
-		const name = Object.keys(tab)[0];
-		const descr = tab[Object.keys(tab)];
-		
 		return(
-			<div onClick={() => changeTab(`${name}`)} className={currentTab === name ? "tab active" : "tab"} key={name}>
-				{descr}
+			<div onClick={() => changeTab(`${tab}`)} className={currentTab === tab ? "tab active" : "tab"} key={tab}>
+				{t(tab)}
 			</div>
 		)
 	});

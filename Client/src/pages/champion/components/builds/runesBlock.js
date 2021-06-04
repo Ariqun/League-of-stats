@@ -1,7 +1,10 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
+
 import RunesColumn from './runesColumn';
 
 const RunesBlock = ({champStats}) => {
+	const [t] = useTranslation();
 	const runes = champStats.runes[0];
 	const matches = champStats.matches;
 
@@ -35,7 +38,7 @@ const RunesBlock = ({champStats}) => {
 
 	return(
 		<div className="runes_block">
-			<div className="block_title">Популярность рун</div>
+			<div className="block_title">{t('runesPopularity')}</div>
 			<div className="columns_wrapper">
 				{content}
 			</div>
