@@ -1,9 +1,16 @@
+import checkLanguage from '../languages/checkLanguage';
 import './tooltips.sass';
 
 const runeTooltip = (rune, percent) => {
 	const {name, icon, longDesc} = rune;
+	const arr = ['Популярность', 'Popularity'];
+	const lang = checkLanguage();
+	let pop = arr[0];
+	
+	if (lang === 'en') pop = arr[1];
 
-	let popularity = `<span class="pop">Популярность: <span class="value">${percent}%</span></span>`;
+	let popularity = `<span class="pop">${pop}: <span class="value">${percent}%</span></span>`;
+
 	if (percent === undefined) popularity = '';
 
 	let descr = longDesc.replace(/<b>(\W+)<\/b>|<attention>(\s?\w+%?)<\/attention>/gi, (match, m1, m2) => {

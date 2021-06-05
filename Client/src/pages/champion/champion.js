@@ -50,7 +50,7 @@ const Champion = ({champName, lang, version}) => {
 	return (
 		<div className="champion_page">
 			<div className="container">
-				<Nav changeTab={changeTab} titles={titles}/>
+				<Nav changeTab={changeTab} titles={titles} tab={tab}/>
 				{content()}
 			</div>
 		</div>
