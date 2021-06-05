@@ -1,10 +1,11 @@
 @import '../../UI/ui'
 	
 .header
+	@include transGrayBorderBot_10per
 	display: flex
 	align-items: center
 	height: 6vh
-	background: white
+	margin-bottom: 50px
 	.container
 		display: flex
 		justify-content: space-between
@@ -20,8 +21,11 @@
 					padding: 0 20px
 					a
 						display: block
-						color: black
+						color: $color-light_gray
 						text-decoration: none
+						transition: 0.6s all ease
+						&:hover
+							color: $color-skyblue
 		.forms
 			display: flex
 			.choise_lang
@@ -33,17 +37,20 @@
 				display: flex
 				align-items: center
 				input, select
+					height: 30px
 					cursor: pointer
 					outline: none
 					border: none
-					border-bottom: 2px solid rgba(0, 0, 0, 0)
+				input
+					width: 200px
+					border-top-right-radius: 0
+					border-bottom-right-radius: 0
 					transition: 1s all ease
-					&:hover
-						background: rgba(218, 220, 224, 0.5)
+				select
+					border-radius: 15px
 					&:focus
-						cursor: auto
-						border-bottom: 2px solid #1a73e8
-						background: rgba(218, 220, 224, 0.5)
+						border-bottom-left-radius: 0
+						border-bottom-right-radius: 0
 				button
 					width: 25px
 					cursor: pointer
@@ -52,5 +59,10 @@
 					margin-left: 10px
 					border: none
 					background: none
-		
-		
+			.search form
+				select
+					border-top-left-radius: 0
+					border-bottom-left-radius: 0
+			.choise_lang form
+				select
+					padding: 0 5px

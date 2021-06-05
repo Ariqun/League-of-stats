@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import Header from './header';
-import Background from './background';
 import Footer from './footer';
 import Up from '../buttons/up';
 
@@ -88,7 +87,6 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 
 			<Up />
 			<Footer />
-			<Background />
 		</div>
 	)
 };

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 
 import checkLanguage from '../../languages/checkLanguage';
+import Search from '../inputs/search';
 
 function Form() {
 	const [name, setName] = useState('');
@@ -21,9 +22,9 @@ function Form() {
 		return(
 			<div className="search">
 				<form>
-					<input type="text" placeholder={t('sumName')} value={name} onChange={changeName}/>
+					<Search func={changeName} placeholder={t('sumName')}/>
 
-					<select value={region} onChange={changeRegion}>
+					<select value={region} onChange={changeRegion} className="select">
 						<option value="ru">RU</option>
 						<option value="euw1">EUW</option>
 						<option value="eun1">EUN</option>
