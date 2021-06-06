@@ -19,7 +19,7 @@ module.exports = async (sumInfo, matchId) => {
 				sumId: sumId,
 				sumName: sumName,
 				[`champions.${champName}.name`]: champName,
-				[`champions.${champName}.champId`]: champId,
+				[`champions.${champName}.id`]: champId,
 				$inc: {
 					[`statistics.total.matches`]: 1,
 					[`statistics.total.wins`]: win,

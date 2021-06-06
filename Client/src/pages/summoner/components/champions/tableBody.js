@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 import PlayerKDA from '../../../match/components/playerKDA';
 import ProgressBar from '../../../../components/progressBars/progressBar';
@@ -9,8 +10,8 @@ import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio'
 import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
 import {separateNumWithDot} from '../../../../components/manipulationsWithNums/checkNums';
 
-
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
+	const [t] = useTranslation();
 	const champs = statistics.champions[0];
 
 	const maxMatches = Object.values(champs).reduce((acc, curr) => {
@@ -26,12 +27,14 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		if (champs[champ][tab] === undefined) return null;
 
 		const name = champions[champ].name;
+		const {level, score} =  champs[champ];
 		const {matches, wins} = champs[champ][tab].results;
 		const {creeps, gold, vision} = champs[champ][tab];
 		const {kills, deaths, assists} = champs[champ][tab].kda;
 		const {magic, physical, trueDmg} = champs[champ][tab].dmg;
 		const {restore, shield} = champs[champ][tab].heal;
 		
+		const mastery = separateNumWithDot(score);
 		const winrate = findPercent(wins, matches, 1);
 		const avgKills = calcRatio(kills, matches, 1);
 		const avgDeaths = calcRatio(deaths, matches, 1);
@@ -45,14 +48,15 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		
 		return(
 			<tr className={`champ ${champ}`} key={champ}>
-				<td className="general" champ={champ}>
+				<td className="general" champ={score}  data-tip={`${t('masteryScore')}: ${mastery}`} data-for="tooltip">
 					<div className="wrapper">
+						<img src={`${process.env.PUBLIC_URL}/assets/icons/mastery/${level}.png`} alt={`mastery_${level}`}/>
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champ}.png`} alt={champ}/>
 						<span className="name">{name}</span>
 					</div>
 				</td>
 
-				<td className="matches" matches={matches}>
+				<td className="matches" games={matches}>
 					<ProgressBar current={matches} max={maxMatches}/>
 				</td>
 

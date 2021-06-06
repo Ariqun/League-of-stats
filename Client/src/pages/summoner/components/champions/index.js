@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import Tabs from './tabs';
 import TableHead from './tableHead';
@@ -26,6 +27,8 @@ const Champions = ({statistics, matchAmount}) => {
 					</tbody>
 				</table>
 			</div>
+
+			<ReactTooltip id="tooltip" html/>
 		</div>
 	)
 }
