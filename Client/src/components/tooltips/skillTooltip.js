@@ -1,7 +1,12 @@
+import checkLanguage from '../languages/checkLanguage';
+import translateInTooltip from '../languages/translate';
+
 import './tooltips.sass';
 
 const skillTooltip = (skill, version) => {
 	const {name, image, description, cooldownBurn, costBurn} = skill;
+	const obj = translateInTooltip(checkLanguage());
+	const {cost, cooldown} = obj;
 
 	const tooltip = `
 		<div class="tooltip">
@@ -11,8 +16,8 @@ const skillTooltip = (skill, version) => {
 				</div>
 				<div class="settings">
 					<span class="name">${name}</span>
-					<span class="cost">Стоимость: <span class="value">${costBurn}</span></span>
-					<span class="cooldown">Восстановление: <span class="value">${cooldownBurn}</span></span>
+					<span class="cost">${cost}: <span class="value">${costBurn}</span></span>
+					<span class="cooldown">${cooldown}: <span class="value">${cooldownBurn}</span></span>
 				</div>
 			</div>
 

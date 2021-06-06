@@ -13,7 +13,7 @@ const ShowItem = ({currentItem, items, version}) => {
 		if (item.name !== currentItem) return null;
 
 		const {name, description, image, gold} = item;
-		const descr = modifyTags(description);
+		const descr = modifyTags(description, 'item');
 
 		return(
 			<div className="item_extend_wrapper" key={name}>

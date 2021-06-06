@@ -1,10 +1,15 @@
 import modifyTags from '../manipulationsWithStr/modifyTags';
+import checkLanguage from '../languages/checkLanguage';
+import translateInTooltips from '../languages/translate';
+
 import './tooltips.sass';
 
 const itemTooltip = (item, version) => {
 	const {name, gold, image, description} = item;
-	
-	const descr = modifyTags(description);
+	const descr = modifyTags(description, 'item');
+	const obj = translateInTooltips(checkLanguage());
+
+	const {price} = obj;
 
 	const tooltip = `
 		<div class="tooltip">
@@ -14,7 +19,7 @@ const itemTooltip = (item, version) => {
 				</div>
 				<div class="settings">
 					<span class="name">${name}</span>
-					<span class="cost">Цена: <span class="value">${gold.total}</span></span>
+					<span class="cost">${price}: <span class="value">${gold.total}</span></span>
 				</div>
 			</div>
 

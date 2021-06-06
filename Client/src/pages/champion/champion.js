@@ -11,25 +11,29 @@ import langForDB from '../../components/languages/langForDB';
 import {LoadingPage} from '../../components/loading';
 
 import DragonData from '../../services/dragonData';
+import ChampNotFound from '../../components/errors/champNotFound';
 
 const Champion = ({champName, lang, version}) => {
 	const [isLoading, changeLoading] = useState(true);
+	const [isError, setError] = useState(false);
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
 	
-	// const lang = checkLanguage();
 	const dd = new DragonData(version, langForDB(lang));
 
 	useEffect(() => {
 		const getChampion = async () => {
 			const res = await dd.getChampion(champName);
 			
+			if (res === 'Error') return setError(true);
+
 			setChamp(res);
 			changeLoading(false);
 		}
 		getChampion();
 	}, [lang]);
 
+	if (isError) return <ChampNotFound name={champName}/>
 	if (isLoading) return <LoadingPage />
 
 	const titles = ['general', 'skills','skins', 'builds', 'statistics'];

@@ -1,8 +1,13 @@
+import checkLanguage from '../languages/checkLanguage';
+import translateInTooltip from '../languages/translate';
+
 import './tooltips.sass';
 
 const spellTooltip = (spell, version) => {
 	const {name, image, cooldownBurn, description} = spell;
-
+	const obj = translateInTooltip(checkLanguage());
+	const {cooldown} = obj;
+	
 	const tooltip = `
 		<div class="tooltip">
 			<div class="title">
@@ -11,7 +16,7 @@ const spellTooltip = (spell, version) => {
 				</div>
 				<div class="settings">
 					<span class="name">${name}</span>
-					<span class="cooldown">Восстановление: <span class="value">${cooldownBurn}</span></span>
+					<span class="cooldown">${cooldown}: <span class="value">${cooldownBurn}</span></span>
 				</div>
 			</div>
 

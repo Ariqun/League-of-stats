@@ -6,6 +6,7 @@ import Matches from './components/matches';
 import Champions from './components/champions';
 import Records from './components/records';
 import Statistics from './components/statistics';
+import SummonerNotFound from '../../components/errors/summonerNotFound';
 import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';
@@ -13,6 +14,7 @@ import DataBase from '../../services/dataBase';
 
 const Summoner = ({region, name}) => {
 	const [isloading, changeLoading] = useState(true);
+	const [isError, setError] = useState(false);
 	const [summoner, setSummoner] = useState({});
 	const [statistics, setStatistics] = useState({});
 	const [tab, changeTab] = useState('matches');
@@ -24,6 +26,8 @@ const Summoner = ({region, name}) => {
 		const getSummoner = async () => {
 			console.time('hey');
 			const sumInfo = await riotAPI.getSummoner(region, name);
+			
+			if (sumInfo === 'Error') return setError(true);
 
 			const sumStats = await db.getSumStatistics(sumInfo.sumId);
 			console.timeEnd('hey');
@@ -36,6 +40,7 @@ const Summoner = ({region, name}) => {
 		return () => {changeLoading(true)}
 	}, [name])
 
+	if (isError) return <SummonerNotFound name={name}/>
 	if (isloading) return <LoadingPage />
 	
 	const content = () => {
