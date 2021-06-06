@@ -1,26 +1,17 @@
+import modifyTags from '../manipulationsWithStr/modifyTags';
 import checkLanguage from '../languages/checkLanguage';
+import translateInTooltips from '../languages/translate';
+
 import './tooltips.sass';
 
 const runeTooltip = (rune, percent) => {
 	const {name, icon, longDesc} = rune;
-	const arr = ['Популярность', 'Popularity'];
-	const lang = checkLanguage();
-	let pop = arr[0];
-	
-	if (lang === 'en') pop = arr[1];
+	const descr = modifyTags(longDesc, 'rune');
+	const obj = translateInTooltips(checkLanguage());
+	const {pop} = obj;
 
 	let popularity = `<span class="pop">${pop}: <span class="value">${percent}%</span></span>`;
-
 	if (percent === undefined) popularity = '';
-
-	let descr = longDesc.replace(/<b>(\W+)<\/b>|<attention>(\s?\w+%?)<\/attention>/gi, (match, m1, m2) => {
-		let str = '';
-		m1 ? str = m1 : str = m2;
-		
-		return `<span>${str}</span>`;
-	})
-
-	descr = descr.replace(/<hr>/gi, '');
 
 	const tooltip = `
 		<div class="tooltip">

@@ -10,7 +10,7 @@ import './index.sass';
 
 const Champions = ({statistics, matchAmount}) => {
 	const [tab, changeTab] = useState('total');
-	const [sortBy, changeSortBy] = useState('matches');
+	const [sortBy, changeSortBy] = useState('games');
 
 	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount}/>
 	

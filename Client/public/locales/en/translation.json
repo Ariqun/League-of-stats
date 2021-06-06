@@ -155,5 +155,13 @@
 	"spell3Casts": "Uses E",
 	"spell4Casts": "Uses R",
 	"summoner1Casts": "Uses D",
-	"summoner2Casts": "Uses F"
+	"summoner2Casts": "Uses F",
+	"playerWithName": "Player",
+	"notFound": "was not found",
+	"wrongRegionOrName": "Perhaps the wrong region is selected, or the nickname is written in letters from different languages",
+	"statisticsNotFound": "No statistics found for ranked and normal games",
+	"yordleOnTheWay": "The search parties of the yordles are organized and on the way",
+	"ifYouPlayed": "If you've played ranked or normal games, they're sure to find something",
+	"timeToSearching": "Estimated end time of searches",
+	"weKnow": "We seem to know where to look..."
 }
