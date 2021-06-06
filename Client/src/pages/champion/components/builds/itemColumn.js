@@ -7,7 +7,7 @@ import itemTooltip from '../../../../components/tooltips/itemTooltip';
 const ItemColumn = ({champItems, blockItems, matches, title, items, version}) => {
 	const createAndModifyArray = () => {
 		const result = [];
-
+		console.log(items);
 		for (let item of blockItems) {
 			// Подобная ересь нужна, чтобы показывать только полные и не улучшенные Орном предметы
 			const onlyFullItems = !items[item].into || items[items[item].into[0]].requiredAlly;

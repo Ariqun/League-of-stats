@@ -15,7 +15,7 @@ const ItemsBlock = ({champStats, items}) => {
 			const tags = items[item].tags;
 
 			if (!main && tags.includes(tag)) return item;
-			if (main && !tags.includes('Boots') && !tags.includes('Trinket') && !tags.includes('Lane')) return item;
+			if (main && !tags.includes('Boots') && !tags.includes('Trinket') && !tags.includes('Lane') && !tags.includes('Consumables')) return item;
 
 			return null;
 		});
