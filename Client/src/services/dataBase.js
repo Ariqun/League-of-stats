@@ -28,11 +28,11 @@ export default class DataBase {
 		return res.data;
 	}
 
-	getSumStatistics = async (puuid) => {
+	getSumStatistics = async (sumId) => {
 		const res = await axios({
 			method: 'post',
 			url: '/sumStatistics',
-			data: `puuid=${puuid}`,
+			data: `sumId=${sumId}`,
 			headers: {'Content-type': 'application/x-www-form-urlencoded'}
 		});
 
@@ -52,7 +52,7 @@ export default class DataBase {
 		})
 
 		if (res.status !== 200) throw new Error('DataBase getMatchInfo failed');
-
+		
 		return res.data;
 	}
 }

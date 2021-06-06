@@ -25,7 +25,7 @@ const Summoner = ({region, name}) => {
 			console.time('hey');
 			const sumInfo = await riotAPI.getSummoner(region, name);
 
-			const sumStats = await db.getSumStatistics(sumInfo.puuid);
+			const sumStats = await db.getSumStatistics(sumInfo.sumId);
 			console.timeEnd('hey');
 
 			setSummoner(sumInfo);

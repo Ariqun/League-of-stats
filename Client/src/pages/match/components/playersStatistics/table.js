@@ -2,21 +2,17 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
+import objectOfTitles from './objectOfTitles';
 import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
 import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
 
 const Table = ({info, version}) => {
 	const [currentColumn, changeCurrentColumn] = useState(0);
 	const [t] = useTranslation();
-	
-	const fight = ['largestKillingSpree', 'largestMultiKill', 'timeCCingOthers', 'firstBloodKill', 'firstTowerKill'];
-	const damage = ["totalDamageDealtToChampions", "physicalDamageDealtToChampions", "magicDamageDealtToChampions", "trueDamageDealtToChampions", "largestCriticalStrike", "damageDealtToBuildings", "damageDealtToObjectives", "totalDamageTaken"];
-	const restore = ['totalHealsOnTeammates', 'totalDamageShieldedOnTeammates'];
-	const eco = ['goldEarned', 'totalMinionsKilled', 'neutralMinionsKilled'];
-	const vision = ['visionScore', 'visionWardsBoughtInGame', 'wardsKilled', 'wardsPlaced'];
-	const other = ['spell1Casts', 'spell2Casts', 'spell3Casts', 'spell4Casts', 'summoner1Casts', 'summoner2Casts'];
 
 	const {participants} = info;
+	const objOfTitles = objectOfTitles();
+	const titles = ['fight', 'dmg', 'healAndShields', 'economics', 'vision', 'other'];
 
 	const createBlock = (arr, title) => {
 		const result = arr.map(item  => {
@@ -24,11 +20,11 @@ const Table = ({info, version}) => {
 
 			const res = participants.map((player, i) => {
 				let content = checkBigNum(player[item]);
-				if (player[item] === true) content = '🗸';
-
 				let className = '';
+
+				if (player[item] === true) content = '🗸';
 				if (currentColumn === i) className = 'current';
-				if (player[item] === max || player[item] === true) className += ' max';
+				if ((player[item] === max && max !== 0) || player[item] === true) className += ' max';
 				
 				return (
 					<td className={className} key={player.participantId}>
@@ -46,10 +42,10 @@ const Table = ({info, version}) => {
 		});
 
 		return (
-			<>
-				<tr><td className="block_title">{title}</td></tr>
+			<React.Fragment key={title}>
+				<tr><td className="block_title">{t(title)}</td></tr>
 				{result}
-			</>
+			</React.Fragment>
 		);
 	}
 	
@@ -62,23 +58,14 @@ const Table = ({info, version}) => {
 			</td>
 		)
 	});
-	const fightBlock = createBlock(fight, 'Бой');
-	const damageBlock = createBlock(damage, 'Урон');
-	const restoreBlock = createBlock(restore, 'Лечение и щиты');
-	const ecoBlock = createBlock(eco, 'Экономика');
-	const visionBlock = createBlock(vision, 'Обзор');
-	const otherBlock = createBlock(other, 'Остальное');
+	
+	const content = titles.map(title => createBlock(objOfTitles[title], title));
 
 	return(
 		<table className="statistics_table">
 			<tbody>
 				<tr className="champ_icons"><td></td>{champsBlock}</tr>
-				{fightBlock}
-				{damageBlock}
-				{restoreBlock}
-				{ecoBlock}
-				{visionBlock}
-				{otherBlock}
+				{content}
 				<tr className="champ_icons"><td></td>{champsBlock}</tr>
 			</tbody>
 		</table>

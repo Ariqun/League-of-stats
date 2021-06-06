@@ -19,7 +19,7 @@ const MatchItem = ({matchId, name, region}) => {
 		const getInfo = async () => {
 			const res = await db.getMatchInfo(matchId, region);
 			const {queueId} = res;
-
+			
 			if (res === 'Error' || queueId === 2000 || queueId === 2020 || queueId === 2010) {
 				changeError(true);
 			} else {

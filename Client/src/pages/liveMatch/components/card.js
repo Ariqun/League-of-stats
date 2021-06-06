@@ -20,12 +20,12 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 	const db = new DataBase();
 
 	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player;
-
+	
 	useEffect(() => {
 		const getInfo = async () => {
 			const champRes = await db.getChampionStats(championId);
 			const sumRes = await db.getSumStatistics(summonerId);
-
+			
 			setChampion(champRes);
 			setSummoner(sumRes);
 			changeLoading(false);
@@ -42,10 +42,10 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 	const prim = runes.find(rune => rune.id === perkStyle);
 	const main = prim.slots[0].runes[0];
 	const sub = runes.find(rune => rune.id === perkSubStyle);
-	
+
 	if (summoner.length !== 0 && summoner.champions[0][name]) {
 		const champ = summoner.champions[0][name];
-
+		console.log(champ)
 		champWins = champ.total.results.wins;
 		champMatches = champ.total.results.matches;
 		champWinrate = findPercent(champWins, champMatches);

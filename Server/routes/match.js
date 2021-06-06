@@ -28,10 +28,10 @@ router.post('/match', async (req, res) => {
 		const timelineInfo = collectTimeLineInfo(timeline);
 		
 		const result = {...matchInfo.info, timeline: [timelineInfo]};
-
+		
 		if (matchInfo.info.gameDuration <= 300000) {
+			res.send(JSON.stringify(result));
 			pushMatchIdInDB(matchId);
-			return;
 		}
 		
 		const allowedQueueIds = [400, 420, 440, 700];

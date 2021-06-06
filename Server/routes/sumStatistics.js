@@ -4,9 +4,9 @@ const router = Router();
 const summoner = require('../models/summoner');
 
 router.post('/sumStatistics', async (req, res) => {
-	const puuid = req.body.puuid;
+	const {sumId} = req.body;
 	
-	await summoner.findOne({puuid: puuid}, (err, doc) => {
+	await summoner.findOne({sumId: sumId}, (err, doc) => {
 		res.send(doc);
 	})
 })
