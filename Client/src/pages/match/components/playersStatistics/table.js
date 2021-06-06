@@ -8,6 +8,7 @@ import {modifyChampName} from '../../../../components/manipulationsWithStr/modif
 
 const Table = ({info, version}) => {
 	const [currentColumn, changeCurrentColumn] = useState(0);
+	const [currentRow, changeCurrentRow] = useState('largestKillingSpree');
 	const [t] = useTranslation();
 
 	const {participants} = info;
@@ -34,7 +35,7 @@ const Table = ({info, version}) => {
 			})
 	
 			return(
-				<tr key={item}>
+				<tr onClick={() => changeCurrentRow(item)} className={currentRow === item ? "current_row" : ''} key={item}>
 					<td className="title">{t(item)}</td>
 					{res}
 				</tr>

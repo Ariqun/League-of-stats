@@ -134,16 +134,21 @@
 			color: $color-dark_gray
 			tr
 				height: 24px
-			tr.champ_icons
 				cursor: pointer
 				img
 					width: 40px
+			tr.current_row
+				td
+					border-radius: 50px
+					background: rgba(111, 111, 111, 0.3)
+				td.current
+					color: $color-skyblue
 			td
 				text-align: center
 				padding: 2px 10px
 			td.title, td.block_title
 				text-align: start
-				padding: 0 20px 0 0
+				padding: 0 20px 0 10px
 			td.block_title
 				padding-top: 10px
 				color: $color-light_gray
