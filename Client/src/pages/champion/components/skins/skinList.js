@@ -7,7 +7,7 @@ const SkinList = ({id, skins, showModal}) => {
 		if (num === 0) return null;
 
 		return(
-			<div className="skin_card col-xl-3 col-lg-4 col-sm-6" onClick={() => showModal(num)} key={num}>
+			<div className="skin_card col-5 col-sm-4 col-md-3" onClick={() => showModal(num)} key={num}>
 				<div className="wrapper_for_horizontal_borders">
 					<div className="wrapper_for_vertical_borders">
 						<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_${num}.jpg`} alt={name}/>

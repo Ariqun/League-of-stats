@@ -1,76 +1,76 @@
 @import '../../../../components/UI/ui'
-	
-.summoner_matches
-	display: flex
-	flex-direction: column
-	padding: 40px 0
-	.match_item
-		@include transGrayBorderBot
-		&:nth-of-type(1)
-			border-top: 1px solid
-		.inner_wrapper
-			display: flex
-			justify-content: space-between
-			align-items: center
-			padding: 10px 20px
-			color: $color-light_gray
-			.match_settings
+
+.summoner_page
+	.summoner_matches
+		display: flex
+		flex-direction: column
+		padding: 40px 0
+		.match_item
+			@include transGrayBorderBot
+			&:nth-of-type(1)
+				border-top: 1px solid
+			.inner_wrapper
 				display: flex
-				.champion_icon
-				.runes_and_spells
+				justify-content: space-between
+				align-items: center
+				padding: 10px 20px
+				color: $color-light_gray
+				.match_settings
 					display: flex
-					flex-direction: column
-					justify-content: space-between
-					padding: 5px 0
-					.spells, .runes
-						cursor: pointer
-						img
-							width: 20px
-							border-radius: 5px
-							&:first-of-type
-								margin-bottom: 2px
-			.match_stats
-				width: 350px
-				.show_full_match
-					display: flex
-					flex-direction: column
-					justify-content: space-between
-					width: 100%
-					height: 100%
-					text-decoration: none
-					color: inherit
-					.time
-						text-align: center
-						.date
-						.duration
-							color: $color-dark_gray
-					.stats_wrapper
+					.champion_icon
+					.runes_and_spells
 						display: flex
-						justify-content: space-evenly
-						height: 90px
-						.match_result
-							display: flex
-							flex-direction: column
-							justify-content: center
-							align-items: center
-							min-width: 160px
+						flex-direction: column
+						justify-content: space-between
+						padding: 5px 0
+						.spells, .runes
+							cursor: pointer
+							img
+								width: 20px
+								border-radius: 5px
+								&:first-of-type
+									margin-bottom: 2px
+				.match_stats
+					width: 350px
+					.show_full_match
+						display: flex
+						flex-direction: column
+						justify-content: space-between
+						width: 100%
+						height: 100%
+						text-decoration: none
+						color: inherit
+						.time
 							text-align: center
-						.champion_stats
+							.date
+							.duration
+								color: $color-dark_gray
+						.stats_wrapper
 							display: flex
-							flex-direction: column
-							justify-content: center
-							align-items: center
-							.kda_score
-								margin-bottom: 5px
-							.farm_score
-								margin-bottom: 5px
-								.farm_per_min
-									color: $color-dark_gray
-			.match_players
-				display: flex
-				justify-content: center
-				width: 400px
-	.show_more_matches
-		width: 20%
-		padding: 10px 20px
-		margin: 50px auto
+							justify-content: space-evenly
+							height: 90px
+							.match_result
+								display: flex
+								flex-direction: column
+								justify-content: center
+								align-items: center
+								min-width: 160px
+								text-align: center
+							.champion_stats
+								display: flex
+								flex-direction: column
+								justify-content: center
+								align-items: center
+								.kda_score
+									margin-bottom: 5px
+								.farm_score
+									margin-bottom: 5px
+									.farm_per_min
+										color: $color-dark_gray
+				.match_players
+					display: flex
+					justify-content: center
+					width: 400px
+		.show_more_matches
+			padding: 10px 20px
+			margin: 50px auto

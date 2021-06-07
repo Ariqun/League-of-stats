@@ -58,7 +58,7 @@ const Summoner = ({region, name}) => {
 
 	return (
 		<div className="summoner_page">
-			<div className="container">
+			<div className="container-xxl">
 				<Promo summoner={summoner} statistics={statistics}/>
 				<Nav changeTab={changeTab} type="sumNav" titles={titles} tab={tab}/>
 

@@ -1,88 +1,89 @@
 @import '../../../../components/UI/ui'
 
-.builds
-	padding: 20px 0
-	.items_block, .runes_block
-		display: flex
-		flex-direction: column
-		.block_title
-			@include transGrayBorderBot_20per
-			text-align: center
-			padding-bottom: 10px
-		.columns_wrapper
-			display: flex
-			justify-content: space-evenly
-			flex-wrap: wrap
-			width: 100%
-			padding: 20px 0
-			.item_column
-				@include opacityBg
-				@include transGrayBordersTopAndBot
-				margin-bottom: 20px
-				.column_title
-					@include transGrayBorderBot_20per
-					text-align: center
-					padding-bottom: 10px
-					margin-bottom: 5px
-				.item
-					display: flex
-					align-items: center
-					padding: 5px 0
-					&:last-of-type
-						padding-bottom: 0
-					.item_icon
-						cursor: pointer
-						border: 2px solid black
-						border-radius: 5px
-						img
-							width: 36px
-							height: 36px
-							border-radius: 5px
-	.runes_block
-		display: flex
-		justify-content: center
-		flex-wrap: wrap
-		.runes_build
-			@include opacityBg
-			@include transGrayBordersTopAndBot
+.champion_page
+	.builds
+		padding: 20px 0
+		.items_block, .runes_block
 			display: flex
 			flex-direction: column
-			margin-bottom: 20px
-			.style_block
-				@include flexColumn
-				.style_title
-					padding: 5px 0 10px
-				.rune_row
-					display: flex
-					&:nth-of-type(2)
+			.block_title
+				@include transGrayBorderBot_20per
+				text-align: center
+				padding-bottom: 10px
+			.columns_wrapper
+				display: flex
+				justify-content: space-evenly
+				flex-wrap: wrap
+				width: 100%
+				padding: 20px 0
+				.item_column
+					@include opacityBg
+					@include transGrayBordersTopAndBot
+					margin-bottom: 20px
+					.column_title
+						@include transGrayBorderBot_20per
+						text-align: center
+						padding-bottom: 10px
+						margin-bottom: 5px
+					.item
+						display: flex
+						align-items: center
+						padding: 5px 0
+						&:last-of-type
+							padding-bottom: 0
+						.item_icon
+							cursor: pointer
+							border: 2px solid black
+							border-radius: 5px
+							img
+								width: 36px
+								height: 36px
+								border-radius: 5px
+		.runes_block
+			display: flex
+			justify-content: center
+			flex-wrap: wrap
+			.runes_build
+				@include opacityBg
+				@include transGrayBordersTopAndBot
+				display: flex
+				flex-direction: column
+				margin-bottom: 20px
+				.style_block
+					@include flexColumn
+					.style_title
+						padding: 5px 0 10px
+					.rune_row
+						display: flex
+						&:nth-of-type(2)
+							.rune_item
+								background: rgba(128, 128, 128, 0.3)
 						.rune_item
-							background: rgba(128, 128, 128, 0.3)
-					.rune_item
-						cursor: pointer
-						opacity: 0.3
-						margin: 5px
-						border-radius: 50%
-						border: 2px solid black
-						img
-							width: 32px
-					.rune_item.active
-						opacity: 1
-			.style_block.prim
-				order: 1
-				padding: 10px 0
-			.style_block.sub
-				order: 2
-				.rune_row
-					&:nth-of-type(3)
-						display: none
-	.items_block
-		.progress_bar.pop
-			progress
-				&::-webkit-progress-bar
-					border-radius: 0
-					border-top-right-radius: 15px
-					border-bottom-right-radius: 15px
-				&::-webkit-progress-value
-					border-radius: 0
-					border-top-right-radius: 15px
-					border-bottom-right-radius: 15px
+							cursor: pointer
+							opacity: 0.3
+							margin: 5px
+							border-radius: 50%
+							border: 2px solid black
+							img
+								width: 32px
+						.rune_item.active
+							opacity: 1
+				.style_block.prim
+					order: 1
+					padding: 10px 0
+				.style_block.sub
+					order: 2
+					.rune_row
+						&:nth-of-type(3)
+							display: none
+		.items_block
+			.progress_bar.pop
+				progress
+					&::-webkit-progress-bar
+						border-radius: 0
+						border-top-right-radius: 15px
+						border-bottom-right-radius: 15px
+					&::-webkit-progress-value
+						border-radius: 0
+						border-top-right-radius: 15px
+						border-bottom-right-radius: 15px

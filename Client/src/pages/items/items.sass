@@ -1,69 +1,70 @@
 @import '../../components/UI/ui'
 
 .items_page
-	.container
-		.choice_item
+	.choice_item
+		display: flex
+		justify-content: center
+		padding-bottom: 20px
+	.items
+		display: flex
+		flex-wrap: wrap
+		.items_wrapper
+			.items_block
+				@include opacityBg
+				@include transGrayBordersTopAndBot
+				display: flex
+				flex-direction: column
+				align-items: center
+				margin: 0 20px 20px 0
+				.title
+					@include transGrayBorderBot_20per
+					display: flex
+					justify-content: center
+					width: 100%
+					padding-bottom: 10px
+				.wrapper_block
+					display: flex
+					justify-content: center
+					flex-wrap: wrap
+					padding-top: 10px
+					.item
+						cursor: pointer
+						text-align: center
+						padding: 5px
+						border: 1px solid transparent
+						img
+							width: 48px
+							border-radius: 5px
+							border: 1px solid rgb(128, 128, 128)
+						&:hover
+							border-radius: 5px
+							border: 1px solid rgb(128, 128, 128)
+							background: rgba(111, 111, 111, 0.3)
+		.item_extend
+			position: relative
 			display: flex
 			justify-content: center
-			padding: 40px 0
-		.items
-			display: flex
-			flex-wrap: wrap
-			.items_wrapper
-				.items_block
-					@include opacityBg
-					@include transGrayBordersTopAndBot
+			.item_extend_wrapper
+				@include opacityBg
+				@include transGrayBordersTopAndBot
+				position: fixed
+				width: 25%
+				.title
+					@include transGrayBorderBot_20per
 					display: flex
-					flex-direction: column
-					align-items: center
-					margin: 0 20px 20px 0
-					.title
-						@include transGrayBorderBot_20per
+					padding-bottom: 10px
+					.item_icon
+						img
+							border-radius: 5px
+							border: 1px solid gray
+					.name_and_cost
 						display: flex
-						justify-content: center
-						width: 100%
-						padding-bottom: 10px
-					.wrapper_block
-						display: flex
-						justify-content: center
-						flex-wrap: wrap
-						padding-top: 10px
-						.item
-							cursor: pointer
-							text-align: center
-							padding: 5px
-							border: 1px solid transparent
-							img
-								width: 48px
-								border-radius: 5px
-								border: 1px solid rgb(128, 128, 128)
-							&:hover
-								border-radius: 5px
-								border: 1px solid rgb(128, 128, 128)
-								background: rgba(111, 111, 111, 0.3)
-			.item_extend
-				position: relative
-				.item_extend_wrapper
-					@include opacityBg
-					@include transGrayBordersTopAndBot
-					position: fixed
-					width: 22%
-					.title
-						@include transGrayBorderBot_20per
-						display: flex
-						padding-bottom: 10px
-						.item_icon
-							img
-								border-radius: 5px
-								border: 1px solid gray
-						.name_and_cost
-							display: flex
-							flex-direction: column
-							padding: 0 10px
-							.cost
-								color: $color-dark_gray
-								.value
-									color: $color-orange
+						flex-direction: column
+						padding: 0 10px
+						.cost
+							color: $color-dark_gray
+							.value
+								color: $color-orange
 .descr, #item_tooltip
 	padding-top: 10px
 	maintext

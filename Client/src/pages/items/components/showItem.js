@@ -33,7 +33,7 @@ const ShowItem = ({currentItem, items, version}) => {
 	});
 
 	return (
-		<div className="item_extend col-4">
+		<div className="item_extend col-5 col-md-4">
 			{result}
 		</div>
 	)

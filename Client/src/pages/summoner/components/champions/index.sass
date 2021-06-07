@@ -1,73 +1,74 @@
 @import '../../../../components/UI/ui'
 
-.champs
-	padding: 50px 0
-	.champs_wrapper
-		@include opacityBg
-		@include transGrayBordersTopAndBot
-		display: flex
-		flex-direction: column
-		.tabs
+.summoner_page
+	.champs
+		padding: 50px 0
+		.champs_wrapper
+			@include opacityBg
+			@include transGrayBordersTopAndBot
 			display: flex
-			.tab
-				@include transGrayBorderBot
-				cursor: pointer
-				padding: 5px 10px 10px
-				margin-right: 20px
-				transition: 0.5s color
-				&:last-of-type
-					margin: 0
-				&:hover
+			flex-direction: column
+			.tabs
+				display: flex
+				.tab
+					@include transGrayBorderBot
+					cursor: pointer
+					padding: 5px 10px 10px
+					margin-right: 20px
+					transition: 0.5s color
+					&:last-of-type
+						margin: 0
+					&:hover
+						@include skyblueBorderBot
+						color: rgba(18, 235, 255, 0.8)
+				.tab.active
 					@include skyblueBorderBot
 					color: rgba(18, 235, 255, 0.8)
-			.tab.active
-				@include skyblueBorderBot
-				color: rgba(18, 235, 255, 0.8)
-		table
-			tbody
-				.table_head
-					.head_item
-						.title
-							position: relative
-							text-align: center
-							cursor: pointer
-							padding: 10px
-							&:hover
-								color: rgba(18, 235, 255, 0.8)
-							&::before
-								content: '\23f7'
-					.head_item.active
-						color: rgba(18, 235, 255, 0.8)
-				.champ
-					&::after
-						@include transGrayBorderBot_20per
-						content: ''
-						position: absolute
-						left: 0
-						width: 100%
-					td
-						.wrapper, .progress_bar
-							display: flex
-							justify-content: center
-							align-items: center
-							padding: 10px
-							img
-								width: 25px
-								margin-right: 3px
-					td.general
-						width: 180px
-						.wrapper
-							display: flex
-							justify-content: flex-start
-							align-items: center
-							padding: 10px
-							img
-								width: 48px
-							.name
-								padding: 5px
-					td.avg_kda
-						.wrapper
-							.kda_score
-								display: block
+			table
+				tbody
+					.table_head
+						.head_item
+							.title
+								position: relative
 								text-align: center
+								cursor: pointer
+								padding: 10px
+								&:hover
+									color: rgba(18, 235, 255, 0.8)
+								&::before
+									content: '\23f7'
+						.head_item.active
+							color: rgba(18, 235, 255, 0.8)
+					.champ
+						&::after
+							@include transGrayBorderBot_20per
+							content: ''
+							position: absolute
+							left: 0
+							width: 100%
+						td
+							.wrapper, .progress_bar
+								display: flex
+								justify-content: center
+								align-items: center
+								padding: 10px
+								img
+									width: 25px
+									margin-right: 3px
+						td.general
+							width: 180px
+							.wrapper
+								display: flex
+								justify-content: flex-start
+								align-items: center
+								padding: 10px
+								img
+									width: 48px
+								.name
+									padding: 5px
+						td.avg_kda
+							.wrapper
+								.kda_score
+									display: block
+									text-align: center
 					

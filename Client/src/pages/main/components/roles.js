@@ -17,7 +17,7 @@ const Roles = ({shownRoles, toggleVision}) => {
 	})
 
 	return (
-		<div className="roles col-6 offset-3">
+		<div className="roles col-10 col-sm-6">
 			{roles}
 		</div>
 	);

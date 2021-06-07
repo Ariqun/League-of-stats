@@ -6,10 +6,10 @@ import ChangeLanguage from './changeLanguage';
 
 import './index.sass';
 
-function Header({changeLang}) {
+const Header = ({changeLang}) => {
 	return (
 		<div className="header">
-			<div className="container">
+			<div className="container-xxl">
 				<Nav />
 				
 				<div className="forms">

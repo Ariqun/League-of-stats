@@ -16,14 +16,14 @@ const Items = () => {
 
 	return(
 		<div className="items_page">
-			<div className="container">
+			<div className="container-xxl">
 
 				<div className="choice_item col-12">
 					<Search func={showItem} placeholder={t('startWriteItemName')} />
 				</div>
 
 				<div className="items">
-					<div className="items_wrapper col-8">
+					<div className="items_wrapper col-7 col-md-8">
 						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="consumable" />
 						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="boots" />
 						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="items" />

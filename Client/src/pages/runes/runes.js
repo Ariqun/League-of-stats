@@ -6,7 +6,7 @@ import RunesBlock from './components/runesBlock';
 const Runes = () => {
 	return(
 		<div className="runes_page">
-			<div className="container">
+			<div className="container-xxl">
 				<div className="runes">
 					<RunesBlock />
 				</div>

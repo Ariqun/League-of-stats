@@ -1,51 +1,52 @@
 @import '../../../../components/UI/ui'
 
-.statistics
-	padding: 50px 0
-	.match_type, .stats_type
-		display: flex
-		justify-content: space-evenly
-		flex-wrap: wrap
-		.type
-			.type_head
-				@include opacityBg
-				@include transGrayBordersTopAndBot
-				flex: 0 0 auto
+.summoner_page
+	.statistics
+		padding: 50px 0
+		.match_type, .stats_type
+			display: flex
+			justify-content: space-evenly
+			flex-wrap: wrap
+			.type
+				.type_head
+					@include opacityBg
+					@include transGrayBordersTopAndBot
+					flex: 0 0 auto
+					.type_title
+						@include transGrayBorderBot_10per
+						text-align: center
+						color: $color-light_gray
+						padding-bottom: 10px
+					.total_matches
+						text-align: center
+						color: $color-dark_gray
+					.no_data
+						text-align: center
+						color: $color-dark_gray
+						margin-top: 75px
+			.type.total
+				order: 1
+			.type.solo
+				order: 2
+			.type.flex
+				order: 3
+			.type.normal
+				order: 4
+			.type.clash
+				order: 5
+		.stats_type
+			@include opacityBg
+			@include transGrayBordersTopAndBot
+			margin: 30px 0
+			.type
 				.type_title
-					@include transGrayBorderBot_10per
-					text-align: center
-					color: $color-light_gray
-					padding-bottom: 10px
-				.total_matches
-					text-align: center
-					color: $color-dark_gray
-				.no_data
-					text-align: center
-					color: $color-dark_gray
-					margin-top: 75px
-		.type.total
-			order: 1
-		.type.solo
-			order: 2
-		.type.flex
-			order: 3
-		.type.normal
-			order: 4
-		.type.clash
-			order: 5
-	.stats_type
-		@include opacityBg
-		@include transGrayBordersTopAndBot
-		margin: 30px 0
-		.type
-			.type_title
-				margin-bottom: 10px
-			.stat
-				display: flex
-				flex-direction: column
-				align-items: center
-				padding-bottom: 5px
-				.title
-					color: $color-dark_gray
-				.value
-					color: $color-light_gray
+					margin-bottom: 10px
+				.stat
+					display: flex
+					flex-direction: column
+					align-items: center
+					padding-bottom: 5px
+					.title
+						color: $color-dark_gray
+					.value
+						color: $color-light_gray

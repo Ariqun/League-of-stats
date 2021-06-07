@@ -25,7 +25,7 @@ const Main = () => {
 	
 	return(
 		<div className="main_page">
-			<div className="container">
+			<div className="container-xxl">
 				<Roles shownRoles={shownRoles} toggleVision={toggleVision}/>
 
 				<div className="choice_champ col-12">

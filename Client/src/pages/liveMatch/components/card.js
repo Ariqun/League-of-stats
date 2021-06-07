@@ -45,14 +45,15 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 
 	if (summoner.length !== 0 && summoner.champions[0][name]) {
 		const champ = summoner.champions[0][name];
-		console.log(champ)
-		champWins = champ.total.results.wins;
-		champMatches = champ.total.results.matches;
-		champWinrate = findPercent(champWins, champMatches);
+		const {wins, matches} = champ.total.results;
+		const {kills, deaths, assists} = champ.total.kda;
 		
-		champKills = calcRatio(champ.total.kda.kills, champMatches, 1);
-		champDeaths = calcRatio(champ.total.kda.deaths, champMatches, 1);
-		champAssists = calcRatio(champ.total.kda.assists, champMatches, 1);
+		champWins = wins;
+		champMatches = matches;
+		champWinrate = findPercent(champWins, champMatches);
+		champKills = calcRatio(kills, champMatches, 1);
+		champDeaths = calcRatio(deaths, champMatches, 1);
+		champAssists = calcRatio(assists, champMatches, 1);
 	}
 
 	const detectRole = () => {

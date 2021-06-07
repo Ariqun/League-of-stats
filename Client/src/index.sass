@@ -1,3 +1,5 @@
+@import './components/UI/ui'
+	
 /* -------------- Сброс стилей -------------- */
 *, *::before, *::after
 	box-sizing: border-box
@@ -39,120 +41,214 @@ input, button, textarea, select
 	#video_back
 		width: auto
 
-@media screen and (max-width: 1399px)
-	.champion_page
-		.container
+// @media screen and (max-width: 1399px)
+// 	.champion_page
+// 		.container
 
 @media screen and (max-width: 1199px)
+	#video_back
+		left: -200px
 	.champion_page
-		.general
-			.lore, .stats
-				font-size: 14px
-		.skills
-			.descr
-				font-size: 14px
+		.skills 
+			.descr 
+				.video
+					width: 80%
+					margin: 0 auto
+		.stats
+			.posAndAvg
+				.positions
+					margin-bottom: 20px
+	.items_page 
+		.items 
+			.item_extend 
+				.item_extend_wrapper
+					width: 30%
 	.summoner_page
-		.matches
-			.match_item
-				.inner_wrapper
-					.match_stats
-						.champion_stats
-							font-size: 14px
-					.champ_items
-						justify-content: flex-start
-						width: 140px
-					.match_players
-						width: 340px
-						.players_block
-							.left_team, .right_team
-								width: 170xp
-	.match_page
-		.table_result
-			.table_body
-				.left_team, .right_team
-					.player
-						.player_items
-							display: none
+		.champs
+			.champs_wrapper
+				table tbody
+					.champ
+						td .wrapper, .progress_bar
+							padding: 5px
+
 
 @media screen and (max-width: 991px)
-	.champion_page
-		.container
-			.general
-				flex-direction: column
-				align-items: center
+	#video_back
+		left: -400px
 	.summoner_page
-		.matches
-			.match_item
-				.inner_wrapper
+		.promo
+			margin-top: 50px
+			.sum
+				position: absolute
+				top: -50px
+				left: calc(50% - 200px)
+				width: 400px
+		.players_block .left_team, 
+		.players_block .right_team
+			width: 170px
+		.champs 
+			.champs_wrapper 
+				overflow: scroll
+				table tbody
+					tr
+						display: flex
+						td
+							display: flex
+							justify-content: center
+							align-items: center
+							&:first-of-type
+								justify-content: flex-start
+								width: 200px
+							&:nth-of-type(2),
+							&:nth-of-type(3)
+								width: 180px
+							&:nth-of-type(4)
+								width: 120px
+							&:nth-of-type(5),
+							&:nth-of-type(6),
+							&:nth-of-type(7),
+							&:nth-of-type(8),
+							&:nth-of-type(9)
+								width: 90px
+	.match_page
+		.player_items
+			display: none
+		.player 
+			.player_name
+				padding: 0 5px
+			.player_stats
+				width: 130px
+				.other_score
+					display: block
+		.graphs
+			.graph
+				&:first-of-type
+					margin-bottom: 20px
+		.statistics_table
+			overflow: scroll
+			table tbody
+				tr
+					display: flex
+					td
+						display: flex
+						justify-content: center
+						align-items: center
+						width: 45px
+						margin: 1px 0
+						&:first-of-type
+							justify-content: flex-start
+							width: 320px
+				tr.champ_icons
+					height: 50px
+					td
+						padding: 2px 0
+			
+@media screen and (max-width: 767px)
+	#video_back
+		left: -500px
+	.header
+		height: 12vh
+		padding: 10px 0
+		.container-xxl
+			flex-wrap: wrap
+			justify-content: center
+			height: 100%
+			.nav
+				font-size: 18px
+			.forms
+				align-items: center
+				.search form,
+				.choise_lang form
+					input, select
+						height: 40px
+	.champion_page
+		.general
+			@include transGrayBorderBot
+			position: relative
+			padding-bottom: 1px
+			.champion_info
+				.lore
+					font-size: 18px
+					border: 0
+				.roles, .stats
+					position: absolute
+					top: 340px
+					left: 0
+					width: 100%
+				.stats
+					top: 450px
+	.items_page 
+		.items 
+			.item_extend 
+				.item_extend_wrapper
+					width: 40%
+	.summoner_page
+		.promo
+			display: flex
+			flex-direction: column
+			margin-top: 80px
+			.sum_banner
+				left: 15%
+				align-self: flex-start
+			.champ_banner
+				align-self: flex-end
+				right: 15%
+			.sum
+				top: -75px
+		.summoner_matches 
+			.match_item 
+				.inner_wrapper 
+					.match_stats 
+						.show_full_match 
+							.stats_wrapper 
+								.champion_stats
+									display: none
+					.player_items
+						display: none
+
+@media screen and (max-width: 575px)
+	#video_back
+		left: -600px
+	.champion_page
+		.general
+			display: flex
+			flex-direction: column
+			align-items: center
+			.champion_info
+				.lore
+					@include transGrayBorderBot
+				.roles, .stats
+					position: relative
+					top: 0
+					left: 0
+				.stats
+					top: 0
+					font-size: 15px
+		.stats 
+			.main_stats
+				.graph
+					margin-bottom: 20px
+			.posAndAvg 
+				.positions tbody tr th:not(n1), .positions tbody tr td:not(n1)
+					margin: 0 13px
+		.sky_btn
+			padding: 10px 0
+	.summoner_page
+		.promo
+			.sum_banner
+				left: 0
+			.champ_banner
+				right: 0
+		.summoner_matches 
+			.match_item 
+				.inner_wrapper 
 					.match_players
 						display: none
 	.match_page
-		.table_result
-			.table_body
-				.left_team, .right_team
-					.player
-						.player_stats
-							width: 120px
-							.kda_score
-								flex-direction: column
-								align-items: center
-								width: auto
-							.other_score
-								display: none
-		.graphs
-			flex-direction: column
-			align-items: center
-			.graph
-				margin-bottom: 10px
-
-@media screen and (max-width: 767px)
-	.champion_page
-		.general
-			.stat_name
-				text-align: center
-	.summoner_page
-		.promo
-			.sum_rating
-				width: 150px
-				.rank_block
-					.rank_icon
-						.img
-							width: 100px
-			.banner
-				.name_and_lvl
-					.name
-						font-size: 20px
-					lvl
-						font-size: 13px
-			.sum_winrate
-				#winrate
-					width: 150px
-				#background
-					width: 150px
-				.stats
-					top: calc(50% - 50px)
-					left: calc(50% - 50px)
-					width: 100px
-					height: 100px
-					.wins, .losses
-						font-size: 20px
-					.percent
-						font-size: 26px
-	.match_page
-		.table_result
-			.table_head
-				.match_type
-					justify-content: space-evenly
-				.left_team, .right_team
-					flex-direction: column
-					align-items: center
-					.result
-						margin-bottom: 10px
-				.right_team
-					.result
-						order: 1
-
-@media screen and (max-width: 575px)
-	.champion_page
-		.container
-			
+		.player 
+			.player_stats
+				display: none
+		.champion_statistic .tabs .left_team .tab img, 
+		.champion_statistic .tabs .right_team .tab img,
+		.champion_statistic .tabs .table
+			width: 40px

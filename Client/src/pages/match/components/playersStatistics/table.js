@@ -63,13 +63,15 @@ const Table = ({info, version}) => {
 	const content = titles.map(title => createBlock(objOfTitles[title], title));
 
 	return(
-		<table className="statistics_table">
-			<tbody>
-				<tr className="champ_icons"><td></td>{champsBlock}</tr>
-				{content}
-				<tr className="champ_icons"><td></td>{champsBlock}</tr>
-			</tbody>
-		</table>
+		<div className="statistics_table">
+			<table>
+				<tbody>
+					<tr className="champ_icons"><td></td>{champsBlock}</tr>
+					{content}
+					<tr className="champ_icons"><td></td>{champsBlock}</tr>
+				</tbody>
+			</table>
+		</div>
 	)
 }
 

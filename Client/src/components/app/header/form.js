@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import checkLanguage from '../../languages/checkLanguage';
 import Search from '../inputs/search';
 
-function Form() {
+const Form = () => {
 	const [name, setName] = useState('');
 	const [region, setRegion] = useState(checkLanguage());
 	const [t] = useTranslation();

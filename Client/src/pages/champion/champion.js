@@ -53,7 +53,7 @@ const Champion = ({champName, lang, version}) => {
 
 	return (
 		<div className="champion_page">
-			<div className="container">
+			<div className="container-xxl">
 				<Nav changeTab={changeTab} titles={titles} tab={tab}/>
 				{content()}
 			</div>

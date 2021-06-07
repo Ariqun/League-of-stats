@@ -27,7 +27,7 @@ const Match = ({region, matchId}) => {
 
 	return(
 		<div className="match_page">
-			<div className="container">
+			<div className="container-xxl">
 				<TableResult info={info} region={region} />
 				<TeamGraphs info={info} />
 				<PlayersStatistics info={info} />
