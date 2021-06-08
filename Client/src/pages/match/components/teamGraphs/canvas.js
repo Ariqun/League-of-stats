@@ -31,19 +31,20 @@ export default class Canvas extends Component {
 		if (maxScore > 70) factor = 2.5;
 		
 		function createCanvas(team, color, j = 0) {
-			ctx.fillStyle = color;
-			
 			for (let i = 0; i < 5; i++) {
 				const img = new Image();
 				const num = team[i][type].total / 1000;
 
+				img.onload = () => {
+					img.width = '20px';
+					ctx.fillStyle = color;
+
+					ctx.transform(1, 0, 0, -1, 0, 410);
+					ctx.fillRect(i * 50 + j, 52, 40, num * factor);
+					ctx.resetTransform();
+					ctx.drawImage(img, i * 50 + j, 360, 40, 40);
+				}
 				img.src = team[i].champ;
-				img.width = '20px';
-				
-				ctx.transform(1, 0, 0, -1, 0, 410);
-				ctx.fillRect(i * 50 + j, 52, 40, num * factor);
-				ctx.resetTransform();
-				ctx.drawImage(img, i * 50 + j, 360, 40, 40);
 			}
 
 			ctx.fillStyle = 'white';
