@@ -1,12 +1,12 @@
-import modifyTags from '../manipulationsWithStr/modifyTags';
 import checkLanguage from '../languages/checkLanguage';
 import translateInTooltips from '../languages/translate';
+import {modifyItemTags} from '../manipulationsWithStr/modifyTags';
 
 import './tooltips.sass';
 
 const itemTooltip = (item, version) => {
 	const {name, gold, image, description} = item;
-	const descr = modifyTags(description, 'item');
+	const descr = modifyItemTags(description);
 	const obj = translateInTooltips(checkLanguage());
 
 	const {price} = obj;

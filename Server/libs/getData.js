@@ -18,16 +18,7 @@ module.exports = async (url, func, region = 'ru') => {
 			if (!func) result = res.data;
 		})
 		.catch(err => {
-			console.error(`Ошибка: ${err.response.status} ${err.response.statusText}`);
-
-			const isCustomMatch = /RU_\d*/gi.test(url);
-
-			if (err.response.status === 404 && isCustomMatch) {
-				let matchId = '';
-				url.replace(/RU_\d*/g, match => matchId = match);
-				
-				pushInvalidMatchIdInDB(matchId);
-			}
+			console.error(`Ошибка: ${err.response.status} ${err.response.statusText} - ${url}`);
 		})
 
 	return result;

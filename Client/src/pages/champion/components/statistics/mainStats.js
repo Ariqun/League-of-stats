@@ -16,7 +16,7 @@ const MainStats = ({champStats}) => {
 		if (rate === 'pickrate') secondary = totalMatches - matches;
 
 		return(
-			<div className={`${rate} graph col-5 col-sm3`} key={rate}>
+			<div className={`${rate} graph col-5 col-sm-3 col-lg-2`} key={rate}>
 				<div className="graph_title">{t(rate)}</div>
 				<CircleCanvas primary={wins} secondary={secondary} width="200" height="200" mode="hidden"/>
 			</div>

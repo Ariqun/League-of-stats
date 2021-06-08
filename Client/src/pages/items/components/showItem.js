@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import transformAndSort from './transfromAndSort';
-import modifyTags from '../../../components/manipulationsWithStr/modifyTags';
+import {modifyItemTags} from '../../../components/manipulationsWithStr/modifyTags';
 
 const ShowItem = ({currentItem, items, version}) => {
 	const [t] = useTranslation();
@@ -13,7 +13,7 @@ const ShowItem = ({currentItem, items, version}) => {
 		if (item.name !== currentItem) return null;
 
 		const {name, description, image, gold} = item;
-		const descr = modifyTags(description, 'item');
+		const descr = modifyItemTags(description, 'item');
 
 		return(
 			<div className="item_extend_wrapper" key={name}>

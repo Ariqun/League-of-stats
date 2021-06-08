@@ -1,12 +1,12 @@
-import modifyTags from '../manipulationsWithStr/modifyTags';
 import checkLanguage from '../languages/checkLanguage';
 import translateInTooltips from '../languages/translate';
+import {modifyRuneTags} from '../manipulationsWithStr/modifyTags';
 
 import './tooltips.sass';
 
 const runeTooltip = (rune, percent) => {
 	const {name, icon, longDesc} = rune;
-	const descr = modifyTags(longDesc, 'rune');
+	const descr = modifyRuneTags(longDesc, 'rune');
 	const obj = translateInTooltips(checkLanguage());
 	const {pop} = obj;
 
