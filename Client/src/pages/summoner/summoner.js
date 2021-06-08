@@ -37,7 +37,11 @@ const Summoner = ({region, name}) => {
 			changeLoading(false);
 		}
 		getSummoner();
-		return () => {changeLoading(true)}
+		
+		return () => {
+			changeLoading(true);
+			changeTab('matches');
+		}
 	}, [name])
 
 	if (isError) return <SummonerNotFound name={name}/>
