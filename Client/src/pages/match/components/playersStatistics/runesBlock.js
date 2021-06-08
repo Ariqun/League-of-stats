@@ -1,18 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import ReactTooltip from 'react-tooltip';
+import React from 'react';
 import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
-import {LoadingBlock} from '../../../../components/loading';
 import runeTooltip from '../../../../components/tooltips/runeTooltip';
 
 const RunesBlock = ({info, tab, runes}) => {
-	const [isLoading, changeLoading] = useState(true);
-	const [runeIds, setRuneIds] = useState({});
 	const [t] = useTranslation();
 	const {participants} = info;
 
-	useEffect(() => {
+	const createRuneIds = () => {
 		const obj = {};
 
 		for (let player of participants) {
@@ -34,12 +30,9 @@ const RunesBlock = ({info, tab, runes}) => {
 			}
 		}
 
-		setRuneIds(obj);
-		changeLoading(false);
-		ReactTooltip.rebuild();
-	}, [tab])
-
-	if (isLoading) return <LoadingBlock />
+		return obj;
+	}
+	const runeIds = createRuneIds();
 
 	const result = runes.map(rune => {
 		const prim = runeIds.primaryStyle.style;

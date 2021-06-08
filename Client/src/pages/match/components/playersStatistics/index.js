@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import Tabs from './tabs';
 import Table from './table';
@@ -11,6 +12,10 @@ import './index.sass';
 const PlayersStatistics = ({info}) => {
 	const [tab, setTab] = useState(1);
 	const {participants} = info;
+
+	useEffect(() => {
+		ReactTooltip.rebuild();
+	}, [tab])
 
 	const changeTab = (id) => {
 		setTab(id);

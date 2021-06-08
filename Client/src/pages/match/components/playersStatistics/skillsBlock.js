@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ReactTooltip from 'react-tooltip';
 import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
@@ -18,7 +17,7 @@ const SkillsBlock = ({info, tab, version}) => {
 
 	const lang = checkLanguage();
 	const dragonData = new DragonData(version, langForDB(lang));
-
+	
 	useEffect(() => {
 		const getChamp = async () => {
 			const {participants} = info;
@@ -30,9 +29,8 @@ const SkillsBlock = ({info, tab, version}) => {
 			changeLoading(false);
 		}
 		getChamp();
-		ReactTooltip.rebuild();
 	}, [tab])
-
+	
 	if (isLoading) return <LoadingBlock />
 	
 	const createRow = (skillId) => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import Tabs from './tabs';
@@ -11,6 +11,10 @@ import './index.sass';
 const Champions = ({statistics, matchAmount}) => {
 	const [tab, changeTab] = useState('total');
 	const [sortBy, changeSortBy] = useState('games');
+
+	useEffect(() => {
+		ReactTooltip.rebuild();
+	}, [tab])
 
 	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount}/>
 	
