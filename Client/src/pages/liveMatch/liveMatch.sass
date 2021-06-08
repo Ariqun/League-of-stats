@@ -1,129 +1,129 @@
 @import '../../components/UI/ui'
 
 .live_page
-	.container
-		.not_in_game
-			text-align: center
-			div
-				font-size: 32px
-				margin-bottom: 30px
-				.name
-					color: rgba(0, 191, 255, 1)
-			.profile
-				.sky_btn
-					width: auto
-		.match_data
-			text-align: center
-			padding-bottom: 20px
-		.team
-			display: flex
-			justify-content: center
-			margin-bottom: 50px
-			.player_card
-				@include opacityBg
-				position: relative
-				width: 16.6%
-				height: 392px
-				cursor: pointer
-				padding-top: 0
-				margin: 0 10px
-				border-top: 1px solid
+	.not_in_game
+		text-align: center
+		div
+			font-size: 32px
+			margin-bottom: 30px
+			.name
+				color: rgba(0, 191, 255, 1)
+		.profile
+			.sky_btn
+				width: auto
+	.match_data
+		text-align: center
+		padding-bottom: 20px
+	.team
+		display: flex
+		justify-content: center
+		flex-wrap: wrap
+		margin-bottom: 50px
+		.player_card
+			@include opacityBg
+			position: relative
+			width: 16.6%
+			height: 392px
+			cursor: pointer
+			padding-top: 0
+			margin: 0 10px
+			border-top: 1px solid
+			border-bottom: 1px solid
+			.player_name
+				display: block
+				text-align: center
+				text-decoration: none
+				padding: 10px 0
 				border-bottom: 1px solid
-				.player_name
-					display: block
-					text-align: center
-					text-decoration: none
-					padding: 10px 0
-					border-bottom: 1px solid
-				.champ_icon
-					transition: 0.6s opacity
-					img
-						width: 60px
-						margin: 10px auto
-				.champ_stats
+			.champ_icon
+				transition: 0.6s opacity
+				img
+					width: 60px
+					margin: 10px auto
+			.champ_stats
+				display: flex
+				flex-direction: column
+				align-items: center
+				transition: 0.6s opacity
+				padding: 10px 0
+			.player_settings
+				position: absolute
+				bottom: 0
+				left: 0
+				display: flex
+				justify-content: space-between
+				align-items: center
+				width: 100%
+				transition: 0.6s opacity
+				.runes
 					display: flex
-					flex-direction: column
 					align-items: center
-					transition: 0.6s opacity
-					padding: 10px 0
-				.player_settings
-					position: absolute
-					bottom: 0
-					left: 0
+					padding: 5px
+					border-radius: 10px
+					background: rgba(111, 111, 111, 0.3)
+					.rune
+						width: 32px
+				.spells
 					display: flex
-					justify-content: space-between
 					align-items: center
-					width: 100%
-					transition: 0.6s opacity
-					.runes
-						display: flex
-						align-items: center
-						padding: 5px
-						border-radius: 10px
-						background: rgba(111, 111, 111, 0.3)
-						.rune
-							width: 32px
-					.spells
-						display: flex
-						align-items: center
-						padding: 5px
-						border-radius: 10px
-						background: rgba(111, 111, 111, 0.3)
-						img
-							width: 32px
-							height: 32px
-							border-radius: 10px
-							&:first-of-type
-								margin-right: 5px
-					.role
-						width: 42px
-				.background
-					position: absolute
-					top: 0
-					left: 0
-					opacity: 0
-					transition: 0.6s opacity
-					z-index: -10
+					padding: 5px
+					border-radius: 10px
+					background: rgba(111, 111, 111, 0.3)
 					img
+						width: 32px
+						height: 32px
 						border-radius: 10px
-				&:hover
-					border: 1px solid orange !important
-				&:hover .player_name
-					color: orange !important
-					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 165, 0, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
-					border-image-slice: 1
-					background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)
-				&:hover .champ_stats,
-				&:hover .champ_icon,
-				&:hover .player_rank,
-				&:hover .player_settings
-					opacity: 0
-				&:hover .background
-					opacity: 1 !important
-			.player_card.top
-				order: 1
-			.player_card.jungle
-				order: 5
-			.player_card.middle
-				order: 10
-			.player_card.bottom
-				order: 15
-			.player_card.utility
-				order: 20
-		.team.left
-			.player_card
-				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
+						&:first-of-type
+							margin-right: 5px
+				.role
+					width: 42px
+			.background
+				position: absolute
+				top: 0
+				left: 0
+				opacity: 0
+				transition: 0.6s opacity
+				z-index: -10
+				img
+					border-radius: 10px
+			&:hover
+				border: 1px solid orange !important
+			&:hover .player_name
+				color: orange !important
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 165, 0, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
 				border-image-slice: 1
-				.player_name
-					color: rgba(0, 191, 255, 1)
-					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
-					border-image-slice: 1
-		.team.right
-			.player_card
-				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
+				background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)
+			&:hover .champ_stats,
+			&:hover .champ_icon,
+			&:hover .player_rank,
+			&:hover .player_settings
+				opacity: 0
+			&:hover .background
+				opacity: 1 !important
+		.player_card.top
+			order: 1
+		.player_card.jungle
+			order: 5
+		.player_card.middle
+			order: 10
+		.player_card.bottom
+			order: 15
+		.player_card.utility
+			order: 20
+	.team.left
+		.player_card
+			border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
+			border-image-slice: 1
+			.player_name
+				color: rgba(0, 191, 255, 1)
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(0, 191, 255, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
 				border-image-slice: 1
-				.player_name
-					color: rgba(255, 99, 71, 1)
-					border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
-					border-image-slice: 1
-				
+	.team.right
+		.player_card
+			border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 5%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 95%)
+			border-image-slice: 1
+			.player_name
+				color: rgba(255, 99, 71, 1)
+				border-image: linear-gradient(270deg, rgba(128, 128, 128, 0) 10%, rgba(255, 99, 71, 0.8) 50%, rgba(128, 128, 128, 0) 90%)
+				border-image-slice: 1
+			

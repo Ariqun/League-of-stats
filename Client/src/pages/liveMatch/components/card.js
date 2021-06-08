@@ -77,7 +77,7 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 	const role = detectRole();
 
 	return(
-		<div className={`player_card ${role} col-2`}>
+		<div className={`player_card ${role} col-5 col-sm-4 col-md-3 col-lg-2`}>
 			<Link to={`/summoner/${region}/${summonerName}`} className="player_name">
 				{summonerName}
 			</Link>

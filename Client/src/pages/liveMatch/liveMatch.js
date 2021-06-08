@@ -63,7 +63,7 @@ const LiveMatch = ({region, name, matchTypes}) => {
 
 	return(
 		<div className="live_page">
-			<div className="container">
+			<div className="container-xxl">
 				{content()}
 			</div>
 		</div>
