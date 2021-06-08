@@ -156,6 +156,7 @@
 	"spell4Casts": "Uses R",
 	"summoner1Casts": "Uses D",
 	"summoner2Casts": "Uses F",
+	"showAll": "Show all items",
 	"playerWithName": "Player",
 	"notFound": "was not found",
 	"wrongRegionOrName": "Perhaps the wrong region is selected, or the nickname is written in letters from different languages",
