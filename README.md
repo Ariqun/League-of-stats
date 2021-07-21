@@ -70,9 +70,9 @@
 ```
 
 ## :arrow_forward: Запуск и сборка ##
-Riot API:
+Riot API key:
 ```
-> server/libs/getData.js поле "X-Riot-Token"
+> server/libs/getData.js
 ```
 
 Запуск:
