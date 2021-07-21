@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
+import {checkBigNum} from '../../../../components/actionsWithNums/checkNums';
 
 const TotalTeamScore = ({leftTeam, rightTeam, type}) => {
 	const [t] = useTranslation();

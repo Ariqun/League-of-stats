@@ -6,9 +6,9 @@ import PlayerKDA from '../../../match/components/playerKDA';
 import ProgressBar from '../../../../components/progressBars/progressBar';
 import RateBar from '../../../../components/progressBars/rateBar';
 import AvgBlock from './avgBlock';
-import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
-import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
-import {separateNumWithDot} from '../../../../components/manipulationsWithNums/checkNums';
+import {calcRatio} from '../../../../components/actionsWithNums/calcRatio';
+import {findPercent} from '../../../../components/actionsWithNums/findPercent';
+import {separateNumWithDot} from '../../../../components/actionsWithNums/checkNums';
 
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 	const [t] = useTranslation();

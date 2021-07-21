@@ -13,7 +13,7 @@ import RiotAPI from '../../services/riotAPI';
 import DataBase from '../../services/dataBase';
 
 const Summoner = ({region, name}) => {
-	const [isloading, changeLoading] = useState(true);
+	const [isLoading, changeLoading] = useState(true);
 	const [isError, setError] = useState(false);
 	const [summoner, setSummoner] = useState({});
 	const [statistics, setStatistics] = useState({});
@@ -21,16 +21,14 @@ const Summoner = ({region, name}) => {
 	const riotAPI = new RiotAPI();
 	const db = new DataBase();
 	window.scrollTo(0, 0);
-	
+
 	useEffect(() => {
 		const getSummoner = async () => {
-			console.time('hey');
 			const sumInfo = await riotAPI.getSummoner(region, name);
 			
 			if (sumInfo === 'Error') return setError(true);
 
 			const sumStats = await db.getSumStatistics(sumInfo.sumId);
-			console.timeEnd('hey');
 
 			setSummoner(sumInfo);
 			setStatistics(sumStats);
@@ -45,7 +43,9 @@ const Summoner = ({region, name}) => {
 	}, [name])
 
 	if (isError) return <SummonerNotFound name={name}/>
-	if (isloading) return <LoadingPage />
+	if (isLoading) return <LoadingPage />
+	
+	const titles = ['matches', 'champs', 'records', 'statistics'];
 	
 	const content = () => {
 		const {name, matchIds} = summoner;
@@ -57,8 +57,6 @@ const Summoner = ({region, name}) => {
 		if (tab === 'records') return <Records records={records} matchAmount={matchAmount}/>
 		if (tab === 'statistics') return <Statistics statistics={statistics} matchAmount={matchAmount}/>
 	}
-
-	const titles = ['matches', 'champs', 'records', 'statistics'];
 
 	return (
 		<div className="summoner_page">

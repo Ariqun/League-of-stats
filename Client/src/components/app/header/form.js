@@ -2,42 +2,23 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 
+import Search from '../../inputs/search';
 import checkLanguage from '../../languages/checkLanguage';
-import Search from '../inputs/search';
+import useInput from '../../../hooks/useInput';
+import pushNameInLS from '../../localStorage/pushNameInLS';
 
 const Form = () => {
-	const [name, setName] = useState('');
 	const [region, setRegion] = useState(checkLanguage());
+	const [inputValue, setInputValue] = useInput('');
 	const [t] = useTranslation();
 
-	let recentSearch = [];
-
-	const changeName = (e) => {
-		setName(e.target.value);
-	}
-
-	const changeRegion = (e) => {
-		setRegion((e.target.value).toLowerCase());
-	}
-
-	const pushNameInLS = () => {
-		const recentSummoners = JSON.parse(localStorage.getItem('recent summoners'));
-		recentSearch = [{name: name, region: region}];
-
-		if (name === '') return;
-		if (recentSummoners) recentSearch = [...recentSummoners];
-		if (recentSummoners && !recentSummoners.find(sum => sum.name === name && sum.region === region)) {
-			recentSearch = [...recentSummoners, {name: name, region: region}];
-		}
-
-		localStorage.setItem('recent summoners', JSON.stringify(recentSearch));
-	}
+	const changeRegion = (e) => setRegion((e.target.value).toLowerCase());
 
 	return(
 		<div className="search">
 			<form>
 				<div className="search_input">
-					<Search func={changeName} placeholder={t('sumName')} recent/>
+					<Search func={setInputValue} placeholder={t('sumName')} recent/>
 				</div>
 
 				<select value={region} onChange={changeRegion} className="select">
@@ -54,8 +35,8 @@ const Form = () => {
 					<option value="tr1">TR</option>
 				</select>
 
-				<Link to={`/summoner/${region.toLowerCase()}/${name}`}>
-					<button onClick={() => pushNameInLS()} type="submit">
+				<Link to={`/summoner/${region.toLowerCase()}/${inputValue}`}>
+					<button onClick={() => pushNameInLS(inputValue, region)} type="submit">
 						<img src={process.env.PUBLIC_URL + "/assets/icons/search.png"} alt="search"/>
 					</button>
 				</Link>

@@ -37,8 +37,7 @@ async function start() {
 		
 		await mongoose.connect(url, {
 			useNewUrlParser: true,
-			useUnifiedTopology: true,
-			// autoIndex: process.env.NODE_ENV !== 'production'
+			useUnifiedTopology: true
 		});
 
 		app.listen(PORT, () => {

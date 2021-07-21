@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
+import {calcRatio} from '../../../../components/actionsWithNums/calcRatio';
 
 import './index.sass';
 

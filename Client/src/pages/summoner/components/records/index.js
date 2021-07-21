@@ -12,21 +12,16 @@ const Records = ({records, matchAmount}) => {
 	const basics = {kills, deaths, assists, kda, creeps, gold};
 	const impact = {dmg, healAndShields, dmgTaken, CC, vision, wards};
 	const combo = {killingSpree, double, triple, quadra, penta};
+	const types = [basics, impact, combo];
+
+	const content = types.map(type => {
+		return <Card records={type} />
+	})
 
 	return(
 		<div className="records">
 			<div className="records_wrapper">
-				<div className="block basics">
-					<Card records={basics}/>
-				</div>
-
-				<div className="block impact">
-					<Card records={impact}/>
-				</div>
-
-				<div className="block combo">
-					<Card records={combo}/>
-				</div>
+				{content}
 			</div>
 		</div>
 	)

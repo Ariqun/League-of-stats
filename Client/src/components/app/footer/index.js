@@ -3,11 +3,7 @@ import React from 'react';
 import './index.sass'
 
 const Footer = () => {
-	return(
-		<footer className="footer">
-
-		</footer>
-	)
+	return	<footer className="footer" />
 }
 
 export default Footer;

@@ -1,24 +1,20 @@
-import React, {Component} from 'react';
+import React, {useEffect, useRef} from 'react';
 
-import {findPercent} from '../manipulationsWithNums/findPercent';
-
+import {findPercent} from '../actionsWithNums/findPercent';
 import './canvases.sass';
-export default class CircleCanvas extends Component {
-	constructor(props) {
-		super(props);
-		this.canvasFront = React.createRef();
-		this.canvasBack = React.createRef();
-		this.canvasBorder = React.createRef();
-	}
 
-	componentDidMount() {
-		this.updateCanvas();
-	}
+const CircleCanvas = ({primary, secondary, width, height, mode}) => {
+ 	const canvasFront = useRef();
+ 	const canvasBack = useRef();
+ 	const canvasBorder = useRef();
+	const percent = findPercent(primary, primary + secondary, 1);
 
-	updateCanvas = () => {
-		const {primary, secondary, width, height} = this.props;
+	useEffect(() => {
+		updateCanvas();
+	}, []);
 
-		const ctxFront = this.canvasFront.current.getContext('2d');
+	function updateCanvas() {
+		const ctxFront = canvasFront.current.getContext('2d');
 		const percent = findPercent(primary, primary + secondary, 2) / 100;
 		const degrees = percent * 360;
 		const result = degrees * (Math.PI / 180);
@@ -38,7 +34,7 @@ export default class CircleCanvas extends Component {
 			ctxFront.stroke();
 		})
 
-		const ctxBack = this.canvasBack.current.getContext('2d');
+		const ctxBack = canvasBack.current.getContext('2d');
 		ctxBack.strokeStyle = 'rgba(111, 111, 111, 0.3)';
 		ctxBack.beginPath();
 		ctxBack.arc(100, 100, 80, 0, Math.PI * 2, false);
@@ -46,7 +42,7 @@ export default class CircleCanvas extends Component {
 		ctxBack.closePath();
 		ctxBack.stroke();
 
-		const ctxBorder = this.canvasBack.current.getContext('2d');
+		const ctxBorder = canvasBack.current.getContext('2d');
 		ctxBorder.strokeStyle = 'deepskyblue';
 		ctxBorder.beginPath();
 		ctxBorder.arc(100, 100, 87, 0, Math.PI * 2, false);
@@ -55,21 +51,20 @@ export default class CircleCanvas extends Component {
 		ctxBorder.stroke();
 	}
 
-	render() {
-		const {primary, secondary, width, height, mode} = this.props;
-		const percent = findPercent(primary, primary + secondary, 1);
+	return(
+		<div className="circle_canvas">
+			<canvas ref={canvasFront} id="front" width={width} height={height} />
 
-		return(
-			<div className="circle_canvas">
-				<canvas id="front" width={width} height={height} ref={this.canvasFront}></canvas>
-				<div className="stats">
-					<span className={mode === 'hidden' ? "hidden" : "primary"}>{primary}</span>
-					<span className="percent">{percent}%</span>
-					<span className={mode === 'hidden' ? "hidden" : "secondary"}>{secondary}</span>
-				</div>
-				<canvas id="back" width={width} height={height} ref={this.canvasBack}></canvas>
-				<canvas id="border" width={width} height={height} ref={this.canvasBorder}></canvas>
+			<div className="stats">
+				<span className={mode === 'hidden' ? "hidden" : "primary"}>{primary}</span>
+				<span className="percent">{percent}%</span>
+				<span className={mode === 'hidden' ? "hidden" : "secondary"}>{secondary}</span>
 			</div>
-		)
-	}
+			
+			<canvas ref={canvasBack} id="back" width={width} height={height} />
+			<canvas ref={canvasBorder} id="border" width={width} height={height} />
+		</div>
+	)
 }
+
+export default CircleCanvas;

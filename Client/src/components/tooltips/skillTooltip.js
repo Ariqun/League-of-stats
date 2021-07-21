@@ -4,6 +4,8 @@ import translateInTooltip from '../languages/translate';
 import './tooltips.sass';
 
 const skillTooltip = (skill, version) => {
+	if (!skill) return null;
+
 	const {name, image, description, cooldownBurn, costBurn} = skill;
 	const obj = translateInTooltip(checkLanguage());
 	const {cost, cooldown} = obj;

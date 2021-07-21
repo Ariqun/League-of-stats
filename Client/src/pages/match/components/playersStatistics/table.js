@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import objectOfTitles from './objectOfTitles';
-import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
-import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+import {checkBigNum} from '../../../../components/actionsWithNums/checkNums';
+import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
 
 const Table = ({info, version}) => {
 	const [currentColumn, changeCurrentColumn] = useState(0);

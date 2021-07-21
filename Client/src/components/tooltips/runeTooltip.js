@@ -1,10 +1,12 @@
 import checkLanguage from '../languages/checkLanguage';
 import translateInTooltips from '../languages/translate';
-import {modifyRuneTags} from '../manipulationsWithStr/modifyTags';
+import {modifyRuneTags} from '../actionsWithStr/modifyTags';
 
 import './tooltips.sass';
 
 const runeTooltip = (rune, percent) => {
+	if (!rune) return null;
+
 	const {name, icon, longDesc} = rune;
 	const descr = modifyRuneTags(longDesc, 'rune');
 	const obj = translateInTooltips(checkLanguage());

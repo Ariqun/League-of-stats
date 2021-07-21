@@ -6,8 +6,8 @@ import {useTranslation} from 'react-i18next';
 import PlayerRank from '../../match/components/playerRank';
 import PlayerKDA from '../../match/components/playerKDA';
 import PlayerSpells from '../../match/components/playerSpells';
-import {findPercent} from '../../../components/manipulationsWithNums/findPercent';
-import {calcRatio} from '../../../components/manipulationsWithNums/calcRatio';
+import {findPercent} from '../../../components/actionsWithNums/findPercent';
+import {calcRatio} from '../../../components/actionsWithNums/calcRatio';
 import {LoadingBlock} from '../../../components/loading';
 
 import DataBase from '../../../services/dataBase';

@@ -4,6 +4,8 @@ import translateInTooltip from '../languages/translate';
 import './tooltips.sass';
 
 const spellTooltip = (spell, version) => {
+	if (!spell) return null;
+
 	const {name, image, cooldownBurn, description} = spell;
 	const obj = translateInTooltip(checkLanguage());
 	const {cooldown} = obj;

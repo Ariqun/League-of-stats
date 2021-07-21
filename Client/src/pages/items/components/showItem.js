@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import transformAndSort from './transfromAndSort';
-import {modifyItemTags} from '../../../components/manipulationsWithStr/modifyTags';
+import {modifyItemTags} from '../../../components/actionsWithStr/modifyTags';
 
 const ShowItem = ({currentItem, items, version}) => {
 	const [t] = useTranslation();
@@ -27,7 +27,7 @@ const ShowItem = ({currentItem, items, version}) => {
 					</div>
 				</div>
 
-				<div className="descr" dangerouslySetInnerHTML={{__html: descr}}></div>
+				<div className="descr" dangerouslySetInnerHTML={{__html: descr}} />
 			</div>
 		)
 	});

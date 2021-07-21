@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import itemTooltip from '../../../../components/tooltips/itemTooltip';
-import {transformMS} from '../../../../components/manipulationsWithNums/transformTime';
+import {transformMS} from '../../../../components/actionsWithNums/transformTime';
 
 const ItemsBlock = ({info, tab, version, items}) => {
 	const [t] = useTranslation();

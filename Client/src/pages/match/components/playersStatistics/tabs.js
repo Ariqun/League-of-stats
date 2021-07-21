@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
 
 const Tabs = ({tab, participants, changeTab, version}) => {
 	const leftPlayers = [], rightPlayers = [];
@@ -20,9 +20,7 @@ const Tabs = ({tab, participants, changeTab, version}) => {
 	
 			return (
 				<div onClick={() => changeTab(participantId)} className={tab === participantId ? classNameActive : className} key={`${champName}_${i}`}>
-					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} 
-						 alt={`${champName}_icon`}
-					/>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`} />
 				</div>
 			);
 		});

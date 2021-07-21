@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import checkLanguage from '../../../../components/languages/checkLanguage';
-import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
 import {LoadingBlock} from '../../../../components/loading';
 
 import DragonData from '../../../../services/dragonData';

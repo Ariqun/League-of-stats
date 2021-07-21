@@ -1,8 +1,8 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
-import {transformSeconds, transformDate} from '../../../../components/manipulationsWithNums/transformTime';
+import {checkBigNum} from '../../../../components/actionsWithNums/checkNums';
+import {transformSeconds, transformDate} from '../../../../components/actionsWithNums/transformTime';
 
 const Card = ({records}) => {
 	const [t] = useTranslation();
@@ -48,7 +48,7 @@ const Card = ({records}) => {
 		)
 	})
 	
-	return result;
+	return <div className="block">{result}</div>;
 }
 
 export default Card;

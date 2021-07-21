@@ -6,9 +6,9 @@ import {useTranslation} from 'react-i18next';
 import MatchResult from '../../../../match/components/matchResult';
 import PlayerKDA from '../../../../match/components/playerKDA';
 import totalTeamKills from '../../../../match/components/getMatchInfo/totalTeamKills';
-import {scorePerMin} from '../../../../../components/manipulationsWithNums/scorePerTime';
-import {calcRatio} from '../../../../../components/manipulationsWithNums/calcRatio';
-import {transformDate, transformMS} from '../../../../../components/manipulationsWithNums/transformTime';
+import {scorePerMin} from '../../../../../components/actionsWithNums/scorePerTime';
+import {calcRatio} from '../../../../../components/actionsWithNums/calcRatio';
+import {transformDate, transformMS} from '../../../../../components/actionsWithNums/transformTime';
 
 const Statistics = ({player, info, matchId, matchTypes}) => {
 	const [t] = useTranslation();

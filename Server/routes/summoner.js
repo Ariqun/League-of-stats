@@ -53,13 +53,15 @@ router.post('/summoner', async (req, res) => {
 
 		const uncheckedMatchIds = matchList.filter(id => !arrOfCheckedIds.includes(id)).reverse();
 		let count = 0;
+
 		console.log(`Количество игр: ${uncheckedMatchIds.length}`);
+
 		let interval = setTimeout(function tick() {
 			if (count >= uncheckedMatchIds.length) return;
 
 			const start = count;
 			const end = count + 1;
-			console.log(count)
+			console.log(count);
 			
 			const oneMatch = uncheckedMatchIds.slice(start, end);
 			bruteForceMatches(oneMatch[0], area);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {transformDate} from '../manipulationsWithNums/transformTime';
+import {transformDate} from '../actionsWithNums/transformTime';
 import './errors.sass';
 
 const StatisticsNotFound = ({matchAmount}) => {

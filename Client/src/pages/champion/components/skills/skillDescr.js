@@ -1,8 +1,8 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import removeTags from '../../../../components/manipulationsWithStr/removeTags';
-import {addZeroFour} from '../../../../components/manipulationsWithNums/addZeros';
+import removeTags from '../../../../components/actionsWithStr/removeTags';
+import {addZeroFour} from '../../../../components/actionsWithNums/addZeros';
 
 const SkillDescr = ({spells, passive, keyID, currentSkill}) => {
 	const [t] = useTranslation();

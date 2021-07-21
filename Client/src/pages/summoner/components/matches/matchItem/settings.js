@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import PlayerSpells from '../../../../match/components/playerSpells';
 import PlayerRunes from '../../../../match/components/playerRunes';
-import {modifyChampName} from '../../../../../components/manipulationsWithStr/modifyChampName';
+import {modifyChampName} from '../../../../../components/actionsWithStr/modifyChampName';
 
 const Settings = ({player, version}) => {
 	const {championName, summoner1Id, summoner2Id, perks} = player;

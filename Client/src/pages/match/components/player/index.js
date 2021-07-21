@@ -9,10 +9,10 @@ import PlayerRank from '../playerRank';
 import PlayerKDA from '../playerKDA';
 import PlayerItems from '../playerItems';
 
-import {checkBigNum} from '../../../../components/manipulationsWithNums/checkNums';
-import {findPercent} from '../../../../components/manipulationsWithNums/findPercent';
-import {scorePerMin} from '../../../../components/manipulationsWithNums/scorePerTime';
-import {modifyChampName} from '../../../../components/manipulationsWithStr/modifyChampName';
+import {checkBigNum} from '../../../../components/actionsWithNums/checkNums';
+import {findPercent} from '../../../../components/actionsWithNums/findPercent';
+import {scorePerMin} from '../../../../components/actionsWithNums/scorePerTime';
+import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
 
 import './index.sass';
 

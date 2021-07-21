@@ -1,14 +1,12 @@
 const axios = require('axios');
 
-const pushInvalidMatchIdInDB = require('./pushInvalidMatchIdInDB');
-
 module.exports = async (url, func, region = 'ru') => {
 	const headers = {
 		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",
 		"Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
 		"Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
 		"Origin": "https://developer.riotgames.com",
-		"X-Riot-Token": "RGAPI-8509dd80-1c43-4df0-b9bb-06c7a28079e7"
+		"X-Riot-Token": "RGAPI-8e666e52-b6d4-4713-801e-500f60de9985"
 	};
 	let result = {};
 

@@ -3,11 +3,12 @@ import {useTranslation} from 'react-i18next';
 
 import ChampionBlock from './components/championBlock';
 import Roles from './components/roles';
-import Search from '../../components/app/inputs/search';
+import Search from '../../components/inputs/search';
+import useInput from '../../hooks/useInput';
 
 const Main = () => {
 	const [shownRoles, changeShownRoles] = useState(['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank']);
-	const [inputValue, setInputValue] = useState('');
+	const [inputValue, setInputValue] = useInput('');
 	const [t] = useTranslation();
 
 	const toggleVision = (role) => {
@@ -18,10 +19,6 @@ const Main = () => {
 			changeShownRoles([...shownRoles, role]);
 		}
 	}
-
-	const showChamp = (e) => {
-		setInputValue(e.target.value);
-	}
 	
 	return(
 		<div className="main_page">
@@ -29,7 +26,7 @@ const Main = () => {
 				<Roles shownRoles={shownRoles} toggleVision={toggleVision}/>
 
 				<div className="choice_champ col-12">
-					<Search func={showChamp} placeholder={t("startWriteChampName")} />
+					<Search func={setInputValue} placeholder={t("startWriteChampName")} />
 				</div>
 
 				<ChampionBlock inputValue={inputValue} shownRoles={shownRoles}/>

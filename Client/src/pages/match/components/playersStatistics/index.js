@@ -17,9 +17,7 @@ const PlayersStatistics = ({info}) => {
 		ReactTooltip.rebuild();
 	}, [tab])
 
-	const changeTab = (id) => {
-		setTab(id);
-	}
+	const changeTab = (id) => setTab(id);
 
 	const content = () => {
 		if (tab !== 'table') {

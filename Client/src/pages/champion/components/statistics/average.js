@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {calcRatio} from '../../../../components/manipulationsWithNums/calcRatio';
+import {calcRatio} from '../../../../components/actionsWithNums/calcRatio';
 import PlayerKDA from '../../../match/components/playerKDA';
 import AvgBlock from './avgBlock';
 

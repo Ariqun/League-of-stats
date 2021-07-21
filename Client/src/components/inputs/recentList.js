@@ -4,13 +4,11 @@ import {Link} from 'react-router-dom';
 const RecentList = ({recent, isShow}) => {
 	if (!recent) return null;
 
-	const recentSummoners = JSON.parse(localStorage.getItem('recent summoners'));
-	let className = 'recent_search col-6 col-sm-6 col-md-5 col-lg-4 col-xl-3';
-
+	const recentSummoners = JSON.parse(localStorage.getItem('recent summoners')).reverse();
 	if (!recentSummoners) return null;
-	if (!isShow) className = "hidden";
 
-	recentSummoners.reverse();
+	const className = isShow ? 'recent_search col-6 col-sm-6 col-md-5 col-lg-4 col-xl-3' : 'hidden';
+
 	const recentList = recentSummoners.map((summoner, i) => {
 		if (i > 5) return null;
 

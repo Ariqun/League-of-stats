@@ -3,23 +3,20 @@ import {useTranslation} from 'react-i18next';
 
 import ItemBlock from './components/itemBlock';
 import ShowItem from './components/showItem';
-import Search from '../../components/app/inputs/search';
+import Search from '../../components/inputs/search';
+import useInput from '../../hooks/useInput';
 
 const Items = () => {
 	const [t] = useTranslation();
 	const [currentItem, setCurrentItem] = useState(t("Health Potion"));
-	const [inputValue, setInputValue] = useState('');
-	
-	const showItem = (e) => {
-		setInputValue(e.target.value);
-	}
+	const [inputValue, setInputValue] = useInput('');
 
 	return(
 		<div className="items_page">
 			<div className="container-xxl">
 
 				<div className="choice_item col-12">
-					<Search func={showItem} placeholder={t('startWriteItemName')} />
+					<Search func={setInputValue} placeholder={t('startWriteItemName')} />
 				</div>
 
 				<div className="items">

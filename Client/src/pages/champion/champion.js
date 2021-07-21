@@ -40,15 +40,14 @@ const Champion = ({champName, lang, version}) => {
 
 	const content = () => {
 		const {id} = champ;
-		let tabContent = '';
 		
-		if (tab === 'general') tabContent = <General champ={champ} id={id}/>;
-		if (tab === 'skills') tabContent = <Skills champ={champ}/>;
-		if (tab === 'skins') tabContent = <Skins champ={champ}/>;
-		if (tab === 'builds') tabContent = <Builds champ={champ}/>;
-		if (tab === 'statistics') tabContent = <Statistics champ={champ}/>;
+		if (tab === 'general') return <General champ={champ} id={id}/>;
+		if (tab === 'skills') return <Skills champ={champ}/>;
+		if (tab === 'skins') return <Skins champ={champ}/>;
+		if (tab === 'builds') return <Builds champ={champ}/>;
+		if (tab === 'statistics') return <Statistics champ={champ}/>;
 
-		return tabContent;
+		return null;
 	}
 
 	return (
