@@ -2,13 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
-import checkLanguage from '../../../../components/languages/checkLanguage';
-import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
-import {LoadingBlock} from '../../../../components/loading';
-
 import DragonData from '../../../../services/dragonData';
+import checkLanguage from '../../../../components/languages/checkLanguage';
 import skillTooltip from '../../../../components/tooltips/skillTooltip';
 import langForDB from '../../../../components/languages/langForDB';
+import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
+import {LoadingBlock} from '../../../../components/loading';
 
 const SkillsBlock = ({info, tab, version}) => {
 	const [isLoading, changeLoading] = useState(true);
@@ -48,7 +47,7 @@ const SkillsBlock = ({info, tab, version}) => {
 		})
 
 		return(
-			<tr>
+			<tr key={skillId}>
 				<td data-tip={tooltip} data-for="tooltip">
 					<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${icon}`} alt="skill"/>
 				</td>
