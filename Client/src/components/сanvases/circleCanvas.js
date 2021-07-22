@@ -51,7 +51,7 @@ const CircleCanvas = ({primary, secondary, width, height, mode}) => {
 		<div className="circle_canvas">
 			<canvas ref={canvasFront} id="front" width={width} height={height} />
 
-			<div className="stats">
+			<div className="canvas_stats">
 				<span className={mode === 'hidden' ? "hidden" : "primary"}>{primary}</span>
 				<span className="percent">{percent}%</span>
 				<span className={mode === 'hidden' ? "hidden" : "secondary"}>{secondary}</span>
