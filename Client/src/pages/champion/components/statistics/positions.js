@@ -3,9 +3,10 @@ import {useTranslation} from 'react-i18next';
 
 import RateBar from '../../../../components/progressBars/rateBar';
 
-const Positions = ({roles, matches}) => {
-	const [t] = useTranslation();
+const Positions = ({champStats}) => {
+	const {roles, matches} = champStats;
 	const pos = ['top', 'jungle', 'middle', 'bottom', 'utility'];
+	const [t] = useTranslation();
 
 	const result = pos.map(position => {
 		let matchesAtPos = 0, winsAtPos = 0;
@@ -22,7 +23,7 @@ const Positions = ({roles, matches}) => {
 		return (
 			<tr className={`position ${position}`} key={position}>
 				<td className="position_type">
-					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${position}.png`} alt={`${position}_icon`}/>
+					<img src={`${process.env.PUBLIC_URL}/assets/icons/positions/${position}.png`} alt={`${position}_icon`}/>
 					<span className="position_name">{t(position)}</span>
 				</td>
 

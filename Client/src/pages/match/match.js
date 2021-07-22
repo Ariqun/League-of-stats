@@ -11,19 +11,19 @@ import DataBase from '../../services/dataBase';
 const Match = ({region, matchId}) => {
 	const [info, setInfo] = useState({});
 	const [isLoading, changeLoading] = useState(true);
-	const db = new DataBase();
 
 	useEffect(() => {
 		const getInfo = async () => {
+			const db = new DataBase();
 			const res = await db.getMatchInfo(matchId, region);
 			
 			setInfo(res);
 			changeLoading(false);
 		}
 		getInfo();
-	}, []);
+	}, [matchId, region]);
 
-	if (isLoading) return <LoadingPage />
+	if (isLoading) return <LoadingPage />;
 
 	return(
 		<div className="match_page">

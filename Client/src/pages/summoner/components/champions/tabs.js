@@ -2,12 +2,14 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 
 const Tabs = ({changeTab, currentTab}) => {
-	const [t] = useTranslation();
 	const tabs = ['total', 'solo', 'flex', 'normal', 'clash'];
+	const [t] = useTranslation();
 	
 	const result = tabs.map(tab => {
+		const className = currentTab === tab ? "tab active" : "tab";
+
 		return(
-			<div onClick={() => changeTab(`${tab}`)} className={currentTab === tab ? "tab active" : "tab"} key={tab}>
+			<div onClick={() => changeTab(`${tab}`)} className={className} key={tab}>
 				{t(tab)}
 			</div>
 		)

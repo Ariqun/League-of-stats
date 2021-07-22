@@ -13,7 +13,7 @@ const Matches = ({matchIds, name, region}) => {
 	const matchList = matchIds.map((match, i) => {
 		if (i >= matchListLenght) return null;
 		
-		return <MatchItem matchId={match} name={name} key={match} region={region}/>
+		return <MatchItem matchId={match} name={name} key={match} region={region} />
 	});
 
 	return(

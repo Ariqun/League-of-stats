@@ -10,13 +10,19 @@ router.post('/champion', async (req, res) => {
 		await champion.findOne({id: champ}, (err, doc) => {
 			res.send(doc);
 		})
-	} catch {res.send('Error')}
+	} catch(e) {
+		res.send('Error');
+	}
 })
 
 router.post('/champions', async (req, res) => {
-	await champion.find({}, (err, doc) => {
-		res.send(doc);
-	})
+	try {
+		await champion.find({}, (err, doc) => {
+			res.send(doc);
+		})
+	} catch(e) {
+		res.send('Error');
+	}
 })
 
 module.exports = router;

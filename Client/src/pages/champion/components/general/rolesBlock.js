@@ -6,8 +6,8 @@ const RolesBlock = ({roles}) => {
 			<div className="role" key={role}>
 				<img src={`${process.env.PUBLIC_URL}/assets/icons/roles/${role}.png`} alt={role} title={role} />
 			</div>
-		)
-	})
+		);
+	});
 
 	return(
 		<div className="roles">

@@ -16,23 +16,22 @@ const Champions = ({statistics, matchAmount}) => {
 		ReactTooltip.rebuild();
 	}, [tab])
 
-	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount}/>
+	if (!statistics) return <StatisticsNotFound matchAmount={matchAmount} />;
 	
 	return(
 		<div className="champs">
 			<div className="champs_wrapper">
-				<Tabs changeTab={changeTab} currentTab={tab}/>
+				<Tabs changeTab={changeTab} currentTab={tab} />
 
 				<table>
 					<tbody>
-						<TableHead changeSort={changeSortBy} sortBy={sortBy}/>
-
-						<TableBody tab={tab} statistics={statistics} sortBy={sortBy}/>
+						<TableHead changeSort={changeSortBy} sortBy={sortBy} />
+						<TableBody tab={tab} statistics={statistics} sortBy={sortBy} />
 					</tbody>
 				</table>
 			</div>
 
-			<ReactTooltip id="tooltip" html/>
+			<ReactTooltip id="tooltip" html />
 		</div>
 	)
 }

@@ -7,15 +7,16 @@ import RiotAPI from '../../../../services/riotAPI';
 const CheckLiveMatch = ({name, region = 'ru', sumId}) => {
 	const [live, setLive] = useState({});
 	const [t] = useTranslation();
-	const riotAPI = new RiotAPI();
 
 	useEffect(() => {
 		const getLiveInfo = async () => {
+			const riotAPI = new RiotAPI();
 			const res = await riotAPI.getLiveMatch(sumId, region);
+
 			setLive(res);
 		}
 		getLiveInfo();
-	}, [])
+	}, [sumId, region])
 
 	if (!live || Object.keys(live).length === 0) return null;
 

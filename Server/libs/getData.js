@@ -15,7 +15,7 @@ module.exports = async (url, func, region = 'ru') => {
 	await axios.get(url, {headers: headers})
 		.then(res => {
 			if (func) result = func(res.data, region)
-			if (!func) result = res.data;
+			else result = res.data;
 		})
 		.catch(err => {
 			console.error(`Ошибка: ${err.response.status} ${err.response.statusText} - ${url}`);

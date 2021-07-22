@@ -17,12 +17,12 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 	const [champion, setChampion] = useState('');
 	const [summoner, setSummoner] = useState({});
 	const [t] = useTranslation();
-	const db = new DataBase();
 
 	const {summonerId, championId, summonerName, spell1Id, spell2Id} = player;
 	
 	useEffect(() => {
 		const getInfo = async () => {
+			const db = new DataBase();
 			const champRes = await db.getChampionStats(championId);
 			const sumRes = await db.getSumStatistics(summonerId);
 			
@@ -31,9 +31,9 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 			changeLoading(false);
 		}
 		getInfo();
-	}, [])
+	}, [championId, summonerId])
 
-	if (isLoading) return <LoadingBlock />
+	if (isLoading) return <LoadingBlock />;
 
 	const name = Object.keys(champions).filter(champ => +champions[champ].key === championId);
 	let champWins = 0, champMatches = 0, champWinrate = 0, champKills = 0, champDeaths = 0, champAssists = 0;
@@ -87,7 +87,9 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 			</div>
 
 			<div className="champ_stats">
-				<div className="winrate">{champWinrate}% <span>({champMatches} {t('played')})</span></div>
+				<div className="winrate">{champWinrate}% 
+					<span>({champMatches} {t('played')})</span>
+				</div>
 
 				<PlayerKDA kills={champKills} deaths={champDeaths} assists={champAssists} live/>
 			</div>
@@ -101,7 +103,7 @@ const Card = ({player, region = 'ru', champions, runes, version}) => {
 				</div>
 
 				<div className="role">
-					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
+					<img src={`${process.env.PUBLIC_URL}/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
 				</div>
 
 				<PlayerSpells firstId={spell1Id} secondId={spell2Id}/>

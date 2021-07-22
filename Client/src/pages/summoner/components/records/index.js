@@ -6,7 +6,7 @@ import StatisticsNotFound from '../../../../components/errors/statisticsNotFound
 import './index.sass';
 
 const Records = ({records, matchAmount}) => {
-	if (!records) return <StatisticsNotFound matchAmount={matchAmount}/>
+	if (!records) return <StatisticsNotFound matchAmount={matchAmount} />;
 
 	const {kda, kills, deaths, assists, creeps, gold, dmg, healAndShields, dmgTaken, CC, vision, wards, killingSpree, double, triple, quadra, penta} = records[0];
 	const basics = {kills, deaths, assists, kda, creeps, gold};
@@ -15,7 +15,7 @@ const Records = ({records, matchAmount}) => {
 	const types = [basics, impact, combo];
 
 	const content = types.map(type => {
-		return <Card records={type} />
+		return <Card records={type} />;
 	})
 
 	return(

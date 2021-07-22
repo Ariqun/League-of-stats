@@ -11,8 +11,8 @@ import {findPercent} from '../../../../components/actionsWithNums/findPercent';
 import {separateNumWithDot} from '../../../../components/actionsWithNums/checkNums';
 
 const TableBody = ({tab, statistics, sortBy, champions, version}) => {
-	const [t] = useTranslation();
 	const champs = statistics.champions[0];
+	const [t] = useTranslation();
 
 	const maxMatches = Object.values(champs).reduce((acc, curr) => {
 		let matches = 0;
@@ -93,7 +93,13 @@ const TableBody = ({tab, statistics, sortBy, champions, version}) => {
 		)
 	}).filter(item => item !== null);
 	
-	if (result.length === 0) return <tr><td className="no_data" colSpan="10">Игры не найдены</td></tr>;
+	if (result.length === 0) {
+		return(
+			<tr>
+				<td className="no_data" colSpan="10">Игры не найдены</td>
+			</tr>
+		)
+	}
 
 	result.sort((a, b) => {
 		if (!a || !b) return null;

@@ -30,9 +30,9 @@ const TeamScore = ({teamId, info}) => {
 	return(
 		<div className={teamId === 100 ? "left_team col-4" : "right_team col-4"}>
 			<div className="result">
-				<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender}/>
+				<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender} />
 				
-				<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
+				<PlayerKDA kills={kills} deaths={deaths} assists={assists} />
 			</div>
 
 			<div className="objects">

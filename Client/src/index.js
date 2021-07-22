@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-import App from './components/app/app';
+import App from './App';
+import Background from './components/background';
 import store from './store/store';
-import Background from './components/app/background';
 
 import './i18n.js';
 import './index.sass';

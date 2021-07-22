@@ -8,8 +8,7 @@ import RateBar from '../../../../components/progressBars/rateBar';
 
 const RunesColumn = ({styles, perks, matches, runes}) => {
 	const arrOfStyles = styles.split('_');
-	const prim = +arrOfStyles[0];
-	const sub = +arrOfStyles[1];
+	const [prim, sub] = arrOfStyles;
 	const {total} = perks;
 
 	const createAndModifyArray = (slot) => {
@@ -34,19 +33,21 @@ const RunesColumn = ({styles, perks, matches, runes}) => {
 	}
 
 	const content = runes.map(rune => {
-		if (prim !== rune.id && sub !== rune.id) return null;
+		if (+prim !== rune.id && +sub !== rune.id) return null;
 
 		const result = rune.slots.map((slot, i) => {
 			const runesArray = createAndModifyArray(slot);
 
 			const res = slot.runes.map(item => {
 				const boolean = runesArray[0] && item.id === runesArray[0].id;
+				const className = boolean ? "rune_item active" : "rune_item";
+
 				const matchesWithThisStyles = runesArray[runesArray.length - 1];
 				const percentWithThisStyles = checkNanAndDoubleZero(findPercent(perks[item.id], matchesWithThisStyles, 1));
 				const tooltip = runeTooltip(item, percentWithThisStyles);
 
 				return (
-					<div className={boolean ? "rune_item active" : "rune_item"} data-tip={tooltip} data-for="tooltip" key={item.id}>
+					<div className={className} data-tip={tooltip} data-for="tooltip" key={item.id}>
 						<img src={`https://ddragon.leagueoflegends.com/cdn/img/${item.icon}`} alt={`icon_${item.id}`}/>
 					</div>
 				)
@@ -57,13 +58,14 @@ const RunesColumn = ({styles, perks, matches, runes}) => {
 					{res}
 				</div>
 			)
-		})
+		});
 
 		return(
 			<div className={rune.id === prim ? "style_block prim" : "style_block sub"} key={rune.id}>
 				<div className="style">
 					<img src={`https://ddragon.leagueoflegends.com/cdn/img/${rune.icon}`} alt={rune}/>
 				</div>
+
 				<div className="style_title">{rune.name}</div>
 				{result}
 			</div>

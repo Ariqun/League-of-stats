@@ -24,4 +24,4 @@ const modifyRuneTags = (str) => {
 	return result;
 }
 
-export {modifyItemTags, modifyRuneTags}
+export {modifyItemTags, modifyRuneTags};

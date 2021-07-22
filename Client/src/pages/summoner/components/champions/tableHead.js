@@ -6,8 +6,10 @@ const TableHead = ({changeSort, sortBy}) => {
 	const titles = ['champ', 'games', 'winrate', 'kda', 'creeps', 'gold', 'dmg', 'heal', 'vision'];
 
 	const content = titles.map(title => {
+		const className = sortBy === title ? 'head_item active' : 'head_item';
+
 		return(
-			<td onClick={() => changeSort(title)} className={sortBy === title ? 'head_item active' : 'head_item'} key={title}>
+			<td onClick={() => changeSort(title)} className={className} key={title}>
 				<div className="title">{t(title)}</div>
 			</td>
 		)

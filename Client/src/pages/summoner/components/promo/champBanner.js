@@ -47,7 +47,7 @@ const ChampBanner = ({statistics, champions, version}) => {
 				</div>
 
 				<div className="role">
-					<img src={process.env.PUBLIC_URL + `/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
+					<img src={`${process.env.PUBLIC_URL}/assets/icons/positions/${role}.png`} alt={`${role}_icon`}/>
 				</div>
 
 				<div className="side_block">

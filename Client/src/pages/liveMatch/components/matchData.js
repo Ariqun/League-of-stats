@@ -9,9 +9,9 @@ const MatchData = ({matchType, startTime}) => {
 		const timer = setInterval(() => {
 			const duration = getTime();
 			changeTime(duration);
-		}, 1000)
+		}, 1000);
 		
-		return () => {clearInterval(timer)}
+		return () => {clearInterval(timer)};
 	})
 
 	function getTime() {

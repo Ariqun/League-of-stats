@@ -23,7 +23,7 @@ const RunesBlock = ({runes}) => {
 					{subRes}
 				</div>
 			)
-		})
+		});
 
 		return(
 			<div className={"style_block"} key={id}>

@@ -3,40 +3,35 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
-import Header from './header';
-import Footer from './footer';
-import Up from '../buttons/up';
+import Main from './pages/main';
+import Champion from './pages/champion';
+import Items from './pages/items';
+import Runes from './pages/runes';
+import Summoner from './pages/summoner';
+import Match from './pages/match';
+import LiveMatch from './pages/liveMatch';
+import Header from './components/header';
+import Up from './components/buttons/up';
+import checkLanguage from './components/languages/checkLanguage';
+import langForDB from './components/languages/langForDB';
+import {LoadingPage} from './components/loading';
 
-import Main from '../../pages/main';
-import Champion from '../../pages/champion';
-import Items from '../../pages/items';
-import Runes from '../../pages/runes/';
-import Summoner from '../../pages/summoner';
-import Match from '../../pages/match';
-import LiveMatch from '../../pages/liveMatch';
-import checkLanguage from '../languages/checkLanguage';
-import langForDB from '../languages/langForDB';
-import {LoadingPage} from '../loading';
-
-import DragonData from '../../services/dragonData';
-
-import './app.sass';
+import DragonData from './services/dragonData';
 
 const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [language, setLanguage] = useState(checkLanguage())
 	const [t, i18n] = useTranslation();
-
-	const dragonData = new DragonData(version, langForDB(language));
 	
 	useEffect(() => {
 		const getInfo = async () => {
-			const ver = await dragonData.getLatestVersion();
-			const champs = await dragonData.getAllChampions();
-			const runes = await dragonData.getAllRunes();
-			const spells = await dragonData.getSummonerSpells();
-			const items = await dragonData.getAllItems();
-			const types = await dragonData.getMatchTypes();
+			const dd = new DragonData(version, langForDB(language));
+			const ver = await dd.getLatestVersion();
+			const champs = await dd.getAllChampions();
+			const runes = await dd.getAllRunes();
+			const spells = await dd.getSummonerSpells();
+			const items = await dd.getAllItems();
+			const types = await dd.getMatchTypes();
 
 			versionLoaded(ver);
 			championsLoaded(champs);
@@ -47,19 +42,21 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 			changeLoading(false);
 		}
 		getInfo();
-	}, [language])
+	}, [version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded, itemsLoaded, matchTypesLoaded, language])
 
 	const changeLang = (e) => {
-		localStorage.setItem('lang', e.target.value);
-		setLanguage(e.target.value)
-		i18n.changeLanguage(e.target.value);
+		const value = e.target.value;
+
+		localStorage.setItem('lang', value);
+		setLanguage(value)
+		i18n.changeLanguage(value);
 	}
 
-	if (isLoading) return <LoadingPage />
+	if (isLoading) return <LoadingPage />;
 	
 	return (
 		<div className="app">
-			<Header changeLang={changeLang}/>
+			<Header changeLang={changeLang} />
 
 			<Route path="/" exact render={() => <Main />} />
 			<Route path="/items" render={() => <Items />} />
@@ -86,7 +83,6 @@ const App = ({version, versionLoaded, championsLoaded, runesLoaded, spellsLoaded
 			}}/>
 
 			<Up />
-			<Footer />
 		</div>
 	)
 };

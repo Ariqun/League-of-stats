@@ -18,12 +18,13 @@ const Summoner = ({region, name}) => {
 	const [summoner, setSummoner] = useState({});
 	const [statistics, setStatistics] = useState({});
 	const [tab, changeTab] = useState('matches');
-	const riotAPI = new RiotAPI();
-	const db = new DataBase();
 	window.scrollTo(0, 0);
 
 	useEffect(() => {
 		const getSummoner = async () => {
+			const riotAPI = new RiotAPI();
+			const db = new DataBase();
+
 			const sumInfo = await riotAPI.getSummoner(region, name);
 			
 			if (sumInfo === 'Error') return setError(true);
@@ -40,9 +41,9 @@ const Summoner = ({region, name}) => {
 			changeLoading(true);
 			changeTab('matches');
 		}
-	}, [name])
+	}, [region, name])
 
-	if (isError) return <SummonerNotFound name={name}/>
+	if (isError) return <SummonerNotFound name={name} />
 	if (isLoading) return <LoadingPage />
 	
 	const titles = ['matches', 'champs', 'records', 'statistics'];
@@ -52,17 +53,17 @@ const Summoner = ({region, name}) => {
 		const {records} = statistics;
 		const matchAmount = matchIds.length;
 		
-		if (tab === 'matches') return <Matches matchIds={matchIds} name={name} region={region}/>;
-		if (tab === 'champs') return <Champions statistics={statistics} matchAmount={matchAmount}/>
-		if (tab === 'records') return <Records records={records} matchAmount={matchAmount}/>
-		if (tab === 'statistics') return <Statistics statistics={statistics} matchAmount={matchAmount}/>
+		if (tab === 'matches') return <Matches matchIds={matchIds} name={name} region={region} />;
+		if (tab === 'champs') return <Champions statistics={statistics} matchAmount={matchAmount} />
+		if (tab === 'records') return <Records records={records} matchAmount={matchAmount} />
+		if (tab === 'statistics') return <Statistics statistics={statistics} matchAmount={matchAmount} />
 	}
 
 	return (
 		<div className="summoner_page">
 			<div className="container-xxl">
-				<Promo summoner={summoner} statistics={statistics}/>
-				<Nav changeTab={changeTab} type="sumNav" titles={titles} tab={tab}/>
+				<Promo summoner={summoner} statistics={statistics} />
+				<Nav changeTab={changeTab} type="sumNav" titles={titles} tab={tab} />
 
 				{content()}
 			</div>

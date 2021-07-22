@@ -10,10 +10,6 @@ const CircleCanvas = ({primary, secondary, width, height, mode}) => {
 	const percent = findPercent(primary, primary + secondary, 1);
 
 	useEffect(() => {
-		updateCanvas();
-	}, []);
-
-	function updateCanvas() {
 		const ctxFront = canvasFront.current.getContext('2d');
 		const percent = findPercent(primary, primary + secondary, 2) / 100;
 		const degrees = percent * 360;
@@ -49,7 +45,7 @@ const CircleCanvas = ({primary, secondary, width, height, mode}) => {
 		ctxBorder.lineWidth = 1.5;
 		ctxBorder.closePath();
 		ctxBorder.stroke();
-	}
+	}, [primary, secondary, width, height, mode]);
 
 	return(
 		<div className="circle_canvas">

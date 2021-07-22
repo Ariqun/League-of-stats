@@ -5,8 +5,8 @@ import RolesBlock from './rolesBlock';
 
 import './index.sass';
 
-const General = ({champ, id}) => {
-	const {name, title, lore, stats, tags} = champ;
+const General = ({champ}) => {
+	const {id, name, title, lore, stats, tags} = champ;
 	
 	return(
 		<div className="general">
@@ -28,8 +28,7 @@ const General = ({champ, id}) => {
 				<StatsTable stats={stats}/>
 			</div>
 		</div>
-	)
-
+	);
 }
 
 export default General;

@@ -17,7 +17,7 @@ const TeamBans = ({teamId, info, champions, version}) => {
 				<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${image.full}`} alt={`${id}_icon`}/>
 			</div>
 		)
-	})
+	});
 
 
 	return(

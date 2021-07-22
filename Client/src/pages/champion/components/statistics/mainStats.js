@@ -4,10 +4,9 @@ import {useTranslation} from 'react-i18next';
 import CircleCanvas from '../../../../components/сanvases/circleCanvas';
 
 const MainStats = ({champStats}) => {
-	const [t] = useTranslation();
-
 	const {wins, matches, totalMatches, bans} = champStats;
 	const rates = ['winrate', 'banrate', 'pickrate'];
+	const [t] = useTranslation();
 
 	const content = rates.map(rate => {
 		let secondary = matches - wins;

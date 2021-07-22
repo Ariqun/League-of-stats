@@ -17,8 +17,8 @@ import {modifyChampName} from '../../../../components/actionsWithStr/modifyChamp
 import './index.sass';
 
 const Player = ({teamId, info, region, version}) => {
-	const [t] = useTranslation();
 	const {participants, gameDuration} = info;
+	const [t] = useTranslation();
 	const players = [];
 
 	for (let player of participants) {
@@ -45,20 +45,20 @@ const Player = ({teamId, info, region, version}) => {
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
 					</div>
 					<div className="spells_and_runes">
-						<PlayerSpells firstId={summoner1Id} secondId={summoner2Id}/>
-						<PlayerRunes perks={perks}/>
+						<PlayerSpells firstId={summoner1Id} secondId={summoner2Id} />
+						<PlayerRunes perks={perks} />
 					</div>
 				</div>
 
 				<div className="player_name">
 					<Link to={`/summoner/${region}/${summonerName}`}>
 						<span className="name">{summonerName}</span>
-						<PlayerRank id={summonerId} region={region}/>
+						<PlayerRank id={summonerId} region={region} />
 					</Link>
 				</div>
 				
 				<div className="player_stats">
-					<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
+					<PlayerKDA kills={kills} deaths={deaths} assists={assists} />
 
 					<div className="other_score">
 						<div className="wrapper_block_left">
@@ -84,7 +84,7 @@ const Player = ({teamId, info, region, version}) => {
 					</div>
 				</div>
 
-				<PlayerItems player={player}/>
+				<PlayerItems player={player} />
 			</div>
 		)
 	})

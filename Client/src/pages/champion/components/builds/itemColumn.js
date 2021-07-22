@@ -44,8 +44,8 @@ const ItemColumn = ({champItems, blockItems, matches, title, items, version, tri
 
 				<RateBar current={count} max={matches} pop/>
 			</div>
-		)
-	})
+		);
+	});
 
 	const showAllItems = () => {
 		if (isShowAll || trigger === false) return null;

@@ -36,12 +36,12 @@ const Statistics = ({player, info, matchId, matchTypes}) => {
 
 				<div className="stats_wrapper">
 					<div className="match_result">
-						<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender}/>
+						<MatchResult teams={teams} teamId={teamId} duration={gameDuration} surrender={isSurrender} />
 						<span className="match_type">{t(matchType.description)}</span>
 					</div>
 
 					<div className="champion_stats">
-						<PlayerKDA kills={kills} deaths={deaths} assists={assists}/>
+						<PlayerKDA kills={kills} deaths={deaths} assists={assists} />
 
 						<div className="farm_score">
 							<span className="farm">{farm} </span>

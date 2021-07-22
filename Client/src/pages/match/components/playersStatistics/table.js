@@ -66,9 +66,17 @@ const Table = ({info, version}) => {
 		<div className="statistics_table">
 			<table>
 				<tbody>
-					<tr className="champ_icons"><td></td>{champsBlock}</tr>
+					<tr className="champ_icons">
+						<td></td>
+						{champsBlock}
+					</tr>
+
 					{content}
-					<tr className="champ_icons"><td></td>{champsBlock}</tr>
+					
+					<tr className="champ_icons">
+						<td></td>
+						{champsBlock}
+					</tr>
 				</tbody>
 			</table>
 		</div>

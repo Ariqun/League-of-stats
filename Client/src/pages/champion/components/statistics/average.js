@@ -8,17 +8,20 @@ import AvgBlock from './avgBlock';
 const Average = ({champStats}) => {
 	const [t] = useTranslation();
 	const {matches, creeps, gold, kda, dmg, combo} = champStats;
+	const {kills, deaths, assists} = kda;
+	const {physical, magic, trueDmg} = dmg;
+	const {double, triple, quadro, penta} = combo;
 	
-	const avgKills = calcRatio(kda.kills, matches, 1);
-	const avgDeaths = calcRatio(kda.deaths, matches, 1);
-	const avgAssists = calcRatio(kda.assists, matches, 1);
+	const avgKills = calcRatio(kills, matches, 1);
+	const avgDeaths = calcRatio(deaths, matches, 1);
+	const avgAssists = calcRatio(assists, matches, 1);
 	const avgCreeps = calcRatio(creeps, matches, 1);
-	const avgDmg = calcRatio((dmg.physical + dmg.magic + dmg.trueDmg), matches) / 1000;
+	const avgDmg = calcRatio((physical + magic + trueDmg), matches) / 1000;
 	const avgGold = calcRatio(gold, matches) / 1000;
-	const avgDouble = calcRatio(combo.double, matches, 4);
-	const avgTriple = calcRatio(combo.triple, matches, 4);
-	const avgQuadro = calcRatio(combo.quadro, matches, 4);
-	const avgPenta = calcRatio(combo.penta, matches, 4);
+	const avgDouble = calcRatio(double, matches, 4);
+	const avgTriple = calcRatio(triple, matches, 4);
+	const avgQuadro = calcRatio(quadro, matches, 4);
+	const avgPenta = calcRatio(penta, matches, 4);
 
 	return(
 		<div className="average">

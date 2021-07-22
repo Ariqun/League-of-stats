@@ -34,7 +34,7 @@ const RunesBlock = ({champStats}) => {
 		const styles = Object.keys(elem)[0];
 
 		return <RunesColumn styles={styles} perks={runes[styles]} matches={matches} key={styles}/>
-	})
+	});
 
 	return(
 		<div className="runes_block">

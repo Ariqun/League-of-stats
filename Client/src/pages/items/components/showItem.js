@@ -6,9 +6,9 @@ import transformAndSort from './transfromAndSort';
 import {modifyItemTags} from '../../../components/actionsWithStr/modifyTags';
 
 const ShowItem = ({currentItem, items, version}) => {
-	const [t] = useTranslation();
 	const arrOfItems = transformAndSort(items);
-
+	const [t] = useTranslation();
+	
 	const result = arrOfItems.map(item => {
 		if (item.name !== currentItem) return null;
 

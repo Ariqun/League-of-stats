@@ -4,10 +4,6 @@ const TeamGraphCanvas = ({leftTeam, rightTeam, type}) => {
 	const canvas = useRef();
 
 	useEffect(() => {
-		verticalGraph();
-	}, [])
-
-	function verticalGraph() {
 		const ctx = canvas.current.getContext('2d');
 		const allScore = [];
 		let factor = 110;
@@ -17,8 +13,6 @@ const TeamGraphCanvas = ({leftTeam, rightTeam, type}) => {
 		}
 
 		const maxScore = Math.max(...allScore) / 1000;
-		console.log(maxScore);
-		// factor = maxScore / 4
 		if (maxScore > 3) factor = 50;
 		if (maxScore > 5) factor = 30;
 		if (maxScore > 10) factor = 20;
@@ -61,7 +55,7 @@ const TeamGraphCanvas = ({leftTeam, rightTeam, type}) => {
 
 		createCanvas(leftTeam, '#2a98bf');
 		createCanvas(rightTeam, '#ff5859', 250);
-	}
+	}, [leftTeam, rightTeam, type])
 
 	return <canvas id="damage" width="490px" height="400px" ref={canvas} />
 }

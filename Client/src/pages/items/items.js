@@ -26,7 +26,7 @@ const Items = () => {
 						<ItemBlock setCurrentItem={setCurrentItem} inputValue={inputValue} type="items" />
 					</div>
 					
-					<ShowItem currentItem={currentItem}/>
+					<ShowItem currentItem={currentItem} />
 				</div>
 			</div>
 		</div>

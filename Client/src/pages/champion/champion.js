@@ -18,11 +18,10 @@ const Champion = ({champName, lang, version}) => {
 	const [isError, setError] = useState(false);
 	const [champ, setChamp] = useState({});
 	const [tab, changeTab] = useState('general');
-	
-	const dd = new DragonData(version, langForDB(lang));
 
 	useEffect(() => {
 		const getChampion = async () => {
+			const dd = new DragonData(version, langForDB(lang));
 			const res = await dd.getChampion(champName);
 			
 			if (res === 'Error') return setError(true);
@@ -31,7 +30,7 @@ const Champion = ({champName, lang, version}) => {
 			changeLoading(false);
 		}
 		getChampion();
-	}, [lang]);
+	}, [champName, lang, version]);
 
 	if (isError) return <ChampNotFound name={champName}/>
 	if (isLoading) return <LoadingPage />
@@ -39,13 +38,11 @@ const Champion = ({champName, lang, version}) => {
 	const titles = ['general', 'skills','skins', 'builds', 'statistics'];
 
 	const content = () => {
-		const {id} = champ;
-		
-		if (tab === 'general') return <General champ={champ} id={id}/>;
-		if (tab === 'skills') return <Skills champ={champ}/>;
-		if (tab === 'skins') return <Skins champ={champ}/>;
-		if (tab === 'builds') return <Builds champ={champ}/>;
-		if (tab === 'statistics') return <Statistics champ={champ}/>;
+		if (tab === 'general') return <General champ={champ} />;
+		if (tab === 'skills') return <Skills champ={champ} />;
+		if (tab === 'skins') return <Skins champ={champ} />;
+		if (tab === 'builds') return <Builds champ={champ} />;
+		if (tab === 'statistics') return <Statistics champ={champ} />;
 
 		return null;
 	}
@@ -53,7 +50,7 @@ const Champion = ({champName, lang, version}) => {
 	return (
 		<div className="champion_page">
 			<div className="container-xxl">
-				<Nav changeTab={changeTab} titles={titles} tab={tab}/>
+				<Nav changeTab={changeTab} titles={titles} tab={tab} />
 				{content()}
 			</div>
 		</div>

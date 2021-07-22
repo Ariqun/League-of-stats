@@ -11,12 +11,14 @@ const Promo = ({summoner, statistics}) => {
 	
 	return (
 		<div className="promo">
-			<SumBanner name={name} ranked={ranked} lvl={lvl} iconID={iconId}/>
+			<SumBanner name={name} ranked={ranked} lvl={lvl} iconID={iconId} />
+			
 			<div className="sum">
 				<div className="name">{name}</div>
 				<div className="region">({region})</div>
-				<CheckLiveMatch name={name} sumId={sumId} region={region}/>
+				<CheckLiveMatch name={name} sumId={sumId} region={region} />
 			</div>
+
 			<ChampBanner statistics={statistics} />
 		</div>
 	)

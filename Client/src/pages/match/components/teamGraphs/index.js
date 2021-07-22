@@ -3,17 +3,16 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import Canvas from '../../../../components/сanvases/teamGraphCanvas';
+import TotalTeamScore from './totalTeamScore';
 import graphInfo from './graphInfo';
 
 import './index.sass';
-import TotalTeamScore from './totalTeamScore';
 
 const TeamGraphs = ({info, version}) => {
-	const [t] = useTranslation();
 	const {participants} = info;
-
 	const leftTeamInfo = graphInfo(100, participants, version);
 	const rightTeamInfo = graphInfo(200, participants, version);
+	const [t] = useTranslation();
 
 	return(
 		<div className="graphs">

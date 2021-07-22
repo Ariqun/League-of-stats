@@ -5,8 +5,8 @@ const transformMS = (ms, format = 'literal') => {
 	const minutes = addZero(Math.floor((ms / (1000 * 60)) % 60));
 	const hours = addZero(Math.floor((ms / (1000 * 60 * 60)) % 60));
 
-	if (ms >= 3600000 && format === 'literal') return `${hours}ч. ${minutes}м. ${seconds}с.`
-	if (ms >= 3600000 && format === 'digits') return `${hours}:${minutes}:${seconds}`
+	if (ms >= 3600000 && format === 'literal') return `${hours}ч. ${minutes}м. ${seconds}с.`;
+	if (ms >= 3600000 && format === 'digits') return `${hours}:${minutes}:${seconds}`;
 	
 	if (format === 'literal') return `${minutes}м. ${seconds}с.`;
 	if (format === 'digits') return `${minutes}:${seconds}`;
@@ -28,10 +28,9 @@ const transformDate = (ms, full = false) => {
 	const hours = addZero(date.getHours());
 	const minutes = addZero(date.getMinutes());
 
-	let result = `${day}.${months}.${year}`;
-	if (full) result = `${result} ${hours}:${minutes}`;
+	if (full) return `${day}.${months}.${year} ${hours}:${minutes}`;
 
-	return result;
+	return `${day}.${months}.${year}`;
 }
 
 

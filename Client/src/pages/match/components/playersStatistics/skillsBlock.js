@@ -13,25 +13,26 @@ import langForDB from '../../../../components/languages/langForDB';
 const SkillsBlock = ({info, tab, version}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [champion, setChampion] = useState({});
+	const skillIds = [1, 2, 3, 4];
 	const [t] = useTranslation();
-
-	const lang = checkLanguage();
-	const dragonData = new DragonData(version, langForDB(lang));
 	
 	useEffect(() => {
 		const getChamp = async () => {
 			const {participants} = info;
 			const player = participants.find(item => item.participantId === tab);
 			const champName = modifyChampName(player.championName);
+			const lang = checkLanguage();
 
-			const res = await dragonData.getChampion(champName);
+			const dd = new DragonData(version, langForDB(lang));
+			const res = await dd.getChampion(champName);
+			
 			setChampion(res);
 			changeLoading(false);
 		}
 		getChamp();
-	}, [tab])
+	}, [info, tab, version])
 	
-	if (isLoading) return <LoadingBlock />
+	if (isLoading) return <LoadingBlock />;
 	
 	const createRow = (skillId) => {
 		const skills = info.timeline[0][tab].lvlUp;
@@ -56,15 +57,14 @@ const SkillsBlock = ({info, tab, version}) => {
 		);
 	}
 
+	const content = skillIds.map(id => createRow(id));
+
 	return(
 		<div className="skill_table">
 			<div className="title">{t('skillOrders')}</div>
 			<table>
 				<tbody>
-					{createRow(1)}
-					{createRow(2)}
-					{createRow(3)}
-					{createRow(4)}
+					{content}
 				</tbody>
 			</table>
 		</div>

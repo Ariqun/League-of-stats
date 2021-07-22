@@ -13,14 +13,15 @@ const MatchItem = ({matchId, name, region}) => {
 	const [info, setInfo] = useState({});
 	const [isLoading, changeLoading] = useState(true);
 	const [isError, changeError] = useState(false);
-	const db = new DataBase();
 	
 	useEffect(() => {
 		const getInfo = async () => {
+			const db = new DataBase();
 			const res = await db.getMatchInfo(matchId, region);
 			const {queueId} = res;
-			
-			if (res === 'Error' || queueId === 2000 || queueId === 2020 || queueId === 2010) {
+			const taboo = ['Error', 2000, 2020, 2010];
+
+			if (taboo.includes(res) || taboo.includes(queueId)) {
 				changeError(true);
 			} else {
 				setInfo(res);
@@ -29,7 +30,7 @@ const MatchItem = ({matchId, name, region}) => {
 			changeLoading(false);
 		}
 		getInfo();
-	}, []);
+	}, [matchId, region]);
 
 	if (isLoading) return <LoadingBlock />
 	if (isError) return null;
@@ -47,16 +48,16 @@ const MatchItem = ({matchId, name, region}) => {
 		<div className="match_item">
 			<div className="inner_wrapper">
 				<Settings player={player} />
-				<Statistics player={player} info={info} matchId={matchId}/>
+				<Statistics player={player} info={info} matchId={matchId} />
 
-				<PlayerItems player={player}/>
+				<PlayerItems player={player} />
 
 				<div className="match_players">
-					<PlayersTable currentPlayer={player.summonerName} participants={participants} region={platformId}/>
+					<PlayersTable currentPlayer={player.summonerName} participants={participants} region={platformId} />
 				</div>
 			</div>
 			
-			<ReactTooltip id="tooltip" html/>
+			<ReactTooltip id="tooltip" html />
 		</div>
 	)
 }

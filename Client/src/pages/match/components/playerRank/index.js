@@ -8,17 +8,17 @@ const PlayerRank = ({id, region, live = false}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [ranked, setRanked] = useState([]);
 	const [t] = useTranslation();
-	const riotAPI = new RiotAPI();
 	
 	useEffect(() => {
 		const getRank = async () => {
+			const riotAPI = new RiotAPI();
 			const res = await riotAPI.getSumRanked(id, region);
 
 			setRanked(...Object.values(res));
 			changeLoading(false);
 		}
 		getRank();
-	}, [])
+	}, [id, region])
 
 	if (isLoading) return null;
 	
@@ -27,7 +27,7 @@ const PlayerRank = ({id, region, live = false}) => {
 		return(
 			<div className="player_rank">
 				<div className="rank_icon">
-					<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'}></img>
+					<img src={`${process.env.PUBLIC_URL}/assets/icons/ranked/unranked.png`} alt={'unranked_emblem'} />
 				</div>
 				<span className="rank_name">{t('unranked')}</span>
 			</div>

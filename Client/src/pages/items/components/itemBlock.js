@@ -5,11 +5,11 @@ import {useTranslation} from 'react-i18next';
 import transformAndSort from './transfromAndSort';
 
 const ItemBlock = ({setCurrentItem, inputValue, type, items, version}) => {
-	const [t] = useTranslation();
-
 	const arrOfItems = transformAndSort(items);
 	const exceptionTypes = ['Boots', 'Consumable', 'Trinket'];
 	const exceptionItems = [3330, 3400, 3513, 3599, 3600];
+	const [t] = useTranslation();
+	
 	let types = ['Damage', 'AttackSpeed', 'SpellDamage', 'CooldownReduction', 'Health', 'Armor', 'SpellBlock', 'NonbootsMovement', 'OnHit', "ManaRegen", "Active"];
 	
 	if (type === 'consumable') types = ['Consumable', 'Trinket'];

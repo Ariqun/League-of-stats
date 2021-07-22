@@ -5,9 +5,10 @@ import {useTranslation} from 'react-i18next';
 import ItemColumn from './itemColumn';
 
 const ItemsBlock = ({champStats, items}) => {
-	const [t] = useTranslation();
-	const matches = champStats.matches;
 	const champItems = champStats.items[0];
+	const matches = champStats.matches;
+	const [t] = useTranslation();
+	
 	delete champItems[0];
 
 	const filterItems = (tag, main = false) => {
@@ -28,9 +29,9 @@ const ItemsBlock = ({champStats, items}) => {
 		<div className="items_block">
 			<div className="block_title">{t("itemPopularity")}</div>
 			<div className="columns_wrapper">
-				<ItemColumn champItems={champItems} blockItems={filterItems(null, true)} matches={matches} title={t('coreItems')} trigger/>
-				<ItemColumn champItems={champItems} blockItems={filterItems('Boots')} matches={matches} title={t('boots')}/>
-				<ItemColumn champItems={champItems} blockItems={filterItems('Trinket')} matches={matches} title={t('trinkets')}/>
+				<ItemColumn champItems={champItems} blockItems={filterItems(null, true)} matches={matches} title={t('coreItems')} trigger />
+				<ItemColumn champItems={champItems} blockItems={filterItems('Boots')} matches={matches} title={t('boots')} />
+				<ItemColumn champItems={champItems} blockItems={filterItems('Trinket')} matches={matches} title={t('trinkets')} />
 			</div>
 		</div>
 	)

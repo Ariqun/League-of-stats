@@ -12,7 +12,7 @@ const Runes = () => {
 				</div>
 			</div>
 
-			<ReactTooltip id="tooltip" html/>
+			<ReactTooltip id="tooltip" html />
 		</div>
 	)
 }

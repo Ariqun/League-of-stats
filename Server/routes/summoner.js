@@ -74,7 +74,9 @@ router.post('/summoner', async (req, res) => {
 		pushMasteryInfoInDB(masteryInfo, puuid);
 
 		res.send(JSON.stringify({...summonerInfo, ...rankedInfo, matchIds: matchList}));
-	} catch {res.send('Error')}
+	} catch(e) {
+		res.send('Error');
+	}
 })
 
 module.exports = router;

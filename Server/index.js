@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const path = require('path');
 const exphbs = require('express-handlebars');
 
-const summonerRoute = require('./routes/summoner');
+const champRoute = require('./routes/champion');
+const liveMatchRoute = require('./routes/liveMatch');
 const matchRoute = require('./routes/match');
 const rankedRoute = require('./routes/ranked');
-const champRoute = require('./routes/champion');
+const summonerRoute = require('./routes/summoner');
 const sumStatisticsRoute = require('./routes/sumStatistics');
-const liveMatch = require('./routes/liveMatch');
 
 const app = express();
 const hbs = exphbs.create({
@@ -23,12 +23,12 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
-app.use('/', summonerRoute);
+app.use('/', champRoute);
+app.use('/', liveMatchRoute);
 app.use('/', matchRoute);
 app.use('/', rankedRoute);
-app.use('/', champRoute);
+app.use('/', summonerRoute);
 app.use('/', sumStatisticsRoute);
-app.use('/', liveMatch);
 
 async function start() {
 	try {

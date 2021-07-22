@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import itemTooltip from '../../../../components/tooltips/itemTooltip';
-
 import './index.sass';
 
 const PlayerItems = ({player, items, version}) => {
@@ -23,6 +22,7 @@ const PlayerItems = ({player, items, version}) => {
 
 					const tooltip = itemTooltip(items[itemId], version);
 					let content = (<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`} alt={`${itemId}_icon`}/>);
+					
 					if (i === 6) {
 						content = (
 							<>

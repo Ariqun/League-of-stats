@@ -9,11 +9,11 @@ const addZeroFour = (num) => {
 
 	if (arr.length < 4) {
 		for (let i = arr.length; i < 4; i++) {
-			arr.unshift('0')
+			arr.unshift('0');
 		}
 	}
 
-	return arr.join('')
+	return arr.join('');
 }
 
 export {addZero, addZeroFour};

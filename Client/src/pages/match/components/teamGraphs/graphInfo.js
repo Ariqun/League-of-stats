@@ -1,8 +1,7 @@
 import {modifyChampName} from "../../../../components/actionsWithStr/modifyChampName";
 
 const graphInfo = (teamId, participants, version) => {
-	const players = [];
-	let res = [];
+	const players = [], res = [];
 
 	for (let player of participants) {
 		if (player.teamId === teamId) players.push(player);

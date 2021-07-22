@@ -8,7 +8,7 @@ const SkyblueBtn = ({text, spanText = '', active}) => {
 	if (active) className = 'sky_btn active';
 
 	const spanContent = () => {
-		return <span> {spanText}</span>
+		return <span> {spanText}</span>;
 	}
 
 	return(

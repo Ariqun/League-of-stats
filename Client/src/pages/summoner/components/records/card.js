@@ -8,47 +8,41 @@ const Card = ({records}) => {
 	const [t] = useTranslation();
 	const titles = ['kills', 'deaths', 'assists', 'kda', 'dmg', 'healAndShields', 'creeps', 'gold', 'vision', 'wards', 'dmgTaken', 'CC', 'killingSpree', 'double', 'triple', 'quadra', 'penta'];
 
-	const noData = (record, value) => {
+	const createCard = (record, value, matchDate = 0, matchType = 0, champName = 'Teemo') => {
 		const title = titles.find(item => item === record);
+		const styles = value === 0 ? {opacity: 0} : null;
 
 		return(
-			<div className="card col-2" key={record}>
+			<div className="card col-2" key={title}>
 				<div className="title">{t(title)}</div>
 				<div className="value">{value}</div>
+
+				<div className={'other'} style={styles}>
+					<div className="date">{matchDate}</div>
+					<div className="type">{t(matchType)}</div>
+				</div>
+
 				<div className="background">
-					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Teemo_0.jpg`} alt={`Teemo_img`}/>
+					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champName}_0.jpg`} alt={`${champName}_img`} />
 				</div>
 			</div>
 		)
 	}
 	
-	const result = Object.keys(records).map(record => {
+	const content = Object.keys(records).map(record => {
 		const {value, date, champName, matchType} = records[record];
 
-		if (value === 0) return noData(record, value);
+		if (value === 0) return createCard(record, value);
 
-		const title = titles.find(item => item === record);
 		const matchDate = transformDate(date);
 		let num = checkBigNum(value, 'digits');
 		
 		if (record === 'CC') num = transformSeconds(value);
 
-		return(
-			<div className="card col-2" key={record}>
-				<div className="title">{t(title)}</div>
-				<div className="value">{num}</div>
-				<div className="other">
-					<div className="date">{matchDate}</div>
-					<div className="type">{t(matchType)}</div>
-				</div>
-				<div className="background">
-					<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champName}_0.jpg`} alt={`${champName}_img`}/>
-				</div>
-			</div>
-		)
+		return createCard(record, num, matchDate, matchType, champName);
 	})
 	
-	return <div className="block">{result}</div>;
+	return <div className="block">{content}</div>;
 }
 
 export default Card;

@@ -6,8 +6,8 @@ import itemTooltip from '../../../../components/tooltips/itemTooltip';
 import {transformMS} from '../../../../components/actionsWithNums/transformTime';
 
 const ItemsBlock = ({info, tab, version, items}) => {
-	const [t] = useTranslation();
 	const timeline = info.timeline[0][tab].itemPurchase;
+	const [t] = useTranslation();
 	
 	const transformArrToObj = () => {
 		let result = timeline.reduce((acc, item) => {

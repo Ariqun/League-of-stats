@@ -7,8 +7,7 @@ import {modifyChampName} from '../../../../components/actionsWithStr/modifyChamp
 import './index.sass';
 
 const PlayersTable = ({currentPlayer, participants, region, version}) => {
-	const leftTeam = [];
-	const rightTeam = [];
+	const leftTeam = [], rightTeam = [];
 
 	for (let player of participants) {
 		const obj = {
@@ -25,13 +24,15 @@ const PlayersTable = ({currentPlayer, participants, region, version}) => {
 
 	const createDOM = (player) => {
 		const champName = modifyChampName(player.champ);
+		const className = currentPlayer === player.name ? 'current_player' : 'player_small';
 
 		return(
-			<div className={currentPlayer === player.name ? 'current_player' : 'player_small'} data-tip={player.name} data-for="tooltip" key={player.name}>
+			<div className={className} data-tip={player.name} data-for="tooltip" key={player.name}>
 				<Link to={`/summoner/${region}/${player.name}`}>
 					<div className="champion_icon">
 						<img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`} alt={`${champName}_icon`}/>
 					</div>
+
 					<div className="player_name">
 						<span>{player.name}</span>
 					</div>
@@ -43,10 +44,10 @@ const PlayersTable = ({currentPlayer, participants, region, version}) => {
 	return(
 		<div className="players_block">
 			<div className="left_team">
-				{leftTeam.map(player => {return createDOM(player)})}
+				{leftTeam.map(player => createDOM(player))}
 			</div>
 			<div className="right_team">
-				{rightTeam.map(player => {return createDOM(player)})}
+				{rightTeam.map(player => createDOM(player))}
 			</div>
 		</div>
 	)

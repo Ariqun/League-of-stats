@@ -56,7 +56,9 @@ router.post('/match', async (req, res) => {
 		}
 		
 		res.send(JSON.stringify(result));
-	} catch {}
+	} catch(e) {
+		res.send('Error');
+	}
 })
 
 module.exports = router;

@@ -5,29 +5,21 @@ const StatsTable = ({stats}) => {
 	const [t] = useTranslation();
 	const sortedStats = [];
 
-	const sortArr = () => {
-		// Такая наркомания нужна для правильного формирования окончательной таблицы
+	// Такая наркомания нужна для правильного формирования окончательной таблицы,
+	// Чтобы родственный статы отображались друг напротив друга в верстке (Здоровье - здоровье за уровень), т.к. изначально они приходят в хаотичном порядке.
+	// Чтобы лучше понять логику вещей, лучше посмотреть на отрисованный компонент в браузере.
+	const sort = (arr, bool) => {
 		for (let key in stats) {
-			if (key !== 'attackrange' && key !== 'movespeed' && key !== 'attackspeedperlevel') {
-				sortedStats.push(`${t(key)}: ${stats[key]}`);
-			}
-		}
-
-		for (let key in stats) {
-			if (key === 'attackspeedperlevel') {
-				sortedStats.push(`${t(key)}: ${stats[key]}`);
-			}
-		}
-
-		for (let key in stats) {
-			if (key === 'attackrange' || key === 'movespeed') {
+			if (arr.includes(key) === bool) {
 				sortedStats.push(`${t(key)}: ${stats[key]}`);
 			}
 		}
 	}
-	sortArr();
+	sort(['attackrange', 'movespeed', 'attackspeedperlevel'], false);
+	sort(['attackspeedperlevel'], true);
+	sort(['attackrange', 'movespeed'], true);
 
-	const content = (name, value, right = false) => {
+	const content = (name, value, right) => {
 		const className = right ? "stat right" : "stat left";
 		let str = `${name} - `;
 
@@ -42,10 +34,10 @@ const StatsTable = ({stats}) => {
 	}
 
 	const table = sortedStats.map((item, i) => {
-		const name = item.split(':')[0];
-		const value = item.split(':')[1];
+		const arr = item.split(':');
+		const [name, value] = arr;
 
-		if (i % 2 === 0) return content(name, value);
+		if (i % 2 === 0) return content(name, value, false);
 
 		return content(name, value, true);
 	})

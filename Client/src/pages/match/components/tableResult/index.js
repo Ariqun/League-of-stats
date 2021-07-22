@@ -10,13 +10,11 @@ import {transformDate, transformMS} from '../../../../components/actionsWithNums
 import './index.sass';
 
 const TableResult = ({info, region, matchTypes}) => {
-	const [t] = useTranslation();
-
 	const {queueId, gameStartTimestamp, gameDuration} = info;
-	
 	const matchType = matchTypes.find(type => type.queueId === queueId);
 	const startDate = transformDate(gameStartTimestamp, true);
 	const duration = transformMS(gameDuration, 'digits');
+	const [t] = useTranslation();
 
 	return(
 		<div className="table_result">
@@ -36,13 +34,13 @@ const TableResult = ({info, region, matchTypes}) => {
 
 			<div className="table_body">
 				<div className="left_team">
-					<Player teamId={100} info={info} region={region}/>
-					<TeamBans teamId={100} info={info}/>
+					<Player teamId={100} info={info} region={region} />
+					<TeamBans teamId={100} info={info} />
 				</div>
 
 				<div className="right_team">
-					<Player teamId={200} info={info} region={region}/>
-					<TeamBans teamId={200} info={info}/>
+					<Player teamId={200} info={info} region={region} />
+					<TeamBans teamId={200} info={info} />
 				</div>
 			</div>
 		</div>

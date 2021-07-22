@@ -6,7 +6,7 @@ import './index.sass';
 const MatchResult = ({teams, teamId, duration, surrender}) => {
 	const [t] = useTranslation();
 
-	if (duration < 300000) return <div className="remake">{t('remake')}</div>
+	if (duration < 300000) return <div className="remake">{t('remake')}</div>;
 
 	for (let team of teams) {
 		if (team.teamId === teamId) {

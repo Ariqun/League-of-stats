@@ -13,23 +13,24 @@ import RiotAPI from '../../services/riotAPI';
 const LiveMatch = ({region, name, matchTypes}) => {
 	const [isLoading, changeLoading] = useState(true);
 	const [live, setLive] = useState({});
-	const riotAPI = new RiotAPI();
 	const [t] = useTranslation();
 
 	useEffect(() => {
 		const getLiveInfo = async () => {
-			const summoner = await riotAPI.getSummoner(region, name);
+			const riotAPI = new RiotAPI();
 
+			const summoner = await riotAPI.getSummoner(region, name);
 			const {sumId} = summoner;
+
 			const liveMatch = await riotAPI.getLiveMatch(sumId, region);
 
 			setLive(liveMatch);
 			changeLoading(false);
 		}
 		getLiveInfo();
-	}, [])
+	}, [name, region])
 
-	if (isLoading) return <LoadingPage />
+	if (isLoading) return <LoadingPage />;
 
 	const content = () => {
 		if (Object.keys(live).length === 0) {

@@ -5,8 +5,8 @@ import {useTranslation} from 'react-i18next';
 import runeTooltip from '../../../../components/tooltips/runeTooltip';
 
 const RunesBlock = ({info, tab, runes}) => {
-	const [t] = useTranslation();
 	const {participants} = info;
+	const [t] = useTranslation();
 
 	const createRuneIds = () => {
 		const obj = {};

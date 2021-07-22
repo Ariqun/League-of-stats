@@ -8,7 +8,7 @@ const Search = ({func, placeholder, recent = null}) => {
 
 	const hideRecentList = () => {
 		setTimeout(() => {
-			setShowRecentList(false)
+			setShowRecentList(false);
 		}, 500)
 	}
 
