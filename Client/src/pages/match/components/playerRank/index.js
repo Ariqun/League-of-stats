@@ -21,8 +21,9 @@ const PlayerRank = ({id, region, live = false}) => {
 	}, [id, region])
 
 	if (isLoading) return null;
-	
-	if (!live && ranked.length === 0) return <span className="rank_name">{t('unranked')}</span>
+
+	if (!ranked) return <span className="rank_name">{t('noData')}</span>;
+	if (!live && ranked.length === 0) return <span className="rank_name">{t('unranked')}</span>;
 	if (live && ranked.length === 0) {
 		return(
 			<div className="player_rank">
