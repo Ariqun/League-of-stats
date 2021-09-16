@@ -9,6 +9,7 @@
 - Разработано на стеке MERN с помощью [RIOT API](https://developer.riotgames.com/).
 - На русском и английском языках.
 - Адаптивная верстка под мобильные устройства.
+- Видео-демонстрация [Яндекс.Диск](https://disk.yandex.ru/i/A53pekNoFWUA_Q)
 
 ![demo](https://raw.githubusercontent.com/Ariqun/Ariqun/main/assets/los.png)
 Главная страница профиля игрока.

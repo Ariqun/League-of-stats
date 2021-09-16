@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export default class DataBase {
 	getChampionStats = async (id) => {
 		const res = await axios({
