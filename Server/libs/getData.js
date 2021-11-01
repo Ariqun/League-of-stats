@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = async (url, func, region = 'ru') => {
-	const key = '';
+	const key = 'RGAPI-8ed4c01e-2479-4f89-a04b-e1e20352bde8';
 
 	const headers = {
 		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",

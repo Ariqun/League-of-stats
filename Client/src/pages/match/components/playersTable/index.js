@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
+import {modifyChampName} from '../../../../utils/actionsWithStr/modifyChampName';
 
 import './index.sass';
 

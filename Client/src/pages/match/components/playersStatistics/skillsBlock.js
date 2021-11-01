@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import DragonData from '../../../../services/dragonData';
-import checkLanguage from '../../../../components/languages/checkLanguage';
+import checkLanguage from '../../../../utils/languages/checkLanguage';
 import skillTooltip from '../../../../components/tooltips/skillTooltip';
-import langForDB from '../../../../components/languages/langForDB';
-import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
+import langForDB from '../../../../utils/languages/langForDB';
+import {modifyChampName} from '../../../../utils/actionsWithStr/modifyChampName';
 import {LoadingBlock} from '../../../../components/loading';
 
 const SkillsBlock = ({info, tab, version}) => {

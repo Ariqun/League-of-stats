@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {checkNanAndDoubleZero} from '../actionsWithNums/checkNums';
-import {findPercent} from '../actionsWithNums/findPercent';
+import {checkNanAndDoubleZero} from '../../utils/actionsWithNums/checkNums';
+import {findPercent} from '../../utils/actionsWithNums/findPercent';
 
 import './index.sass'
 

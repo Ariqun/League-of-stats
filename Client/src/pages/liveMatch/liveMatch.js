@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 
 import MatchData from './components/matchData';
 import TeamBlock from './components/teamBlock';
-import SkyblueBtn from '../../components/buttons/skyblueBtn';
+import SkyblueBtn from '../../components/ui/buttons/skyblueBtn';
 import {LoadingPage} from '../../components/loading';
 
 import RiotAPI from '../../services/riotAPI';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {calcRatio} from '../../../../components/actionsWithNums/calcRatio';
+import {calcRatio} from '../../../../utils/actionsWithNums/calcRatio';
 import './index.sass';
 
 const PlayerKDA = ({kills, deaths, assists, live}) => {

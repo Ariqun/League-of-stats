@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 
-import {findPercent} from '../actionsWithNums/findPercent';
+import {findPercent} from '../../utils/actionsWithNums/findPercent';
 import './canvases.sass';
 
 const CircleCanvas = ({primary, secondary, width, height, mode}) => {

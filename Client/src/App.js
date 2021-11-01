@@ -10,10 +10,10 @@ import Runes from './pages/runes';
 import Summoner from './pages/summoner';
 import Match from './pages/match';
 import LiveMatch from './pages/liveMatch';
-import Header from './components/header';
-import Up from './components/buttons/up';
-import checkLanguage from './components/languages/checkLanguage';
-import langForDB from './components/languages/langForDB';
+import Header from './components/Header/Header';
+import Up from './components/ui/buttons/up';
+import checkLanguage from './utils/languages/checkLanguage';
+import langForDB from './utils/languages/langForDB';
 import {LoadingPage} from './components/loading';
 
 import DragonData from './services/dragonData';

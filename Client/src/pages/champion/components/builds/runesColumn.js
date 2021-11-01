@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import runeTooltip from '../../../../components/tooltips/runeTooltip';
-import {checkNanAndDoubleZero} from '../../../../components/actionsWithNums/checkNums';
-import {findPercent} from '../../../../components/actionsWithNums/findPercent';
+import {checkNanAndDoubleZero} from '../../../../utils/actionsWithNums/checkNums';
+import {findPercent} from '../../../../utils/actionsWithNums/findPercent';
 import RateBar from '../../../../components/progressBars/rateBar';
 
 const RunesColumn = ({styles, perks, matches, runes}) => {

@@ -1,6 +1,6 @@
-import checkLanguage from '../languages/checkLanguage';
-import translateInTooltips from '../languages/translate';
-import {modifyItemTags} from '../actionsWithStr/modifyTags';
+import checkLanguage from '../../utils/languages/checkLanguage';
+import translateInTooltips from '../../utils/languages/translate';
+import {modifyItemTags} from '../../utils/actionsWithStr/modifyTags';
 
 import './tooltips.sass';
 

@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 
 import ItemBlock from './components/itemBlock';
 import ShowItem from './components/showItem';
-import Search from '../../components/inputs/search';
+import Search from '../../components/ui/inputs/search';
 import useInput from '../../hooks/useInput';
 
 const Items = () => {

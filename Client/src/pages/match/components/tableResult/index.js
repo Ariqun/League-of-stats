@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import Player from '../player';
 import TeamScore from '../teamScore';
 import TeamBans from '../teamBans';
-import {transformDate, transformMS} from '../../../../components/actionsWithNums/transformTime';
+import {transformDate, transformMS} from '../../../../utils/actionsWithNums/transformTime';
 
 import './index.sass';
 

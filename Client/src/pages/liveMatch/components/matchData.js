@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import {transformMS} from '../../../components/actionsWithNums/transformTime';
+import {transformMS} from '../../../utils/actionsWithNums/transformTime';
 
 const MatchData = ({matchType, startTime}) => {
 	const [time, changeTime] = useState(getTime());

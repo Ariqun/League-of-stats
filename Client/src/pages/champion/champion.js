@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 
-import Nav from '../../components/nav';
+import Nav from '../../components/Navigation/Navigation';
 import General from './components/general';
 import Skills from './components/skills';
 import Skins from './components/skins';
 import Statistics from './components/statistics';
 import Builds from './components/builds';
-import langForDB from '../../components/languages/langForDB';
+import langForDB from '../../utils/languages/langForDB';
 import {LoadingPage} from '../../components/loading';
 
 import DragonData from '../../services/dragonData';

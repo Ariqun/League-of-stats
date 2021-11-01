@@ -1,5 +1,5 @@
-import checkLanguage from '../languages/checkLanguage';
-import translateInTooltip from '../languages/translate';
+import checkLanguage from '../../utils/languages/checkLanguage';
+import translateInTooltip from '../../utils/languages/translate';
 
 import './tooltips.sass';
 

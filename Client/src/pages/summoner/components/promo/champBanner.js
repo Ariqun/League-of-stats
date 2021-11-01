@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
-import {findPercent} from '../../../../components/actionsWithNums/findPercent';
+import {findPercent} from '../../../../utils/actionsWithNums/findPercent';
 
 const ChampBanner = ({statistics, champions, version}) => {
 	const [t] = useTranslation();

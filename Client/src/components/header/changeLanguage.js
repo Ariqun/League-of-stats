@@ -1,6 +1,6 @@
 import React from 'react';
 
-import checkLanguage from '../languages/checkLanguage';
+import checkLanguage from '../../utils/languages/checkLanguage';
 
 const ChangeLanguage = ({changeLang}) => {
 	const lang = checkLanguage();

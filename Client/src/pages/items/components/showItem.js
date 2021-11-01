@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 import transformAndSort from './transfromAndSort';
-import {modifyItemTags} from '../../../components/actionsWithStr/modifyTags';
+import {modifyItemTags} from '../../../utils/actionsWithStr/modifyTags';
 
 const ShowItem = ({currentItem, items, version}) => {
 	const arrOfItems = transformAndSort(items);

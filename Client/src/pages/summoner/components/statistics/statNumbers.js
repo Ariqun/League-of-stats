@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {checkBigNum} from '../../../../components/actionsWithNums/checkNums';
+import {checkBigNum} from '../../../../utils/actionsWithNums/checkNums';
 
 const StatNumbers = ({champs, type}) => {
 	const [t] = useTranslation();

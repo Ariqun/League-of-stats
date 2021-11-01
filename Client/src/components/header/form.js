@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 
-import Search from '../inputs/search';
-import checkLanguage from '../languages/checkLanguage';
+import Search from '../ui/inputs/search';
+import checkLanguage from '../../utils/languages/checkLanguage';
 import useInput from '../../hooks/useInput';
-import pushNameInLS from '../localStorage/pushNameInLS';
+import pushNameInLS from '../../utils/localStorage/pushNameInLS';
 
 const Form = () => {
 	const [region, setRegion] = useState(checkLanguage());

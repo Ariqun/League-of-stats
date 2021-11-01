@@ -1,8 +1,8 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {checkBigNum} from '../../../../components/actionsWithNums/checkNums';
-import {transformSeconds, transformDate} from '../../../../components/actionsWithNums/transformTime';
+import {checkBigNum} from '../../../../utils/actionsWithNums/checkNums';
+import {transformSeconds, transformDate} from '../../../../utils/actionsWithNums/transformTime';
 
 const Card = ({records}) => {
 	const [t] = useTranslation();

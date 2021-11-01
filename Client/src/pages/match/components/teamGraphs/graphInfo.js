@@ -1,4 +1,4 @@
-import {modifyChampName} from "../../../../components/actionsWithStr/modifyChampName";
+import {modifyChampName} from "../../../../utils/actionsWithStr/modifyChampName";
 
 const graphInfo = (teamId, participants, version) => {
 	const players = [], res = [];

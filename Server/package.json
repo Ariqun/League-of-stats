@@ -5,6 +5,7 @@
 	"author": "Ariqun",
 	"license": "ISC",
 	"description": "League of Stats.server",
+	"private": true,
 	"scripts": {
 		"start": "node index.js",
 		"dev": "nodemon index.js"

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 
 import MatchItem from './matchItem';
-import SkyblueBtn from '../../../../components/buttons/skyblueBtn';
+import SkyblueBtn from '../../../../components/ui/buttons/skyblueBtn';
 
 import './index.sass';
 

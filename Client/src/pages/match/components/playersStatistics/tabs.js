@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {modifyChampName} from '../../../../components/actionsWithStr/modifyChampName';
+import {modifyChampName} from '../../../../utils/actionsWithStr/modifyChampName';
 
 const Tabs = ({tab, participants, changeTab, version}) => {
 	const leftPlayers = [], rightPlayers = [];

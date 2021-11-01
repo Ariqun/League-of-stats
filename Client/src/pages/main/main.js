@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 
 import ChampionBlock from './components/championBlock';
 import Roles from './components/roles';
-import Search from '../../components/inputs/search';
+import Search from '../../components/ui/inputs/search';
 import useInput from '../../hooks/useInput';
 
 const Main = () => {
