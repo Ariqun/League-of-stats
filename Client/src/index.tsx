@@ -10,11 +10,11 @@ import './i18n.js';
 import './index.sass';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<App />
-			<Background />
-		</BrowserRouter>
-	</React.StrictMode>,
-	document.getElementById('root')
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+      <Background />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root'),
 );

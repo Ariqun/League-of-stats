@@ -4,7 +4,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import versionService from './versionStore.service';
 
 class VersionStore {
-  version: string = '';
+  version = '';
 
   isLoading = true;
 

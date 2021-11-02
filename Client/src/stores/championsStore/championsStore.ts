@@ -1,12 +1,12 @@
-import React from "react";
-import { makeAutoObservable, runInAction } from "mobx";
+import React from 'react';
+import { makeAutoObservable, runInAction } from 'mobx';
 
-import championsService, { ChampionTypes } from "./championStore.service";
+import championsService, { ChampionTypes } from './championStore.service';
 
 class ChampionsStore {
-	champions: any;
+  champions: any;
 
-	championNames: string[] = [];
+  championNames: string[] = [];
 
   isLoading = true;
 
@@ -19,7 +19,7 @@ class ChampionsStore {
       .then((champions) => {
         runInAction(() => {
           this.champions = champions.data;
-					this.championNames = this.getChampNames(champions.data);
+          this.championNames = this.getChampNames(champions.data);
           this.isLoading = false;
         });
       })
@@ -28,10 +28,10 @@ class ChampionsStore {
       });
   }
 
-	getChampNames = (champions: ChampionTypes): string[] => {
-		const champNames = [...Object.keys({...champions})];
-		return champNames;
-	}
+  getChampNames = (champions: ChampionTypes): string[] => {
+    const champNames = [...Object.keys({ ...champions })];
+    return champNames;
+  };
 }
 
 export default new ChampionsStore();

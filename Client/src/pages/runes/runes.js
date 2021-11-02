@@ -3,18 +3,16 @@ import ReactTooltip from 'react-tooltip';
 
 import RunesBlock from './components/runesBlock';
 
-const Runes = () => {
-	return(
-		<div className="runes_page">
-			<div className="container-xxl">
-				<div className="runes">
-					<RunesBlock />
-				</div>
-			</div>
+const Runes = () => (
+  <div className="runes_page">
+    <div className="container-xxl">
+      <div className="runes">
+        <RunesBlock />
+      </div>
+    </div>
 
-			<ReactTooltip id="tooltip" html />
-		</div>
-	)
-}
+    <ReactTooltip id="tooltip" html />
+  </div>
+);
 
 export default Runes;

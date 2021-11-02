@@ -3,48 +3,9 @@
 .header
 	@include transGrayBorderBot_10per
 	display: flex
+	justify-content: space-between
 	align-items: center
 	height: 6vh
-	margin-bottom: 20px
+	margin: 0 auto
 	.forms
 		display: flex
-		.search_input
-			position: relative
-		.choise_lang
-			display: flex
-			align-items: center
-			margin: 0 40px
-		.search form,
-		.choise_lang form
-			display: flex
-			align-items: center
-			input, select
-				height: 30px
-				cursor: pointer
-				outline: none
-				border: none
-			input
-				width: 200px
-				border-top-right-radius: 0
-				border-bottom-right-radius: 0
-				transition: 1s all ease
-			select
-				border-radius: 20px
-				&:focus
-					border-bottom-left-radius: 0
-					border-bottom-right-radius: 0
-			button
-				width: 25px
-				cursor: pointer
-				outline: none
-				padding: 0
-				margin-left: 10px
-				border: none
-				background: none
-		.search form
-			select
-				border-top-left-radius: 0
-				border-bottom-left-radius: 0
-		.choise_lang form
-			select
-				padding: 0 5px

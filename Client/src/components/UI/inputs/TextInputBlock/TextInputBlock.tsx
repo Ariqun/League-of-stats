@@ -5,8 +5,14 @@ import cl from './TextInputBlock.module.sass';
 const TextInputBlock: React.FC<TextInputBlockProps> = ({
   fields, className = '',
 }) => (
-  <div className={`${cl.block} ${className}`}>
-    {fields.map((field) => <input {...field}	className={cl.field} 	key={field.name} />)}
+  <div className={cl.block}>
+    {fields.map((field) => (
+      <input
+        {...field}
+        className={`${cl.field} ${className}`}
+        key={field.name}
+      />
+    ))}
   </div>
 );
 
@@ -17,13 +23,11 @@ export type InputTypes = {
   type: 'text' | 'password' | 'email';
   placeholder?: string;
   disabled?: boolean;
-  autocomplete?: boolean;
+  autoComplete?: 'on' | 'off' | undefined;
 };
 
 type TextInputBlockProps = {
   fields: InputTypes[];
-  title?: string;
-  titleLevel?: 1 | 2 | 3 | 4 | 5 | 6;
   className?: string;
 };
 

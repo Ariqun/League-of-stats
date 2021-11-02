@@ -1,34 +1,36 @@
-import React from 'react'
+import React from 'react';
 
 import StatsTable from './statsTable';
 import RolesBlock from './rolesBlock';
 
 import './index.sass';
 
-const General = ({champ}) => {
-	const {id, name, title, lore, stats, tags} = champ;
-	
-	return(
-		<div className="general">
-			<div className="picture_block col-sm-3">
-				<img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`}></img>
-			</div>
+const General = ({ champ }) => {
+  const {
+    id, name, title, lore, stats, tags,
+  } = champ;
 
-			<div className="champion_info">
-				<div className="title">
-					<span className="champ_name">{name}</span>
-					<span className="champ_title">{title}</span>
-				</div>
+  return (
+    <div className="general">
+      <div className="picture_block col-sm-3">
+        <img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`} alt={`Art of ${id}`} />
+      </div>
 
-				<div className="lore">
-					<p>{lore}</p>
-				</div>
+      <div className="champion_info">
+        <div className="title">
+          <span className="champ_name">{name}</span>
+          <span className="champ_title">{title}</span>
+        </div>
 
-				<RolesBlock roles={tags}/>
-				<StatsTable stats={stats}/>
-			</div>
-		</div>
-	);
-}
+        <div className="lore">
+          <p>{lore}</p>
+        </div>
+
+        <RolesBlock roles={tags} />
+        <StatsTable stats={stats} />
+      </div>
+    </div>
+  );
+};
 
 export default General;

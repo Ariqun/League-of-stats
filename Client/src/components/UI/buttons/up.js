@@ -1,29 +1,29 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const Up = () => {
-	const [scrollTop, changeScrollTop] = useState(0);
-	const className = scrollTop >= 700 ? "up" : "up invisible";
+  const [scrollTop, changeScrollTop] = useState(0);
+  const className = scrollTop >= 700 ? 'up' : 'up invisible';
 
-	setInterval(() => {
-		changeScrollTop(window.pageYOffset);
-	}, 1000);
-	
-	const scrollUp = () => {
-		let count = window.pageYOffset;
+  setInterval(() => {
+    changeScrollTop(window.pageYOffset);
+  }, 1000);
 
-		const interval = setInterval(() => {
-			if (count <= 0) clearInterval(interval);
+  const scrollUp = () => {
+    let count = window.pageYOffset;
 
-			window.scrollTo(0, count);
-			count -= 50;
-		}, 1)
-	}
+    const interval = setInterval(() => {
+      if (count <= 0) clearInterval(interval);
 
-	return(
-		<div className={className} onClick={() => scrollUp()}>
-			<img src={process.env.PUBLIC_URL + '/assets/icons/up.png'} alt="up"/>
-		</div>
-	)
-}
+      window.scrollTo(0, count);
+      count -= 50;
+    }, 1);
+  };
+
+  return (
+    <div className={className} onClick={() => scrollUp()}>
+      <img src={`${process.env.PUBLIC_URL}/assets/icons/up.png`} alt="up" />
+    </div>
+  );
+};
 
 export default Up;

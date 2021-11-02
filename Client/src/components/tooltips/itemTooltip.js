@@ -1,19 +1,21 @@
 import checkLanguage from '../../utils/languages/checkLanguage';
 import translateInTooltips from '../../utils/languages/translate';
-import {modifyItemTags} from '../../utils/actionsWithStr/modifyTags';
+import { modifyItemTags } from '../../utils/actionsWithStr/modifyTags';
 
 import './tooltips.sass';
 
 const itemTooltip = (item, version) => {
-	if (!item) return null;
+  if (!item) return null;
 
-	const {name, gold, image, description} = item;
-	const descr = modifyItemTags(description);
-	const obj = translateInTooltips(checkLanguage());
+  const {
+    name, gold, image, description,
+  } = item;
+  const descr = modifyItemTags(description);
+  const obj = translateInTooltips(checkLanguage());
 
-	const {price} = obj;
+  const { price } = obj;
 
-	const tooltip = `
+  const tooltip = `
 		<div class="tooltip">
 			<div class="title">
 				<div class="icon">
@@ -27,9 +29,9 @@ const itemTooltip = (item, version) => {
 
 			<div class="descr">${descr}</div>
 		</div>
-	`
+	`;
 
-	return tooltip;
-}
+  return tooltip;
+};
 
 export default itemTooltip;

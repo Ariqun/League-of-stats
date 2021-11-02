@@ -1,35 +1,33 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-const SkillList = ({spells, changeCurrentSkill, version}) => {
-	const content = (id, name, url) => {
-		const className = id === 'passive' ? "passive" : "skill";
-		
-		return(
-			<div onClick={() => changeCurrentSkill(id)} className={className} key={id}>
-				<div className="wrapper_for_horizontal_borders">
-					<div className="wrapper_for_vertical_borders">
-						<img src={url} alt={name} />
-					</div>
-				</div>
-			</div>
-		)
-	}
+const SkillList = ({ spells, changeCurrentSkill, version }) => {
+  const content = (id, name, url) => {
+    const className = id === 'passive' ? 'passive' : 'skill';
 
-	const result = spells.map(spell => {
-		const {id, name, image} = spell;
-		let url = `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image.full}`;
+    return (
+      <div onClick={() => changeCurrentSkill(id)} className={className} key={id}>
+        <div className="wrapper_for_horizontal_borders">
+          <div className="wrapper_for_vertical_borders">
+            <img src={url} alt={name} />
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-		if (id === 'passive') url = `http://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${image.full}`;
+  const result = spells.map((spell) => {
+    const { id, name, image } = spell;
+    let url = `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image.full}`;
 
-		return content(id, name, url);
-	})
+    if (id === 'passive') url = `http://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${image.full}`;
 
-	return result;
-}
+    return content(id, name, url);
+  });
 
-const mapStateToProps = (state) => {
-	return {version: state.version};
-}
+  return result;
+};
+
+const mapStateToProps = (state) => ({ version: state.version });
 
 export default connect(mapStateToProps)(SkillList);

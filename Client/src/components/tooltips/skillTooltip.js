@@ -4,13 +4,15 @@ import translateInTooltip from '../../utils/languages/translate';
 import './tooltips.sass';
 
 const skillTooltip = (skill, version) => {
-	if (!skill) return null;
+  if (!skill) return null;
 
-	const {name, image, description, cooldownBurn, costBurn} = skill;
-	const obj = translateInTooltip(checkLanguage());
-	const {cost, cooldown} = obj;
+  const {
+    name, image, description, cooldownBurn, costBurn,
+  } = skill;
+  const obj = translateInTooltip(checkLanguage());
+  const { cost, cooldown } = obj;
 
-	const tooltip = `
+  const tooltip = `
 		<div class="tooltip">
 			<div class="title">
 				<div class="icon">
@@ -25,9 +27,9 @@ const skillTooltip = (skill, version) => {
 
 			<div class="descr">${description}</div>
 		</div>
-	`
+	`;
 
-	return tooltip;
-}
+  return tooltip;
+};
 
 export default skillTooltip;

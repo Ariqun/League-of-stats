@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {Switch, Route} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import 'antd/dist/antd.css';
 
 import Home from '../routes/Home';
@@ -10,16 +10,14 @@ import checkLanguage from '../../utils/languages/checkLanguage';
 import Up from '../ui/buttons/up';
 import cl from './App.module.sass';
 
-const App = observer(() => {
+const App = observer(() => (
+  <div className={cl.app}>
+    <Header />
 
-	return (
-		<div className={cl.app}>
-			<Header />
-
-			<Switch>
-				<Route exact path="/" component={Home} />
-				{/* <Route path="/" exact render={ () => <Main /> } /> */}
-				{/* <Route path="/items" render={() => <Items />} />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      {/* <Route path="/" exact render={ () => <Main /> } /> */}
+      {/* <Route path="/items" render={() => <Items />} />
 				<Route path="/runes" render={() => <Runes />} />
 
 				<Route path="/champion/:name" render={({match}) => {
@@ -41,11 +39,10 @@ const App = observer(() => {
 					const {region, name} = match.params;
 					return <LiveMatch region={region} name ={name} />
 				}}/> */}
-			</Switch>
+    </Switch>
 
-			{/* <Up /> */}
-		</div>
-	);
-});
+    {/* <Up /> */}
+  </div>
+));
 
 export default App;

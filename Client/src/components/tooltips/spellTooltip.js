@@ -4,13 +4,15 @@ import translateInTooltip from '../../utils/languages/translate';
 import './tooltips.sass';
 
 const spellTooltip = (spell, version) => {
-	if (!spell) return null;
+  if (!spell) return null;
 
-	const {name, image, cooldownBurn, description} = spell;
-	const obj = translateInTooltip(checkLanguage());
-	const {cooldown} = obj;
-	
-	const tooltip = `
+  const {
+    name, image, cooldownBurn, description,
+  } = spell;
+  const obj = translateInTooltip(checkLanguage());
+  const { cooldown } = obj;
+
+  const tooltip = `
 		<div class="tooltip">
 			<div class="title">
 				<div class="icon">
@@ -24,9 +26,9 @@ const spellTooltip = (spell, version) => {
 
 			<div class="descr">${description}</div>
 		</div>
-	`
+	`;
 
-	return tooltip;
-}
+  return tooltip;
+};
 
 export default spellTooltip;

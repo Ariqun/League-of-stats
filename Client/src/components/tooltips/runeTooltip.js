@@ -1,21 +1,21 @@
 import checkLanguage from '../../utils/languages/checkLanguage';
 import translateInTooltips from '../../utils/languages/translate';
-import {modifyRuneTags} from '../../utils/actionsWithStr/modifyTags';
+import { modifyRuneTags } from '../../utils/actionsWithStr/modifyTags';
 
 import './tooltips.sass';
 
 const runeTooltip = (rune, percent) => {
-	if (!rune) return null;
+  if (!rune) return null;
 
-	const {name, icon, longDesc} = rune;
-	const descr = modifyRuneTags(longDesc, 'rune');
-	const obj = translateInTooltips(checkLanguage());
-	const {pop} = obj;
+  const { name, icon, longDesc } = rune;
+  const descr = modifyRuneTags(longDesc, 'rune');
+  const obj = translateInTooltips(checkLanguage());
+  const { pop } = obj;
 
-	let popularity = `<span class="pop">${pop}: <span class="value">${percent}%</span></span>`;
-	if (percent === undefined) popularity = '';
+  let popularity = `<span class="pop">${pop}: <span class="value">${percent}%</span></span>`;
+  if (percent === undefined) popularity = '';
 
-	const tooltip = `
+  const tooltip = `
 		<div class="tooltip">
 			<div class="title">
 				<div class="icon">
@@ -29,9 +29,9 @@ const runeTooltip = (rune, percent) => {
 
 			<div class="descr">${descr}</div>
 		</div>
-	`
+	`;
 
-	return tooltip;
-}
+  return tooltip;
+};
 
 export default runeTooltip;

@@ -1,43 +1,43 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import MainStats from './mainStats';
 import Positions from './positions';
 import Average from './average';
-import {LoadingBlock} from '../../../../components/loading';
+import { LoadingBlock } from '../../../../components/loading';
 import DataBase from '../../../../services/dataBase';
 
 import './index.sass';
 
-const Statistics = ({champ}) => {
-	const [isLoading, changeLoading] = useState(true);
-	const [champStats, setChampStats] = useState({});
-	const [t] = useTranslation();
+const Statistics = ({ champ }) => {
+  const [isLoading, changeLoading] = useState(true);
+  const [champStats, setChampStats] = useState({});
+  const [t] = useTranslation();
 
-	useEffect(() => {
-		const getInfo = async () => {
-			const db = new DataBase();
-			const res = await db.getChampionStats(champ.key);
+  useEffect(() => {
+    const getInfo = async () => {
+      const db = new DataBase();
+      const res = await db.getChampionStats(champ.key);
 
-			setChampStats(res);
-			changeLoading(false);
-		}
-		getInfo();
-	}, [champ]);
+      setChampStats(res);
+      changeLoading(false);
+    };
+    getInfo();
+  }, [champ]);
 
-	if (isLoading) return <LoadingBlock />;
-	if (!champStats.matches) return <div className="stats">{t('noData')}</div>;
+  if (isLoading) return <LoadingBlock />;
+  if (!champStats.matches) return <div className="stats">{t('noData')}</div>;
 
-	return (
-		<div className="stats">
-			<MainStats champStats={champStats} />
+  return (
+    <div className="stats">
+      <MainStats champStats={champStats} />
 
-			<div className="posAndAvg">
-				<Positions champStats={champStats} />
-				<Average champStats={champStats} />
-			</div>
-		</div>
-	);
-}
+      <div className="posAndAvg">
+        <Positions champStats={champStats} />
+        <Average champStats={champStats} />
+      </div>
+    </div>
+  );
+};
 
 export default Statistics;

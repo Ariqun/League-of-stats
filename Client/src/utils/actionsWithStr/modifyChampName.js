@@ -1,11 +1,9 @@
 const modifyChampName = (str) => {
-	if (str !== 'FiddleSticks') return str;
+  if (str !== 'FiddleSticks') return str;
 
-	const result = str.toLowerCase().replace(/\w/, (match) => {
-		return match.toUpperCase();
-	});
+  const result = str.toLowerCase().replace(/\w/, (match) => match.toUpperCase());
 
-	return result;
-}
+  return result;
+};
 
-export {modifyChampName};
+export { modifyChampName };
