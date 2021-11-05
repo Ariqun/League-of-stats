@@ -7,7 +7,7 @@ import Champions from './components/champions';
 import Records from './components/records';
 import Statistics from './components/statistics';
 import SummonerNotFound from '../../components/errors/summonerNotFound';
-import { LoadingPage } from '../../components/loading';
+import { LoadingPage } from '../../components/Loading';
 import RiotAPI from '../../services/riotAPI';
 import DataBase from '../../services/dataBase';
 

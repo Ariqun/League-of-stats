@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import championsService, { ChampionTypes } from './championStore.service';
+import championsService, { AllChampionTypes } from './championStore.service';
 
 class ChampionsStore {
   champions: any;
@@ -28,7 +28,7 @@ class ChampionsStore {
       });
   }
 
-  getChampNames = (champions: ChampionTypes): string[] => {
+  getChampNames = (champions: AllChampionTypes): string[] => {
     const champNames = [...Object.keys({ ...champions })];
     return champNames;
   };

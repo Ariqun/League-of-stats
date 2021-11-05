@@ -2,18 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
-import { LoadingPage } from '../../../loading';
+import Loading from '../../../Loading';
+import { DataNotFound } from '../../../errors';
 import ChampionsStore from '../../../../stores/championsStore';
 import VersionStore from '../../../../stores/versionStore';
 import cl from './Champions.module.sass';
 
 const Champions: React.FC<ChampionsProps> = observer(({ inputValue, shownRoles }) => {
+  const { isLoading: isVersionLoading, version } = VersionStore;
   const {
     isLoading, isError, champions, championNames,
   } = ChampionsStore;
-  const { isLoading: isVersionLoading, version } = VersionStore;
 
-  if (isLoading && isVersionLoading) return <LoadingPage />;
+  if (isError) return <DataNotFound />;
+  if (isLoading && isVersionLoading) return <Loading />;
 
   return (
     <div className={cl.champions}>
@@ -31,7 +33,7 @@ const Champions: React.FC<ChampionsProps> = observer(({ inputValue, shownRoles }
 
 			  return (
   <div className={cl.champion} key={key}>
-    <Link to={`/champion/${champName}`}>
+    <Link to={`/champion/${champName}/general`}>
       <img
         src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`}
         alt={name}

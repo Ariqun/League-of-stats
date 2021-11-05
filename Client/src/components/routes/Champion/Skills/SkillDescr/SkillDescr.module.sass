@@ -1,0 +1,26 @@
+@import '../../../../ui/ui'
+	
+.descr
+	.text
+		@include transGrayBordersTopAndBot
+		display: flex
+		flex-direction: column
+		align-items: center
+		padding: 10px 0
+		.name
+			font-size: 25px
+			color: $color-orange
+		.note
+			color: $color-dark_gray
+			font-size: 20px
+			margin: 0 5px
+		.descr
+			color: $color-light_gray
+			text-align: center
+			margin-top: 10px
+		.hidden
+			display: none
+	.video
+		margin-top: 20px
+		video
+			width: 100%

@@ -10,12 +10,8 @@ const SimpleNavigation: React.FC<SimpleNavigationProps> = ({ tabs }) => {
   return (
     <ul className={cl.nav}>
       {tabs.map((tab) => (
-        <li>
-          <Link
-            className={cl.link}
-            to={tab.path}
-            key={tab.path}
-          >
+        <li key={tab.path}>
+          <Link className={cl.link} to={tab.path}>
             {t(tab.text)}
           </Link>
         </li>

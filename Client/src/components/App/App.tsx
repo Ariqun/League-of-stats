@@ -9,6 +9,7 @@ import Header from '../Header/Header';
 import checkLanguage from '../../utils/languages/checkLanguage';
 import Up from '../ui/buttons/up';
 import cl from './App.module.sass';
+import Champion from '../routes/Champion';
 
 const App = observer(() => (
   <div className={cl.app}>
@@ -16,6 +17,8 @@ const App = observer(() => (
 
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route path="/champion/:name" component={Champion} />
+
       {/* <Route path="/" exact render={ () => <Main /> } /> */}
       {/* <Route path="/items" render={() => <Items />} />
 				<Route path="/runes" render={() => <Runes />} />

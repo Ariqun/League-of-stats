@@ -1,2 +1,4 @@
 export { default } from './championsStore';
-export type { ChampionTypes } from './championStore.service';
+export type {
+  InfoTypes, ImageTypes, StatTypes, AllChampionTypes,
+} from './championStore.service';

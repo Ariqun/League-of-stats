@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import TableResult from './components/tableResult';
 import TeamGraphs from './components/teamGraphs';
 import PlayersStatistics from './components/playersStatistics';
-import { LoadingPage } from '../../components/loading';
+import { LoadingPage } from '../../components/Loading';
 import DataBase from '../../services/dataBase';
 
 const Match = ({ region, matchId }) => {

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import './errors.sass';
 
-const ChampNotFound = ({ name }) => {
+const ChampNotFound: React.FC<ChampNotFoundProps> = ({ name }) => {
   const [t] = useTranslation();
 
   return (
@@ -12,6 +12,10 @@ const ChampNotFound = ({ name }) => {
       <div>{t('weKnow')}</div>
     </div>
   );
+};
+
+type ChampNotFoundProps = {
+  name: string;
 };
 
 export default ChampNotFound;

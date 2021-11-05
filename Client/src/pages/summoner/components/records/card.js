@@ -23,7 +23,7 @@ const Card = ({ records }) => {
         </div>
 
         <div className="background">
-          <img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champName}_0.jpg`} alt={`${champName}_img`} />
+          <img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/Loading/${champName}_0.jpg`} alt={`${champName}_img`} />
         </div>
       </div>
     );

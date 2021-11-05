@@ -14,7 +14,7 @@ import Header from './components/Header/Header';
 import Up from './components/ui/buttons/up';
 import checkLanguage from './utils/languages/checkLanguage';
 import langForDB from './utils/languages/langForDB';
-import { LoadingPage } from './components/loading';
+import { LoadingPage } from './components/Loading';
 import DragonData from './services/dragonData';
 
 const App = ({

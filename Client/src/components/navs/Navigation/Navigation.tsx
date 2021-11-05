@@ -1,18 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import cl from './Navigation.module.sass';
 
-const Navigation: React.FC<NavigationProps> = ({ tabs }) => {
+const Navigation: React.FC<NavigationProps> = ({
+  tabs, className = '',
+}) => {
   const [t] = useTranslation();
 
   return (
-    <ul className={cl.nav}>
+    <ul className={`${cl.nav} ${className}`}>
       {tabs.map((tab) => (
-        <Link to={tab.path} key={tab.path}>
-          {t(tab.text)}
-        </Link>
+        <li key={tab.path}>
+          <NavLink
+            activeClassName={cl.active}
+            className={cl.sky_btn}
+            to={tab.path}
+          >
+            {t(tab.text)}
+          </NavLink>
+        </li>
       ))}
     </ul>
   );
@@ -23,6 +31,7 @@ type NavigationProps = {
     path: string;
     text: string;
   }[];
+  className?: string;
 };
 
 export default Navigation;

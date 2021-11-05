@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import MainStats from './mainStats';
 import Positions from './positions';
 import Average from './average';
-import { LoadingBlock } from '../../../../components/loading';
+import Loading from '../../../../components/Loading';
 import DataBase from '../../../../services/dataBase';
 
 import './index.sass';
@@ -25,7 +25,7 @@ const Statistics = ({ champ }) => {
     getInfo();
   }, [champ]);
 
-  if (isLoading) return <LoadingBlock />;
+  if (isLoading) return <Loading />;
   if (!champStats.matches) return <div className="stats">{t('noData')}</div>;
 
   return (

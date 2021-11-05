@@ -1,0 +1,47 @@
+.horizontal_borders
+	position: relative
+	pointer-events: none
+	&::before, &::after
+		content: ''
+		position: absolute
+		left: 0
+		width: 100%
+		z-index: 10
+	&::before
+		top: -1px
+		border-top: 1px solid
+		border-image: linear-gradient(270deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+	&::after
+		bottom: -1px
+		border-bottom: 1px solid	
+		border-image: linear-gradient(90deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+.vertical_borders
+	position: relative
+	pointer-events: none
+	&::before, &::after
+		content: ''
+		position: absolute
+		top: 0
+		height: 100%
+		z-index: 10
+	&::before
+		right: 0
+		border-right: 1px solid
+		border-image: linear-gradient(180deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+	&::after
+		left: -1px
+		border-left: 1px solid
+		border-image: linear-gradient(0deg, rgba(18, 235, 255, 0) 0%, rgba(18, 235, 255, 0.8) 80%, rgba(18, 235, 255, 0) 100%)
+		border-image-slice: 1
+.vertical_borders.active, .horizontal_borders.active
+	&::before, &::after
+		top: -5px
+		right: -5px
+		bottom: -5px
+		left: -5px
+.horizontal_borders.video
+	&::after
+		bottom: 6px

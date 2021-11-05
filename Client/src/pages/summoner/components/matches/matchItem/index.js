@@ -5,7 +5,7 @@ import Settings from './settings';
 import Statistics from './statistics';
 import PlayerItems from '../../../../match/components/playerItems';
 import PlayersTable from '../../../../match/components/playersTable';
-import { LoadingBlock } from '../../../../../components/loading';
+import Loading from '../../../../../components/Loading';
 import DataBase from '../../../../../services/dataBase';
 
 const MatchItem = ({ matchId, name, region }) => {
@@ -31,7 +31,7 @@ const MatchItem = ({ matchId, name, region }) => {
     getInfo();
   }, [matchId, region]);
 
-  if (isLoading) return <LoadingBlock />;
+  if (isLoading) return <Loading />;
   if (isError) return null;
 
   const { participants, platformId } = info;

@@ -1,0 +1,16 @@
+@import '../../../../ui/ui'
+	
+.stats
+	@include transGrayBordersTopAndBot
+	position: relative
+	display: flex
+	flex-wrap: wrap
+	padding: 10px 0
+	margin: 10px 0
+	&::before
+		@include transGrayBorderLeft
+		content: ''
+		position: absolute
+		top: 0
+		left: calc(50% - 0.5px)
+		height: 100%

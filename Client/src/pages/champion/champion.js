@@ -8,9 +8,9 @@ import Skins from './components/skins';
 import Statistics from './components/statistics';
 import Builds from './components/builds';
 import langForDB from '../../utils/languages/langForDB';
-import { LoadingPage } from '../../components/loading';
+import Loading from '../../components/Loading';
 import DragonData from '../../services/dragonData';
-import ChampNotFound from '../../components/errors/champNotFound';
+import ChampNotFound from '../../components/errors/ChampNotFound';
 
 const Champion = ({ champName, lang, version }) => {
   const [isLoading, changeLoading] = useState(true);
@@ -32,7 +32,7 @@ const Champion = ({ champName, lang, version }) => {
   }, [champName, lang, version]);
 
   if (isError) return <ChampNotFound name={champName} />;
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) return <Loading />;
 
   const titles = ['general', 'skills', 'skins', 'builds', 'statistics'];
 

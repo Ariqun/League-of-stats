@@ -7,7 +7,7 @@ import checkLanguage from '../../../../utils/languages/checkLanguage';
 import skillTooltip from '../../../../components/tooltips/skillTooltip';
 import langForDB from '../../../../utils/languages/langForDB';
 import { modifyChampName } from '../../../../utils/actionsWithStr/modifyChampName';
-import { LoadingBlock } from '../../../../components/loading';
+import Loading from '../../../../components/Loading';
 
 const SkillsBlock = ({ info, tab, version }) => {
   const [isLoading, changeLoading] = useState(true);
@@ -31,7 +31,7 @@ const SkillsBlock = ({ info, tab, version }) => {
     getChamp();
   }, [info, tab, version]);
 
-  if (isLoading) return <LoadingBlock />;
+  if (isLoading) return <Loading />;
 
   const createRow = (skillId) => {
     const skills = info.timeline[0][tab].lvlUp;

@@ -8,7 +8,7 @@ import PlayerKDA from '../../match/components/playerKDA';
 import PlayerSpells from '../../match/components/playerSpells';
 import { findPercent } from '../../../utils/actionsWithNums/findPercent';
 import { calcRatio } from '../../../utils/actionsWithNums/calcRatio';
-import { LoadingBlock } from '../../../components/loading';
+import Loading from '../../../components/Loading';
 import DataBase from '../../../services/dataBase';
 
 const Card = ({
@@ -36,7 +36,7 @@ const Card = ({
     getInfo();
   }, [championId, summonerId]);
 
-  if (isLoading) return <LoadingBlock />;
+  if (isLoading) return <Loading />;
 
   const name = Object.keys(champions).filter((champ) => +champions[champ].key === championId);
   let champWins = 0; let champMatches = 0; let champWinrate = 0; let champKills = 0; let champDeaths = 0; let
@@ -114,7 +114,7 @@ const Card = ({
       </div>
 
       <div className="background">
-        <img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name[0]}_0.jpg`} alt={`${name}_img`} />
+        <img src={`http://ddragon.leagueoflegends.com/cdn/img/champion/Loading/${name[0]}_0.jpg`} alt={`${name}_img`} />
       </div>
     </div>
   );
