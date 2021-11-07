@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import championStore from '../../../../stores/championStore';
 import SkillDescr from './SkillDescr';
 import SkillList from './SkillList';
+import championStore from '../../../../stores/championStore';
 import cl from './Skills.module.sass';
 
 const Skills: React.FC = () => {

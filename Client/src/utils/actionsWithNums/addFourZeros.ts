@@ -1,4 +1,4 @@
-const addFourZeros = (num: number): string => {
+const addFourZeros = (num: number | string): string => {
   const arr = String(num).split('');
 
   if (arr.length < 4) {

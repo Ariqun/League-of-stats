@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, useParams } from 'react-router';
+import { Routes, Route, useParams } from 'react-router';
 import { observer } from 'mobx-react';
 
 import Main from '../../layouts/Main';
@@ -10,6 +10,7 @@ import Navigation from '../../navs/Navigation';
 import General from './General';
 import Skills from './Skills';
 import championStore from '../../../stores/championStore';
+import Skins from './Skins';
 
 const Champion: React.FC = observer(() => {
   const { name }: ParamsTypes = useParams();
@@ -17,6 +18,8 @@ const Champion: React.FC = observer(() => {
 
   useEffect(() => {
     championStore.getChampionInfo(name);
+
+    return () => championStore.clearStore();
   }, [name]);
 
   if (isError) return <ChampNotFound name={name} />;
@@ -35,17 +38,19 @@ const Champion: React.FC = observer(() => {
       <Container>
         <Navigation tabs={nav} />
 
-        <Switch>
-          <Route path={`/champion/${name}/general`} component={General} />
-          <Route path={`/champion/${name}/skills`} component={Skills} />
-        </Switch>
+        <Routes>
+          <Route path="/general" element={<General />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/skins" element={<Skins />} />
+          <Route path="*" element={<General />} />
+        </Routes>
       </Container>
     </Main>
   );
 });
 
 type ParamsTypes = {
-  name: string;
+  name: string | undefined;
 };
 
 export default Champion;

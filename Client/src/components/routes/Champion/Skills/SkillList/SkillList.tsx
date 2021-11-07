@@ -1,8 +1,8 @@
 import React from 'react';
 
+import SkillItem from './SkillItem';
 import { SpellTypes } from '../../../../../stores/championStore';
 import cl from './SkillList.module.sass';
-import SkillItem from './SkillItem';
 
 const SkillList: React.FC<SkillListProps> = ({
   skills, changeCurrentSkill,

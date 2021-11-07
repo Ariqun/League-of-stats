@@ -15,7 +15,7 @@ const ChampNotFound: React.FC<ChampNotFoundProps> = ({ name }) => {
 };
 
 type ChampNotFoundProps = {
-  name: string;
+  name: string | undefined;
 };
 
 export default ChampNotFound;

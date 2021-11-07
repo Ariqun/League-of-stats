@@ -46,27 +46,27 @@ export type StatTypes = {
   attackspeed: number;
 };
 
-export type AllChampionTypes = {
-  [key: string]: {
-    version: string;
-    id: string;
-    key: string;
-    name: string;
-    title: string;
-    blurb: string;
-    info: InfoTypes;
-    image: ImageTypes;
-    tags: string[];
-    partype: string;
-    stats: StatTypes;
-  }
+export type AllChampionsTypes = {
+  version: string;
+  id: string;
+  key: string;
+  name: string;
+  title: string;
+  blurb: string;
+  info: InfoTypes;
+  image: ImageTypes;
+  tags: string[];
+  partype: string;
+  stats: StatTypes;
 };
 
 type DataTypes = {
   type: string;
   format: string;
   version: string;
-  data: AllChampionTypes;
+  data: {
+    [key: string]: AllChampionsTypes
+  };
 };
 
 export default championsService;

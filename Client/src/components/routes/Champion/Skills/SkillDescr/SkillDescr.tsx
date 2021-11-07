@@ -42,7 +42,7 @@ const SkillDescr: React.FC<SkillDescrProps> = ({
   );
 };
 
-const getUrl = (skills: SpellTypes[], currentSkill: string, keyID: number): string => {
+const getUrl = (skills: SpellTypes[], currentSkill: string, keyID: string): string => {
   const key = addFourZeros(keyID);
 
   if (currentSkill === 'passive') {
@@ -62,7 +62,7 @@ type BtnTypes = {
 
 type SkillDescrProps = {
   skills: SpellTypes[];
-  keyID: number;
+  keyID: string;
   currentSkill: string;
 };
 

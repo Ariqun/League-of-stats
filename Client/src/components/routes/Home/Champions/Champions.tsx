@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
+import ChampionItem from './ChampionItem';
 import Loading from '../../../Loading';
 import { DataNotFound } from '../../../errors';
 import ChampionsStore from '../../../../stores/championsStore';
@@ -15,34 +15,19 @@ const Champions: React.FC<ChampionsProps> = observer(({ inputValue, shownRoles }
   } = ChampionsStore;
 
   if (isError) return <DataNotFound />;
-  if (isLoading && isVersionLoading) return <Loading />;
+  if (isLoading || isVersionLoading) return <Loading />;
 
   return (
     <div className={cl.champions}>
-      {championNames.map((champName) => {
-			  const { key, name, tags } = champions[champName];
-			  const lowerName = name.toLowerCase();
-			  const lowerValue = inputValue.toLowerCase();
-			  let show = false;
-
-			  for (const elem of tags) {
-			    if (shownRoles.includes(elem) && lowerName.includes(lowerValue)) show = true;
-			  }
-
-			  if (!show) return null;
-
-			  return (
-  <div className={cl.champion} key={key}>
-    <Link to={`/champion/${champName}/general`}>
-      <img
-        src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champName}.png`}
-        alt={name}
-        title={name}
-      />
-    </Link>
-  </div>
-			  );
-      })}
+      {championNames.map((champName) => (
+        <ChampionItem
+          champion={champions[champName]}
+          inputValue={inputValue}
+          shownRoles={shownRoles}
+          version={version}
+          key={champName}
+        />
+      ))}
     </div>
   );
 });

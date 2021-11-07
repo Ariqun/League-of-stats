@@ -2,9 +2,10 @@ import React from 'react';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import championService from './championStore.service';
+import { ChampionTypes } from '.';
 
 class ChampionStore {
-  champion: any;
+  champion!: ChampionTypes;
 
   isLoading = true;
 
@@ -14,7 +15,9 @@ class ChampionStore {
     makeAutoObservable(this);
   }
 
-  getChampionInfo = (name: string) => {
+  getChampionInfo = (name: string | undefined) => {
+    if (!name) return this.isError = true;
+
     championService(name)
       .then((champion) => {
         runInAction(() => {
@@ -25,6 +28,11 @@ class ChampionStore {
       .catch(() => {
         this.isError = true;
       });
+  };
+
+  clearStore = () => {
+    this.isLoading = true;
+    this.isError = false;
   };
 }
 

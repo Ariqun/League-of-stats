@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import 'antd/dist/antd.css';
@@ -15,9 +15,10 @@ const App = observer(() => (
   <div className={cl.app}>
     <Header />
 
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/champion/:name" component={Champion} />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/champion/:name/*" element={<Champion />} />
+      {/* <Route path="*" element={<Home />} /> */}
 
       {/* <Route path="/" exact render={ () => <Main /> } /> */}
       {/* <Route path="/items" render={() => <Items />} />
@@ -42,7 +43,7 @@ const App = observer(() => (
 					const {region, name} = match.params;
 					return <LiveMatch region={region} name ={name} />
 				}}/> */}
-    </Switch>
+    </Routes>
 
     {/* <Up /> */}
   </div>

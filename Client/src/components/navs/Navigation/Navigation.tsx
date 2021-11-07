@@ -14,8 +14,7 @@ const Navigation: React.FC<NavigationProps> = ({
       {tabs.map((tab) => (
         <li key={tab.path}>
           <NavLink
-            activeClassName={cl.active}
-            className={cl.sky_btn}
+            className={({ isActive }) => cl.sky_btn + (isActive ? ` ${cl.active}` : '')}
             to={tab.path}
           >
             {t(tab.text)}

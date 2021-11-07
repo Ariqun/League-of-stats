@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import championsService, { AllChampionTypes } from './championStore.service';
+import championsService, { AllChampionsTypes } from './championsStore.service';
 
 class ChampionsStore {
-  champions: any;
+  champions!: ChampionsTypes;
 
   championNames: string[] = [];
 
@@ -28,10 +28,14 @@ class ChampionsStore {
       });
   }
 
-  getChampNames = (champions: AllChampionTypes): string[] => {
+  getChampNames = (champions: ChampionsTypes): string[] => {
     const champNames = [...Object.keys({ ...champions })];
     return champNames;
   };
 }
+
+type ChampionsTypes = {
+  [key: string]: AllChampionsTypes;
+};
 
 export default new ChampionsStore();
