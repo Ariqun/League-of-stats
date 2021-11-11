@@ -10,6 +10,7 @@ import checkLanguage from '../../utils/languages/checkLanguage';
 import Up from '../ui/buttons/up';
 import cl from './App.module.sass';
 import Champion from '../routes/Champion';
+import Items from '../routes/Items';
 
 const App = observer(() => (
   <div className={cl.app}>
@@ -18,6 +19,7 @@ const App = observer(() => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/champion/:name/*" element={<Champion />} />
+      <Route path="/items" element={<Items />} />
       {/* <Route path="*" element={<Home />} /> */}
 
       {/* <Route path="/" exact render={ () => <Main /> } /> */}

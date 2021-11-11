@@ -1,2 +1,2 @@
 export { default } from './itemsStore';
-export type { AllItemsTypes } from './itemsStore.service';
+export type { AllItemsTypes, SingleItemTypes } from './itemsStore.service';

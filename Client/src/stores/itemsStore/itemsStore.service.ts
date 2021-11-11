@@ -7,7 +7,7 @@ const itemsService = async (): Promise<DataTypes> => {
   return result.data;
 };
 
-type SingleItemTypes = {
+export type SingleItemTypes = {
   name: string;
   description: string;
   colloq: string;

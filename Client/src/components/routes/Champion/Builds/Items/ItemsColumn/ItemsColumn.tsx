@@ -15,13 +15,13 @@ const ItemsColumn: React.FC<ItemsColumnProps> = ({ column }) => {
   const { matches, items: championItems } = championStore.championStats;
   delete championItems[0];
 
-  const { items, isLoading, isError } = itemsStore;
+  const { allItems, isLoading, isError } = itemsStore;
   const {
     title, trigger, tag, isMain,
   } = column;
 
-  const blockItems = filterItems(items, championItems, tag, isMain);
-  const itemsArray = filterByFullItems(items, blockItems, championItems);
+  const blockItems = filterItems(allItems, championItems, tag, isMain);
+  const itemsArray = filterByFullItems(allItems, blockItems, championItems);
 
   const handleShowAll = () => setShowAll(true);
 

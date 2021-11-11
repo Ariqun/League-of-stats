@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import itemsService, { AllItemsTypes } from './itemsStore.service';
 
 class ItemsStore {
-  items!: AllItemsTypes;
+  allItems!: AllItemsTypes;
 
   isLoading = true;
 
@@ -15,7 +15,7 @@ class ItemsStore {
     itemsService()
       .then((items) => {
         runInAction(() => {
-          this.items = items.data;
+          this.allItems = items.data;
           this.isLoading = false;
         });
       })
