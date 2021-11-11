@@ -10,14 +10,14 @@ const champion = new Schema({
 	totalMatches: Number,
 	creeps: Number,
 	gold: Number,
-	items: Array,
-	runes: Array,
+	items: Map,
+	runes: Map,
 	roles: {
-		top: Array,
-		jungle: Array,
-		middle: Array,
-		bottom: Array,
-		utility: Array
+		top: Map,
+		jungle: Map,
+		middle: Map,
+		bottom: Map,
+		utility: Map
 	},
 	kda: {
 		kills: Number,

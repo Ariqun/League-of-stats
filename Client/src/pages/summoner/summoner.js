@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Promo from './components/promo';
-import Nav from '../../components/navs/Navigation/Navigation';
+import Nav from '../../components/Navigation/Navigation';
 import Matches from './components/matches';
 import Champions from './components/champions';
 import Records from './components/records';

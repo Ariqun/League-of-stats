@@ -9,7 +9,7 @@ const Skills: React.FC = () => {
   const [currentSkill, changeCurrentSkill] = useState('passive');
 
   const {
-    champion: { passive, spells, key },
+    championInfo: { passive, spells, key },
   } = championStore;
 
   passive.id = 'passive';

@@ -2,7 +2,7 @@ import React from 'react';
 
 import StatItem from './StatItem';
 import { StatTypes } from '../../../../../stores/championsStore';
-import sortStats from '../../../../../utils/actionsWithObj/sortStats';
+import sortStats from '../../../../../utils/actions/sortStats';
 import cl from './Stats.module.sass';
 
 const Stats: React.FC<StatsProps> = ({ stats }) => {

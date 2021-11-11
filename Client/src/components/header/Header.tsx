@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Container from '../layouts/Container';
-import SimpleNavigation from '../navs/SimpleNavigation';
+import Navigation from '../Navigation';
 import FindSummonerForm from '../ui/Forms/FindSummonerForm';
 import ChangeLangForm from '../ui/Forms/ChangeLangForm';
 import cl from './Header.module.sass';
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
 
   return (
     <Container className={cl.header}>
-      <SimpleNavigation tabs={nav} />
+      <Navigation links={nav} className={cl.nav} />
 
       <div className={cl.forms}>
         <FindSummonerForm />

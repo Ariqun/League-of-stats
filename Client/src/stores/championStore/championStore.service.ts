@@ -3,8 +3,15 @@ import axios from 'axios';
 import { InfoTypes, ImageTypes, StatTypes } from '../championsStore';
 
 const championService = async (name: string): Promise<DataTypes> => {
-  const result = await axios.get(`http://ddragon.leagueoflegends.com/cdn/11.21.1/data/ru_RU/champion/${name}.json`);
-  return result.data;
+  const info = await axios.get(`http://ddragon.leagueoflegends.com/cdn/11.21.1/data/ru_RU/champion/${name}.json`);
+  const stats = await axios({
+    method: 'post',
+    url: '/champion',
+    data: `champ=${name}`,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  });
+
+  return [info.data, stats.data];
 };
 
 export type SkinTypes = {
@@ -40,7 +47,7 @@ export type SpellTypes = {
   resource?: string;
 };
 
-export type ChampionTypes = {
+export type ChampionInfoTypes = {
   id: string;
   key: string;
   name: string;
@@ -64,13 +71,72 @@ export type ChampionTypes = {
   }
 };
 
-type DataTypes = {
+type ChampionInfoDataTypes = {
   type: string;
   format: string;
   version: string;
   data: {
-    [key: string]: ChampionTypes;
+    [key: string]: ChampionInfoTypes;
   };
 };
+
+export type ChampionKDAType = {
+  kills: number;
+  assists: number;
+  deaths: number;
+};
+
+export type ChampionComboType = {
+  double: number;
+  triple: number;
+  quadra: number;
+  penta: number;
+};
+
+export type ChampionDmgType = {
+  magic: number;
+  physical: number;
+  trueDmg: number;
+};
+
+export type ChampionRolesType = {
+  [key: string]: {
+    matches: number;
+    wins: number;
+  };
+};
+
+export type ChampionRunesType = {
+  [key: string]: {
+    [key: string]: number;
+    total: number;
+  };
+};
+
+export type ChampionStatsTypes = {
+  id: string;
+  name: string;
+  totalMatches: number;
+  matches: number;
+  wins: number;
+  losses: number;
+  bans: number;
+  creeps: number;
+  gold: number;
+  kda: ChampionKDAType;
+  combo: ChampionComboType;
+  roles: ChampionRolesType;
+  dmg: ChampionDmgType;
+  heal: {
+    restore: number;
+    shield: number;
+  };
+  items: {
+    [key: string]: number;
+  };
+  runes: ChampionRunesType;
+};
+
+type DataTypes = [ChampionInfoDataTypes, ChampionStatsTypes];
 
 export default championService;

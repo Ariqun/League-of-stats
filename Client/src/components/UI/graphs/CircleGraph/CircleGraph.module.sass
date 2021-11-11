@@ -1,0 +1,32 @@
+@import '../../ui'
+	
+.graph
+	position: relative
+	display: flex
+	justify-content: center
+	.stats
+		position: absolute
+		top: calc(50% - 75px)
+		left: calc(50% - 75px)
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: space-evenly
+		width: 150px
+		height: 150px
+		line-height: 1
+		.primary
+			font-size: 25px
+			color: $color-green
+		.percent
+			@include transGrayBordersTopAndBot
+			color: $color-light_gray
+			font-size: 35px
+			padding: 4px 0 8px
+		.secondary
+			font-size: 25px
+			color: $color-red
+		.hidden
+			display: none
+	#front, #border
+		position: absolute

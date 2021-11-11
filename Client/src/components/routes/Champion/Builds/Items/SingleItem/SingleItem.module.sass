@@ -1,0 +1,29 @@
+@import '../../../../../ui/ui'
+
+.item
+	display: flex
+	align-items: center
+	padding: 4px 0
+	&:last-of-type
+		padding-bottom: 0
+	.icon
+		cursor: pointer
+		border: 2px solid black
+		border-radius: 4px
+		img
+			width: 36px
+			height: 36px
+			border-radius: 4px
+	.pop_bar
+		progress
+			&::-webkit-progress-bar
+				border-radius: 0
+				border-top-right-radius: 16px
+				border-bottom-right-radius: 16px
+			&::-webkit-progress-value
+				border-radius: 0
+				border-top-right-radius: 16px
+				border-bottom-right-radius: 16px
+
+.hidden
+	display: none

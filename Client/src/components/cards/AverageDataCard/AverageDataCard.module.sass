@@ -1,0 +1,28 @@
+@import '../../ui/ui'
+
+.average
+	@include transGrayBordersTopAndBot
+	@include opacityBg
+	width: 594px
+	padding: 12px 0 0
+	.title
+		@include transGrayBorderBot_20per
+		text-align: center
+		padding-bottom: 12px
+	.wrapper, .kda
+		display: flex
+		flex-wrap: wrap
+		font-size: 20px
+		padding-top: 12px
+	.kda
+		display: flex
+		flex-direction: column
+		align-items: center
+		.kda_title
+			@include transGrayBorderBot_30per
+			width: 100%
+			color: $color-dark_gray
+			text-align: center
+			padding-bottom: 4px
+		.kda_score
+			padding: 4px 0 12px

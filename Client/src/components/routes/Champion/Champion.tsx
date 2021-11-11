@@ -6,11 +6,13 @@ import Main from '../../layouts/Main';
 import Container from '../../layouts/Container';
 import ChampNotFound from '../../errors/ChampNotFound';
 import Loading from '../../Loading';
-import Navigation from '../../navs/Navigation';
+import Navigation from '../../Navigation';
 import General from './General';
 import Skills from './Skills';
-import championStore from '../../../stores/championStore';
 import Skins from './Skins';
+import Builds from './Builds';
+import Statistics from './Statistics';
+import championStore from '../../../stores/championStore';
 
 const Champion: React.FC = observer(() => {
   const { name }: ParamsTypes = useParams();
@@ -36,12 +38,14 @@ const Champion: React.FC = observer(() => {
   return (
     <Main>
       <Container>
-        <Navigation tabs={nav} />
+        <Navigation links={nav} type="bordered" />
 
         <Routes>
           <Route path="/general" element={<General />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/skins" element={<Skins />} />
+          <Route path="/builds" element={<Builds />} />
+          <Route path="/statistics" element={<Statistics />} />
           <Route path="*" element={<General />} />
         </Routes>
       </Container>

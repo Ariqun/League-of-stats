@@ -1,2 +1,4 @@
 export { default } from './championStore';
-export type { ChampionTypes, SpellTypes, SkinTypes } from './championStore.service';
+export type {
+  ChampionInfoTypes, SpellTypes, SkinTypes, ChampionStatsTypes, ChampionRunesType, ChampionRolesType, ChampionKDAType, ChampionComboType, ChampionDmgType,
+} from './championStore.service';

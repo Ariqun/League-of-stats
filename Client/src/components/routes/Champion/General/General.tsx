@@ -7,7 +7,7 @@ import cl from './General.module.sass';
 
 const General: React.FC = () => {
   const {
-    champion: {
+    championInfo: {
       id, name, title, lore, stats, tags,
     },
   } = championStore;

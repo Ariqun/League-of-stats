@@ -9,7 +9,7 @@ const Skins: React.FC = () => {
   const [modalInfo, setModalInfo] = useState({
     isVisible: false, champID: '', skinID: -1,
   });
-  const { champion: { id, skins } } = championStore;
+  const { championInfo: { id, skins } } = championStore;
 
   const handleOpenModal = (champID: string, skinID: number) => {
     setModalInfo({ isVisible: true, champID, skinID });

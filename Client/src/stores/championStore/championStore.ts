@@ -1,11 +1,12 @@
-import React from 'react';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import championService from './championStore.service';
-import { ChampionTypes } from '.';
+import { ChampionStatsTypes, ChampionInfoTypes } from '.';
 
 class ChampionStore {
-  champion!: ChampionTypes;
+  championInfo!: ChampionInfoTypes;
+
+  championStats!: ChampionStatsTypes;
 
   isLoading = true;
 
@@ -19,9 +20,12 @@ class ChampionStore {
     if (!name) return this.isError = true;
 
     championService(name)
-      .then((champion) => {
+      .then((array) => {
         runInAction(() => {
-          this.champion = champion.data[name];
+          const [info, stats] = array;
+
+          this.championInfo = info.data[name];
+          this.championStats = stats;
           this.isLoading = false;
         });
       })

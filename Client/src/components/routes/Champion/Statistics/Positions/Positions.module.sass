@@ -1,0 +1,23 @@
+@import '../../../../ui/ui'
+
+.positions
+	@include transGrayBordersTopAndBot
+	@include opacityBg
+	border-collapse: separate
+	.head_row
+		@include transGrayBorderBot_10per
+		padding: 0 0 8px
+	tbody, thead
+		tr
+			padding: 8px 0
+			display: flex
+			th, td
+				display: flex
+				font-weight: 400
+				&:first-of-type
+					width: 128px
+				&:not(n1)
+					width: 160px
+					margin: 0 20px
+			th
+				justify-content: center

@@ -7,7 +7,7 @@ router.post('/champion', async (req, res) => {
 	const champ = req.body.champ;
 
 	try {
-		await champion.findOne({id: champ}, (err, doc) => {
+		await champion.findOne({name: champ}, (err, doc) => {
 			res.send(doc);
 		})
 	} catch(e) {
